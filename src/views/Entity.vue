@@ -1,0 +1,550 @@
+<template>
+  <div
+    style="width: 100%; height: 100%;">
+    <div
+      id="cesium-container"
+      style="width: 100%; height: 100%;" />
+    <el-image
+      ref="preview"
+      :src="url"
+      :preview-src-list="srcList"
+      style="display: none;" />
+  </div>
+</template>
+
+<script>
+/* eslint-disable no-undef */
+/* eslint-disable new-cap */
+/* eslint-disable no-unused-vars */
+export default {
+  data () {
+    return {
+      srcList: [],
+      url: '',
+      points: [
+        {
+          'id': 102881,
+          'latitude': 31.85376,
+          'longitude': 120.217137,
+          'altitude': 90,
+          'action': [
+            {
+              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+              'id': 164260,
+              'yaw': 100,
+              'roll': 100,
+              'pitch': 100
+            }
+          ]
+        },
+        {
+          'id': 102882,
+          'latitude': 31.8554312,
+          'longitude': 120.216864,
+          'altitude': 82.5,
+          'action': [
+            {
+              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+              'id': 164261,
+              'yaw': 0,
+              'roll': 0,
+              'pitch': 45
+            }
+          ]
+        },
+        {
+          'id': 102883,
+          'latitude': 31.8556587,
+          'longitude': 120.2185077,
+          'altitude': 92.6,
+          'action': [
+            {
+              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+              'id': 164262,
+              'yaw': 0,
+              'roll': 0,
+              'pitch': 45
+            }
+          ]
+        },
+        {
+          'id': 102884,
+          'latitude': 31.856109,
+          'longitude': 120.2218049,
+          'altitude': 93.4,
+          'action': [
+            {
+              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+              'id': 164263,
+              'yaw': 0,
+              'roll': 0,
+              'pitch': 45
+            }
+          ]
+        },
+        {
+          'id': 102885,
+          'latitude': 31.8559722,
+          'longitude': 120.2218505,
+          'altitude': 82.27,
+          'action': []
+        },
+        {
+          'id': 102886,
+          'latitude': 31.8559722,
+          'longitude': 120.2218505,
+          'altitude': 62.27,
+          'action': [
+            {
+              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+              'id': 164264,
+              'yaw': 0,
+              'roll': 0,
+              'pitch': 1.7
+            }
+          ]
+        },
+        {
+          'id': 102887,
+          'latitude': 31.8559748,
+          'longitude': 120.2218342,
+          'altitude': 58.18,
+          'action': [
+            {
+              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+              'id': 164265,
+              'yaw': 1.4,
+              'roll': 0,
+              'pitch': 1.5
+            },
+            {
+              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+              'id': 164266,
+              'yaw': -1.4,
+              'roll': 0,
+              'pitch': 1.9
+            }
+          ]
+        },
+        {
+          'id': 102888,
+          'latitude': 31.8559665,
+          'longitude': 120.2218342,
+          'altitude': 51.39,
+          'action': [
+            {
+              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+              'id': 164267,
+              'yaw': 2,
+              'roll': 0,
+              'pitch': 1.7
+            },
+            {
+              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+              'id': 164268,
+              'yaw': -2,
+              'roll': 0,
+              'pitch': 1.7
+            }
+          ]
+        },
+        {
+          'id': 102889,
+          'latitude': 31.8559705,
+          'longitude': 120.2218332,
+          'altitude': 44.96,
+          'action': [
+            {
+              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+              'id': 164269,
+              'yaw': 100,
+              'roll': 100,
+              'pitch': 100
+            },
+            {
+              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+              'id': 164270,
+              'yaw': 200,
+              'roll': 200,
+              'pitch': 200
+            }
+          ]
+        },
+        {
+          'id': 102890,
+          'latitude': 31.8559722,
+          'longitude': 120.2218505,
+          'altitude': 82.27,
+          'action': []
+        },
+        {
+          'id': 102891,
+          'latitude': 31.8562512,
+          'longitude': 120.2217962,
+          'altitude': 82.04,
+          'action': []
+        },
+        {
+          'id': 102892,
+          'latitude': 31.8562512,
+          'longitude': 120.2217962,
+          'altitude': 62.04,
+          'action': [
+            {
+              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+              'id': 164271,
+              'yaw': 0,
+              'roll': 0,
+              'pitch': 1.7
+            }
+          ]
+        },
+        {
+          'id': 102893,
+          'latitude': 31.8562451,
+          'longitude': 120.2217842,
+          'altitude': 58.18,
+          'action': [
+            {
+              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+              'id': 164272,
+              'yaw': -2.3,
+              'roll': 0,
+              'pitch': 1.8
+            },
+            {
+              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+              'id': 164273,
+              'yaw': 2.3,
+              'roll': 0,
+              'pitch': 1.6
+            }
+          ]
+        },
+        {
+          'id': 102894,
+          'latitude': 31.8562542,
+          'longitude': 120.2217819,
+          'altitude': 51.42,
+          'action': [
+            {
+              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+              'id': 164274,
+              'yaw': -2.3,
+              'roll': 0,
+              'pitch': 1.6
+            },
+            {
+              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+              'id': 164275,
+              'yaw': 2.4,
+              'roll': 0,
+              'pitch': 1.9
+            }
+          ]
+        },
+        {
+          'id': 102895,
+          'latitude': 31.8562497,
+          'longitude': 120.2217814,
+          'altitude': 44.99,
+          'action': [
+            {
+              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+              'id': 164276,
+              'yaw': -2.2,
+              'roll': 0,
+              'pitch': 2
+            },
+            {
+              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+              'id': 164277,
+              'yaw': 2.1,
+              'roll': 0,
+              'pitch': 1.5
+            }
+          ]
+        },
+        {
+          'id': 102896,
+          'latitude': 31.8562512,
+          'longitude': 120.2217962,
+          'altitude': 82.04,
+          'action': []
+        },
+        {
+          'id': 102897,
+          'latitude': 31.856109,
+          'longitude': 120.2218049,
+          'altitude': 93.4,
+          'action': [
+            {
+              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+              'id': 164278,
+              'yaw': 0,
+              'roll': 0,
+              'pitch': 45
+            }
+          ]
+        },
+        {
+          'id': 102898,
+          'latitude': 31.8556587,
+          'longitude': 120.2185077,
+          'altitude': 92.6,
+          'action': [
+            {
+              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+              'id': 164279,
+              'yaw': 0,
+              'roll': 0,
+              'pitch': 45
+            }
+          ]
+        },
+        {
+          'id': 102899,
+          'latitude': 31.8554312,
+          'longitude': 120.216864,
+          'altitude': 82.5,
+          'action': [
+            {
+              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+              'id': 164280,
+              'yaw': 0,
+              'roll': 0,
+              'pitch': 45
+            }
+          ]
+        },
+        {
+          'id': 102900,
+          'latitude': 31.85376,
+          'longitude': 120.217137,
+          'altitude': 90,
+          'action': [
+            {
+              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+              'id': 164281,
+              'yaw': 0,
+              'roll': 0,
+              'pitch': 0
+            }
+          ]
+        }
+      ]
+    }
+  },
+  computed: {
+
+  },
+  watch: {
+
+  },
+  mounted () {
+    const _this = this
+    // const china = Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
+    // Cesium.Camera.DEFAULT_VIEW_RECTANGLE = china
+    // Initialize the viewer widget with several custom options and mixins.
+    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYTJjNTM1Yy0wZDRjLTRlZWYtYTFkMi1hOGIwNTI2ZGU0MDgiLCJpZCI6ODI5MjAsImlhdCI6MTY0NTE2NDEyOH0.XndixRDpLnRAxnqSNQpT2JofpGyngIUWlmzbG53hEtM'
+    const viewer = new Cesium.Viewer('cesium-container', {
+      terrainProvider: Cesium.createWorldTerrain(),
+      animation: false, // 是否显示左下角的仪表盘
+      baseLayerPicker: false, // 是否显示图层选择器按钮，右上角那个地图图标
+      fullscreenButton: false, // 是否显示全屏按钮
+      vrButton: false, // 是否显示VR按钮
+      geocoder: false, // 是否显示搜索按钮
+      homeButton: false, // 是否显示主页按钮
+      infoBox: false, // 是否显示提示信息
+      sceneModePicker: false, // 是否显示右上角的模式切换按钮
+      selectionIndicator: false, // 是否显示选取指示器组件
+      timeline: false, // 是否显示下边的时间轴
+      navigationHelpButton: false, // 是否显示右上角的帮助按钮
+      navigationInstructionsInitiallyVisible: true, // 是不显示导航
+      // scene3DOnly: true, // 是否指定仅为三维模式，全部使用三维模式可节约 GPU 资源
+      // requestRenderMode: true,
+      imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
+        url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'
+      })
+    })
+
+    console.log('this.point', this.points)
+
+    // 清除实体
+    // 方法一：通过 Entity 删除
+    // viewer.entities.remove(Entity)
+    // 方法二：通过 id 删除
+    // viewer.entities.remove(this.viewer.entities.getById('xxx'))
+    // 方法三：删除所有实体
+    viewer.entities.removeAll()
+
+    this.points.map((point, index) => {
+      // 点
+      const entity = viewer.entities.add(new Cesium.Entity({
+        id: 'point' + point.id,
+        name: 'point',
+        position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
+        data: {
+          point
+        },
+        // point: new Cesium.PointGraphics({
+        //   pixelSize: 4,
+        //   heightReference: Cesium.HeightReference.NONE,
+        //   color: new Cesium.Color.fromCssColorString('#d81e06').withAlpha(0.4),
+        //   outlineColor: new Cesium.Color.fromCssColorString('#d81e06').withAlpha(0.4),
+        //   outlineWidth: 1,
+        //   pixelOffset: new Cesium.Cartesian2(0.0, 0.0),
+        //   translucencyByDistance: new Cesium.NearFarScalar(0, 1, 5e10, 1),
+        //   scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+        //   distanceDisplayCondition: new Cesium.DistanceDisplayCondition(500, Number.MAX_VALUE), // 可视高度范围
+        //   show: true
+        // }),
+        billboard: {
+          image: require('@/assets/images/point.png'),
+          verticalOrigin: Cesium.VerticalOrigin.CENTER,
+          horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+          scale: 1,
+          scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+          distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0),
+          show: true
+        },
+        label: {
+          text: point.id + '',
+          fillColor: new Cesium.Color.fromCssColorString('#fff'),
+          outlineColor: new Cesium.Color.fromCssColorString('#fff'),
+          outlineWidth: 1,
+          verticalOrigin: Cesium.VerticalOrigin.CENTER,
+          horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+          showBackground: true,
+          backgroundColor: new Cesium.Color.fromCssColorString('#fff').withAlpha(0.0),
+          distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0),
+          scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+          show: true
+        }
+        // 圆柱
+        // cylinder: {
+        //   topRadius: 10,
+        //   bottomRadius: 100,
+        //   heightReference: 0,
+        //   length: 1000,
+        //   // material: new Cesium.ImageMaterialProperty({
+        //   //   image: require('@/assets/images/circle.png'),
+        //   //   repeat: new Cesium.Cartesian2(1.0, 1.0),
+        //   //   transparent: true,
+        //   //   color: new Cesium.CallbackProperty(function () {
+        //   //     return Cesium.Color.WHITE.withAlpha(0.5)
+        //   //   }, false)
+        //   // }),
+        //   // material: new Cesium.Color(0.21, 0.66, 1, 0.4),
+        //   show: true
+        // }
+        // 立方体
+        // box: {
+        //   dimensions: new Cesium.Cartesian3(100.0, 100.0, 100.0),
+        //   material: new Cesium.Color.fromCssColorString('#fcb718').withAlpha(0.5),
+        //   outline: true,
+        //   outlineColor: new Cesium.Color.fromCssColorString('#fcb718')
+        // }
+      }))
+
+      if (point.action && point.action.length > 0) {
+        point.action.map((action) => {
+          const entity = viewer.entities.add(new Cesium.Entity({
+            id: 'action' + action.id,
+            name: 'action',
+            position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
+            // orientation: Cesium.Transforms.headingPitchRollQuaternion(
+            //   Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
+            //   new Cesium.HeadingPitchRoll(action.yaw, action.pitch, action.roll)
+            // ),
+            data: {
+              action
+            },
+            billboard: {
+              width: 320,
+              height: 150,
+              // image: action.src,
+              image: require('@/assets/images/pic.jpeg'),
+              verticalOrigin: Cesium.VerticalOrigin.CENTER,
+              horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+              // scale: 0.2,
+              scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0),
+              show: true
+            }
+          }))
+        })
+      }
+    })
+
+    // 线
+    const _list = []
+    this.points.map((point, index) => {
+      _list.push(point.longitude)
+      _list.push(point.latitude)
+      _list.push(point.altitude)
+    })
+    const lineEntity = viewer.entities.add(
+      new Cesium.Entity({
+        id: 'line',
+        name: 'line',
+        polyline: {
+          // positions: Cesium.Cartesian3.fromDegreesArray([116.3, 39.9, 116.47958024969756, 39.84829594348535, 116.56374186776782, 39.87785704033606]), // 无高度，贴地
+          positions: Cesium.Cartesian3.fromDegreesArrayHeights(_list),
+          width: 2,
+          arcType: Cesium.ArcType.RHUMB,
+          material: new Cesium.PolylineDashMaterialProperty({
+            color: new Cesium.Color.fromCssColorString('#FCB718').withAlpha(1),
+            dashLength: 5 // 短划线长度
+          }),
+          scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+          distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
+        }
+      })
+    )
+    viewer.flyTo(lineEntity, {
+      duration: 1,
+      offset: new Cesium.HeadingPitchRoll(
+        Cesium.Math.toRadians(-30),
+        Cesium.Math.toRadians(-45),
+        Cesium.Math.toRadians(0)
+      )
+    })
+
+    const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
+    handler.setInputAction(function (event) {
+      const picked = viewer.scene.pick(event.position)
+      console.log(picked)
+      const earthPosition = viewer.camera.pickEllipsoid(event.position, viewer.scene.globe.ellipsoid)
+      const cartographic = Cesium.Cartographic.fromCartesian(earthPosition, viewer.scene.globe.ellipsoid, new Cesium.Cartographic())
+      const longitude = Cesium.Math.toDegrees(cartographic.longitude)
+      const latitude = Cesium.Math.toDegrees(cartographic.latitude)
+      console.log('空间直角坐标系转经纬度', longitude, latitude, cartographic.height)
+      if (!picked || !picked.id) {
+        return
+      }
+      if (picked.id.data) {
+        console.log(picked.id.data)
+        const data = picked.id.data
+        if (data.action && data.action.src) {
+          _this.url = data.action.src
+          _this.srcList = [_this.url]
+          setTimeout(() => {
+            _this.$refs.preview.clickHandler()
+          }, 100)
+        }
+      }
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+  },
+  methods: {
+  }
+}
+</script>
+
+<style>
+* {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+}
+</style>

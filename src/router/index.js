@@ -8,6 +8,11 @@ const routes = [
     path: '/',
     name: 'Init',
     component: () => import('../views/Init.vue')
+  },
+  {
+    path: '/Entity',
+    name: 'Entity',
+    component: () => import('../views/Entity.vue')
   }
 ]
 
