@@ -460,18 +460,26 @@ export default {
             data: {
               action
             },
-            billboard: {
-              width: 320,
-              height: 150,
-              // image: action.src,
-              image: require('@/assets/images/pic.jpeg'),
-              verticalOrigin: Cesium.VerticalOrigin.CENTER,
-              horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-              // scale: 0.2,
-              scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
-              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0),
-              show: true
+            plane: {
+              plane: new Cesium.Plane(Cesium.Cartesian3.UNIT_Z, -50.0),
+              dimensions: new Cesium.Cartesian2(100.0, 80.0),
+              material: new Cesium.ImageMaterialProperty({
+                image: require('@/assets/images/pic.jpeg'), // 图片以材质的方式填充
+                repeat: new Cesium.Cartesian2(1, 1)
+              })
             }
+            // billboard: {
+            //   width: 320,
+            //   height: 150,
+            //   // image: action.src,
+            //   image: require('@/assets/images/pic.jpeg'),
+            //   verticalOrigin: Cesium.VerticalOrigin.CENTER,
+            //   horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+            //   // scale: 0.2,
+            //   scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+            //   distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0),
+            //   show: true
+            // }
           }))
         })
       }
