@@ -35,7 +35,7 @@ export default {
       selectionIndicator: false, // 是否显示选取指示器组件
       timeline: false, // 是否显示下边的时间轴
       navigationHelpButton: false, // 是否显示右上角的帮助按钮
-      navigationInstructionsInitiallyVisible: true, // 是不显示导航
+      navigationInstructionsInitiallyVisible: true, // 是否显示导航
       // scene3DOnly: true, // 是否指定仅为三维模式，全部使用三维模式可节约 GPU 资源
       // requestRenderMode: true,
       imageryProvider: new Cesium.ArcGisMapServerImageryProvider({

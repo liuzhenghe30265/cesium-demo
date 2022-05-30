@@ -16,6 +16,13 @@
 /* eslint-disable no-undef */
 /* eslint-disable new-cap */
 /* eslint-disable no-unused-vars */
+import {
+  scaleAnimate,
+  opacityAnimate,
+  colorOpacityAnimate,
+  semiMinorAxisAnimate,
+  semiMajorAxisAnimate
+} from '@/utils/cesiumAnimate'
 export default {
   data () {
     return {
@@ -42,15 +49,7 @@ export default {
           'latitude': 31.8554312,
           'longitude': 120.216864,
           'altitude': 82.5,
-          'action': [
-            {
-              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-              'id': 164261,
-              'yaw': 0,
-              'roll': 0,
-              'pitch': 45
-            }
-          ]
+          'action': []
         },
         {
           'id': 102883,
@@ -72,21 +71,6 @@ export default {
           'latitude': 31.856109,
           'longitude': 120.2218049,
           'altitude': 93.4,
-          'action': [
-            {
-              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-              'id': 164263,
-              'yaw': 0,
-              'roll': 0,
-              'pitch': 45
-            }
-          ]
-        },
-        {
-          'id': 102885,
-          'latitude': 31.8559722,
-          'longitude': 120.2218505,
-          'altitude': 82.27,
           'action': []
         },
         {
@@ -111,13 +95,6 @@ export default {
           'altitude': 58.18,
           'action': [
             {
-              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-              'id': 164265,
-              'yaw': 1.4,
-              'roll': 0,
-              'pitch': 1.5
-            },
-            {
               'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
               'id': 164266,
               'yaw': -1.4,
@@ -133,13 +110,6 @@ export default {
           'altitude': 51.39,
           'action': [
             {
-              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-              'id': 164267,
-              'yaw': 2,
-              'roll': 0,
-              'pitch': 1.7
-            },
-            {
               'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
               'id': 164268,
               'yaw': -2,
@@ -153,35 +123,6 @@ export default {
           'latitude': 31.8559705,
           'longitude': 120.2218332,
           'altitude': 44.96,
-          'action': [
-            {
-              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-              'id': 164269,
-              'yaw': 100,
-              'roll': 100,
-              'pitch': 100
-            },
-            {
-              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-              'id': 164270,
-              'yaw': 200,
-              'roll': 200,
-              'pitch': 200
-            }
-          ]
-        },
-        {
-          'id': 102890,
-          'latitude': 31.8559722,
-          'longitude': 120.2218505,
-          'altitude': 82.27,
-          'action': []
-        },
-        {
-          'id': 102891,
-          'latitude': 31.8562512,
-          'longitude': 120.2217962,
-          'altitude': 82.04,
           'action': []
         },
         {
@@ -204,44 +145,14 @@ export default {
           'latitude': 31.8562451,
           'longitude': 120.2217842,
           'altitude': 58.18,
-          'action': [
-            {
-              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-              'id': 164272,
-              'yaw': -2.3,
-              'roll': 0,
-              'pitch': 1.8
-            },
-            {
-              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-              'id': 164273,
-              'yaw': 2.3,
-              'roll': 0,
-              'pitch': 1.6
-            }
-          ]
+          'action': []
         },
         {
           'id': 102894,
           'latitude': 31.8562542,
           'longitude': 120.2217819,
           'altitude': 51.42,
-          'action': [
-            {
-              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-              'id': 164274,
-              'yaw': -2.3,
-              'roll': 0,
-              'pitch': 1.6
-            },
-            {
-              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-              'id': 164275,
-              'yaw': 2.4,
-              'roll': 0,
-              'pitch': 1.9
-            }
-          ]
+          'action': []
         },
         {
           'id': 102895,
@@ -255,80 +166,6 @@ export default {
               'yaw': -2.2,
               'roll': 0,
               'pitch': 2
-            },
-            {
-              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-              'id': 164277,
-              'yaw': 2.1,
-              'roll': 0,
-              'pitch': 1.5
-            }
-          ]
-        },
-        {
-          'id': 102896,
-          'latitude': 31.8562512,
-          'longitude': 120.2217962,
-          'altitude': 82.04,
-          'action': []
-        },
-        {
-          'id': 102897,
-          'latitude': 31.856109,
-          'longitude': 120.2218049,
-          'altitude': 93.4,
-          'action': [
-            {
-              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-              'id': 164278,
-              'yaw': 0,
-              'roll': 0,
-              'pitch': 45
-            }
-          ]
-        },
-        {
-          'id': 102898,
-          'latitude': 31.8556587,
-          'longitude': 120.2185077,
-          'altitude': 92.6,
-          'action': [
-            {
-              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-              'id': 164279,
-              'yaw': 0,
-              'roll': 0,
-              'pitch': 45
-            }
-          ]
-        },
-        {
-          'id': 102899,
-          'latitude': 31.8554312,
-          'longitude': 120.216864,
-          'altitude': 82.5,
-          'action': [
-            {
-              'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-              'id': 164280,
-              'yaw': 0,
-              'roll': 0,
-              'pitch': 45
-            }
-          ]
-        },
-        {
-          'id': 102900,
-          'latitude': 31.85376,
-          'longitude': 120.217137,
-          'altitude': 90,
-          'action': [
-            {
-              'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-              'id': 164281,
-              'yaw': 0,
-              'roll': 0,
-              'pitch': 0
             }
           ]
         }
@@ -360,7 +197,7 @@ export default {
       selectionIndicator: false, // 是否显示选取指示器组件
       timeline: false, // 是否显示下边的时间轴
       navigationHelpButton: false, // 是否显示右上角的帮助按钮
-      navigationInstructionsInitiallyVisible: true, // 是不显示导航
+      navigationInstructionsInitiallyVisible: true, // 是否显示导航
       // scene3DOnly: true, // 是否指定仅为三维模式，全部使用三维模式可节约 GPU 资源
       // requestRenderMode: true,
       imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
@@ -374,7 +211,7 @@ export default {
     // 方法一：通过 Entity 删除
     // viewer.entities.remove(Entity)
     // 方法二：通过 id 删除
-    // viewer.entities.remove(this.viewer.entities.getById('xxx'))
+    // viewer.entities.remove(viewer.entities.getById('xxx'))
     // 方法三：删除所有实体
     viewer.entities.removeAll()
 
@@ -447,6 +284,8 @@ export default {
         // }
       }))
 
+      /**
+      // 扩展（航点动作上拍照图片）
       if (point.action && point.action.length > 0) {
         point.action.map((action) => {
           const entity = viewer.entities.add(new Cesium.Entity({
@@ -464,7 +303,7 @@ export default {
               plane: new Cesium.Plane(Cesium.Cartesian3.UNIT_Z, -50.0),
               dimensions: new Cesium.Cartesian2(100.0, 80.0),
               material: new Cesium.ImageMaterialProperty({
-                image: require('@/assets/images/pic.jpeg'), // 图片以材质的方式填充
+                image: action.src, // 图片以材质的方式填充
                 repeat: new Cesium.Cartesian2(1, 1)
               })
             }
@@ -483,6 +322,7 @@ export default {
           }))
         })
       }
+       */
     })
 
     // 线
@@ -518,6 +358,50 @@ export default {
         Cesium.Math.toRadians(0)
       )
     })
+
+    // 动画效果
+
+    // 圆环扩散效果
+    // http://www.bigemap.com/Public/offline/gl/EllipseGeometry.html?classFilter=ellipse
+    const point1 = this.points[0]
+    const point2 = this.points[1]
+    const point3 = this.points[2]
+
+    // 方式一：颜色填充
+    // viewer.entities.add({
+    //   position: Cesium.Cartesian3.fromDegrees(point1.longitude, point1.latitude, point1.altitude),
+    //   ellipse: {
+    //     // semiMinorAxis: 500, // 椭圆半短轴的长度，单位为米
+    //     // semiMajorAxis: 500, // 椭圆半长轴的长度，单位为米
+    //     semiMinorAxis: semiMinorAxisAnimate(), // 动态效果
+    //     semiMajorAxis: semiMajorAxisAnimate(),
+    //     height: 100,
+    //     material: Cesium.Color.RED.withAlpha(0.5),
+    //     outlineColor: Cesium.Color.RED
+    //     // extrudedHeight: undefined
+    //   }
+    // })
+
+    // 方式二：使用图片
+    // viewer.entities.add({
+    //   position: Cesium.Cartesian3.fromDegrees(point2.longitude, point2.latitude, point2.altitude),
+    //   ellipse: {
+    //     semiMinorAxis: semiMinorAxisAnimate(), // 动态效果
+    //     semiMajorAxis: semiMajorAxisAnimate(),
+    //     height: point2.point2,
+    //     material: new Cesium.ImageMaterialProperty({
+    //       image: require('@/assets/images/circle.png'),
+    //       repeat: new Cesium.Cartesian2(1.0, 1.0),
+    //       transparent: true,
+    //       color: colorOpacityAnimate()
+    //     })
+    //   }
+    // })
+
+    // 获取到实体添加动画
+    const entity1 = viewer.entities.getById('point' + 102883)
+    entity1.billboard.color = opacityAnimate()
+    entity1.billboard.scale = scaleAnimate()
 
     const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
     handler.setInputAction(function (event) {
