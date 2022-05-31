@@ -10,7 +10,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@turf/turf": "^6.3.0",
+    "@turf/turf": "^6.5.0",
     "axios": "^0.21.1",
     "cesium": "~1.83.0",
     "cesiumvectortile": "^1.2.2",

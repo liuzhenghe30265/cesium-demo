@@ -18,6 +18,11 @@ const routes = [
     path: '/Model',
     name: 'Model',
     component: () => import('../views/Model.vue')
+  },
+  {
+    path: '/ClippingPlane',
+    name: 'ClippingPlane',
+    component: () => import('../views/ClippingPlane.vue')
   }
 ]
 
