@@ -22,7 +22,7 @@ import {
   colorOpacityAnimate,
   semiMinorAxisAnimate,
   semiMajorAxisAnimate
-} from '@/utils/cesiumAnimate'
+} from '@/utils/EntityAnimate'
 export default {
   data () {
     return {

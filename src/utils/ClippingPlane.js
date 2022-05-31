@@ -1,13 +1,23 @@
 /* eslint-disable no-undef */
 import * as turf from '@turf/turf'
 
-export function createPlaneUpdateFunction(plane) {
+export function createPlaneUpdateFunction (plane) {
   return function () {
     return plane
   }
 }
 
-export function createClippingPlaneFun(url, clippingPlanes) {
+/**
+ * @description: 给模型添加切割面
+ * @param {*} url 模型地址
+ * @param {*} maximumScreenSpaceError 驱动细节细化程度的最大屏幕空间错误
+ * @param {*} clippingPlanes 切割面
+ * @param {*} material 材质
+ * @param {*} outline 边框
+ * @param {*} outlineColor 边框颜色
+ * @return {*}
+ */
+export function createClippingPlaneFun (url, clippingPlanes) {
   const planeEntities = []
   const option = {
     url: url,
@@ -72,7 +82,7 @@ export function createClippingPlaneFun(url, clippingPlanes) {
   return tileset
 }
 
-export function isDirRes(polygon, isClockwise) {
+export function isDirRes (polygon, isClockwise) {
   var lineStringList = []
   polygon.forEach((p) => {
     lineStringList.push([p.lng, p.lat])
@@ -105,12 +115,12 @@ export function isDirRes(polygon, isClockwise) {
   }
   return points
 }
-export function getOriginCoordinateSystemPoint(point, inverseTransform) {
+export function getOriginCoordinateSystemPoint (point, inverseTransform) {
   const val = Cesium.Cartesian3.fromDegrees(point.lng, point.lat)
   return Cesium.Matrix4.multiplyByPoint(
     inverseTransform, val, new Cesium.Cartesian3(0, 0, 0))
 }
-export function createPlane(p1, p2, inverseTransform) {
+export function createPlane (p1, p2, inverseTransform) {
   const p1C3 = getOriginCoordinateSystemPoint(p1, inverseTransform)
   const p2C3 = getOriginCoordinateSystemPoint(p2, inverseTransform)
   const up = new Cesium.Cartesian3(0, 0, 10)
@@ -121,7 +131,7 @@ export function createPlane(p1, p2, inverseTransform) {
   return Cesium.ClippingPlane.fromPlane(planeTmp)
 }
 
-export function getInverseTransform(tileSet) {
+export function getInverseTransform (tileSet) {
   let transform
   const tmp = tileSet.root.transform
   if ((tmp && tmp.equals(Cesium.Matrix4.IDENTITY)) || !tmp) {

@@ -57,39 +57,45 @@ export default {
     })
     window.viewer = viewer
 
-    const tileseta = createClippingPlaneFun('https://lab.earthsdk.com/model/3610c2b0d08411eab7a4adf1d6568ff7/tileset.json', new Cesium.ClippingPlaneCollection({
-      planes: [
-        new Cesium.ClippingPlane(
-          new Cesium.Cartesian3(1.0, 0.0, 0.0),
-          0.0
-        )
-      ],
-      edgeColor: Cesium.Color.WHITE,
-      edgeWidth: 0.0,
-      unionClippingRegions: true
-    }))
-    viewer.zoomTo(tileseta)
+    // 模型一
+    const tileseta = createClippingPlaneFun(
+      'https://lab.earthsdk.com/model/3610c2b0d08411eab7a4adf1d6568ff7/tileset.json',
+      new Cesium.ClippingPlaneCollection({
+        planes: [
+          new Cesium.ClippingPlane(
+            new Cesium.Cartesian3(1.0, 0.0, 0.0),
+            0.0
+          )
+        ],
+        unionClippingRegions: true
+      })
+    )
 
-    const tilesetb = createClippingPlaneFun('https://lab.earthsdk.com/model/908311a0ac2f11e99dbd8fd044883638/tileset.json', new Cesium.ClippingPlaneCollection({
-      planes: [
-        new Cesium.ClippingPlane(
-          new Cesium.Cartesian3(-1.0, 0.0, 0.0),
-          0.0
-        )
-      ],
-      edgeColor: Cesium.Color.BLUE,
-      edgeWidth: 0.0,
-      unionClippingRegions: true
-    }))
+    // 模型二
+    const tilesetb = createClippingPlaneFun(
+      'https://lab.earthsdk.com/model/908311a0ac2f11e99dbd8fd044883638/tileset.json',
+      new Cesium.ClippingPlaneCollection({
+        planes: [
+          new Cesium.ClippingPlane(
+            new Cesium.Cartesian3(-1.0, 0.0, 0.0),
+            0.0
+          )
+        ],
+        // edgeColor: Cesium.Color.WHITE,
+        // edgeWidth: 0.0,
+        unionClippingRegions: true
+      })
+    )
+
+    viewer.zoomTo(tileseta)
 
     const leftBtn = document.getElementById('left')
     leftBtn.onclick = function () {
       if (tileseta.clippingPlanes.get(0).distance > 3500) {
         return
       }
-      tileseta.clippingPlanes.get(0).distance += 1000
-      tilesetb.clippingPlanes.get(0).distance -= 1000
-      console.log(tileseta.clippingPlanes.get(0).distance)
+      tileseta.clippingPlanes.get(0).distance += 500
+      tilesetb.clippingPlanes.get(0).distance -= 500
     }
 
     const rightBtn = document.getElementById('right')
@@ -97,9 +103,8 @@ export default {
       if (tilesetb.clippingPlanes.get(0).distance > 3500) {
         return
       }
-      tilesetb.clippingPlanes.get(0).distance += 1000
-      tileseta.clippingPlanes.get(0).distance -= 1000
-      console.log(tilesetb.clippingPlanes.get(0).distance)
+      tilesetb.clippingPlanes.get(0).distance += 500
+      tileseta.clippingPlanes.get(0).distance -= 500
     }
   },
   methods: {
