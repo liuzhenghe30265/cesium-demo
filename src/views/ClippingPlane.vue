@@ -6,11 +6,9 @@
       style="width: 100%; height: 100%;" />
     <div
       class="btns">
-      <i
-        id="left"
+      <i id="left"
         class="el-icon-arrow-left" />
-      <i
-        id="right"
+      <i id="right"
         class="el-icon-arrow-right" />
     </div>
   </div>
@@ -112,10 +110,10 @@ export default {
 <style lang="scss" scoped>
 .btns {
   position: fixed;
-  left: 0;
-  top: 0;
+  right: 0;
+  top: 100px;
   z-index: 999;
-  width: 100%;
+  width: 200px;
   display: flex;
   font-size: 56px;
   font-weight: bold;
