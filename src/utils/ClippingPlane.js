@@ -10,11 +10,7 @@ export function createPlaneUpdateFunction (plane) {
 /**
  * @description: 给模型添加切割面
  * @param {*} url 模型地址
- * @param {*} maximumScreenSpaceError 驱动细节细化程度的最大屏幕空间错误
  * @param {*} clippingPlanes 切割面
- * @param {*} material 材质
- * @param {*} outline 边框
- * @param {*} outlineColor 边框颜色
  * @return {*}
  */
 export function createClippingPlaneFun (url, clippingPlanes) {
@@ -83,15 +79,15 @@ export function createClippingPlaneFun (url, clippingPlanes) {
 }
 
 export function isDirRes (polygon, isClockwise) {
-  var lineStringList = []
+  const lineStringList = []
   polygon.forEach((p) => {
-    lineStringList.push([p.lng, p.lat])
+    lineStringList.push([p[0], p[1]])
   })
 
-  var clockwiseRing = turf.lineString(lineStringList)
+  const clockwiseRing = turf.lineString(lineStringList)
   const isR = turf.booleanClockwise(clockwiseRing)
 
-  var points = []
+  let points = []
   if (isClockwise) {
     if (!isR) {
       points = polygon
@@ -115,11 +111,20 @@ export function isDirRes (polygon, isClockwise) {
   }
   return points
 }
+
 export function getOriginCoordinateSystemPoint (point, inverseTransform) {
   const val = Cesium.Cartesian3.fromDegrees(point.lng, point.lat)
   return Cesium.Matrix4.multiplyByPoint(
     inverseTransform, val, new Cesium.Cartesian3(0, 0, 0))
 }
+
+/**
+ * @description: 创建平面
+ * @param {*} p1
+ * @param {*} p2
+ * @param {*} inverseTransform
+ * @return {*}
+ */
 export function createPlane (p1, p2, inverseTransform) {
   const p1C3 = getOriginCoordinateSystemPoint(p1, inverseTransform)
   const p2C3 = getOriginCoordinateSystemPoint(p2, inverseTransform)
@@ -131,13 +136,18 @@ export function createPlane (p1, p2, inverseTransform) {
   return Cesium.ClippingPlane.fromPlane(planeTmp)
 }
 
-export function getInverseTransform (tileSet) {
+/**
+ * @description: 转换矩阵
+ * @param {*} tileset
+ * @return {*}
+ */
+export function getInverseTransform (tileset) {
   let transform
-  const tmp = tileSet.root.transform
+  const tmp = tileset.root.transform
   if ((tmp && tmp.equals(Cesium.Matrix4.IDENTITY)) || !tmp) {
-    transform = Cesium.Transforms.eastNorthUpToFixedFrame(tileSet.boundingSphere.center)
+    transform = Cesium.Transforms.eastNorthUpToFixedFrame(tileset.boundingSphere.center)
   } else {
-    transform = Cesium.Matrix4.fromArray(tileSet.root.transform)
+    transform = Cesium.Matrix4.fromArray(tileset.root.transform)
   }
   return Cesium.Matrix4.inverseTransformation(transform, new Cesium.Matrix4())
 }
