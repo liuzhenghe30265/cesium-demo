@@ -51,7 +51,6 @@ export function createClippingPlaneFun (url, clippingPlanes) {
       clippingPlanes.modelMatrix = Cesium.Matrix4.fromTranslation(
         new Cesium.Cartesian3(0.0, 0.0, height)
       )
-
       for (let i = 0; i < clippingPlanes.length; ++i) {
         const plane = clippingPlanes.get(i)
         const planeEntity = viewer.entities.add({
@@ -113,7 +112,7 @@ export function isDirRes (polygon, isClockwise) {
 }
 
 export function getOriginCoordinateSystemPoint (point, inverseTransform) {
-  const val = Cesium.Cartesian3.fromDegrees(point.lng, point.lat)
+  const val = Cesium.Cartesian3.fromDegrees(point[0], point[1])
   return Cesium.Matrix4.multiplyByPoint(
     inverseTransform, val, new Cesium.Cartesian3(0, 0, 0))
 }

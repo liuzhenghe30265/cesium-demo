@@ -27,6 +27,14 @@ export default {
 
   },
   mounted () {
+    function concatArrFun (arr) {
+      if (arr && arr.length > 0) {
+        const result = arr.reduce((a, b) => {
+          return a.concat(b)
+        })
+        return result
+      }
+    }
     const _this = this
     // const china = Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
     // Cesium.Camera.DEFAULT_VIEW_RECTANGLE = china
@@ -85,63 +93,38 @@ export default {
         [121.50687111770299, 31.23284924862835],
         [121.50544233566751, 31.235339079540314]
       ]
-      const drawList = isDirRes(cutPolygon, false)
-      console.log('...........drawList', drawList)
+      const cutList = isDirRes(cutPolygon, true)
+      const cutListConcate = concatArrFun(cutList)
       viewer.entities.removeAll()
       viewer.entities.add(
         new Cesium.Entity({
           id: 'line',
           name: 'line',
           polyline: {
-            positions: Cesium.Cartesian3.fromDegreesArray([121.50544233566751, 31.235339079540314, 121.50885371103823, 31.235375264414056, 121.51044141510673, 31.232301509163992, 121.50761807127788, 31.23151980919727, 121.50687111770299, 31.23284924862835, 121.50544233566751, 31.235339079540314]),
-            width: 2,
+            positions: Cesium.Cartesian3.fromDegreesArray(cutListConcate),
+            width: 4,
             arcType: Cesium.ArcType.RHUMB,
             material: new Cesium.PolylineDashMaterialProperty({
-              color: Cesium.Color.RED
+              color: Cesium.Color.BLUE
             })
           }
         })
       )
 
-      const Planes = []
-      for (let i = 0; i < drawList.length; i++) {
-        if (i === (drawList.length - 1)) {
-          Planes.push(createPlane(drawList[i], drawList[0], inverseTransform))
-        } else {
-          Planes.push(createPlane(drawList[i], drawList[i + 1], inverseTransform))
-        }
+      const clippingPlanes1 = []
+      for (let i = 0; i < cutList.length - 1; i++) {
+        const plane = createPlane(cutList[i], cutList[i + 1], inverseTransform)
+        clippingPlanes1.push(plane)
       }
-      console.log('............Planes', Planes)
-      const PlaneCollection = new Cesium.ClippingPlaneCollection({
-        planes: Planes,
-        unionClippingRegions: false
+      // 创建裁剪平面
+      const clippingPlanes = new Cesium.ClippingPlaneCollection({
+        // 一组 ClippingPlane 对象，用于选择性地禁用每个平面外部的渲染
+        planes: clippingPlanes1,
+        // 应用于裁剪对象的边缘的高光的宽度（以像素为单位）
+        unionClippingRegions: false,
+        edgeWidth: 1.0
       })
-      console.log('............PlaneCollection', PlaneCollection)
-      _tileset.clippingPlanes = PlaneCollection
-      // const cutPolygon = [
-      //   [121.50078319146864, 31.239295363355005],
-      //   [121.50287882182977, 31.231858043758603],
-      //   [121.51224880516521, 31.232266680352073],
-      //   [121.51240949836178, 31.242211264722496],
-      //   [121.50703002230989, 31.24506857160166],
-      //   [121.50078319146864, 31.239295363355005]
-      // ]
-      // clippingPlane 集合
-      // const clippingPlaneList = []
-      // for (let i = 0; i < cutPolygon.length - 1; i++) {
-      //   const plane = createPlane(cutPolygon[i], cutPolygon[i + 1], inverseTransform)
-      //   clippingPlaneList.push(plane)
-      // }
-      // // 创建裁切平面
-      // const clippingPlanes = new Cesium.ClippingPlaneCollection({
-      //   // 一组 ClippingPlane 对象，用于选择性地禁用每个平面外部的渲染
-      //   planes: clippingPlaneList,
-      //   // 应用于裁剪对象的边缘的高光的宽度（以像素为单位）
-      //   edgeWidth: 1.0,
-      //   unionClippingRegions: true
-      // })
-      // _tileset.clippingPlanes = clippingPlanes
-      // console.log('..........clippingPlanes', clippingPlanes)
+      _tileset.clippingPlanes = clippingPlanes
     })
 
     const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
