@@ -10,6 +10,10 @@
         class="el-icon-arrow-left" />
       <i id="right"
         class="el-icon-arrow-right" />
+      <i id="up"
+        class="el-icon-arrow-up" />
+      <i id="down"
+        class="el-icon-arrow-down" />
     </div>
   </div>
 </template>
@@ -31,6 +35,7 @@ export default {
   },
   mounted () {
     const _this = this
+    let timer = null
     // const china = Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
     // Cesium.Camera.DEFAULT_VIEW_RECTANGLE = china
     // Initialize the viewer widget with several custom options and mixins.
@@ -65,7 +70,11 @@ export default {
           new Cesium.ClippingPlane(
             new Cesium.Cartesian3(1.0, 0.0, 0.0),
             0.0
-          )
+          ) // 左
+          // new Cesium.ClippingPlane(
+          //   new Cesium.Cartesian3(0.0, 0.0, 1.0),
+          //   0.0
+          // ) // 上
         ],
         unionClippingRegions: true
       })
@@ -79,7 +88,11 @@ export default {
           new Cesium.ClippingPlane(
             new Cesium.Cartesian3(-1.0, 0.0, 0.0),
             0.0
-          )
+          ) // 右
+          // new Cesium.ClippingPlane(
+          //   new Cesium.Cartesian3(0.0, 0.0, -1.0),
+          //   0.0
+          // ) // 下
         ],
         // edgeColor: Cesium.Color.WHITE,
         // edgeWidth: 0.0,
@@ -89,23 +102,74 @@ export default {
 
     viewer.zoomTo(tileseta)
 
+    function changeFun (type) {
+      if (timer) {
+        clearInterval(timer)
+      }
+      timer = setInterval(() => {
+        if (type === 'left') {
+          if (tileseta.clippingPlanes.get(0).distance > 3500) {
+            clearInterval(timer)
+            return
+          }
+          tileseta.clippingPlanes.get(0).distance += 10
+          tilesetb.clippingPlanes.get(0).distance -= 10
+        } else if (type === 'right') {
+          if (tilesetb.clippingPlanes.get(0).distance > 3500) {
+            clearInterval(timer)
+            return
+          }
+          tilesetb.clippingPlanes.get(0).distance += 10
+          tileseta.clippingPlanes.get(0).distance -= 10
+        } else if (type === 'up') {
+          if (tilesetb.clippingPlanes.get(1).distance > 250) {
+            clearInterval(timer)
+            return
+          }
+          tilesetb.clippingPlanes.get(1).distance += 10
+          tileseta.clippingPlanes.get(1).distance -= 10
+          console.log('up', tilesetb.clippingPlanes.get(1).distance)
+        } else if (type === 'down') {
+          if (tileseta.clippingPlanes.get(1).distance > 250) {
+            clearInterval(timer)
+            return
+          }
+          tileseta.clippingPlanes.get(1).distance += 10
+          tilesetb.clippingPlanes.get(1).distance -= 10
+          console.log('down', tileseta.clippingPlanes.get(1).distance)
+        }
+      }, 10)
+    }
+
     const leftBtn = document.getElementById('left')
     leftBtn.onclick = function () {
-      if (tileseta.clippingPlanes.get(0).distance > 3500) {
-        return
-      }
-      tileseta.clippingPlanes.get(0).distance += 500
-      tilesetb.clippingPlanes.get(0).distance -= 500
+      changeFun('left')
+      // if (tileseta.clippingPlanes.get(0).distance > 3500) {
+      //   return
+      // }
+      // tileseta.clippingPlanes.get(0).distance += 500
+      // tilesetb.clippingPlanes.get(0).distance -= 500
     }
 
     const rightBtn = document.getElementById('right')
     rightBtn.onclick = function () {
-      if (tilesetb.clippingPlanes.get(0).distance > 3500) {
-        return
-      }
-      tilesetb.clippingPlanes.get(0).distance += 500
-      tileseta.clippingPlanes.get(0).distance -= 500
+      changeFun('right')
+      // if (tilesetb.clippingPlanes.get(0).distance > 3500) {
+      //   return
+      // }
+      // tilesetb.clippingPlanes.get(0).distance += 500
+      // tileseta.clippingPlanes.get(0).distance -= 500
     }
+
+    // const upBtn = document.getElementById('up')
+    // upBtn.onclick = function () {
+    //   changeFun('up')
+    // }
+
+    // const downBtn = document.getElementById('down')
+    // downBtn.onclick = function () {
+    //   changeFun('down')
+    // }
   },
   methods: {
   }

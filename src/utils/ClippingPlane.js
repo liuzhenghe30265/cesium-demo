@@ -45,7 +45,6 @@ export function createPlaneUpdateFunction (plane) {
  * @return {*}
  */
 export function createClippingPlaneFun (url, clippingPlanes) {
-  const planeEntities = []
   const option = {
     url: url,
     maximumScreenSpaceError: 8,
@@ -54,10 +53,7 @@ export function createClippingPlaneFun (url, clippingPlanes) {
   const tileset = viewer.scene.primitives.add(
     new Cesium.Cesium3DTileset(option)
   )
-
   tileset.readyPromise.then(function (tileset) {
-    const boundingSphere = tileset.boundingSphere
-    const radius = boundingSphere.radius
     if (
       !Cesium.Matrix4.equals(
         tileset.root.transform,
@@ -82,26 +78,30 @@ export function createClippingPlaneFun (url, clippingPlanes) {
       clippingPlanes.modelMatrix = Cesium.Matrix4.fromTranslation(
         new Cesium.Cartesian3(0.0, 0.0, height)
       )
-      for (let i = 0; i < clippingPlanes.length; ++i) {
-        const plane = clippingPlanes.get(i)
-        const planeEntity = viewer.entities.add({
-          position: boundingSphere.center,
-          plane: {
-            dimensions: new Cesium.Cartesian2(
-              radius,
-              radius
-            ),
-            material: Cesium.Color.RED.withAlpha(0.0),
-            plane: new Cesium.CallbackProperty(
-              createPlaneUpdateFunction(plane),
-              false
-            ),
-            outline: false,
-            outlineColor: Cesium.Color.RED
-          }
-        })
-        planeEntities.push(planeEntity)
-      }
+      // 添加平面实体（调试用）
+      // const planeEntities = []
+      // const boundingSphere = tileset.boundingSphere
+      // const radius = boundingSphere.radius
+      // for (let i = 0; i < clippingPlanes.length; ++i) {
+      //   const plane = clippingPlanes.get(i)
+      //   const planeEntity = viewer.entities.add({
+      //     position: boundingSphere.center,
+      //     plane: {
+      //       dimensions: new Cesium.Cartesian2(
+      //         radius,
+      //         radius
+      //       ),
+      //       material: Cesium.Color.RED.withAlpha(0.5),
+      //       plane: new Cesium.CallbackProperty(
+      //         createPlaneUpdateFunction(plane),
+      //         false
+      //       ),
+      //       outline: false,
+      //       outlineColor: Cesium.Color.RED
+      //     }
+      //   })
+      //   planeEntities.push(planeEntity)
+      // }
       return tileset
     }
   })
