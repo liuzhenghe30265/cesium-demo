@@ -40,14 +40,12 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 * {
   outline: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-appearance: none;
 }
-</style>
-<style lang="scss" scoped>
 .nav {
   position: fixed;
   right: 0;
@@ -59,6 +57,27 @@ export default {
     margin: 10px;
     &.router-link-exact-active {
       color: red;
+    }
+  }
+}
+.btns {
+  position: fixed;
+  right: 0;
+  top: 100px;
+  z-index: 999;
+  display: flex;
+  font-size: 24px;
+  font-weight: bold;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  i {
+    font-style: normal;
+    cursor: pointer;
+    &[class^='el-icon'] {
+      font-size: 48px;
     }
   }
 }

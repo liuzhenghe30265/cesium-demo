@@ -1,6 +1,37 @@
 /* eslint-disable no-undef */
 import * as turf from '@turf/turf'
 
+/**
+ * @description: 根据多边形裁切模型
+ * @param {*} tileset 模型
+ * @param {*} polygon 多边形
+ * @param {*} model 裁切方式（正切/反切）
+ * @return {*}
+ */
+export function cutModelByPolygon (tileset, polygon, model) {
+  tileset.readyPromise.then((_tileset) => {
+    const inverseTransform = getInverseTransform(_tileset) // 转换矩阵
+    // 切割的多边形
+    const cutPolygon = polygon
+    const cutList = isDirRes(cutPolygon, model)
+
+    const clippingPlanes1 = []
+    for (let i = 0; i < cutList.length - 1; i++) {
+      const plane = createPlane(cutList[i], cutList[i + 1], inverseTransform)
+      clippingPlanes1.push(plane)
+    }
+    // 创建裁剪平面
+    const clippingPlanes = new Cesium.ClippingPlaneCollection({
+      // 一组 ClippingPlane 对象，用于选择性地禁用每个平面外部的渲染
+      planes: clippingPlanes1,
+      // 应用于裁剪对象的边缘的高光的宽度（以像素为单位）
+      unionClippingRegions: !model,
+      edgeWidth: 1.0
+    })
+    _tileset.clippingPlanes = clippingPlanes
+  })
+}
+
 export function createPlaneUpdateFunction (plane) {
   return function () {
     return plane

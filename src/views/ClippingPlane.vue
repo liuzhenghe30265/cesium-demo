@@ -113,20 +113,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.btns {
-  position: fixed;
-  right: 0;
-  top: 100px;
-  z-index: 999;
-  width: 200px;
-  display: flex;
-  font-size: 56px;
-  font-weight: bold;
-  flex-direction: row;
-  justify-content: space-between;
-  color: #fff;
-  padding: 20px;
-  box-sizing: border-box;
-  cursor: pointer;
-}
 </style>
