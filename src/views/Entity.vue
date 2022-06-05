@@ -16,7 +16,9 @@
 /* eslint-disable no-undef */
 /* eslint-disable new-cap */
 /* eslint-disable no-unused-vars */
+import '@/utils/PolylineTrailMaterialProperty'
 import {
+  makeCurve,
   scaleAnimate,
   opacityAnimate,
   colorOpacityAnimate,
@@ -427,6 +429,24 @@ export default {
         }
       }
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+
+    // 添加流动线纹理流动纹理
+    const flowMaterial = new Cesium.PolylineTrailMaterialProperty({
+      color: Cesium.Color.RED,
+      duration: 3000,
+      trailImage: require('@/assets/images/colors.png')
+    })
+    const positions = makeCurve(
+      Cesium.Cartesian3.fromDegrees(120.216864, 31.8554312, 0),
+      Cesium.Cartesian3.fromDegrees(120.217137, 31.85376, 0)
+    )
+    viewer.entities.add({
+      polyline: {
+        positions: positions,
+        width: 5,
+        material: flowMaterial
+      }
+    })
   },
   methods: {
   }

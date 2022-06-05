@@ -66,3 +66,29 @@ export function scaleAnimate () {
   }, false)
   return CallbackProperty
 }
+
+/**
+ * @description: 生成流动曲线
+ * @param {*} startPoint
+ * @param {*} endPoint
+ * @return {*}
+ */
+export function makeCurve (startPoint, endPoint) {
+  const addPointCartesian = new Cesium.Cartesian3()
+  Cesium.Cartesian3.add(startPoint, endPoint, addPointCartesian)
+  const midPointCartesian = new Cesium.Cartesian3()
+  Cesium.Cartesian3.divideByScalar(addPointCartesian, 2, midPointCartesian)
+  const midPointCartographic = Cesium.Cartographic.fromCartesian(midPointCartesian)
+  midPointCartographic.height = Cesium.Cartesian3.distance(startPoint, endPoint) / 5
+  const midPoint = new Cesium.Cartesian3()
+  Cesium.Ellipsoid.WGS84.cartographicToCartesian(midPointCartographic, midPoint)
+  const spline = new Cesium.CatmullRomSpline({
+    times: [0.0, 0.5, 1.0],
+    points: [startPoint, midPoint, endPoint]
+  })
+  const curvePoints = []
+  for (let i = 0, len = 200; i < len; i++) {
+    curvePoints.push(spline.evaluate(i / len))
+  }
+  return curvePoints
+}
