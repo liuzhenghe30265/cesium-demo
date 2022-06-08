@@ -36,6 +36,7 @@ export default {
           'latitude': 31.85376,
           'longitude': 120.217137,
           'altitude': 90,
+          'heading': -2,
           'action': [
             {
               'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
@@ -51,6 +52,7 @@ export default {
           'latitude': 31.8554312,
           'longitude': 120.216864,
           'altitude': 82.5,
+          'heading': 90,
           'action': []
         },
         {
@@ -58,6 +60,7 @@ export default {
           'latitude': 31.8556587,
           'longitude': 120.2185077,
           'altitude': 92.6,
+          'heading': 180,
           'action': [
             {
               'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
@@ -73,6 +76,7 @@ export default {
           'latitude': 31.856109,
           'longitude': 120.2218049,
           'altitude': 93.4,
+          'heading': 270,
           'action': []
         },
         {
@@ -80,6 +84,7 @@ export default {
           'latitude': 31.8559722,
           'longitude': 120.2218505,
           'altitude': 62.27,
+          'heading': 360,
           'action': [
             {
               'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
@@ -95,6 +100,7 @@ export default {
           'latitude': 31.8559748,
           'longitude': 120.2218342,
           'altitude': 58.18,
+          'heading': 270,
           'action': [
             {
               'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
@@ -110,6 +116,7 @@ export default {
           'latitude': 31.8559665,
           'longitude': 120.2218342,
           'altitude': 51.39,
+          'heading': 180,
           'action': [
             {
               'src': 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
@@ -125,6 +132,7 @@ export default {
           'latitude': 31.8559705,
           'longitude': 120.2218332,
           'altitude': 44.96,
+          'heading': 90,
           'action': []
         },
         {
@@ -132,6 +140,7 @@ export default {
           'latitude': 31.8562512,
           'longitude': 120.2217962,
           'altitude': 62.04,
+          'heading': 0,
           'action': [
             {
               'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
@@ -147,6 +156,7 @@ export default {
           'latitude': 31.8562451,
           'longitude': 120.2217842,
           'altitude': 58.18,
+          'heading': 0,
           'action': []
         },
         {
@@ -154,6 +164,7 @@ export default {
           'latitude': 31.8562542,
           'longitude': 120.2217819,
           'altitude': 51.42,
+          'heading': 0,
           'action': []
         },
         {
@@ -161,6 +172,7 @@ export default {
           'latitude': 31.8562497,
           'longitude': 120.2217814,
           'altitude': 44.99,
+          'heading': 0,
           'action': [
             {
               'src': 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
@@ -217,7 +229,37 @@ export default {
     // 方法三：删除所有实体
     viewer.entities.removeAll()
 
+    // 计算距离点位角度为deg的点位
+    /**
+     * @description: 计算距离点位角度为 deg 的点位
+     * @param {*} lng
+     * @param {*} lat
+     * @param {*} deg
+     * @param {*} distance
+     * @return {*}
+     */
+    function distancePos (lng, lat, deg, distance) {
+      return [lng + distance * Math.sin(deg * Math.PI / 180) * 180 / (Math.PI * 6371229 * Math.cos(lat * Math.PI / 180)), lat + distance * Math.cos(deg * Math.PI / 180) / (Math.PI * 6371229 / 180)]
+    }
+
     this.points.map((point, index) => {
+      // 添加方向实体
+      const toPoint = distancePos(point.longitude, point.latitude, point.heading, 20)
+      const headingEntity = viewer.entities.add(
+        new Cesium.Entity({
+          id: 'heading' + index,
+          name: 'headingLine',
+          polyline: {
+            positions: Cesium.Cartesian3.fromDegreesArrayHeights([point.longitude, point.latitude, point.altitude, toPoint[0], toPoint[1], point.altitude]),
+            width: 10,
+            material: new Cesium.PolylineArrowMaterialProperty(
+              new Cesium.Color.fromCssColorString('#FCB718').withAlpha(1)
+            ),
+            scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
+          }
+        })
+      )
       // 点
       const entity = viewer.entities.add(new Cesium.Entity({
         id: 'point' + point.id,
