@@ -489,6 +489,19 @@ export default {
         material: flowMaterial
       }
     })
+
+    // 添加 glb 模型
+    const modelEntity = viewer.entities.add({
+      name: 'glb 模型',
+      position: new Cesium.Cartesian3.fromDegrees(120.14046454, 30.27415039),
+      model: {
+        uri: 'model/Cesium_Air.glb',
+        minimumPixelSize: 256,
+        maxumunScale: 20000
+      }
+    })
+    // 聚焦模型
+    // viewer.trackedEntity = modelEntity
   },
   methods: {
   }
