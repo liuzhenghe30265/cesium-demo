@@ -79,7 +79,7 @@ export function makeCurve (startPoint, endPoint) {
   const midPointCartesian = new Cesium.Cartesian3()
   Cesium.Cartesian3.divideByScalar(addPointCartesian, 2, midPointCartesian)
   const midPointCartographic = Cesium.Cartographic.fromCartesian(midPointCartesian)
-  midPointCartographic.height = Cesium.Cartesian3.distance(startPoint, endPoint) / 5
+  midPointCartographic.height = Cesium.Cartesian3.distance(startPoint, endPoint)
   const midPoint = new Cesium.Cartesian3()
   Cesium.Ellipsoid.WGS84.cartographicToCartesian(midPointCartographic, midPoint)
   const spline = new Cesium.CatmullRomSpline({

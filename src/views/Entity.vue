@@ -25,6 +25,7 @@ import {
   semiMinorAxisAnimate,
   semiMajorAxisAnimate
 } from '@/utils/EntityAnimate'
+import CesiumUtils from '@/utils/CesiumUtils.js'
 export default {
   data () {
     return {
@@ -228,29 +229,16 @@ export default {
     // viewer.entities.remove(viewer.entities.getById('xxx'))
     // 方法三：删除所有实体
     viewer.entities.removeAll()
-
-    // 计算距离点位角度为deg的点位
-    /**
-     * @description: 计算距离点位角度为 deg 的点位
-     * @param {*} lng
-     * @param {*} lat
-     * @param {*} deg
-     * @param {*} distance
-     * @return {*}
-     */
-    function distancePos (lng, lat, deg, distance) {
-      return [lng + distance * Math.sin(deg * Math.PI / 180) * 180 / (Math.PI * 6371229 * Math.cos(lat * Math.PI / 180)), lat + distance * Math.cos(deg * Math.PI / 180) / (Math.PI * 6371229 / 180)]
-    }
-
+    console.log('......CesiumUtils', CesiumUtils)
     this.points.map((point, index) => {
       // 添加方向实体
-      const toPoint = distancePos(point.longitude, point.latitude, point.heading, 20)
+      const toPoint = CesiumUtils.distancePos(point.longitude, point.latitude, point.heading, 20)
       const headingEntity = viewer.entities.add(
         new Cesium.Entity({
           id: 'heading' + index,
           name: 'headingLine',
           polyline: {
-            positions: Cesium.Cartesian3.fromDegreesArrayHeights([point.longitude, point.latitude, point.altitude, toPoint[0], toPoint[1], point.altitude]),
+            positions: Cesium.Cartesian3.fromDegreesArrayHeights([point.longitude, point.latitude, point.altitude, toPoint.longitude, toPoint.latitude, point.altitude]),
             width: 10,
             material: new Cesium.PolylineArrowMaterialProperty(
               new Cesium.Color.fromCssColorString('#FCB718').withAlpha(1)
@@ -479,8 +467,8 @@ export default {
       trailImage: require('@/assets/images/colors.png')
     })
     const positions = makeCurve(
-      Cesium.Cartesian3.fromDegrees(120.216864, 31.8554312, 0),
-      Cesium.Cartesian3.fromDegrees(120.217137, 31.85376, 0)
+      Cesium.Cartesian3.fromDegrees(point1.longitude, point1.latitude, point1.altitude),
+      Cesium.Cartesian3.fromDegrees(point2.longitude, point2.latitude, point2.altitude)
     )
     viewer.entities.add({
       polyline: {
@@ -493,7 +481,7 @@ export default {
     // 添加 glb 模型
     const modelEntity = viewer.entities.add({
       name: 'glb 模型',
-      position: new Cesium.Cartesian3.fromDegrees(120.14046454, 30.27415039),
+      position: new Cesium.Cartesian3.fromDegrees(point3.longitude, point3.latitude, point3.altitude),
       model: {
         uri: 'model/Cesium_Air.glb',
         minimumPixelSize: 256,
