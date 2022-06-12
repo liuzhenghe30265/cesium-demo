@@ -27,6 +27,12 @@ const routes = [
     name: 'ClippingPlane',
     visible: true,
     component: () => import('../views/ClippingPlane.vue')
+  },
+  {
+    path: '/Path',
+    name: 'Path',
+    visible: true,
+    component: () => import('../views/Path.vue')
   }
 ]
 
