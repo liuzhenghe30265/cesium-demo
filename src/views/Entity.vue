@@ -254,7 +254,7 @@ export default {
                 outlineWidth: 1.0,
                 numberOfVerticalLines: 16,
                 shadows: Cesium.ShadowMode.DISABLED,
-                slices: 4
+                slices: 128
               },
               scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
               distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
@@ -262,7 +262,7 @@ export default {
           )
         })
       }
-      return
+      // return
       // 添加方向实体
       const toPoint = CesiumUtils.distancePos(point.longitude, point.latitude, point.heading, 20)
       const headingEntity = viewer.entities.add(
