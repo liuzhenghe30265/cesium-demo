@@ -231,6 +231,31 @@ export default {
     viewer.entities.removeAll()
     console.log('......CesiumUtils', CesiumUtils)
     this.points.map((point, index) => {
+      if (point.action && point.action.length > 0) {
+        point.action.map((action, actionIndex) => {
+          console.log('........action', action)
+          const cylinderEntity = viewer.entities.add(
+            new Cesium.Entity({
+              id: 'cylinder' + index,
+              name: '圆锥',
+              position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
+              cylinder: {
+                length: 20.0,
+                topRadius: 0.0,
+                bottomRadius: 10.0,
+                heightReference: Cesium.HeightReference.NONE,
+                fill: true,
+                material: Cesium.Color.GREEN.withAlpha(0.5),
+                outline: false,
+                outlineWidth: 1.0,
+                numberOfVerticalLines: 16,
+                shadows: Cesium.ShadowMode.DISABLED,
+                slices: 128
+              }
+            })
+          )
+        })
+      }
       // 添加方向实体
       const toPoint = CesiumUtils.distancePos(point.longitude, point.latitude, point.heading, 20)
       const headingEntity = viewer.entities.add(
