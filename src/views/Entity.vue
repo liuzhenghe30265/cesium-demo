@@ -239,23 +239,30 @@ export default {
               id: 'cylinder' + index,
               name: '圆锥',
               position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
+              orientation: Cesium.Transforms.headingPitchRollQuaternion(
+                Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
+                new Cesium.HeadingPitchRoll(action.yaw, action.pitch, action.roll)
+              ),
               cylinder: {
-                length: 20.0,
+                length: 10.0,
                 topRadius: 0.0,
-                bottomRadius: 10.0,
+                bottomRadius: 5.0,
                 heightReference: Cesium.HeightReference.NONE,
                 fill: true,
-                material: Cesium.Color.GREEN.withAlpha(0.5),
+                material: Cesium.Color.WHITE.withAlpha(0.5),
                 outline: false,
                 outlineWidth: 1.0,
                 numberOfVerticalLines: 16,
                 shadows: Cesium.ShadowMode.DISABLED,
-                slices: 128
-              }
+                slices: 4
+              },
+              scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
             })
           )
         })
       }
+      return
       // 添加方向实体
       const toPoint = CesiumUtils.distancePos(point.longitude, point.latitude, point.heading, 20)
       const headingEntity = viewer.entities.add(
