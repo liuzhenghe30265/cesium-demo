@@ -72,6 +72,23 @@ export default {
     //   }
     // })
 
+    // 5. 监听地图变化，获取 position，heading，pitch，roll
+    // const position = viewer.camera.position
+    // const heading = viewer.camera.heading
+    // const pitch = viewer.camera.pitch
+    // const roll = viewer.camera.roll
+    // const initialPosition = new Cesium.Cartesian3(position.x, position.y, position.z) // 相机的位置
+    // const orientation = {
+    //   heading: heading,
+    //   pitch: pitch,
+    //   roll: roll
+    // }
+    // const homeCameraView = {
+    //   destination: initialPosition,
+    //   orientation: orientation
+    // }
+    // viewer.scene.camera.setView(homeCameraView)
+
     // 监听地图缩放等级
     viewer.scene.camera.moveEnd.addEventListener(() => {
       // const currentMagnitude = viewer.camera.getMagnitude()
@@ -106,9 +123,9 @@ export default {
       // console.log('中心点', longitude, latitude)
 
       // console.log('position', viewer.camera.position)
-      // console.log('heading', viewer.camera.heading * (180 / Math.PI))
-      // console.log('pitch', viewer.camera.pitch * (180 / Math.PI))
-      // console.log('roll', viewer.camera.roll * (180 / Math.PI))
+      // console.log('heading', viewer.camera.heading)
+      // console.log('pitch', viewer.camera.pitch)
+      // console.log('roll', viewer.camera.roll)
 
       // const cameraHeight = viewer.scene.globe.ellipsoid.cartesianToCartographic(viewer.camera.position).height
       // console.log('cameraHeight', cameraHeight)
