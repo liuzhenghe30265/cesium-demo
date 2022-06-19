@@ -214,17 +214,14 @@ export default {
       )
     }
     function genLine (point, yaw, pitch, lenght) {
-      console.log('...........genLine', point, yaw, pitch, lenght)
-      var position = new Cesium.Cartesian3.fromDegrees(point.longitude - 180, point.latitude - 90, point.altitude)
-      var dir = getVector(point, yaw)
-      var forward_l = lenght * Math.cos(pitch * Math.PI / 180)
+      let position = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
+      const dir = getVector(point, yaw)
+      const forward_l = lenght * Math.cos(pitch * Math.PI / 180)
       position = translateByDirection(position, dir, forward_l)
-      var y_offset = lenght * Math.sin(pitch * Math.PI / 180)
-
-      console.log(pitch, y_offset)
-      var cartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(position)
-      var lat = Cesium.Math.toDegrees(cartographic.latitude)
-      var lon = Cesium.Math.toDegrees(cartographic.longitude)
+      const y_offset = lenght * Math.sin(pitch * Math.PI / 180)
+      const cartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(position)
+      const lat = Cesium.Math.toDegrees(cartographic.latitude)
+      const lon = Cesium.Math.toDegrees(cartographic.longitude)
       position = new Cesium.Cartesian3.fromDegrees(lon, lat, point.altitude - y_offset)
 
       const entity = viewer.entities.add(new Cesium.Entity({
@@ -238,29 +235,28 @@ export default {
           outlineColor: Cesium.Color.BLACK
         }
       }))
-      console.log('............entity', entity)
     }
     function getVector (point, yaw) {
-      var A = new Cesium.Cartesian3.fromDegrees(point.longitude - 180, point.latitude - 90, point.altitude)
-      var B = new Cesium.Cartesian3.fromDegrees(point.longitude - 180, point.latitude - 90 + 0.0001, point.altitude)
+      const A = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
+      const B = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude + 0.0001, point.altitude)
 
       // 计算B的地面法向量
-      var chicB = Cesium.Cartographic.fromCartesian(B)
+      const chicB = Cesium.Cartographic.fromCartesian(B)
       chicB.height = 0
-      var dB = Cesium.Cartographic.toCartesian(chicB)
-      var normaB = Cesium.Cartesian3.normalize(Cesium.Cartesian3.subtract(dB, B, new Cesium.Cartesian3()), new Cesium
+      const dB = Cesium.Cartographic.toCartesian(chicB)
+      const normaB = Cesium.Cartesian3.normalize(Cesium.Cartesian3.subtract(dB, B, new Cesium.Cartesian3()), new Cesium
         .Cartesian3())
 
       // 构造基于B的法向量旋转90度的矩阵
-      var Q = Cesium.Quaternion.fromAxisAngle(normaB, Cesium.Math.toRadians(yaw))
-      var m3 = Cesium.Matrix3.fromQuaternion(Q)
-      var m4 = Cesium.Matrix4.fromRotationTranslation(m3)
+      const Q = Cesium.Quaternion.fromAxisAngle(normaB, Cesium.Math.toRadians(yaw))
+      const m3 = Cesium.Matrix3.fromQuaternion(Q)
+      const m4 = Cesium.Matrix4.fromRotationTranslation(m3)
 
       // 计算A点相对B点的坐标A1
-      var A1 = Cesium.Cartesian3.subtract(B, A, new Cesium.Cartesian3())
+      const A1 = Cesium.Cartesian3.subtract(B, A, new Cesium.Cartesian3())
 
       // 对A1应用旋转矩阵
-      var p = Cesium.Matrix4.multiplyByPoint(m4, A1, new Cesium.Cartesian3())
+      const p = Cesium.Matrix4.multiplyByPoint(m4, A1, new Cesium.Cartesian3())
       return p
     }
 
