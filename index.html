@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>目标拾取</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<script src="./js/Cesium/Cesium.js"></script>
+		<script type="text/javascript" src="./js/jquery-1.7.min.js"></script>
+		<style>
+			@import url(./js/Cesium/Widgets/widgets.css);
+
+			html,
+			body,
+			#cesiumContainer {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="cesiumContainer"></div>
+		<script>
+			var viewer = new Cesium.Viewer('cesiumContainer', {
+				terrainProvider: Cesium.createWorldTerrain({
+					imageryProvider: new Cesium.UrlTemplateImageryProvider({
+						url: "https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+						srcCoordType: "WGS84",
+						dstCoordType: "WGS84",
+						maximumLevel: 16,
+					})
+				}),
+				sceneModePicker: false, //3D、2D和哥伦布模式的切换按钮.
+				baseLayerPicker: false, //选择地形、影像等图层。
+				navigationHelpButton: false, //显示默认的相机控制提示.
+				animation: false, //控制场景动画的播放速度.
+				infoBox: false,
+				timeline: false //时间滚动条。
+			});
+			viewer.scene.globe.depthTestAgainstTerrain = false;
+
+			function genPoint(point, color) {
+				//console.log(point, color);
+				var point = viewer.entities.add({
+					position: Cesium.Cartesian3.fromDegrees(point.longitude - 180, point.latitude - 90, point.altitude),
+					point: {
+						pixelSize: 10,
+						color: color,
+						disableDepthTestDistance: Number.POSITIVE_INFINITY,
+					}
+				});
+			}
+
+			function genLine(point, yaw, pitch,lenght) {
+				var position = new Cesium.Cartesian3.fromDegrees(point.longitude - 180, point.latitude - 90, point.altitude);
+				var dir = getVector(point, yaw);
+				var forward_l = lenght * Math.cos(pitch * Math.PI / 180);
+
+				position = translateByDirection(position, dir, forward_l);
+
+				var y_offset = lenght * Math.sin(pitch * Math.PI / 180);
+
+				//console.log(pitch, y_offset);
+
+				var cartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(position);
+				var lat = Cesium.Math.toDegrees(cartographic.latitude);
+				var lon = Cesium.Math.toDegrees(cartographic.longitude);
+				position = new Cesium.Cartesian3.fromDegrees(lon, lat, point.altitude - y_offset);
+
+
+				viewer.entities.add({
+					position: position,
+					orientation: Cesium.Transforms.headingPitchRollQuaternion(position, new Cesium.HeadingPitchRoll
+						.fromDegrees(yaw, 0, -1 * pitch)),
+					box: {
+						dimensions: new Cesium.Cartesian3(0.3, lenght*2, 0.3),
+						material: Cesium.Color.GREEN, //转换颜色
+						outline: false,
+						outlineColor: Cesium.Color.BLACK
+					}
+				});
+			}
+
+
+
+
+
+
+
+			/**
+			
+			   * @description: 根据一个原点，向一个方向上平移多少米后，求得另一个点的坐标
+			
+			   * @param {Cartesian3} start 原点
+			
+			   * @param {Cartesian3} direction 起点指向终点的方向
+			
+			   * @param {Number} offset 平移距离，单位米
+			
+			   * @return {Cartesian3} 目标点
+			
+			   */
+
+			function translateByDirection(start, direction, offset) {
+
+				let normalize = Cesium.Cartesian3.normalize(
+
+					direction,
+
+					new Cesium.Cartesian3()
+
+				);
+
+				//根据偏移量求偏移向量
+
+				let scalerNormalize = Cesium.Cartesian3.multiplyByScalar(
+
+					normalize,
+
+					offset,
+
+					new Cesium.Cartesian3()
+
+				);
+
+				return Cesium.Cartesian3.add(
+
+					start,
+
+					scalerNormalize,
+
+					new Cesium.Cartesian3()
+
+				);
+
+			}
+
+			function getVector(point, yaw) {
+				var A = new Cesium.Cartesian3.fromDegrees(point.longitude - 180, point.latitude - 90, point.altitude);
+				var B = new Cesium.Cartesian3.fromDegrees(point.longitude - 180, point.latitude - 90 + 0.0001, point.altitude);
+
+				// 计算B的地面法向量
+				var chicB = Cesium.Cartographic.fromCartesian(B);
+				chicB.height = 0;
+				var dB = Cesium.Cartographic.toCartesian(chicB);
+				var normaB = Cesium.Cartesian3.normalize(Cesium.Cartesian3.subtract(dB, B, new Cesium.Cartesian3()), new Cesium
+					.Cartesian3());
+
+				// 构造基于B的法向量旋转90度的矩阵
+				var Q = Cesium.Quaternion.fromAxisAngle(normaB, Cesium.Math.toRadians(yaw));
+				var m3 = Cesium.Matrix3.fromQuaternion(Q);
+				var m4 = Cesium.Matrix4.fromRotationTranslation(m3);
+
+				// 计算A点相对B点的坐标A1
+				var A1 = Cesium.Cartesian3.subtract(B, A, new Cesium.Cartesian3());
+
+				//对A1应用旋转矩阵
+				var p = Cesium.Matrix4.multiplyByPoint(m4, A1, new Cesium.Cartesian3());
+				return p;
+			}
+		</script>
+
+		<script>
+			$.getJSON("./data/南运变位置坐标.log", function(data) {
+				//console.log(data.length);
+				for (var i = 0; i < data.length; i++) {
+					genPoint(data[i], Cesium.Color.BLUE);
+				}
+			});
+
+			$.getJSON("./data/南运变位置坐标_test.log", function(data) {
+				console.log(data.length);
+				for (var i = 0; i < data.length; i++) {
+					genPoint(data[i], Cesium.Color.RED);
+					genLine(data[i], data[i].direction, 0,15);
+					for (var j = 0; j < data[i].action.length; j++) {
+						//console.log(data[i].direction, data[i].action[j].pitch);
+						genLine(data[i], data[i].direction, data[i].action[j].pitch,25);
+					}
+				}
+			});
+		</script>
+
+	</body>
+</html>
+</html>

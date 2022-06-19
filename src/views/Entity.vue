@@ -195,6 +195,75 @@ export default {
 
   },
   mounted () {
+    function translateByDirection (start, direction, offset) {
+      const normalize = Cesium.Cartesian3.normalize(
+        direction,
+        new Cesium.Cartesian3()
+      )
+
+      // 根据偏移量求偏移向量
+      const scalerNormalize = Cesium.Cartesian3.multiplyByScalar(
+        normalize,
+        offset,
+        new Cesium.Cartesian3()
+      )
+      return Cesium.Cartesian3.add(
+        start,
+        scalerNormalize,
+        new Cesium.Cartesian3()
+      )
+    }
+    function genLine (point, yaw, pitch, lenght) {
+      console.log('...........genLine', point, yaw, pitch, lenght)
+      var position = new Cesium.Cartesian3.fromDegrees(point.longitude - 180, point.latitude - 90, point.altitude)
+      var dir = getVector(point, yaw)
+      var forward_l = lenght * Math.cos(pitch * Math.PI / 180)
+      position = translateByDirection(position, dir, forward_l)
+      var y_offset = lenght * Math.sin(pitch * Math.PI / 180)
+
+      console.log(pitch, y_offset)
+      var cartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(position)
+      var lat = Cesium.Math.toDegrees(cartographic.latitude)
+      var lon = Cesium.Math.toDegrees(cartographic.longitude)
+      position = new Cesium.Cartesian3.fromDegrees(lon, lat, point.altitude - y_offset)
+
+      const entity = viewer.entities.add(new Cesium.Entity({
+        position: position,
+        orientation: Cesium.Transforms.headingPitchRollQuaternion(position, new Cesium.HeadingPitchRoll
+          .fromDegrees(yaw, 0, -1 * pitch)),
+        box: {
+          dimensions: new Cesium.Cartesian3(0.3, lenght * 2, 0.3),
+          material: Cesium.Color.GREEN, // 转换颜色
+          outline: false,
+          outlineColor: Cesium.Color.BLACK
+        }
+      }))
+      console.log('............entity', entity)
+    }
+    function getVector (point, yaw) {
+      var A = new Cesium.Cartesian3.fromDegrees(point.longitude - 180, point.latitude - 90, point.altitude)
+      var B = new Cesium.Cartesian3.fromDegrees(point.longitude - 180, point.latitude - 90 + 0.0001, point.altitude)
+
+      // 计算B的地面法向量
+      var chicB = Cesium.Cartographic.fromCartesian(B)
+      chicB.height = 0
+      var dB = Cesium.Cartographic.toCartesian(chicB)
+      var normaB = Cesium.Cartesian3.normalize(Cesium.Cartesian3.subtract(dB, B, new Cesium.Cartesian3()), new Cesium
+        .Cartesian3())
+
+      // 构造基于B的法向量旋转90度的矩阵
+      var Q = Cesium.Quaternion.fromAxisAngle(normaB, Cesium.Math.toRadians(yaw))
+      var m3 = Cesium.Matrix3.fromQuaternion(Q)
+      var m4 = Cesium.Matrix4.fromRotationTranslation(m3)
+
+      // 计算A点相对B点的坐标A1
+      var A1 = Cesium.Cartesian3.subtract(B, A, new Cesium.Cartesian3())
+
+      // 对A1应用旋转矩阵
+      var p = Cesium.Matrix4.multiplyByPoint(m4, A1, new Cesium.Cartesian3())
+      return p
+    }
+
     const _this = this
     // const china = Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
     // Cesium.Camera.DEFAULT_VIEW_RECTANGLE = china
@@ -239,33 +308,35 @@ export default {
       if (point.actionEntityList && point.actionEntityList.length > 0) {
         point.actionEntityList.map((action, actionIndex) => {
           console.log('........action', action)
-          const hpr = new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(point.heading + 90), Cesium.Math.toRadians(Number(action.pitch) + 90), Cesium.Math.toRadians(0))
-          const cylinderEntity = viewer.entities.add(
-            new Cesium.Entity({
-              id: 'cylinder' + action.id,
-              name: '圆锥',
-              position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
-              orientation: Cesium.Transforms.headingPitchRollQuaternion(
-                Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
-                hpr
-              ),
-              cylinder: {
-                length: 40.0,
-                topRadius: 0.0,
-                bottomRadius: 0.1,
-                heightReference: Cesium.HeightReference.NONE,
-                fill: true,
-                material: new Cesium.Color.fromCssColorString('#ffffff'),
-                outline: false,
-                outlineWidth: 1.0,
-                numberOfVerticalLines: 16,
-                shadows: Cesium.ShadowMode.DISABLED
-                // slices: 4
-              },
-              scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
-              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
-            })
-          )
+          genLine(point, point.heading, action.pitch, 25)
+
+          // const hpr = new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(point.heading + 90), Cesium.Math.toRadians(Number(action.pitch) + 90), Cesium.Math.toRadians(0))
+          // const cylinderEntity = viewer.entities.add(
+          //   new Cesium.Entity({
+          //     id: 'cylinder' + action.id,
+          //     name: '圆锥',
+          //     position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
+          //     orientation: Cesium.Transforms.headingPitchRollQuaternion(
+          //       Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
+          //       hpr
+          //     ),
+          //     cylinder: {
+          //       length: 40.0,
+          //       topRadius: 0.0,
+          //       bottomRadius: 0.1,
+          //       heightReference: Cesium.HeightReference.NONE,
+          //       fill: true,
+          //       material: new Cesium.Color.fromCssColorString('#ffffff'),
+          //       outline: false,
+          //       outlineWidth: 1.0,
+          //       numberOfVerticalLines: 16,
+          //       shadows: Cesium.ShadowMode.DISABLED
+          //       // slices: 4
+          //     },
+          //     scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+          //     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
+          //   })
+          // )
         })
       }
       // return
