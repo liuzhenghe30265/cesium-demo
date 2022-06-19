@@ -17,6 +17,7 @@
 /* eslint-disable new-cap */
 /* eslint-disable no-unused-vars */
 import '@/utils/PolylineTrailMaterialProperty'
+import mock from '@/assets/mock.json'
 import {
   makeCurve,
   scaleAnimate,
@@ -220,6 +221,11 @@ export default {
       })
     })
 
+    this.points = mock.data
+    this.points.forEach((item) => {
+      item.longitude = item.longitude - 180
+      item.latitude = item.latitude - 90
+    })
     console.log('this.point', this.points)
 
     // 清除实体
@@ -229,32 +235,32 @@ export default {
     // viewer.entities.remove(viewer.entities.getById('xxx'))
     // 方法三：删除所有实体
     viewer.entities.removeAll()
-    console.log('......CesiumUtils', CesiumUtils)
     this.points.map((point, index) => {
-      if (point.action && point.action.length > 0) {
-        point.action.map((action, actionIndex) => {
+      if (point.actionEntityList && point.actionEntityList.length > 0) {
+        point.actionEntityList.map((action, actionIndex) => {
           console.log('........action', action)
+          const hpr = new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(point.heading + 90), Cesium.Math.toRadians(Number(action.pitch) + 90), Cesium.Math.toRadians(0))
           const cylinderEntity = viewer.entities.add(
             new Cesium.Entity({
-              id: 'cylinder' + index,
+              id: 'cylinder' + action.id,
               name: '圆锥',
               position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
               orientation: Cesium.Transforms.headingPitchRollQuaternion(
                 Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
-                new Cesium.HeadingPitchRoll(action.yaw, action.pitch, action.roll)
+                hpr
               ),
               cylinder: {
-                length: 10.0,
+                length: 40.0,
                 topRadius: 0.0,
-                bottomRadius: 5.0,
+                bottomRadius: 0.1,
                 heightReference: Cesium.HeightReference.NONE,
                 fill: true,
-                material: Cesium.Color.WHITE.withAlpha(0.5),
+                material: new Cesium.Color.fromCssColorString('#ffffff'),
                 outline: false,
                 outlineWidth: 1.0,
                 numberOfVerticalLines: 16,
-                shadows: Cesium.ShadowMode.DISABLED,
-                slices: 128
+                shadows: Cesium.ShadowMode.DISABLED
+                // slices: 4
               },
               scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
               distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
@@ -273,7 +279,7 @@ export default {
             positions: Cesium.Cartesian3.fromDegreesArrayHeights([point.longitude, point.latitude, point.altitude, toPoint.longitude, toPoint.latitude, point.altitude]),
             width: 10,
             material: new Cesium.PolylineArrowMaterialProperty(
-              new Cesium.Color.fromCssColorString('#FCB718').withAlpha(1)
+              new Cesium.Color.fromCssColorString('#fff').withAlpha(1)
             ),
             scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
             distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
@@ -427,9 +433,9 @@ export default {
 
     // 圆环扩散效果
     // http://www.bigemap.com/Public/offline/gl/EllipseGeometry.html?classFilter=ellipse
-    const point1 = this.points[0]
-    const point2 = this.points[1]
-    const point3 = this.points[2]
+    // const point1 = this.points[0]
+    // const point2 = this.points[1]
+    // const point3 = this.points[2]
 
     // 方式一：颜色填充
     // viewer.entities.add({
@@ -463,63 +469,63 @@ export default {
     // })
 
     // 获取到实体添加动画
-    const entity1 = viewer.entities.getById('point' + 102883)
-    entity1.billboard.color = opacityAnimate()
-    entity1.billboard.scale = scaleAnimate()
+    // const entity1 = viewer.entities.getById('point' + 102883)
+    // entity1.billboard.color = opacityAnimate()
+    // entity1.billboard.scale = scaleAnimate()
 
-    const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
-    handler.setInputAction(function (event) {
-      const picked = viewer.scene.pick(event.position)
-      console.log(picked)
-      const earthPosition = viewer.camera.pickEllipsoid(event.position, viewer.scene.globe.ellipsoid)
-      const cartographic = Cesium.Cartographic.fromCartesian(earthPosition, viewer.scene.globe.ellipsoid, new Cesium.Cartographic())
-      const longitude = Cesium.Math.toDegrees(cartographic.longitude)
-      const latitude = Cesium.Math.toDegrees(cartographic.latitude)
-      console.log('空间直角坐标系转经纬度', longitude, latitude, cartographic.height)
-      if (!picked || !picked.id) {
-        return
-      }
-      if (picked.id.data) {
-        console.log(picked.id.data)
-        const data = picked.id.data
-        if (data.action && data.action.src) {
-          _this.url = data.action.src
-          _this.srcList = [_this.url]
-          setTimeout(() => {
-            _this.$refs.preview.clickHandler()
-          }, 100)
-        }
-      }
-    }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+    // const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
+    // handler.setInputAction(function (event) {
+    //   const picked = viewer.scene.pick(event.position)
+    //   console.log(picked)
+    //   const earthPosition = viewer.camera.pickEllipsoid(event.position, viewer.scene.globe.ellipsoid)
+    //   const cartographic = Cesium.Cartographic.fromCartesian(earthPosition, viewer.scene.globe.ellipsoid, new Cesium.Cartographic())
+    //   const longitude = Cesium.Math.toDegrees(cartographic.longitude)
+    //   const latitude = Cesium.Math.toDegrees(cartographic.latitude)
+    //   console.log('空间直角坐标系转经纬度', longitude, latitude, cartographic.height)
+    //   if (!picked || !picked.id) {
+    //     return
+    //   }
+    //   if (picked.id.data) {
+    //     console.log(picked.id.data)
+    //     const data = picked.id.data
+    //     if (data.action && data.action.src) {
+    //       _this.url = data.action.src
+    //       _this.srcList = [_this.url]
+    //       setTimeout(() => {
+    //         _this.$refs.preview.clickHandler()
+    //       }, 100)
+    //     }
+    //   }
+    // }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
-    // 添加流动线纹理流动纹理
-    const flowMaterial = new Cesium.PolylineTrailMaterialProperty({
-      color: Cesium.Color.RED,
-      duration: 3000,
-      trailImage: require('@/assets/images/colors.png')
-    })
-    const positions = makeCurve(
-      Cesium.Cartesian3.fromDegrees(point1.longitude, point1.latitude, point1.altitude),
-      Cesium.Cartesian3.fromDegrees(point2.longitude, point2.latitude, point2.altitude)
-    )
-    viewer.entities.add({
-      polyline: {
-        positions: positions,
-        width: 5,
-        material: flowMaterial
-      }
-    })
+    // // 添加流动线纹理流动纹理
+    // const flowMaterial = new Cesium.PolylineTrailMaterialProperty({
+    //   color: Cesium.Color.RED,
+    //   duration: 3000,
+    //   trailImage: require('@/assets/images/colors.png')
+    // })
+    // const positions = makeCurve(
+    //   Cesium.Cartesian3.fromDegrees(point1.longitude, point1.latitude, point1.altitude),
+    //   Cesium.Cartesian3.fromDegrees(point2.longitude, point2.latitude, point2.altitude)
+    // )
+    // viewer.entities.add({
+    //   polyline: {
+    //     positions: positions,
+    //     width: 5,
+    //     material: flowMaterial
+    //   }
+    // })
 
-    // 添加 glb 模型
-    const modelEntity = viewer.entities.add({
-      name: 'glb 模型',
-      position: new Cesium.Cartesian3.fromDegrees(point3.longitude, point3.latitude, point3.altitude),
-      model: {
-        uri: 'model/Cesium_Air.glb',
-        minimumPixelSize: 256,
-        maxumunScale: 20000
-      }
-    })
+    // // 添加 glb 模型
+    // const modelEntity = viewer.entities.add({
+    //   name: 'glb 模型',
+    //   position: new Cesium.Cartesian3.fromDegrees(point3.longitude, point3.latitude, point3.altitude),
+    //   model: {
+    //     uri: 'model/Cesium_Air.glb',
+    //     minimumPixelSize: 256,
+    //     maxumunScale: 20000
+    //   }
+    // })
     // 聚焦模型
     // viewer.trackedEntity = modelEntity
   },
