@@ -195,71 +195,6 @@ export default {
 
   },
   mounted () {
-    function translateByDirection (start, direction, offset) {
-      const normalize = Cesium.Cartesian3.normalize(
-        direction,
-        new Cesium.Cartesian3()
-      )
-
-      // 根据偏移量求偏移向量
-      const scalerNormalize = Cesium.Cartesian3.multiplyByScalar(
-        normalize,
-        offset,
-        new Cesium.Cartesian3()
-      )
-      return Cesium.Cartesian3.add(
-        start,
-        scalerNormalize,
-        new Cesium.Cartesian3()
-      )
-    }
-    function genLine (point, yaw, pitch, lenght) {
-      let position = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
-      const dir = getVector(point, yaw)
-      const forward_l = lenght * Math.cos(pitch * Math.PI / 180)
-      position = translateByDirection(position, dir, forward_l)
-      const y_offset = lenght * Math.sin(pitch * Math.PI / 180)
-      const cartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(position)
-      const lat = Cesium.Math.toDegrees(cartographic.latitude)
-      const lon = Cesium.Math.toDegrees(cartographic.longitude)
-      position = new Cesium.Cartesian3.fromDegrees(lon, lat, point.altitude - y_offset)
-
-      const entity = viewer.entities.add(new Cesium.Entity({
-        position: position,
-        orientation: Cesium.Transforms.headingPitchRollQuaternion(position, new Cesium.HeadingPitchRoll
-          .fromDegrees(yaw, 0, -1 * pitch)),
-        box: {
-          dimensions: new Cesium.Cartesian3(0.3, lenght * 2, 0.3),
-          material: Cesium.Color.GREEN, // 转换颜色
-          outline: false,
-          outlineColor: Cesium.Color.BLACK
-        }
-      }))
-    }
-    function getVector (point, yaw) {
-      const A = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
-      const B = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude + 0.0001, point.altitude)
-
-      // 计算B的地面法向量
-      const chicB = Cesium.Cartographic.fromCartesian(B)
-      chicB.height = 0
-      const dB = Cesium.Cartographic.toCartesian(chicB)
-      const normaB = Cesium.Cartesian3.normalize(Cesium.Cartesian3.subtract(dB, B, new Cesium.Cartesian3()), new Cesium
-        .Cartesian3())
-
-      // 构造基于B的法向量旋转90度的矩阵
-      const Q = Cesium.Quaternion.fromAxisAngle(normaB, Cesium.Math.toRadians(yaw))
-      const m3 = Cesium.Matrix3.fromQuaternion(Q)
-      const m4 = Cesium.Matrix4.fromRotationTranslation(m3)
-
-      // 计算A点相对B点的坐标A1
-      const A1 = Cesium.Cartesian3.subtract(B, A, new Cesium.Cartesian3())
-
-      // 对A1应用旋转矩阵
-      const p = Cesium.Matrix4.multiplyByPoint(m4, A1, new Cesium.Cartesian3())
-      return p
-    }
-
     const _this = this
     // const china = Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
     // Cesium.Camera.DEFAULT_VIEW_RECTANGLE = china
@@ -302,10 +237,32 @@ export default {
     viewer.entities.removeAll()
     this.points.map((point, index) => {
       if (point.actionEntityList && point.actionEntityList.length > 0) {
+        // 添加云台视角
         point.actionEntityList.map((action, actionIndex) => {
-          console.log('........action', action)
-          genLine(point, point.heading, action.pitch, 25)
+          const length = 40
+          let position = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
+          const dir = CesiumUtils.getVector(point, point.heading)
+          const forward_l = length * Math.cos(action.pitch * Math.PI / 180)
+          position = CesiumUtils.translateByDirection(position, dir, forward_l)
+          const y_offset = length * Math.sin(action.pitch * Math.PI / 180)
+          const cartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(position)
+          const lat = Cesium.Math.toDegrees(cartographic.latitude)
+          const lon = Cesium.Math.toDegrees(cartographic.longitude)
+          position = new Cesium.Cartesian3.fromDegrees(lon, lat, point.altitude - y_offset)
 
+          const entity = viewer.entities.add(new Cesium.Entity({
+            position: position,
+            orientation: Cesium.Transforms.headingPitchRollQuaternion(position, new Cesium.HeadingPitchRoll.fromDegrees(point.heading, 0, -1 * action.pitch)),
+            box: {
+              dimensions: new Cesium.Cartesian3(0.3, length * 2, 0.3),
+              material: new Cesium.PolylineArrowMaterialProperty(
+                new Cesium.Color.fromCssColorString('#fff').withAlpha(1)
+              ),
+              outline: false
+            }
+          }))
+
+          // 添加云台视角（圆锥）
           // const hpr = new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(point.heading + 90), Cesium.Math.toRadians(Number(action.pitch) + 90), Cesium.Math.toRadians(0))
           // const cylinderEntity = viewer.entities.add(
           //   new Cesium.Entity({
