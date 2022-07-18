@@ -221,12 +221,12 @@ export default {
       })
     })
 
-    this.points = mock.data
-    this.points.forEach((item) => {
-      item.longitude = item.longitude - 180
-      item.latitude = item.latitude - 90
-    })
-    console.log('this.point', this.points)
+    // this.points = mock.data
+    // this.points.forEach((item) => {
+    //   item.longitude = item.longitude - 180
+    //   item.latitude = item.latitude - 90
+    // })
+    console.log('..........point', this.points)
 
     // 清除实体
     // 方法一：通过 Entity 删除
@@ -238,78 +238,78 @@ export default {
     this.points.map((point, index) => {
       if (point.actionEntityList && point.actionEntityList.length > 0) {
         // 添加云台视角
-        point.actionEntityList.map((action, actionIndex) => {
-          const length = 40
-          let position = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
-          const dir = CesiumUtils.getVector(point, point.heading)
-          const forward_l = length * Math.cos(action.pitch * Math.PI / 180)
-          position = CesiumUtils.translateByDirection(position, dir, forward_l)
-          const y_offset = length * Math.sin(action.pitch * Math.PI / 180)
-          const cartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(position)
-          const lat = Cesium.Math.toDegrees(cartographic.latitude)
-          const lon = Cesium.Math.toDegrees(cartographic.longitude)
-          position = new Cesium.Cartesian3.fromDegrees(lon, lat, point.altitude - y_offset)
+        // point.actionEntityList.map((action, actionIndex) => {
+        //   const length = 40
+        //   let position = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
+        //   const dir = CesiumUtils.getVector(point, point.heading)
+        //   const forward_l = length * Math.cos(action.pitch * Math.PI / 180)
+        //   position = CesiumUtils.translateByDirection(position, dir, forward_l)
+        //   const y_offset = length * Math.sin(action.pitch * Math.PI / 180)
+        //   const cartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(position)
+        //   const lat = Cesium.Math.toDegrees(cartographic.latitude)
+        //   const lon = Cesium.Math.toDegrees(cartographic.longitude)
+        //   position = new Cesium.Cartesian3.fromDegrees(lon, lat, point.altitude - y_offset)
 
-          const entity = viewer.entities.add(new Cesium.Entity({
-            position: position,
-            orientation: Cesium.Transforms.headingPitchRollQuaternion(position, new Cesium.HeadingPitchRoll.fromDegrees(point.heading, 0, -1 * action.pitch)),
-            box: {
-              dimensions: new Cesium.Cartesian3(0.3, length * 2, 0.3),
-              material: new Cesium.PolylineArrowMaterialProperty(
-                new Cesium.Color.fromCssColorString('#fff').withAlpha(1)
-              ),
-              outline: false
-            }
-          }))
+        //   const entity = viewer.entities.add(new Cesium.Entity({
+        //     position: position,
+        //     orientation: Cesium.Transforms.headingPitchRollQuaternion(position, new Cesium.HeadingPitchRoll.fromDegrees(point.heading + action.yaw, 0, -1 * action.pitch)),
+        //     box: {
+        //       dimensions: new Cesium.Cartesian3(0.3, length * 2, 0.3),
+        //       material: new Cesium.PolylineArrowMaterialProperty(
+        //         new Cesium.Color.fromCssColorString('#fff').withAlpha(1)
+        //       ),
+        //       outline: false
+        //     }
+        //   }))
 
-          // 添加云台视角（圆锥）
-          // const hpr = new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(point.heading + 90), Cesium.Math.toRadians(Number(action.pitch) + 90), Cesium.Math.toRadians(0))
-          // const cylinderEntity = viewer.entities.add(
-          //   new Cesium.Entity({
-          //     id: 'cylinder' + action.id,
-          //     name: '圆锥',
-          //     position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
-          //     orientation: Cesium.Transforms.headingPitchRollQuaternion(
-          //       Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
-          //       hpr
-          //     ),
-          //     cylinder: {
-          //       length: 40.0,
-          //       topRadius: 0.0,
-          //       bottomRadius: 0.1,
-          //       heightReference: Cesium.HeightReference.NONE,
-          //       fill: true,
-          //       material: new Cesium.Color.fromCssColorString('#ffffff'),
-          //       outline: false,
-          //       outlineWidth: 1.0,
-          //       numberOfVerticalLines: 16,
-          //       shadows: Cesium.ShadowMode.DISABLED
-          //       // slices: 4
-          //     },
-          //     scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
-          //     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
-          //   })
-          // )
-        })
+        //   // 添加云台视角（圆锥）
+        //   // const hpr = new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(point.heading + 90), Cesium.Math.toRadians(Number(action.pitch) + 90), Cesium.Math.toRadians(0))
+        //   // const cylinderEntity = viewer.entities.add(
+        //   //   new Cesium.Entity({
+        //   //     id: 'cylinder' + action.id,
+        //   //     name: '圆锥',
+        //   //     position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
+        //   //     orientation: Cesium.Transforms.headingPitchRollQuaternion(
+        //   //       Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
+        //   //       hpr
+        //   //     ),
+        //   //     cylinder: {
+        //   //       length: 40.0,
+        //   //       topRadius: 0.0,
+        //   //       bottomRadius: 0.1,
+        //   //       heightReference: Cesium.HeightReference.NONE,
+        //   //       fill: true,
+        //   //       material: new Cesium.Color.fromCssColorString('#ffffff'),
+        //   //       outline: false,
+        //   //       outlineWidth: 1.0,
+        //   //       numberOfVerticalLines: 16,
+        //   //       shadows: Cesium.ShadowMode.DISABLED
+        //   //       // slices: 4
+        //   //     },
+        //   //     scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+        //   //     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
+        //   //   })
+        //   // )
+        // })
       }
       // return
       // 添加方向实体
-      const toPoint = CesiumUtils.distancePos(point.longitude, point.latitude, point.heading, 20)
-      const headingEntity = viewer.entities.add(
-        new Cesium.Entity({
-          id: 'heading' + index,
-          name: 'headingLine',
-          polyline: {
-            positions: Cesium.Cartesian3.fromDegreesArrayHeights([point.longitude, point.latitude, point.altitude, toPoint.longitude, toPoint.latitude, point.altitude]),
-            width: 10,
-            material: new Cesium.PolylineArrowMaterialProperty(
-              new Cesium.Color.fromCssColorString('#fff').withAlpha(1)
-            ),
-            scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
-            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
-          }
-        })
-      )
+      // const toPoint = CesiumUtils.distancePos(point.longitude, point.latitude, point.heading, 20)
+      // const headingEntity = viewer.entities.add(
+      //   new Cesium.Entity({
+      //     id: 'heading' + index,
+      //     name: 'headingLine',
+      //     polyline: {
+      //       positions: Cesium.Cartesian3.fromDegreesArrayHeights([point.longitude, point.latitude, point.altitude, toPoint.longitude, toPoint.latitude, point.altitude]),
+      //       width: 10,
+      //       material: new Cesium.PolylineArrowMaterialProperty(
+      //         new Cesium.Color.fromCssColorString('#fff').withAlpha(1)
+      //       ),
+      //       scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+      //       distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
+      //     }
+      //   })
+      // )
       // 点
       const entity = viewer.entities.add(new Cesium.Entity({
         id: 'point' + point.id,
@@ -426,6 +426,30 @@ export default {
       _list.push(point.latitude)
       _list.push(point.altitude)
     })
+    // fromDegreesArrayHeights 计算出图形面的中点
+    const polygon = new Cesium.PolygonGeometry({
+      polygonHierarchy: new Cesium.PolygonHierarchy(
+        Cesium.Cartesian3.fromDegreesArrayHeights(_list)
+      )
+    })
+    const geometry = Cesium.PolygonGeometry.createGeometry(polygon)
+    const center = geometry.boundingSphere.center
+    const cartographic = Cesium.Cartographic.fromCartesian(center, viewer.scene.globe.ellipsoid, new Cesium.Cartographic())
+    const longitude = Cesium.Math.toDegrees(cartographic.longitude)
+    const latitude = Cesium.Math.toDegrees(cartographic.latitude)
+    const entity = viewer.entities.add(new Cesium.Entity({
+      position: Cesium.Cartesian3.fromDegrees(longitude, latitude, 0),
+      point: new Cesium.PointGraphics({
+        pixelSize: 40,
+        heightReference: Cesium.HeightReference.NONE,
+        color: new Cesium.Color.fromCssColorString('#FCB718').withAlpha(1),
+        outlineColor: new Cesium.Color.fromCssColorString('#FCB718').withAlpha(1),
+        outlineWidth: 1,
+        pixelOffset: new Cesium.Cartesian2(0.0, 0.0),
+        show: true
+      })
+    }))
+
     const lineEntity = viewer.entities.add(
       new Cesium.Entity({
         id: 'line',
