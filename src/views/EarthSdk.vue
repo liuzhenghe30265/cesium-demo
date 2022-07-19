@@ -2,7 +2,31 @@
 <template>
   <div
     id="cesium-container"
-    style="width: 100%; height: 100%;" />
+    style="width: 100%; height: 100%;">
+    <div
+      class="btns_container">
+      <div
+        class="pub_btn"
+        @click="handleMeasureEarth('POINT')">
+        位置测量
+      </div>
+      <div
+        class="pub_btn"
+        @click="handleMeasureEarth('SPACE_DISTANCE')">
+        距离测量
+      </div>
+      <div
+        class="pub_btn"
+        @click="handleMeasureEarth('SPACE_AREA')">
+        面积测量
+      </div>
+      <div
+        class="pub_btn"
+        @click="handleMeasureEarth('clear')">
+        清除
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -46,6 +70,8 @@ export default {
       }
     })
 
+    window.earth = earth
+
     // 添加默认地球影像
     earth.sceneTree.root = {
       children: [{
@@ -68,6 +94,7 @@ export default {
 
     const viewer = earth.czm.viewer
     viewer.scene3DOnly = true
+    window.viewer = viewer
 
     const tileset = new Cesium.Cesium3DTileset({
       url: 'https://lab.earthsdk.com/model/3610c2b0d08411eab7a4adf1d6568ff7/tileset.json', // 上海（白）
@@ -77,17 +104,44 @@ export default {
     })
     viewer.scene.primitives.add(tileset)
     viewer.zoomTo(tileset)
+
+    const eventHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
+    eventHandler.setInputAction(function (event) {
+      const picked = viewer.scene.pick(event.position)
+      if (picked) {
+        if (picked.primitive && picked.primitive._renderedText) {
+          console.log('.........picked', picked.primitive._renderedText)
+        }
+      }
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
   },
   methods: {
-
+    handleMeasureEarth (val) {
+      if (val === 'clear') {
+        earth.analyzation.measurement.clearResults()
+        return
+      }
+      earth.analyzation.measurement.type = val
+    }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 * {
   outline: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-appearance: none;
+}
+.btns_container {
+  position: absolute;
+  right: 50px;
+  top: 50px;
+  padding: 20px;
+  z-index: 9;
+  .pub_btn {
+    color: #fff;
+    cursor: pointer;
+  }
 }
 </style>
