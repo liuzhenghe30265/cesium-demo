@@ -18,6 +18,16 @@ module.exports = {
         from: './node_modules/cesiumvectortile/dist',
         to: 'tool/cesiumvectortile',
         toType: 'dir'
+      },
+      {
+        from: './node_modules/earthsdk/dist/XbsjCesium',
+        to: 'tool/earthsdk/XbsjCesium',
+        toType: 'dir'
+      },
+      {
+        from: './node_modules/earthsdk/dist/XbsjEarth',
+        to: 'tool/earthsdk/XbsjEarth',
+        toType: 'dir'
       }
     ]
     webpackArr.push(

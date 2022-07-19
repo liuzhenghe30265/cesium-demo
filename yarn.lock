@@ -4545,6 +4545,11 @@ earcut@^2.0.0:
   resolved "https://registry.npmjs.org/earcut/-/earcut-2.2.3.tgz"
   integrity sha512-iRDI1QeCQIhMCZk48DRDMVgQSSBDmbzzNhnxIo+pwx3swkfjMh6vh0nWLq1NdvGHLKH6wIrAM3vQWeTj6qeoug==
 
+earthsdk@^1.7.13:
+  version "1.7.13"
+  resolved "https://registry.yarnpkg.com/earthsdk/-/earthsdk-1.7.13.tgz#6e5984f9d061f2497ae17285dba6a2b4d5d40e88"
+  integrity sha512-CGWXcVa07xPrNp0LT1Gtx/X0eOabRw/NrQ9sBgt32cGQSBWLNu0/DQPOg5U0zS0HJvxuA7f0wk0ONNL2PY5XWw==
+
 easy-stack@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/easy-stack/-/easy-stack-1.0.1.tgz"

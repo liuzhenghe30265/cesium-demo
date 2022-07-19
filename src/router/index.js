@@ -35,6 +35,12 @@ const routes = [
     component: () => import('../views/Path.vue')
   },
   {
+    path: '/EarthSdk',
+    name: 'EarthSdk',
+    visible: true,
+    component: () => import('../views/EarthSdk.vue')
+  },
+  {
     path: '/Three',
     name: 'Three',
     visible: false,
