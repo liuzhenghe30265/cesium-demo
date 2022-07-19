@@ -31,8 +31,14 @@ const routes = [
   {
     path: '/Path',
     name: 'Path',
-    visible: true,
+    visible: false,
     component: () => import('../views/Path.vue')
+  },
+  {
+    path: '/Three',
+    name: 'Three',
+    visible: false,
+    component: () => import('../views/Three')
   }
 ]
 
