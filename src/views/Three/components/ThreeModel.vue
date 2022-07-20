@@ -131,9 +131,7 @@ export default {
     }
   },
   mounted () {
-    setTimeout(() => {
-      this.init()
-    }, 0)
+    this.init()
   },
   beforeDestroy () {
     this.clear()
@@ -284,43 +282,8 @@ export default {
         this.dockModelOpen = false
       }
     },
-    // 莲花打开关闭动画
-    dockAnimateOpen (status) {
-      if (!this.dockAnimationAction) {
-        return
-      }
-      if (status) {
-        // open
-        this.dockAnimationAction.paused = true
-        this.dockAnimationAction.timeScale = this.dockAnimateTimeScale
-        this.dockAnimationAction.paused = false
-        this.dockAnimationAction.play()
-      } else {
-        // close
-        this.dockAnimationAction.paused = true
-        this.dockAnimationAction.timeScale = -(this.dockAnimateTimeScale)
-        this.dockAnimationAction.paused = false
-        this.dockAnimationAction.play()
-      }
-    },
     clear () {
       window.cancelAnimationFrame(this.clearAnim)
-      this.scene = null
-      this.camera = null
-      this.renderer = null
-      this.textureLoader = null
-      this.groupBox = null
-      this.control = null
-      this.enableRotate = null
-      this.droneMixer = null
-      this.droneClock = null
-      this.droneAnimationAction = null
-      this.droneModelAnimateTimer = null
-      this.droneModel = null
-      this.dockMixer = null
-      this.dockClock = null
-      this.dockAnimationAction = null
-      this.dockModel = null
     },
     async init () {
       const _this = this
@@ -398,7 +361,7 @@ export default {
       // 加载模型
       const loader = new GLTFLoader()
       await loader.load('model/shengDock.glb', (gltf) => {
-        // await loader.load(`${window.SITE_CONFIG['modelUrl']}gltf/shengDock.glb`, (gltf) => {
+      // await loader.load(`${window.SITE_CONFIG['modelUrl']}gltf/shengDock.glb`, (gltf) => {
         gltf.scene.name = 'shengDock'
         gltf.scene.scale.set(_this.dockModelInitScale, _this.dockModelInitScale, _this.dockModelInitScale) //  设置模型大小缩放
         gltf.scene.position.set(0, 0, 0)
@@ -418,7 +381,7 @@ export default {
         // console.error(error)
       })
       await loader.load('model/shengfeiji.glb', (gltf) => {
-        // await loader.load(`${window.SITE_CONFIG['modelUrl']}gltf/shengfeiji.glb`, (gltf) => {
+      // await loader.load(`${window.SITE_CONFIG['modelUrl']}gltf/shengfeiji.glb`, (gltf) => {
         gltf.scene.name = 'shengDrone'
         gltf.scene.scale.set(_this.droneModelInitScale, _this.droneModelInitScale, _this.droneModelInitScale) //  设置模型大小缩放
         gltf.scene.position.set(0, 0, 0)

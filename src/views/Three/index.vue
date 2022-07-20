@@ -12,11 +12,15 @@
         show-stops
         @change="handleChange" />
     </div>
-    <ThreeModel
-      :process="process"
-      :yaw="yaw"
-      :pitch="pitch"
-      :roll="roll" />
+    <div
+      v-show="visible">
+      <ThreeModel
+        v-if="visible"
+        :process="process"
+        :yaw="yaw"
+        :pitch="pitch"
+        :roll="roll" />
+    </div>
   </div>
 </template>
 
@@ -32,12 +36,12 @@ export default {
   },
   data () {
     return {
+      visible: true,
       timer: null,
       yaw: 0,
       pitch: 0,
       roll: 0,
       sliderVal: 0,
-      visible: false,
       process: -1
     }
   },
