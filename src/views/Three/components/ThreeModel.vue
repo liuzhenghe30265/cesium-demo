@@ -1,7 +1,7 @@
 <template>
   <div
-    id="canvas_container"
-    class="canvas_container" />
+    id="three_container"
+    class="three_container" />
 </template>
 
 <script>
@@ -17,50 +17,14 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 export default {
   name: 'ThreeModel',
   props: {
-    process: {
-      type: Number,
-      default: 0
-    },
-    yaw: {
-      type: [Number, String],
-      default: 0
-    },
-    pitch: {
-      type: [Number, String],
-      default: 0
-    },
-    roll: {
-      type: [Number, String],
-      default: 0
-    }
   },
   data () {
     return {
-      degList: [4, 5, 6],
-      animateTimerDeg: null,
-      animateTimerScale: null,
-      animateTimer: null,
-      timer: null,
-      droneAnimateTimeScale: 1,
-      droneMixer: null,
-      droneClock: null,
-      droneAnimationAction: null,
-      droneModelAnimateTimer: null,
-      droneModelMaxScale: 200,
-      droneModelTranslateY: 80,
-      droneModelInitScale: 90,
-      droneModel: null,
-      dockAnimateTimeScale: 0.05,
-      dockMixer: null,
-      dockClock: null,
-      dockAnimationAction: null,
-      dockModelTranslateYHide: -1200, // 机库消失的高度
-      dockModelTranslateY: -400,
-      dockModelInitScale: 55,
-      dockModelOpen: false,
-      dockModelPosition: 'up',
-      droneDegPlay: false,
-      dockModel: null,
+      modelMixer: null,
+      modelClock: null,
+      modelAnimationAction: null,
+      modelAnimationAction2: null,
+      model: null,
       scene: null,
       camera: null,
       renderer: null,
@@ -74,220 +38,18 @@ export default {
 
   },
   watch: {
-    process (val) {
-      if (val == 1) {
-        // 自检可用
-        // 打开机库
-        this.setModelOwnAnimateToggle(this.dockAnimationAction, true) // 打开机库
-      } else if (val == 2) {
-        // 更换吊舱
-      } else if (val == 3) {
-        // 更换电池
-      } else if (val == 4) {
-        // 起飞
-        if (!this.dockModelOpen) {
-          // 如果机库还未打开（打开页面的状态就是起飞）
-          this.setModelVisible(this.dockModel, false) // 隐藏机库
-          this.setModelOwnAnimateToggle(this.dockAnimationAction, true) // 打开机库
-        }
-        // 关闭机库
-        this.setModelOwnAnimatePlay(this.droneAnimationAction, true) // 飞机转桨
-        // this.setModelDeg(this.droneModel, true) // 飞机角度旋转
-        this.droneDegPlay = true
-        this.setModelAnimate(this.dockModel, 'down', this.dockModelTranslateYHide) // 机库下降消失
-        this.setModelOwnAnimateToggle(this.dockAnimationAction, false) // 关闭机库
-        this.setModelScale(this.droneModel, 'big', this.droneModelMaxScale) // 飞机放大
-      } else if (val == 5) {
-        // 回收
-        if (this.dockModelPosition === 'up') {
-          // 打开页面的状态就是回收
-          if (!this.dockModelOpen) {
-            return
-          }
-        }
-        this.setModelVisible(this.dockModel, true) // 显示机库
-        this.setModelAnimate(this.dockModel, 'up', this.dockModelTranslateY) // 机库还原
-        this.setModelOwnAnimateToggle(this.dockAnimationAction, true) // 打开机库
-        this.setModelScale(this.droneModel, 'small', this.droneModelMaxScale) // 飞机变小
-      } else if (val == 6) {
-        // 归位
-        // this.setModelDeg(this.droneModel, false) // 停止飞机角度旋转并初始化角度
-        this.setModelOwnAnimatePlay(this.droneAnimationAction, false) // 飞机停止转桨
-        this.droneDegPlay = false
-        this.setModelOwnAnimateToggle(this.dockAnimationAction, false) // 关闭机库
-      } else if (val == 7) {
-        // 待命
-      } else {
-      }
-    },
-    yaw (val) {
-      this.degChange()
-    },
-    pitch (val) {
-      this.degChange()
-    },
-    roll (val) {
-      this.degChange()
-    }
   },
   mounted () {
+    window.cancelAnimationFrame(this.clearAnim)
     this.init()
   },
   beforeDestroy () {
-    this.clear()
+    window.cancelAnimationFrame(this.clearAnim)
   },
   methods: {
-    // 模型角度动画
-    setModelDeg (model, type) {
-      const _this = this
-      if (!model) {
-        return
-      }
-      if (this.animateTimerDeg) {
-        clearInterval(this.animateTimerDeg)
-      }
-      if (!type) {
-        model.rotation.x = 0
-        model.rotation.y = 0
-        model.rotation.z = 0
-        return
-      }
-      this.animateTimerDeg = setInterval(() => {
-        // const randomVal = _this.degList[Math.floor(Math.random() * _this.degList.length)]
-        // rotateX() 会接着上一帧的变化而改变
-        // model.rotateX(THREE.MathUtils.degToRad(randomVal))
-        // model.rotateY(THREE.MathUtils.degToRad(randomVal))
-        // model.rotateZ(THREE.MathUtils.degToRad(randomVal))
-        model.rotation.x = THREE.MathUtils.degToRad(_this.roll)
-        model.rotation.y = THREE.MathUtils.degToRad(_this.pitch)
-        model.rotation.z = THREE.MathUtils.degToRad(_this.yaw)
-      }, 1000)
-    },
-    // 监听角度变化
-    degChange () {
-      // console.log('.......deg', this.yaw, this.pitch, this.roll)
-      if (!this.droneModel) {
-        return
-      }
-      if (!this.droneDegPlay) {
-        return
-      }
-      this.droneModel.rotation.x = THREE.MathUtils.degToRad(this.roll)
-      this.droneModel.rotation.y = THREE.MathUtils.degToRad(this.pitch)
-      this.droneModel.rotation.z = THREE.MathUtils.degToRad(this.yaw)
-    },
-    // 模型缩放动画
-    setModelScale (model, type, value) {
-      const _this = this
-      if (!model) {
-        return
-      }
-      if (this.animateTimerScale) {
-        clearInterval(this.animateTimerScale)
-      }
-      if (type === 'big') {
-        let val = this.droneModelInitScale
-        this.animateTimerScale = setInterval(() => {
-          val += 1
-          model.scale.set(val, val, val)
-          if (val >= value) {
-            clearInterval(_this.animateTimerScale)
-            return
-          }
-        }, 50)
-        // if (model.name === 'shengDrone') {
-        //   // 飞机在放大时向下偏移一些
-        // }
-      } else if (type === 'small') {
-        let val = value
-        this.animateTimerScale = setInterval(() => {
-          val += -1
-          model.scale.set(val, val, val)
-          if (val <= _this.droneModelInitScale) {
-            clearInterval(_this.animateTimerScale)
-            return
-          }
-        }, 50)
-        // if (model.name === 'shengDrone') {
-        //   // 飞机在缩小时向上偏移一些
-        // }
-      }
-    },
-    // 自定义模型动画
-    setModelAnimate (model, type, value) {
-      const _this = this
-      if (!model) {
-        return
-      }
-      if (model.name === 'shengDock') {
-        this.dockModelPosition = type
-      }
-      if (this.animateTimer) {
-        clearInterval(this.animateTimer)
-      }
-      this.animateTimer = setInterval(() => {
-        if (type === 'up') {
-          model.translateY(3)
-          if (model.position.y >= value) {
-            clearInterval(_this.animateTimer)
-          }
-        } else if (type === 'down') {
-          model.translateY(-3)
-          if (model.position.y <= value) {
-            clearInterval(_this.animateTimer)
-            _this.setModelVisible(_this.dockModel, false) // 隐藏机库
-          }
-        }
-      }, 80)
-    },
-    // 设置模型显/隐
-    setModelVisible (model, status) {
-      if (model) {
-        if (status) {
-          model.visible = true
-        } else {
-          model.visible = false
-        }
-      }
-    },
-    // 模型自身动画开始/停止
-    setModelOwnAnimatePlay (action, status) {
-      if (!action) {
-        return
-      }
-      if (status) {
-        action.play()
-      } else {
-        action.stop()
-      }
-    },
-    // 模型自身正/反动画
-    setModelOwnAnimateToggle (action, status) {
-      if (!action) {
-        return
-      }
-      if (status) {
-        // open
-        action.paused = true
-        action.timeScale = this.dockAnimateTimeScale
-        action.paused = false
-        action.play()
-        this.dockModelOpen = true
-      } else {
-        // close
-        action.paused = true
-        action.timeScale = -(this.dockAnimateTimeScale)
-        action.paused = false
-        action.play()
-        this.dockModelOpen = false
-      }
-    },
-    clear () {
-      window.cancelAnimationFrame(this.clearAnim)
-    },
     async init () {
       const _this = this
-      const element = document.getElementById('canvas_container')
+      const element = document.getElementById('three_container')
       const width = element.clientWidth // 窗口宽度
       const height = element.clientHeight // 窗口高度
       // 场景
@@ -311,7 +73,7 @@ export default {
       // 设置环境
       this.renderer.setClearColor(0x000000, 0)
       // 设置场景大小
-      this.renderer.setSize(140, 140)
+      this.renderer.setSize(400, 400)
       // 渲染器开启阴影效果
       this.renderer.shadowMap.enabled = true
 
@@ -360,46 +122,28 @@ export default {
 
       // 加载模型
       const loader = new GLTFLoader()
-      await loader.load('model/shengDock.glb', (gltf) => {
-      // await loader.load(`${window.SITE_CONFIG['modelUrl']}gltf/shengDock.glb`, (gltf) => {
-        gltf.scene.name = 'shengDock'
-        gltf.scene.scale.set(_this.dockModelInitScale, _this.dockModelInitScale, _this.dockModelInitScale) //  设置模型大小缩放
+      await loader.load('model/Cesium_Air.glb', (gltf) => {
+        gltf.scene.name = 'Cesium_Air'
+        gltf.scene.scale.set(20, 20, 20) //  设置模型大小缩放
         gltf.scene.position.set(0, 0, 0)
-        gltf.scene.translateY(_this.dockModelTranslateY)
-        _this.dockMixer = new THREE.AnimationMixer(gltf.scene)
-        _this.dockClock = new THREE.Clock()
-        _this.dockAnimationAction = _this.dockMixer.clipAction(gltf.animations[0])
-        _this.dockAnimationAction.timeScale = _this.dockAnimateTimeScale
-        _this.dockAnimationAction.loop = THREE.LoopOnce
-        _this.dockAnimationAction.clampWhenFinished = true
+        gltf.scene.translateY(0)
+        _this.modelMixer = new THREE.AnimationMixer(gltf.scene)
+        _this.modelClock = new THREE.Clock()
+        // http://www.yanhuangxueyuan.com/threejs/docs/index.html#api/zh/animation/AnimationAction
+        _this.modelAnimationAction = _this.modelMixer.clipAction(gltf.animations[0])
+        _this.modelAnimationAction.timeScale = 1
+        // _this.modelAnimationAction.loop = THREE.LoopOnce // 播放一次
+        _this.modelAnimationAction.clampWhenFinished = true
+        _this.modelAnimationAction2 = _this.modelMixer.clipAction(gltf.animations[1])
+        _this.modelAnimationAction2.timeScale = 1
+        // _this.modelAnimationAction2.loop = THREE.LoopOnce // 播放一次
+        _this.modelAnimationAction2.clampWhenFinished = true
         _this.scene.add(gltf.scene)
-        _this.dockModel = gltf.scene
-        // _this.setModelOwnAnimateToggle(_this.dockAnimationAction, true) // 打开机库
+        _this.model = gltf.scene
       }, (_xhr) => {
-        // console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+        // console.log((_xhr.loaded / _xhr.total) * 100 + '% loaded')
       }, (_error) => {
-        // console.error(error)
-      })
-      await loader.load('model/shengfeiji.glb', (gltf) => {
-      // await loader.load(`${window.SITE_CONFIG['modelUrl']}gltf/shengfeiji.glb`, (gltf) => {
-        gltf.scene.name = 'shengDrone'
-        gltf.scene.scale.set(_this.droneModelInitScale, _this.droneModelInitScale, _this.droneModelInitScale) //  设置模型大小缩放
-        gltf.scene.position.set(0, 0, 0)
-        gltf.scene.translateY(_this.droneModelTranslateY)
-        _this.droneMixer = new THREE.AnimationMixer(gltf.scene)
-        _this.droneClock = new THREE.Clock()
-        _this.droneAnimationAction = _this.droneMixer.clipAction(gltf.animations[0])
-        _this.droneAnimationAction.timeScale = _this.droneAnimateTimeScale
-        // _this.droneAnimationAction.loop = THREE.LoopOnce
-        _this.droneAnimationAction.clampWhenFinished = true
-        _this.scene.add(gltf.scene)
-        _this.droneModel = gltf.scene
-        // _this.droneModel.rotateY(THREE.MathUtils.degToRad(45))
-        // _this.droneModel.visible = false
-      }, (_xhr) => {
-        // console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-      }, (_error) => {
-        // console.error(error)
+        // console.error(_error)
       })
 
       const animate = () => {
@@ -409,14 +153,10 @@ export default {
         this.control.update()
         // 渲染界面
         this.renderer.render(this.scene, this.camera)
-        if (this.dockMixer) {
-          // dockClock.getDelta() 方法获得两帧的时间间隔
+        if (this.modelMixer) {
+          // modelClock.getDelta() 方法获得两帧的时间间隔
           // 更新混合器相关的时间
-          this.dockMixer.update(this.dockClock.getDelta())
-        }
-        if (this.droneMixer) {
-          // 更新混合器相关的时间
-          this.droneMixer.update(this.droneClock.getDelta())
+          this.modelMixer.update(this.modelClock.getDelta())
         }
       }
       animate()
@@ -427,17 +167,14 @@ export default {
 
 <style lang="scss" scoped>
 $pub-color: #fcb718;
-.canvas_container {
+.three_container {
   position: absolute;
   z-index: 999;
-  top: 72%;
+  top: 50%;
   left: 50%;
-  width: 140px;
-  height: 140px;
+  width: 400px;
+  height: 400px;
   transform: translateX(-50%) translateY(-50%);
-  border-radius: 50%;
   overflow: hidden;
-  border-radius: 50%;
-  border: 1px solid #fff;
 }
 </style>

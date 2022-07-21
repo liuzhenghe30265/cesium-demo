@@ -3,24 +3,26 @@
     id="cesium-container"
     style="width: 100%; height: 100%;">
     <div
-      class="btns_container">
-      <el-slider
-        v-model="sliderVal"
-        :step="1"
-        :min="5"
-        :max="16"
-        show-stops
-        @change="handleChange" />
+      style="position: absolute;right: 50px;top: 100px;z-index: 9;">
+      <div>
+        <button
+          @click="handlePlay('play')">播放动画</button>
+        <button
+          @click="handlePlay('reverse')">播放动画（反）</button>
+        <button
+          @click="handlePlay('paused')">暂停</button>
+        <button
+          @click="handlePlay('stop')">停止动画</button>
+      </div>
+      <div>
+        <button
+          @click="handlePlay2('play')">播放动画</button>
+        <button
+          @click="handlePlay2('stop')">停止动画</button>
+      </div>
     </div>
-    <div
-      v-show="visible">
-      <ThreeModel
-        v-if="visible"
-        :process="process"
-        :yaw="yaw"
-        :pitch="pitch"
-        :roll="roll" />
-    </div>
+    <ThreeModel
+      ref="ThreeModel" />
   </div>
 </template>
 
@@ -36,13 +38,7 @@ export default {
   },
   data () {
     return {
-      visible: true,
-      timer: null,
-      yaw: 0,
-      pitch: 0,
-      roll: 0,
-      sliderVal: 0,
-      process: -1
+      paused: false
     }
   },
   computed: {
@@ -52,9 +48,6 @@ export default {
 
   },
   mounted () {
-    this.degTimerFun()
-    this.sliderVal = 0
-
     // const china = Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
     // Cesium.Camera.DEFAULT_VIEW_RECTANGLE = china
     // Initialize the viewer widget with several custom options and mixins.
@@ -236,36 +229,30 @@ export default {
     // handler.removeInputAction(Cesium.ScreenSpaceEventType.WHEEL)
   },
   methods: {
-    degTimerFun () {
-      if (this.timer) {
-        clearInterval(this.timer)
-      }
-      this.timer = setInterval(() => {
-        this.yaw = [0, 1, 2, 3, 4, 5][Math.floor(Math.random() * 6)]
-        this.pitch = [0, 1, 2, 3, 4, 5][Math.floor(Math.random() * 6)]
-        this.roll = [0, 1, 2, 3, 4, 5][Math.floor(Math.random() * 6)]
-      }, 1000)
-    },
-    handleChange () {
-      const val = this.sliderVal
-      if (val == 6) {
-        this.process = 1
-      } else if (val == 7 || val == 8) {
-        this.process = 1
-      } else if (val == 9) {
-        this.process = 4
-      } else if (val == 10 || val == 11 || val == 12 || val == 13) {
-        this.process = 4
-      } else if (val == 14) {
-        this.process = 5
-      } else if (val == 15) {
-        this.process = 6
-      } else if (val == 16) {
-        this.process = 7
+    handlePlay2 (val) {
+      if (val === 'play') {
+        this.$refs.ThreeModel.modelAnimationAction2.play()
+      } else if (val === 'stop') {
+        this.$refs.ThreeModel.modelAnimationAction2.stop()
       }
     },
-    handleClick () {
-      this.visible = !this.visible
+    handlePlay (val) {
+      if (val === 'play') {
+        this.$refs.ThreeModel.modelAnimationAction.paused = true
+        this.$refs.ThreeModel.modelAnimationAction.timeScale = 1
+        this.$refs.ThreeModel.modelAnimationAction.paused = false
+        this.$refs.ThreeModel.modelAnimationAction.play()
+      } else if (val === 'reverse') {
+        this.$refs.ThreeModel.modelAnimationAction.paused = true
+        this.$refs.ThreeModel.modelAnimationAction.timeScale = -1
+        this.$refs.ThreeModel.modelAnimationAction.paused = false
+        this.$refs.ThreeModel.modelAnimationAction.play()
+      } else if (val === 'paused') {
+        this.paused = !this.paused
+        this.$refs.ThreeModel.modelAnimationAction.paused = this.paused
+      } else if (val === 'stop') {
+        this.$refs.ThreeModel.modelAnimationAction.stop()
+      }
     }
   }
 }
