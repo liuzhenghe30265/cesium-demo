@@ -21,10 +21,16 @@
         :size="20"
         class="three_model" />
       <ThreeModel
-        :id="'three_model_B'"
+        :id="'three_model_b'"
         ref="ThreeModelB"
         :url="'model/shengfeiji.glb'"
         :size="200"
+        class="three_model" />
+      <ThreeModel
+        :id="'three_model_c'"
+        ref="ThreeModelC"
+        :url="'model/SnowyVillage.glb'"
+        :size="5"
         class="three_model" />
     </div>
   </div>
@@ -237,6 +243,7 @@ export default {
     handleChange (val) {
       this.$refs.ThreeModelA.applyScalar(val)
       this.$refs.ThreeModelB.applyScalar(val)
+      this.$refs.ThreeModelC.applyScalar(val)
     }
   }
 }
@@ -254,6 +261,7 @@ export default {
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
+  display: flex;
   .three_model {
     width: 400px;
     height: 400px;
