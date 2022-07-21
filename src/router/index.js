@@ -6,31 +6,31 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Init',
+    name: '初始化',
     visible: true,
     component: () => import('../views/Init.vue')
   },
   {
     path: '/Entity',
-    name: 'Entity',
+    name: '实体',
     visible: true,
     component: () => import('../views/Entity.vue')
   },
   {
     path: '/Model',
-    name: 'Model',
+    name: '模型',
     visible: true,
     component: () => import('../views/Model.vue')
   },
   {
     path: '/ClippingPlane',
-    name: 'ClippingPlane',
+    name: '模型切割',
     visible: true,
     component: () => import('../views/ClippingPlane.vue')
   },
   {
     path: '/Path',
-    name: 'Path',
+    name: '轨迹',
     visible: false,
     component: () => import('../views/Path.vue')
   },
@@ -42,9 +42,21 @@ const routes = [
   },
   {
     path: '/Three',
-    name: 'Three',
-    visible: false,
+    name: 'ThreeJS',
+    visible: true,
     component: () => import('../views/Three')
+  },
+  {
+    path: '/Three2',
+    name: 'ThreeJSHushi',
+    visible: false,
+    component: () => import('../views/Three/index2.vue')
+  },
+  {
+    path: '/Boom',
+    name: 'Three炸裂',
+    visible: true,
+    component: () => import('../views/Three/Boom.vue')
   }
 ]
 

@@ -152,11 +152,13 @@ export default {
         gltf.scene.translateY(0)
         _this.modelMixer = new THREE.AnimationMixer(gltf.scene)
         _this.modelClock = new THREE.Clock()
-        // http://www.yanhuangxueyuan.com/threejs/docs/index.html#api/zh/animation/AnimationAction
-        _this.modelAnimationAction = _this.modelMixer.clipAction(gltf.animations[0])
-        _this.modelAnimationAction.timeScale = 1
-        // _this.modelAnimationAction.loop = THREE.LoopOnce // 播放一次
-        _this.modelAnimationAction.clampWhenFinished = true
+        if (gltf.animations.length > 0) {
+          // http://www.yanhuangxueyuan.com/threejs/docs/index.html#api/zh/animation/AnimationAction
+          _this.modelAnimationAction = _this.modelMixer.clipAction(gltf.animations[0])
+          _this.modelAnimationAction.timeScale = 1
+          // _this.modelAnimationAction.loop = THREE.LoopOnce // 播放一次
+          _this.modelAnimationAction.clampWhenFinished = true
+        }
         _this.scene.add(gltf.scene)
         _this.model = gltf.scene
 

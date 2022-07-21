@@ -90,7 +90,7 @@ export default {
       }]
     }
     // 大气层
-    // earth.weather.cloud.enabled = true
+    earth.weather.cloud.enabled = true
 
     const viewer = earth.czm.viewer
     viewer.scene3DOnly = true
