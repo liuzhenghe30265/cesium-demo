@@ -18,7 +18,7 @@ export function semiMinorAxisAnimate () {
 
 export function semiMajorAxisAnimate () {
   const CallbackProperty = new Cesium.CallbackProperty(function () {
-    r1 = r1 + data.deviationR
+    r1 = r1 + data.deviationR / 10
     if (r1 >= data.maxR) {
       r1 = data.minR
     }
