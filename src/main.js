@@ -8,6 +8,10 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
+import TimelineSliderVue from 'timeline-slider-vue'
+import 'timeline-slider-vue/lib/timeline-slider-vue.css'
+Vue.use(TimelineSliderVue)
+
 // new Vue({
 //   render: h => h(App),
 //   router,

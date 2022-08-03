@@ -3,6 +3,18 @@
   <div
     id="app"
     style="width: 100%; height: 100%; position: relative">
+    <!-- <div
+      style="position: absolute;width: 100%;left: 0;bottom: 0;z-index: 999;">
+      <timeline-slider-vue
+        @change="handleChange"
+        @input="handleInput">
+        <div
+          slot="sliderContent"
+          slot-scope="scope">
+          {{ scope.data }}
+        </div>
+      </timeline-slider-vue>
+    </div> -->
     <div
       class="nav">
       <router-link
@@ -20,7 +32,12 @@
 import routes from '@/router/index.js'
 export default {
   data () {
-    return {}
+    return {
+      lockDate: [], // 锁定的日期（滑动结束时自动跳到指定的日期）
+      markDate: [], // 做标记的日期
+      mask: true,
+      date: '2022-06-01'
+    }
   },
   computed: {
     visibleRouters: function () {
@@ -35,7 +52,12 @@ export default {
   mounted () {
   },
   methods: {
-
+    handleInput (value, date) {
+      console.log('input', value, date)
+    },
+    handleChange (value, date) {
+      console.log('change', value, date)
+    }
   }
 }
 </script>

@@ -17,6 +17,18 @@ const routes = [
     component: () => import('../views/Entity.vue')
   },
   {
+    path: '/Primitive',
+    name: 'Primitive',
+    visible: true,
+    component: () => import('../views/Primitive')
+  },
+  {
+    path: '/Primitive/get',
+    name: '操作Primitive',
+    visible: true,
+    component: () => import('../views/Primitive/get.vue')
+  },
+  {
     path: '/Model',
     name: '模型',
     visible: true,

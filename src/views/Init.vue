@@ -7,6 +7,7 @@
 
 <script>
 /* eslint-disable no-undef */
+import CesiumUtils from '@/utils/CesiumUtils.js'
 export default {
   data () {
     return {}
@@ -98,7 +99,7 @@ export default {
     // 监听视角变化
     viewer.camera.percentageChanged = 0.00001
     viewer.camera.changed.addEventListener(function (event) {
-      getExtend()
+      console.log(CesiumUtils.getExtend(viewer))
       // console.log(viewer.camera.computeViewRectangle())
 
       // 中心点
@@ -198,41 +199,6 @@ export default {
 
     // 删除事件
     // handler.removeInputAction(Cesium.ScreenSpaceEventType.WHEEL)
-
-    // 获取视图矩形范围
-    function getExtend () {
-      const extend = viewer.camera.computeViewRectangle()
-      const params = {}
-      if (typeof extend === 'undefined') {
-        const coordToLonlat = (viewer, x, y) => {
-          const { camera, scene } = viewer
-          const d2 = new Cesium.Cartesian2(x, y)
-          const ellipsoid = scene.globe.ellipsoid
-          // 2D转3D世界坐标
-          const d3 = camera.pickEllipsoid(d2, ellipsoid)
-          // 3D世界坐标转弧度
-          const upperLeftCartographic = scene.globe.ellipsoid.cartesianToCartographic(d3)
-          // 弧度转经纬度
-          const lon = Cesium.Math.toDegrees(upperLeftCartographic.longitude)
-          const lat = Cesium.Math.toDegrees(upperLeftCartographic.latitude)
-          return { lon, lat }
-        }
-        const canvas = viewer.scene.canvas
-        const upperLeftLonLat = coordToLonlat(viewer, 0, 0)
-        const lowerRightLonLat = coordToLonlat(viewer, canvas.clientWidth, canvas.clientHeight)
-        params.xmin = upperLeftLonLat.lon
-        params.xmax = lowerRightLonLat.lon
-        params.ymin = upperLeftLonLat.lat
-        params.ymax = lowerRightLonLat.lat
-      } else {
-        // 三维视图
-        params.xmax = Cesium.Math.toDegrees(extend.east)
-        params.ymax = Cesium.Math.toDegrees(extend.north)
-        params.xmin = Cesium.Math.toDegrees(extend.west)
-        params.ymin = Cesium.Math.toDegrees(extend.south)
-      }
-      console.log(`${params.xmin},${params.ymin},${params.xmax},${params.ymax}`, params)
-    }
   },
   methods: {
 
