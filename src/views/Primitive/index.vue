@@ -14,11 +14,13 @@
 /* eslint-disable no-undef */
 /* eslint-disable new-cap */
 /* eslint-disable no-unused-vars */
-import CesiumUtils from '@/utils/CesiumUtils.js'
+/* eslint-disable vue/no-reserved-keys */
 import * as turf from '@turf/turf'
 export default {
   data () {
-    return {}
+    return {
+      _primitive: null
+    }
   },
   computed: {
 
@@ -27,6 +29,7 @@ export default {
 
   },
   mounted () {
+    const _this = this
     // const china = Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
     // Cesium.Camera.DEFAULT_VIEW_RECTANGLE = china
     // Initialize the viewer widget with several custom options and mixins.
@@ -53,7 +56,7 @@ export default {
     })
 
     // 随机生成坐标
-    const positions = turf.randomPoint(1000000, {
+    const positions = turf.randomPoint(10000, {
       bbox: [
         70.01180980018789,
         20.12881664932077,
@@ -70,7 +73,7 @@ export default {
       return {
         longitude: _.geometry.coordinates[0],
         latitude: _.geometry.coordinates[1],
-        altitude: 0,
+        altitude: index,
         value: index
       }
     })
@@ -94,17 +97,18 @@ export default {
     // })
     // viewer.entities.add(barEntity)
     // positions.map((item, index) => {
-    //   const color = Cesium.Color.fromHsl(0.1 - item.value * 0.1 / 100, 1.0, 1 - item.value / 100, 0.5)
     //   const entity = new Cesium.Entity({
     //     id: 'bar' + index,
     //     position: Cesium.Cartesian3.fromDegrees(item.longitude, item.latitude, item.altitude),
     //     show: true,
     //     cylinder: {
-    //       topRadius: 100,
-    //       bottomRadius: 100,
+    //       topRadius: 1000,
+    //       bottomRadius: 1000,
     //       heightReference: 0,
-    //       length: item.value,
-    //       material: new Cesium.ColorMaterialProperty(color),
+    //       length: 100000,
+    //       material: new Cesium.ColorMaterialProperty(Cesium.Color.fromRandom({
+    //         alpha: 0.5
+    //       })),
     //       show: true
     //     },
     //     parent: barEntity
@@ -112,22 +116,145 @@ export default {
     //   viewer.entities.add(entity)
     // })
 
-    // Primitive 点
-    // http://www.bigemap.com/Public/offline/gl/PointPrimitive.html
-    const pointCollection = viewer.scene.primitives.add(new Cesium.PointPrimitiveCollection())
+    // Primitive
+    const instances = []
     positions.map((point, index) => {
-      const color = Cesium.Color.fromHsl(0.1 - point.value * 0.1 / 100, 1.0, 1 - point.value / 100, 0.5)
-      pointCollection.add({
-        id: 'point' + index,
-        position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
-        pixelSize: 10,
-        color: color
+      // 图片
+      instances.push(
+        new Cesium.GeometryInstance({
+          id: 'CylinderGeometry' + index,
+          geometry: new Cesium.CylinderGeometry({
+            length: 10000,
+            topRadius: 1000,
+            bottomRadius: 1000
+          }),
+          modelMatrix: Cesium.Matrix4.multiplyByTranslation(
+            Cesium.Transforms.eastNorthUpToFixedFrame(
+              Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)), new Cesium.Cartesian3(0.0, 0.0, 0.0), new Cesium.Matrix4()
+          ),
+          attributes: {
+            color: new Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.fromCssColorString('#0000ff').withAlpha(0.4)),
+            show: new Cesium.ShowGeometryInstanceAttribute(true)
+          }
+        })
+      )
+      // // 圆柱、圆锥或者截断的圆锥
+      // instances.push(
+      //   new Cesium.GeometryInstance({
+      //     id: 'CylinderGeometry' + index,
+      //     geometry: new Cesium.CylinderGeometry({
+      //       length: 10000,
+      //       topRadius: 1000,
+      //       bottomRadius: 1000
+      //     }),
+      //     modelMatrix: Cesium.Matrix4.multiplyByTranslation(
+      //       Cesium.Transforms.eastNorthUpToFixedFrame(
+      //         Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)), new Cesium.Cartesian3(0.0, 0.0, 0.0), new Cesium.Matrix4()
+      //     ),
+      //     attributes: {
+      //       color: new Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.fromCssColorString('#0000ff').withAlpha(0.4)),
+      //       show: new Cesium.ShowGeometryInstanceAttribute(true)
+      //     }
+      //   })
+      // )
+      // // 圆形或者拉伸的圆形，圆圈或挤压圆
+      // instances.push(
+      //   new Cesium.GeometryInstance({
+      //     id: 'CircleGeometry' + index,
+      //     geometry: new Cesium.CircleGeometry({
+      //       center: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
+      //       radius: 5000
+      //     }),
+      //     attributes: {
+      //       color: new Cesium.ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 0.5),
+      //       show: new Cesium.ShowGeometryInstanceAttribute(true)
+      //     }
+      //   })
+      // )
+      // // 仅有轮廓的立方体，只有外部线条的的盒子
+      // instances.push(
+      //   new Cesium.GeometryInstance({
+      //     id: 'BoxOutlineGeometry' + index,
+      //     geometry: new Cesium.BoxOutlineGeometry.fromDimensions({
+      //       vertexFormat: Cesium.VertexFormat.POSITION_AND_NORMAL,
+      //       dimensions: new Cesium.Cartesian3(10000.0, 10000.0, 50000.0) // 分别存储在Cartesian3的x、y和z坐标中的框的宽度、深度和高度。
+      //     }),
+      //     modelMatrix: Cesium.Matrix4.multiplyByTranslation(Cesium.Transforms.eastNorthUpToFixedFrame(
+      //       Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)), new Cesium.Cartesian3(0.0, 0.0, 1000.0), new Cesium.Matrix4()),
+      //     attributes: {
+      //       color: new Cesium.ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 0.5),
+      //       show: new Cesium.ShowGeometryInstanceAttribute(true)
+      //     }
+      //   })
+      // )
+      // // 立方体
+      // instances.push(
+      //   new Cesium.GeometryInstance({
+      //     id: 'BoxGeometry' + index,
+      //     geometry: new Cesium.BoxGeometry.fromDimensions({
+      //       vertexFormat: Cesium.VertexFormat.POSITION_AND_NORMAL,
+      //       dimensions: new Cesium.Cartesian3(10000.0, 10000.0, 50000.0) // 分别存储在Cartesian3的x、y和z坐标中的框的宽度、深度和高度。
+      //     }),
+      //     modelMatrix: Cesium.Matrix4.multiplyByTranslation(Cesium.Transforms.eastNorthUpToFixedFrame(
+      //       Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)), new Cesium.Cartesian3(0.0, 0.0, 1000.0), new Cesium.Matrix4()),
+      //     attributes: {
+      //       color: new Cesium.ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 0.5),
+      //       show: new Cesium.ShowGeometryInstanceAttribute(true)
+      //     }
+      //   })
+      // )
+      // // 矩形
+      // instances.push(
+      //   new Cesium.GeometryInstance({
+      //     id: 'BoxGeometry' + index,
+      //     geometry: new Cesium.RectangleGeometry({
+      //       rectangle: Cesium.Rectangle.fromDegrees(point.longitude, point.latitude, point.longitude + 0.10, point.latitude + 0.10),
+      //       vertexFormat: Cesium.EllipsoidSurfaceAppearance.VERTEXT_FORMAT
+      //     }),
+      //     attributes: {
+      //       color: new Cesium.ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 0.5),
+      //       show: new Cesium.ShowGeometryInstanceAttribute(true)
+      //     }
+      //   })
+      // )
+    })
+    // 走廊：沿着地表的多段线(垂直于表面的折线)，且具有一定的宽度，可以拉伸到一定的高度
+    instances.push(
+      new Cesium.GeometryInstance({
+        id: 'CorridorGeometry',
+        geometry: new Cesium.CorridorGeometry({
+          vertexFormat: Cesium.VertexFormat.POSITION_ONLY,
+          positions: Cesium.Cartesian3.fromDegreesArray([positions[0].longitude, positions[0].latitude, positions[10].longitude, positions[10].latitude]),
+          width: 10000
+        }),
+        attributes: {
+          color: new Cesium.ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 0.5),
+          show: new Cesium.ShowGeometryInstanceAttribute(true)
+        }
+      })
+    )
+    this._primitive = new Cesium.Primitive({
+      geometryInstances: instances,
+      appearance: new Cesium.PerInstanceColorAppearance({
+        // translucent: false,
+        // closed: true
       })
     })
-    document.getElementById('clear').onclick = function () {
-      // pointCollection.destroy()
-      pointCollection.removeAll()
-    }
+    viewer.scene.primitives.add(this._primitive)
+
+    const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
+    handler.setInputAction(function (event) {
+      const pick = viewer.scene.pick(event.position)
+      if (Cesium.defined(pick) && pick.id) {
+        console.log('pick', pick)
+        const attributes = _this._primitive.getGeometryInstanceAttributes(pick.id)
+        attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
+          Cesium.Color.fromRandom({
+            alpha: 1.0
+          })
+        )
+      }
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
   },
   methods: {
   }
