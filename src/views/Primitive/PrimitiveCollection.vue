@@ -1,7 +1,7 @@
 <template>
   <div
     id="cesium-container"
-    style="width: 100%; height: 100%;">
+    style="width: 100%; height: 100%;opacity: 0;">
     <div
       class="btn_container">
       <button
@@ -18,12 +18,18 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable vue/no-reserved-keys */
 import { getObjectSize } from '@/utils/getObjectSize'
+import {
+  debounce,
+  includes,
+  isEqual,
+  findIndex,
+  uniq,
+  cloneDeep
+} from 'lodash'
 import * as turf from '@turf/turf'
 export default {
   data () {
     return {
-      _pointCollection: null,
-      _primitive: null
     }
   },
   computed: {
@@ -81,6 +87,9 @@ export default {
         value: index
       }
     })
+
+    // const positions = require('@/assets/mock/positions.json')
+
     viewer.camera.flyTo({
       destination: Cesium.Rectangle.fromDegrees(
         70.01180980018789,
@@ -99,7 +108,7 @@ export default {
       alert('内存超出100%')
     })
 
-    // Entity，可以通过 id 查找
+    // ------------------------- Entity
     // 内存：100000个点， 1000M +
     // const BillboardEntity = new Cesium.Entity({
     //   id: 'BillboardEntity',
@@ -121,9 +130,10 @@ export default {
     //   viewer.entities.add(entity)
     // })
 
-    // BillboardCollection，只能通过 index 查找
+    // ------------------------- BillboardCollection
     // 内存：100000个点， 143M
     this._BillboardCollection = new Cesium.BillboardCollection()
+    this._BillboardCollection.id = '666666'
     viewer.scene.primitives.add(this._BillboardCollection)
     positions.map((point, index) => {
       this._BillboardCollection.add({
@@ -136,16 +146,18 @@ export default {
         position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
       })
     })
+    console.log('viewer.scene.primitives', viewer.scene.primitives)
+    console.log('this._BillboardCollection', this._BillboardCollection)
 
-    // PointPrimitiveCollection
+    // ------------------------- PointPrimitiveCollection
     // http://www.bigemap.com/Public/offline/gl/PointPrimitive.html
-    // this._pointCollection = new Cesium.PointPrimitiveCollection()
-    // viewer.scene.primitives.add(this._pointCollection)
+    // const pointCollection = new Cesium.PointPrimitiveCollection()
+    // viewer.scene.primitives.add(pointCollection)
     // positions.map((point, index) => {
     //   const color = Cesium.Color.fromRandom({
     //     alpha: 0.5
     //   })
-    //   this._pointCollection.add({
+    //   pointCollection.add({
     //     id: 'point' + index,
     //     position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
     //     pixelSize: 10,
@@ -153,10 +165,23 @@ export default {
     //   })
     // })
 
+    const entity = getBillboardsById(this._BillboardCollection, 'BillboardCollection100')
+    console.log('.....entity', entity)
+
+    function getBillboardsById (collection, id) {
+      let list = []
+      // 判断集合类型
+      if (collection instanceof Cesium.BillboardCollection) {
+        list = collection._billboards
+      }
+      const index = list.findIndex(_ => _._id === id)
+      return list[index]
+    }
+
     document.getElementById('clear').onclick = function () {
-      if (_this._pointCollection) {
-        // _this._pointCollection.destroy()
-        _this._pointCollection.removeAll()
+      if (pointCollection) {
+        pointCollection.destroy()
+        pointCollection.removeAll()
       }
       if (_this._BillboardCollection) {
         _this._BillboardCollection.removeAll()
@@ -166,11 +191,11 @@ export default {
     document.getElementById('getPrimitive').onclick = function () {
       if (_this._BillboardCollection) {
         console.log('_BillboardCollection', _this._BillboardCollection)
-        console.log('_BillboardCollection get', _this._BillboardCollection.get(100).scale = 1)
+        _this._BillboardCollection.get(100).scale = 1
       }
       if (viewer.entities.getById('BillboardEntity100')) {
         console.log('entities', viewer.entities)
-        console.log('BillboardEntity', viewer.entities.getById('BillboardEntity100').billboard.scale = 1)
+        viewer.entities.getById('BillboardEntity100').billboard.scale = 1
       }
     }
 
@@ -179,12 +204,10 @@ export default {
       const pick = viewer.scene.pick(event.position)
       if (Cesium.defined(pick) && pick.id) {
         console.log('pick', pick)
-        const attributes = _this._primitive.getGeometryInstanceAttributes(pick.id)
-        attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
-          Cesium.Color.fromRandom({
-            alpha: 1.0
-          })
-        )
+        if (pick.id instanceof Cesium.Entity) {
+          // 获取到实体
+          pick.id.billboard.scale = 1
+        }
       }
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
   },
