@@ -1,5 +1,13 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const version = Date.parse(new Date()) + ''
+const dateTime = new Date()
+const year = dateTime.getFullYear()
+const month = dateTime.getMonth() + 1
+const date = dateTime.getDate()
+const hours = dateTime.getHours()
+const minutes = dateTime.getMinutes()
+const seconds = dateTime.getSeconds()
+// const version = Date.parse(new Date()).toString()
+const version = `${year}${month}${date}${hours}${minutes}${seconds}`
 module.exports = {
   publicPath: './',
   assetsDir: version,
