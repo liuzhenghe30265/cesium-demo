@@ -75,6 +75,12 @@ const routes = [
     name: 'Three炸裂',
     visible: true,
     component: () => import('../views/Three/Boom.vue')
+  },
+  {
+    path: '/WebControl',
+    name: 'WebControl',
+    visible: true,
+    component: () => import('../views/WebControl')
   }
 ]
 
