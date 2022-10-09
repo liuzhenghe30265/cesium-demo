@@ -1,7 +1,7 @@
 <template>
   <div
     id="cesium-container"
-    style="width: 100%; height: 100%;opacity: 0;">
+    style="width: 100%; height: 100%;">
     <div
       class="btn_container">
       <button
@@ -66,7 +66,7 @@ export default {
     })
 
     // 随机生成坐标
-    const positions = turf.randomPoint(100000, {
+    const positions = turf.randomPoint(1000, {
       bbox: [
         70.01180980018789,
         20.12881664932077,
@@ -140,6 +140,7 @@ export default {
         id: 'BillboardCollection' + index,
         image: require('@/assets/images/tower.png'),
         scale: 0.1,
+        // scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
         // color: Cesium.Color.fromRandom({
         //   alpha: 1.0
         // }),
@@ -179,10 +180,10 @@ export default {
     }
 
     document.getElementById('clear').onclick = function () {
-      if (pointCollection) {
-        pointCollection.destroy()
-        pointCollection.removeAll()
-      }
+      // if (pointCollection) {
+      //   pointCollection.destroy()
+      //   pointCollection.removeAll()
+      // }
       if (_this._BillboardCollection) {
         _this._BillboardCollection.removeAll()
       }
