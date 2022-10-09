@@ -77,6 +77,18 @@ const routes = [
     component: () => import('../views/Three/Boom.vue')
   },
   {
+    path: '/RoutePlanning',
+    name: '航线规划',
+    visible: false,
+    component: () => import('../views/RoutePlanning')
+  },
+  {
+    path: '/Preview',
+    name: '任务预览',
+    visible: true,
+    component: () => import('../views/RoutePlanning/Preview')
+  },
+  {
     path: '/WebControl',
     name: 'WebControl',
     visible: true,
