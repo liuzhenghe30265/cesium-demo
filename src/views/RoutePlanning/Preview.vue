@@ -8,6 +8,8 @@
         @click="handlePlay">{{ play ? '暂停' : '播放' }}</button>
       <button
         @click="handleRestart">重新开始</button>
+      <button
+        @click="handleDestory">销毁</button>
     </div>
   </div>
 </template>
@@ -62,9 +64,10 @@ export default {
       })
     })
     this.viewer.entities.removeAll()
+    const _lines = []
     points.map((point, index) => {
       // return
-      // 添加方向实体
+      // 几头朝向
       const toPoint = CesiumUtils.distancePos(point.longitude, point.latitude, point.heading, 20)
       const headingEntity = this.viewer.entities.add(
         new Cesium.Entity({
@@ -76,11 +79,43 @@ export default {
             material: new Cesium.PolylineArrowMaterialProperty(
               new Cesium.Color.fromCssColorString('#fff').withAlpha(1)
             ),
-            scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
-            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
+            scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2)
+            // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
           }
         })
       )
+
+      // 云台朝向
+      if (point.action && point.action.length > 0) {
+        point.action.map((action, actionIndex) => {
+          const _id = 'Action' + index + '' + actionIndex
+          const length = 20
+          let position = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
+          const dir = CesiumUtils.getVector(point, Number(point.heading + action.yaw))
+          const forward_l = length * Math.cos(action.pitch * Math.PI / 180)
+          position = CesiumUtils.translateByDirection(position, dir, forward_l)
+          const y_offset = length * Math.sin(action.pitch * Math.PI / 180)
+          const cartographic = this.viewer.scene.globe.ellipsoid.cartesianToCartographic(position)
+          const lat = Cesium.Math.toDegrees(cartographic.latitude)
+          const lon = Cesium.Math.toDegrees(cartographic.longitude)
+          position = new Cesium.Cartesian3.fromDegrees(lon, lat, point.altitude - y_offset)
+
+          const entity = this.viewer.entities.add(new Cesium.Entity({
+            id: _id,
+            position: position,
+            orientation: Cesium.Transforms.headingPitchRollQuaternion(position, new Cesium.HeadingPitchRoll.fromDegrees(Number(point.heading + action.yaw), 0, -1 * action.pitch)),
+            box: {
+              dimensions: new Cesium.Cartesian3(0.3, length * 2, 0.3),
+              material: new Cesium.PolylineArrowMaterialProperty(
+                new Cesium.Color.fromCssColorString('#f00').withAlpha(1)
+              ),
+              outline: false
+            }
+          }))
+          return entity
+        })
+      }
+
       // 点
       const entity = this.viewer.entities.add(new Cesium.Entity({
         id: 'point' + point.id,
@@ -95,7 +130,7 @@ export default {
           horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
           scale: 0.5,
           scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
-          distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0),
+          // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0),
           show: true
         },
         label: {
@@ -112,30 +147,29 @@ export default {
           show: true
         }
       }))
+
+      // 线
+      _lines.push(point.longitude)
+      _lines.push(point.latitude)
+      _lines.push(point.altitude)
     })
 
     // 线
-    const _list = []
-    points.map((point, index) => {
-      _list.push(point.longitude)
-      _list.push(point.latitude)
-      _list.push(point.altitude)
-    })
     const lineEntity = this.viewer.entities.add(
       new Cesium.Entity({
         id: 'line',
         name: 'line',
         polyline: {
           // positions: Cesium.Cartesian3.fromDegreesArray([116.3, 39.9, 116.47958024969756, 39.84829594348535, 116.56374186776782, 39.87785704033606]), // 无高度，贴地
-          positions: Cesium.Cartesian3.fromDegreesArrayHeights(_list),
+          positions: Cesium.Cartesian3.fromDegreesArrayHeights(_lines),
           width: 4,
           arcType: Cesium.ArcType.RHUMB,
           material: new Cesium.PolylineDashMaterialProperty({
             color: new Cesium.Color.fromCssColorString('#FCB718').withAlpha(1),
             dashLength: 10
           }),
-          scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
-          distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
+          scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2)
+          // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
         }
       })
     )
@@ -157,6 +191,9 @@ export default {
     this.roaming.Init()
   },
   methods: {
+    handleDestory () {
+      this.roaming.Destory()
+    },
     handleRestart () {
       this.roaming.Restart()
     },
