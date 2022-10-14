@@ -3,6 +3,50 @@
 /* eslint-disable no-unused-vars */
 
 /**
+ * @description: 根据起点和 yaw pitch 计算终点
+ * @param {*} viewer
+ * @param {*} point
+ * @param {*} heading
+ * @param {*} action
+ * @param {*} distance
+ * @return {*}
+ */
+function getEndPointByYawPitch (viewer, point, heading, action, distance) {
+  const { camera, scene } = viewer
+  let position = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
+  const dir = getVector({
+    longitude: point.longitude,
+    latitude: point.latitude,
+    altitude: point.altitude
+  }, Number(heading + action.yaw))
+  const forward_l = distance * Math.cos(action.pitch * Math.PI / 180)
+  position = translateByDirection(position, dir, forward_l)
+  const y_offset = distance * Math.sin(action.pitch * Math.PI / 180)
+  const cartographic = scene.globe.ellipsoid.cartesianToCartographic(position)
+  const lat = Cesium.Math.toDegrees(cartographic.latitude)
+  const lon = Cesium.Math.toDegrees(cartographic.longitude)
+  position = new Cesium.Cartesian3.fromDegrees(lon, lat, point.altitude - y_offset)
+  return position
+}
+
+/**
+ * @description: 世界坐标转经纬度
+ * @param {*} position
+ * @return {*}
+ */
+function cartesianToLongAndLat (position) {
+  const cartographic = Cesium.Ellipsoid.WGS84.cartesianToCartographic(position)
+  const longitude = Cesium.Math.toDegrees(cartographic.longitude)
+  const latitude = Cesium.Math.toDegrees(cartographic.latitude)
+  const data = {
+    longitude: Number(parseFloat(longitude).toFixed(7)),
+    latitude: Number(parseFloat(latitude).toFixed(7)),
+    altitude: Number(parseFloat(cartographic.height))
+  }
+  return data
+}
+
+/**
  * @description: 获取视图矩形范围
  * @return {*}
  */
@@ -111,6 +155,8 @@ function translateByDirection (start, direction, offset) {
 }
 
 export default {
+  getEndPointByYawPitch,
+  cartesianToLongAndLat,
   getExtend,
   translateByDirection,
   getVector,

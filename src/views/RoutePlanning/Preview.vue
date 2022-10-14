@@ -67,7 +67,7 @@ export default {
     const _lines = []
     points.map((point, index) => {
       // return
-      // 几头朝向
+      // 机头朝向
       const toPoint = CesiumUtils.distancePos(point.longitude, point.latitude, point.heading, 20)
       const headingEntity = this.viewer.entities.add(
         new Cesium.Entity({
@@ -86,10 +86,10 @@ export default {
       )
 
       // 云台朝向
-      if (point.action && point.action.length > 0) {
-        point.action.map((action, actionIndex) => {
+      if (point.actionEntityList && point.actionEntityList.length > 0) {
+        point.actionEntityList.map((action, actionIndex) => {
           const _id = 'Action' + index + '' + actionIndex
-          const length = 20
+          const length = 40
           let position = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
           const dir = CesiumUtils.getVector(point, Number(point.heading + action.yaw))
           const forward_l = length * Math.cos(action.pitch * Math.PI / 180)
@@ -118,7 +118,7 @@ export default {
 
       // 点
       const entity = this.viewer.entities.add(new Cesium.Entity({
-        id: 'point' + point.id,
+        id: 'point' + point.index,
         name: 'point',
         position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
         data: {
@@ -134,7 +134,7 @@ export default {
           show: true
         },
         label: {
-          text: point.id + '',
+          text: point.index + '',
           fillColor: new Cesium.Color.fromCssColorString('#fff'),
           outlineColor: new Cesium.Color.fromCssColorString('#fff'),
           outlineWidth: 0.5,
@@ -184,9 +184,7 @@ export default {
 
     this.roaming = new Track(this.viewer, {
       points: points,
-      shootCallback: function (shootId) {
-        console.log('.......shootCallback', shootId)
-      }
+      callback: function () { }
     })
     this.roaming.Init()
   },
