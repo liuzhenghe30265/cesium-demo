@@ -83,10 +83,10 @@ const routes = [
     component: () => import('../views/RoutePlanning')
   },
   {
-    path: '/Preview',
+    path: '/Playback',
     name: '任务预览',
     visible: true,
-    component: () => import('../views/RoutePlanning/Preview')
+    component: () => import('../views/RoutePlanning/Playback')
   },
   {
     path: '/WebControl',

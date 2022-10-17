@@ -22,7 +22,7 @@
 import points from './points.json'
 import CesiumUtils from '@/utils/CesiumUtils.js'
 // import * as turf from '@turf/turf'
-import Preview from './utils/Preview'
+import Playback from './utils/Playback'
 export default {
   data () {
     return {
@@ -182,7 +182,7 @@ export default {
       )
     })
 
-    this.roaming = new Preview(this.viewer, {
+    this.roaming = new Playback(this.viewer, {
       points: points,
       EndCallBack: function () {
         // console.log('.......end')

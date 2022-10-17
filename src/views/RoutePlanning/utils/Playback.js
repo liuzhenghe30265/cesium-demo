@@ -3,12 +3,12 @@
 /* eslint-disable no-unused-vars */
 import { flattenDeep } from 'lodash'
 import CesiumUtils from '@/utils/CesiumUtils.js'
-export default class Preview {
+export default class Playback {
   /**
    * @param {*} viewer 需要传入
    * @param {*} options.points 点集合
    * @param {*} options.shootCallback  拍设点回调函数
-   * @memberof Preview
+   * @memberof Playback
    */
   constructor(viewer, options) {
     this.viewer = viewer
