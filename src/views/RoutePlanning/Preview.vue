@@ -184,7 +184,9 @@ export default {
 
     this.roaming = new Track(this.viewer, {
       points: points,
-      callback: function () { }
+      EndCallBack: function () {
+        // console.log('.......end')
+      }
     })
     this.roaming.Init()
   },

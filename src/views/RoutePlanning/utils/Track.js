@@ -17,6 +17,7 @@ export default class Track {
     this.play = false
     this.conePrimitive = null
     this.coneOutLinePrimitive = null
+    this.EndCallBack = options.EndCallBack
     this.EventListener()
   }
 
@@ -152,7 +153,8 @@ export default class Track {
         })
       }
     })
-    // viewer.trackedEntity = entity
+    viewer.trackedEntity = entity
+    entity.viewFrom = new Cesium.Cartesian3(100, 100, 100)
   }
 
   Restart () {
@@ -188,7 +190,7 @@ export default class Track {
           if (item.startTime && item.endTime) {
             if (item.startTime.secondsOfDay < e.currentTime.secondsOfDay && item.endTime.secondsOfDay > e.currentTime.secondsOfDay) {
               if (k) {
-                this.HandleLookAt(item)
+                this.ClearConePrimitive()
                 if (item.actionEntityList && item.actionEntityList.length > 0) {
                   this.HandleAction(this.moveData[index + 1])
                 }
@@ -197,6 +199,11 @@ export default class Track {
               break
             }
           }
+        }
+        const endData = this.moveData[this.moveData.length - 1]
+        if (e.currentTime.secondsOfDay > endData.JulianDate.secondsOfDay) {
+          this.ClearConePrimitive()
+          this.EndCallBack()
         }
         if (finds) {
           k = false
@@ -207,11 +214,20 @@ export default class Track {
     })
   }
 
+  ClearConePrimitive () {
+    if (this.conePrimitive) {
+      this.conePrimitive.destroy()
+    }
+    if (this.coneOutLinePrimitive) {
+      this.coneOutLinePrimitive.destroy()
+    }
+  }
+
   HandleLookAt (point) {
 
   }
 
-  HandleAction (point) {
+  HandleAction (point, index) {
     if (point.actionEntityList && point.actionEntityList.length > 0) {
       point.actionEntityList.map((action, index) => {
         const stratPosition = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
@@ -228,18 +244,18 @@ export default class Track {
             pitch: action.pitch
           },
           40)
+        // 更新相机位置（第一视角）
+        // this.viewer.camera.lookAt(
+        //   Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude),
+        //   new Cesium.HeadingPitchRange(Cesium.Math.toRadians(0.0), Cesium.Math.toRadians(0.0), 10.0)
+        // )
         this.MakeCone(stratPosition, endPosition, point, action)
       })
     }
   }
 
   MakeCone (startPosition, endPosition) {
-    if (this.conePrimitive) {
-      this.conePrimitive.destroy()
-    }
-    if (this.coneOutLinePrimitive) {
-      this.coneOutLinePrimitive.destroy()
-    }
+    this.ClearConePrimitive()
     const spotLightCamera = new Cesium.Camera(this.viewer.scene)
     const direction = Cesium.Cartesian3.normalize(Cesium.Cartesian3.subtract(endPosition,
       startPosition, new Cesium.Cartesian3()), new Cesium.Cartesian3())
