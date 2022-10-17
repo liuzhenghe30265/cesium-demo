@@ -7,18 +7,19 @@ export default class Playback {
   /**
    * @param {*} viewer 需要传入
    * @param {*} options.points 点集合
-   * @param {*} options.shootCallback  拍设点回调函数
+   * @param {*} options.End  播放结束回调函数
    * @memberof Playback
    */
   constructor(viewer, options) {
+    this.Destory()
     this.viewer = viewer
     this.points = options.points || []
     this.moveData = []
     this.play = false
     this.conePrimitive = null
     this.coneOutLinePrimitive = null
-    this.EndCallBack = options.EndCallBack
-    this.EventListener()
+    this.End = options.End
+    this.EventListenerFun = null
   }
 
   Init () {
@@ -51,7 +52,7 @@ export default class Playback {
 
     const __points = flattenDeep(_points)
     __points.map((item, index) => {
-      const _time = _start + index * 1000
+      const _time = _start + index * 100
       // if (index === 0 || index === 1) {
       //   _time = _start
       // }
@@ -76,7 +77,6 @@ export default class Playback {
         }
       }
     }
-    console.log('.......moveData', this.moveData)
     // const moveData = [{
     //   time: 1656047671018,
     //   longitude: 106,
@@ -127,6 +127,9 @@ export default class Playback {
     const times = property._property._times
     const startTime = times[0].clone()
     const stopTime = times[times.length - 1].clone()
+    if (viewer.entities.getById('trackEntity')) {
+      viewer.entities.remove(viewer.entities.getById('trackEntity'))
+    }
     const entity = viewer.entities.add({
       id: 'trackEntity',
       availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({
@@ -153,13 +156,21 @@ export default class Playback {
         })
       }
     })
-    viewer.trackedEntity = entity
+    this.AddEventListener()
+    this.TrackedEntity()
+  }
+
+  TrackedEntity () {
+    const entity = this.viewer.entities.getById('trackEntity')
     entity.viewFrom = new Cesium.Cartesian3(100, 100, 100)
+    this.viewer.trackedEntity = entity
   }
 
   Restart () {
     this.play = false
-    this.viewer.clock.currentTime = this.viewer.clock.startTime
+    if (this.viewer && this.viewer.clock) {
+      this.viewer.clock.currentTime = this.viewer.clock.startTime
+    }
   }
 
   Play () {
@@ -169,30 +180,52 @@ export default class Playback {
 
   Pause () {
     this.play = false
-    this.viewer.clock.shouldAnimate = false
-  }
-
-  Destory () {
-    this.viewer.trackedEntity = null
-    const entity = this.viewer.entities.getById('trackEntity')
-    if (entity) {
-      this.viewer.entities.remove(entity)
+    if (this.viewer && this.viewer.clock) {
+      this.viewer.clock.shouldAnimate = false
     }
   }
 
-  EventListener () {
-    let k = true
-    this.viewer.clock.onTick.addEventListener((e) => {
-      if (this.play) {
+  Destory () {
+    if (this.viewer) {
+      this.viewer.trackedEntity = null
+      const entity = this.viewer.entities.getById('trackEntity')
+      if (entity) {
+        this.viewer.entities.remove(entity)
+      }
+    }
+    this.Restart()
+    this.Pause()
+    this.RemoveEventListener()
+    this.viewer = null
+    this.points = []
+    this.moveData = []
+    this.conePrimitive = null
+    this.coneOutLinePrimitive = null
+    this.EventListenerFun = null
+  }
+
+  RemoveEventListener () {
+    if (this.viewer) {
+      this.viewer.clock.onTick.removeEventListener(this.EventListenerFun)
+      this.EventListenerFun = null
+    }
+  }
+
+  AddEventListener () {
+    const _this = this
+    let flag = true
+    this.RemoveEventListener()
+    this.EventListenerFun = function (e) {
+      if (_this.play) {
         let finds = false
-        for (let index = 0; index < this.moveData.length; index++) {
-          const item = this.moveData[index]
+        for (let index = 0; index < _this.moveData.length; index++) {
+          const item = _this.moveData[index]
           if (item.startTime && item.endTime) {
             if (item.startTime.secondsOfDay < e.currentTime.secondsOfDay && item.endTime.secondsOfDay > e.currentTime.secondsOfDay) {
-              if (k) {
-                this.ClearConePrimitive()
+              if (flag) {
+                _this.ClearConePrimitive()
                 if (item.actionEntityList && item.actionEntityList.length > 0) {
-                  this.HandleAction(this.moveData[index + 1])
+                  _this.HandleAction(_this.moveData[index + 1])
                 }
               }
               finds = true
@@ -200,18 +233,21 @@ export default class Playback {
             }
           }
         }
-        const endData = this.moveData[this.moveData.length - 1]
+        const endData = _this.moveData[_this.moveData.length - 1]
         if (e.currentTime.secondsOfDay > endData.JulianDate.secondsOfDay) {
-          this.ClearConePrimitive()
-          this.EndCallBack()
+          _this.ClearConePrimitive()
+          _this.End()
+          _this.Destory()
+          return
         }
         if (finds) {
-          k = false
+          flag = false
         } else {
-          k = true
+          flag = true
         }
       }
-    })
+    }
+    _this.viewer.clock.onTick.addEventListener(_this.EventListenerFun)
   }
 
   ClearConePrimitive () {
@@ -221,10 +257,6 @@ export default class Playback {
     if (this.coneOutLinePrimitive) {
       this.coneOutLinePrimitive.destroy()
     }
-  }
-
-  HandleLookAt (point) {
-
   }
 
   HandleAction (point, index) {
@@ -259,8 +291,8 @@ export default class Playback {
     const spotLightCamera = new Cesium.Camera(this.viewer.scene)
     const direction = Cesium.Cartesian3.normalize(Cesium.Cartesian3.subtract(endPosition,
       startPosition, new Cesium.Cartesian3()), new Cesium.Cartesian3())
-    spotLightCamera.position = startPosition // firstPos 是相机起点
-    spotLightCamera.direction = direction // direction 是相机面向的方向
+    spotLightCamera.position = startPosition
+    spotLightCamera.direction = direction
     spotLightCamera.up = Cesium.Cartesian3.clone(this.viewer.camera.up)
     spotLightCamera.frustum.fov = Cesium.Math.PI_OVER_THREE
     spotLightCamera.frustum.near = 0.1

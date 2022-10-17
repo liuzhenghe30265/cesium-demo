@@ -5,6 +5,8 @@
     <div
       class="btn_container">
       <button
+        @click="handlePlayback">预览</button>
+      <button
         @click="handlePlay">{{ play ? '暂停' : '播放' }}</button>
       <button
         @click="handleRestart">重新开始</button>
@@ -81,7 +83,8 @@ export default {
             ),
             scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2)
             // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0)
-          }
+          },
+          show: true
         })
       )
 
@@ -110,7 +113,8 @@ export default {
                 new Cesium.Color.fromCssColorString('#f00').withAlpha(1)
               ),
               outline: false
-            }
+            },
+            show: true
           }))
           return entity
         })
@@ -181,16 +185,18 @@ export default {
         Cesium.Math.toRadians(0)
       )
     })
-
-    this.roaming = new Playback(this.viewer, {
-      points: points,
-      EndCallBack: function () {
-        // console.log('.......end')
-      }
-    })
-    this.roaming.Init()
   },
   methods: {
+    handlePlayback () {
+      const _this = this
+      this.roaming = new Playback(this.viewer, {
+        points: points,
+        End: function () {
+          _this.play = false
+        }
+      })
+      this.roaming.Init()
+    },
     handleDestory () {
       this.roaming.Destory()
     },
