@@ -165,6 +165,7 @@ export default class Playback {
         start: startTime,
         stop: stopTime
       })]),
+      viewFrom: new Cesium.Cartesian3(150, 150, 150),
       position: property, // 点集
       orientation: ori,
       model: _this.model,
@@ -181,7 +182,6 @@ export default class Playback {
         })
       }
     })
-    entity.viewFrom = new Cesium.Cartesian3(150, 150, 150)
     this.viewer.trackedEntity = entity
   }
 
@@ -309,13 +309,25 @@ export default class Playback {
             yaw: action.yaw,
             pitch: action.pitch
           },
-          50)
-        // 更新相机位置（第一视角）
-        // this.viewer.camera.lookAt(
-        //   Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude),
-        //   new Cesium.HeadingPitchRange(Cesium.Math.toRadians(0.0), Cesium.Math.toRadians(0.0), 10.0)
-        // )
+          50
+        )
         this.MakeCone(stratPosition, endPosition, point, action)
+
+        // 更新相机位置（第一视角）
+        // const center = entity.position.getValue(this.viewer.clock.currentTime)
+        // const entity = this.viewer.entities.getById('trackEntity')
+        // entity.viewFrom = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
+        // const heading = this.viewer.scene.camera.heading
+        // const pitch = this.viewer.scene.camera.pitch
+        // const roll = this.viewer.scene.camera.roll
+        // this.viewer.camera.setView({
+        //   destination: center,
+        //   orientation: {
+        //     heading: heading,
+        //     pitch: pitch,
+        //     roll: roll
+        //   }
+        // })
       })
     }
   }
