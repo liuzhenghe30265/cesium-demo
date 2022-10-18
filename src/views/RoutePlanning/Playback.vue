@@ -114,7 +114,7 @@ export default {
             box: {
               dimensions: new Cesium.Cartesian3(0.3, length * 2, 0.3),
               material: new Cesium.PolylineArrowMaterialProperty(
-                new Cesium.Color.fromCssColorString('#f00').withAlpha(1)
+                new Cesium.Color.fromCssColorString('#fff').withAlpha(1)
               ),
               outline: false
             },
@@ -198,6 +198,11 @@ export default {
       const _this = this
       this.roaming = new Playback(this.viewer, {
         points: points,
+        model: {
+          uri: 'model/Cesium_Air.glb',
+          scale: 1,
+          minimumPixelSize: 90
+        },
         End: function () {
           _this.play = false
         }

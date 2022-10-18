@@ -14,6 +14,11 @@ export default class Playback {
     this.Destory()
     this.viewer = viewer
     this.points = options.points || []
+    this.model = options.model || {
+      uri: 'model/Cesium_Air.glb',
+      scale: 1,
+      minimumPixelSize: 90
+    }
     this.moveData = []
     this.play = false
     this.conePrimitive = null
@@ -23,6 +28,11 @@ export default class Playback {
   }
 
   Init () {
+    this.MakeMoveData()
+    this.AddEventListener()
+  }
+
+  MakeMoveData () {
     const _start = Date.now()
     const viewer = this.viewer
     // 模型沿着轨迹移动（图标移动过的路径变色）
@@ -127,10 +137,15 @@ export default class Playback {
     const times = property._property._times
     const startTime = times[0].clone()
     const stopTime = times[times.length - 1].clone()
-    if (viewer.entities.getById('trackEntity')) {
-      viewer.entities.remove(viewer.entities.getById('trackEntity'))
+    this.AddTrackEntity(startTime, stopTime, property, ori)
+  }
+
+  AddTrackEntity (startTime, stopTime, property, ori) {
+    const _this = this
+    if (this.viewer.entities.getById('trackEntity')) {
+      this.viewer.entities.remove(this.viewer.entities.getById('trackEntity'))
     }
-    const entity = viewer.entities.add({
+    const entity = this.viewer.entities.add({
       id: 'trackEntity',
       availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({
         start: startTime,
@@ -138,11 +153,7 @@ export default class Playback {
       })]),
       position: property, // 点集
       orientation: ori,
-      model: {
-        uri: 'model/Cesium_Air.glb',
-        scale: 1,
-        minimumPixelSize: 90
-      },
+      model: _this.model,
       path: {
         show: true,
         leadTime: 0,
@@ -156,23 +167,19 @@ export default class Playback {
         })
       }
     })
-    this.AddEventListener()
-    this.TrackedEntity()
-  }
-
-  TrackedEntity () {
-    const entity = this.viewer.entities.getById('trackEntity')
-    entity.viewFrom = new Cesium.Cartesian3(100, 100, 100)
+    entity.viewFrom = new Cesium.Cartesian3(150, 150, 150)
     this.viewer.trackedEntity = entity
   }
 
   Speed (type) {
-    if (type === 1) {
-      // 加速
-      this.viewer.clockViewModel.multiplier *= 2
-    } else {
-      // 减速
-      this.viewer.clockViewModel.multiplier /= 2
+    if (this.viewer) {
+      if (type === 1) {
+        // 加速
+        this.viewer.clockViewModel.multiplier *= 2
+      } else {
+        // 减速
+        this.viewer.clockViewModel.multiplier /= 2
+      }
     }
   }
 
@@ -185,7 +192,9 @@ export default class Playback {
 
   Play () {
     this.play = true
-    this.viewer.clock.shouldAnimate = true
+    if (this.viewer && this.viewer.clock) {
+      this.viewer.clock.shouldAnimate = true
+    }
   }
 
   Pause () {
