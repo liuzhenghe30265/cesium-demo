@@ -11,6 +11,10 @@
       <button
         @click="handleRestart">重新开始</button>
       <button
+        @click="handleSpeed(1)">加速</button>
+      <button
+        @click="handleSpeed(0)">减速</button>
+      <button
         @click="handleDestory">销毁</button>
     </div>
   </div>
@@ -187,6 +191,9 @@ export default {
     })
   },
   methods: {
+    handleSpeed (type) {
+      this.roaming.Speed(type)
+    },
     handlePlayback () {
       const _this = this
       this.roaming = new Playback(this.viewer, {

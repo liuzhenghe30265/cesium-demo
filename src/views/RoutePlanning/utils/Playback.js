@@ -52,7 +52,7 @@ export default class Playback {
 
     const __points = flattenDeep(_points)
     __points.map((item, index) => {
-      const _time = _start + index * 100
+      const _time = _start + index * 1000
       // if (index === 0 || index === 1) {
       //   _time = _start
       // }
@@ -166,6 +166,16 @@ export default class Playback {
     this.viewer.trackedEntity = entity
   }
 
+  Speed (type) {
+    if (type === 1) {
+      // 加速
+      this.viewer.clockViewModel.multiplier *= 2
+    } else {
+      // 减速
+      this.viewer.clockViewModel.multiplier /= 2
+    }
+  }
+
   Restart () {
     this.play = false
     if (this.viewer && this.viewer.clock) {
@@ -187,6 +197,7 @@ export default class Playback {
 
   Destory () {
     if (this.viewer) {
+      this.viewer.clockViewModel.multiplier = 1
       this.viewer.trackedEntity = null
       const entity = this.viewer.entities.getById('trackEntity')
       if (entity) {
