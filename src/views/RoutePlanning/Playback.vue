@@ -236,7 +236,7 @@ export default {
 .btn_container {
   position: absolute;
   z-index: 9;
-  top: 50px;
+  top: 100px;
   right: 50px;
   padding: 20px;
 }

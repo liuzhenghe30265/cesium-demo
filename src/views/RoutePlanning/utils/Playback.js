@@ -1,7 +1,6 @@
 /* eslint-disable new-cap */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import { flattenDeep } from 'lodash'
 import CesiumUtils from '@/utils/CesiumUtils.js'
 export default class Playback {
   /**
@@ -20,6 +19,22 @@ export default class Playback {
       minimumPixelSize: 90
     }
     this.moveData = []
+    // moveData 示例 [{
+    //   time: 1656047671018,
+    //   longitude: 106,
+    //   latitude: 39,
+    //   altitude: 0
+    // }, {
+    //   time: 1656047771018,
+    //   longitude: 132,
+    //   latitude: 48,
+    //   altitude: 0
+    // }, {
+    //   time: 1656047871018,
+    //   longitude: 120,
+    //   latitude: 32,
+    //   altitude: 0
+    // }]
     this.play = false
     this.conePrimitive = null
     this.coneOutLinePrimitive = null
@@ -41,14 +56,31 @@ export default class Playback {
     }
     const _points = []
     // 飞机到下一个航点才调整机头方向
-    // 把每个点都复制出一份，航点数变为两倍
+    // 多动作航点，拆分为同一位置的多个航点，分别携带一个动作
+    // turnTo 掉头
     this.points.map((item, index) => {
-      _points.push([
-        Object.assign({
-          original: true
-        }, item),
-        Object.assign(item)
-      ])
+      item.pointIndex = index
+      if (item.actionEntityList && item.actionEntityList.length > 0) {
+        // 有动作
+        item.actionEntityList.map((action, actionIndex) => {
+          const _item = JSON.parse(JSON.stringify(item))
+          _item.actionEntityList = [item.actionEntityList[actionIndex]]
+          _points.push([
+            Object.assign({
+              turnTo: true
+            }, _item),
+            Object.assign(_item)
+          ])
+        })
+      } else {
+        // 无动作
+        _points.push([
+          Object.assign({
+            turnTo: true
+          }, item),
+          Object.assign(item)
+        ])
+      }
     })
 
     for (let index = 0; index < _points.length; index++) {
@@ -60,12 +92,9 @@ export default class Playback {
       }
     }
 
-    const __points = flattenDeep(_points)
+    const __points = this.concatArrFun(_points)
     __points.map((item, index) => {
       const _time = _start + index * 1000
-      // if (index === 0 || index === 1) {
-      //   _time = _start
-      // }
       this.moveData.push({
         actionEntityList: item.actionEntityList,
         longitude: item.longitude,
@@ -74,35 +103,20 @@ export default class Playback {
         heading: item.heading,
         time: _time,
         JulianDate: Cesium.JulianDate.fromDate(new Date(_time)),
-        original: item.original
+        turnTo: item.turnTo,
+        pointIndex: item.pointIndex
       })
     })
     for (let index = 0; index < this.moveData.length; index++) {
       const element1 = this.moveData[index]
       const element2 = this.moveData[index + 1]
-      if (element1.original) {
+      if (element1.turnTo) {
         if (element1 && element2) {
           element1.startTime = Cesium.JulianDate.fromDate(new Date(element1.time))
           element1.endTime = Cesium.JulianDate.fromDate(new Date(element2.time))
         }
       }
     }
-    // const moveData = [{
-    //   time: 1656047671018,
-    //   longitude: 106,
-    //   latitude: 39,
-    //   altitude: 0
-    // }, {
-    //   time: 1656047771018,
-    //   longitude: 132,
-    //   latitude: 48,
-    //   altitude: 0
-    // }, {
-    //   time: 1656047871018,
-    //   longitude: 120,
-    //   latitude: 32,
-    //   altitude: 0
-    // }]
     const date = new Date(this.moveData[0].time)
     const start = Cesium.JulianDate.fromDate(date) // 获取第一个点的时间
     viewer.clock.startTime = start // 将多个点的第一个点设为轨迹播放的开始时间
@@ -295,7 +309,7 @@ export default class Playback {
             yaw: action.yaw,
             pitch: action.pitch
           },
-          40)
+          50)
         // 更新相机位置（第一视角）
         // this.viewer.camera.lookAt(
         //   Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude),
@@ -374,5 +388,14 @@ export default class Playback {
         flat: true
       })
     }))
+  }
+
+  concatArrFun (arr) {
+    if (arr && arr.length > 0) {
+      const result = arr.reduce((a, b) => {
+        return a.concat(b)
+      })
+      return result
+    }
   }
 }
