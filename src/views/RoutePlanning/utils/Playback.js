@@ -40,6 +40,7 @@ export default class Playback {
     this.coneOutLinePrimitive = null
     this.End = options.End
     this.EventListenerFun = null
+    this.Init()
   }
 
   Init () {

@@ -207,7 +207,6 @@ export default {
           _this.play = false
         }
       })
-      this.roaming.Init()
     },
     handleDestory () {
       this.roaming.Destory()
