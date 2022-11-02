@@ -7,7 +7,8 @@
       <button
         @click="handlePlayback">预览</button>
       <button
-        @click="handlePlay">{{ play ? '暂停' : '播放' }}</button>
+        @click="handlePlay">{{ play ? '暂停' : '播放' }}
+      </button>
       <button
         @click="handleRestart">重新开始</button>
       <button
@@ -32,7 +33,7 @@ import Playback from './utils/Playback'
 export default {
   data () {
     return {
-      roaming: null,
+      $roaming: null,
       play: false,
       viewer: null
     }
@@ -192,11 +193,11 @@ export default {
   },
   methods: {
     handleSpeed (type) {
-      this.roaming.Speed(type)
+      this.$roaming.Speed(type)
     },
     handlePlayback () {
       const _this = this
-      this.roaming = new Playback(this.viewer, {
+      this.$roaming = new Playback(this.viewer, {
         points: points,
         model: {
           uri: 'model/Cesium_Air.glb',
@@ -209,17 +210,17 @@ export default {
       })
     },
     handleDestory () {
-      this.roaming.Destory()
+      this.$roaming.Destory()
     },
     handleRestart () {
-      this.roaming.Restart()
+      this.$roaming.Restart()
     },
     handlePlay () {
       this.play = !this.play
       if (this.play) {
-        this.roaming.Play()
+        this.$roaming.Play()
       } else {
-        this.roaming.Pause()
+        this.$roaming.Pause()
       }
     }
   }
