@@ -34,8 +34,7 @@ export default {
   data () {
     return {
       $roaming: null,
-      play: false,
-      viewer: null
+      play: false
     }
   },
   computed: {
@@ -47,9 +46,9 @@ export default {
   mounted () {
     // const china = Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
     // Cesium.Camera.DEFAULT_VIEW_RECTANGLE = china
-    // Initialize the this.viewer widget with several custom options and mixins.
+    // Initialize the viewer widget with several custom options and mixins.
     Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYTJjNTM1Yy0wZDRjLTRlZWYtYTFkMi1hOGIwNTI2ZGU0MDgiLCJpZCI6ODI5MjAsImlhdCI6MTY0NTE2NDEyOH0.XndixRDpLnRAxnqSNQpT2JofpGyngIUWlmzbG53hEtM'
-    this.viewer = new Cesium.Viewer('cesium-container', {
+    const viewer = new Cesium.Viewer('cesium-container', {
       terrainProvider: Cesium.createWorldTerrain(),
       animation: false, // 是否显示左下角的仪表盘
       timeline: false, // 是否显示下边的时间轴
@@ -70,13 +69,16 @@ export default {
         url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'
       })
     })
-    this.viewer.entities.removeAll()
+    viewer.entities.removeAll()
+
+    window.viewer = viewer
+
     const _lines = []
     points.map((point, index) => {
       // return
       // 机头朝向
       const toPoint = CesiumUtils.distancePos(point.longitude, point.latitude, point.heading, 20)
-      const headingEntity = this.viewer.entities.add(
+      const headingEntity = viewer.entities.add(
         new Cesium.Entity({
           id: 'heading' + index,
           name: 'headingLine',
@@ -103,12 +105,12 @@ export default {
           const forward_l = length * Math.cos(action.pitch * Math.PI / 180)
           position = CesiumUtils.translateByDirection(position, dir, forward_l)
           const y_offset = length * Math.sin(action.pitch * Math.PI / 180)
-          const cartographic = this.viewer.scene.globe.ellipsoid.cartesianToCartographic(position)
+          const cartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(position)
           const lat = Cesium.Math.toDegrees(cartographic.latitude)
           const lon = Cesium.Math.toDegrees(cartographic.longitude)
           position = new Cesium.Cartesian3.fromDegrees(lon, lat, point.altitude - y_offset)
 
-          const entity = this.viewer.entities.add(new Cesium.Entity({
+          const entity = viewer.entities.add(new Cesium.Entity({
             id: _id,
             position: position,
             orientation: Cesium.Transforms.headingPitchRollQuaternion(position, new Cesium.HeadingPitchRoll.fromDegrees(Number(point.heading + action.yaw), 0, -1 * action.pitch)),
@@ -126,7 +128,7 @@ export default {
       }
 
       // 点
-      const entity = this.viewer.entities.add(new Cesium.Entity({
+      const entity = viewer.entities.add(new Cesium.Entity({
         id: 'point' + point.index,
         name: 'point',
         position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
@@ -164,7 +166,7 @@ export default {
     })
 
     // 线
-    const lineEntity = this.viewer.entities.add(
+    const lineEntity = viewer.entities.add(
       new Cesium.Entity({
         id: 'line',
         name: 'line',
@@ -182,7 +184,7 @@ export default {
         }
       })
     )
-    this.viewer.flyTo(lineEntity, {
+    viewer.flyTo(lineEntity, {
       duration: 1,
       offset: new Cesium.HeadingPitchRoll(
         Cesium.Math.toRadians(-30),
@@ -197,7 +199,7 @@ export default {
     },
     handlePlayback () {
       const _this = this
-      this.$roaming = new Playback(this.viewer, {
+      this.$roaming = new Playback({
         points: points,
         model: {
           uri: 'model/Cesium_Air.glb',

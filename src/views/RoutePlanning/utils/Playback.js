@@ -1,17 +1,18 @@
 /* eslint-disable new-cap */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import CesiumUtils from '@/utils/CesiumUtils.js'
+import {
+  getEndPointByYawPitch
+} from '@/utils/CesiumUtils.js'
+
 export default class Playback {
   /**
-   * @param {*} viewer 需要传入
    * @param {*} options.points 点集合
    * @param {*} options.End  播放结束回调函数
    * @memberof Playback
    */
-  constructor(viewer, options) {
+  constructor(options) {
     this.Destory()
-    this.viewer = viewer
     this.points = options.points || []
     this.model = options.model || {
       uri: 'model/Cesium_Air.glb',
@@ -50,7 +51,6 @@ export default class Playback {
 
   MakeMoveData () {
     const _start = Date.now()
-    const viewer = this.viewer
     // 模型沿着轨迹移动（图标移动过的路径变色）
     if (!this.points || this.points.length === 0) {
       return
@@ -118,6 +118,7 @@ export default class Playback {
         }
       }
     }
+    // return
     const date = new Date(this.moveData[0].time)
     const start = Cesium.JulianDate.fromDate(date) // 获取第一个点的时间
     viewer.clock.startTime = start // 将多个点的第一个点设为轨迹播放的开始时间
@@ -157,10 +158,10 @@ export default class Playback {
 
   AddTrackEntity (startTime, stopTime, property, ori) {
     const _this = this
-    if (this.viewer.entities.getById('trackEntity')) {
-      this.viewer.entities.remove(this.viewer.entities.getById('trackEntity'))
+    if (viewer.entities.getById('trackEntity')) {
+      viewer.entities.remove(viewer.entities.getById('trackEntity'))
     }
-    const entity = this.viewer.entities.add({
+    const entity = viewer.entities.add({
       id: 'trackEntity',
       availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({
         start: startTime,
@@ -183,65 +184,68 @@ export default class Playback {
         })
       }
     })
-    this.viewer.trackedEntity = entity
+    viewer.trackedEntity = entity
   }
 
   Speed (type) {
-    if (this.viewer) {
+    if (viewer) {
       if (type === 1) {
         // 加速
-        this.viewer.clockViewModel.multiplier *= 2
+        viewer.clockViewModel.multiplier *= 2
       } else {
         // 减速
-        this.viewer.clockViewModel.multiplier /= 2
+        viewer.clockViewModel.multiplier /= 2
       }
     }
   }
 
   Restart () {
     this.play = false
-    if (this.viewer && this.viewer.clock) {
-      this.viewer.clock.currentTime = this.viewer.clock.startTime
+    if (viewer && viewer.clock) {
+      viewer.clock.currentTime = viewer.clock.startTime
     }
   }
 
   Play () {
     this.play = true
-    if (this.viewer && this.viewer.clock) {
-      this.viewer.clock.shouldAnimate = true
+    if (viewer && viewer.clock) {
+      viewer.clock.shouldAnimate = true
     }
   }
 
   Pause () {
     this.play = false
-    if (this.viewer && this.viewer.clock) {
-      this.viewer.clock.shouldAnimate = false
+    if (viewer && viewer.clock) {
+      viewer.clock.shouldAnimate = false
     }
   }
 
   Destory () {
-    if (this.viewer) {
-      this.viewer.clockViewModel.multiplier = 1
-      this.viewer.trackedEntity = null
-      const entity = this.viewer.entities.getById('trackEntity')
+    if (viewer) {
+      viewer.clockViewModel.multiplier = 1
+      viewer.trackedEntity = null
+      const entity = viewer.entities.getById('trackEntity')
       if (entity) {
-        this.viewer.entities.remove(entity)
+        viewer.entities.remove(entity)
       }
     }
     this.Restart()
     this.Pause()
     this.RemoveEventListener()
-    this.viewer = null
+    this.ClearConePrimitive()
     this.points = []
     this.moveData = []
     this.conePrimitive = null
     this.coneOutLinePrimitive = null
     this.EventListenerFun = null
+    if (this.End) {
+      this.End()
+    }
   }
 
   RemoveEventListener () {
-    if (this.viewer) {
-      this.viewer.clock.onTick.removeEventListener(this.EventListenerFun)
+    if (viewer) {
+      viewer.clock.onTick.removeEventListener(this.EventListenerFun)
       this.EventListenerFun = null
     }
   }
@@ -270,8 +274,8 @@ export default class Playback {
         }
         const endData = _this.moveData[_this.moveData.length - 1]
         if (e.currentTime.secondsOfDay > endData.JulianDate.secondsOfDay) {
-          _this.ClearConePrimitive()
-          _this.End()
+          // _this.ClearConePrimitive()
+          // _this.End()
           _this.Destory()
           return
         }
@@ -282,7 +286,7 @@ export default class Playback {
         }
       }
     }
-    _this.viewer.clock.onTick.addEventListener(_this.EventListenerFun)
+    viewer.clock.onTick.addEventListener(_this.EventListenerFun)
   }
 
   ClearConePrimitive () {
@@ -298,8 +302,8 @@ export default class Playback {
     if (point.actionEntityList && point.actionEntityList.length > 0) {
       point.actionEntityList.map((action, index) => {
         const stratPosition = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
-        const endPosition = CesiumUtils.getEndPointByYawPitch(
-          this.viewer,
+        const endPosition = getEndPointByYawPitch(
+          viewer,
           {
             longitude: point.longitude,
             latitude: point.latitude,
@@ -315,13 +319,13 @@ export default class Playback {
         this.MakeCone(stratPosition, endPosition, point, action)
 
         // 更新相机位置（第一视角）
-        // const center = entity.position.getValue(this.viewer.clock.currentTime)
-        // const entity = this.viewer.entities.getById('trackEntity')
+        // const center = entity.position.getValue(viewer.clock.currentTime)
+        // const entity = viewer.entities.getById('trackEntity')
         // entity.viewFrom = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
-        // const heading = this.viewer.scene.camera.heading
-        // const pitch = this.viewer.scene.camera.pitch
-        // const roll = this.viewer.scene.camera.roll
-        // this.viewer.camera.setView({
+        // const heading = viewer.scene.camera.heading
+        // const pitch = viewer.scene.camera.pitch
+        // const roll = viewer.scene.camera.roll
+        // viewer.camera.setView({
         //   destination: center,
         //   orientation: {
         //     heading: heading,
@@ -335,12 +339,12 @@ export default class Playback {
 
   MakeCone (startPosition, endPosition) {
     this.ClearConePrimitive()
-    const spotLightCamera = new Cesium.Camera(this.viewer.scene)
+    const spotLightCamera = new Cesium.Camera(viewer.scene)
     const direction = Cesium.Cartesian3.normalize(Cesium.Cartesian3.subtract(endPosition,
       startPosition, new Cesium.Cartesian3()), new Cesium.Cartesian3())
     spotLightCamera.position = startPosition
     spotLightCamera.direction = direction
-    spotLightCamera.up = Cesium.Cartesian3.clone(this.viewer.camera.up)
+    spotLightCamera.up = Cesium.Cartesian3.clone(viewer.camera.up)
     spotLightCamera.frustum.fov = Cesium.Math.PI_OVER_THREE
     spotLightCamera.frustum.near = 0.1
     spotLightCamera.frustum.far = Cesium.Cartesian3.distance(startPosition, endPosition)
@@ -373,7 +377,7 @@ export default class Playback {
         show: new Cesium.ShowGeometryInstanceAttribute(true)
       }
     })
-    this.conePrimitive = this.viewer.scene.primitives.add(new Cesium.Primitive({
+    this.conePrimitive = viewer.scene.primitives.add(new Cesium.Primitive({
       geometryInstances: instance,
       eleaseGeometryInstances: false,
       appearance: new Cesium.PerInstanceColorAppearance({
@@ -394,7 +398,7 @@ export default class Playback {
         show: new Cesium.ShowGeometryInstanceAttribute(true)
       }
     })
-    this.coneOutLinePrimitive = this.viewer.scene.primitives.add(new Cesium.Primitive({
+    this.coneOutLinePrimitive = viewer.scene.primitives.add(new Cesium.Primitive({
       geometryInstances: instanceOutline,
       eleaseGeometryInstances: false,
       appearance: new Cesium.PerInstanceColorAppearance({

@@ -11,7 +11,7 @@
  * @param {*} distance
  * @return {*}
  */
-function getEndPointByYawPitch (viewer, point, heading, action, distance) {
+export function getEndPointByYawPitch (viewer, point, heading, action, distance) {
   const { camera, scene } = viewer
   let position = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
   const dir = getVector({
@@ -155,7 +155,6 @@ function translateByDirection (start, direction, offset) {
 }
 
 export default {
-  getEndPointByYawPitch,
   cartesianToLongAndLat,
   getExtend,
   translateByDirection,
