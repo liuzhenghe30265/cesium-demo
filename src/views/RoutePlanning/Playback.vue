@@ -27,7 +27,11 @@
 /* eslint-disable vue/no-reserved-keys */
 /* eslint-disable new-cap */
 import points from './points.json'
-import CesiumUtils from '@/utils/CesiumUtils.js'
+import {
+  translateByDirection,
+  getVector,
+  distancePos
+} from '@/utils/CesiumUtils.js'
 // import * as turf from '@turf/turf'
 import Playback from './utils/Playback'
 export default {
@@ -77,7 +81,7 @@ export default {
     points.map((point, index) => {
       // return
       // 机头朝向
-      const toPoint = CesiumUtils.distancePos(point.longitude, point.latitude, point.heading, 20)
+      const toPoint = distancePos(point.longitude, point.latitude, point.heading, 20)
       const headingEntity = viewer.entities.add(
         new Cesium.Entity({
           id: 'heading' + index,
@@ -101,9 +105,9 @@ export default {
           const _id = 'Action' + index + '' + actionIndex
           const length = 40
           let position = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
-          const dir = CesiumUtils.getVector(point, Number(point.heading + action.yaw))
+          const dir = getVector(point, Number(point.heading + action.yaw))
           const forward_l = length * Math.cos(action.pitch * Math.PI / 180)
-          position = CesiumUtils.translateByDirection(position, dir, forward_l)
+          position = translateByDirection(position, dir, forward_l)
           const y_offset = length * Math.sin(action.pitch * Math.PI / 180)
           const cartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(position)
           const lat = Cesium.Math.toDegrees(cartographic.latitude)

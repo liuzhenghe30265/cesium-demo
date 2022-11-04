@@ -87,13 +87,13 @@ const routes = [
     name: '任务预览',
     visible: true,
     component: () => import('../views/RoutePlanning/Playback')
-  },
-  {
-    path: '/WebControl',
-    name: 'WebControl',
-    visible: true,
-    component: () => import('../views/WebControl')
   }
+  // {
+  //   path: '/WebControl',
+  //   name: 'WebControl',
+  //   visible: true,
+  //   component: () => import('../views/WebControl')
+  // }
 ]
 
 const router = new VueRouter({

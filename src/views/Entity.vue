@@ -25,7 +25,11 @@ import {
   semiMinorAxisAnimate,
   semiMajorAxisAnimate
 } from '@/utils/EntityAnimate'
-import CesiumUtils from '@/utils/CesiumUtils.js'
+import {
+  translateByDirection,
+  getVector,
+  distancePos
+} from '@/utils/CesiumUtils.js'
 export default {
   data () {
     return {
@@ -233,9 +237,9 @@ export default {
         // point.actionEntityList.map((action, actionIndex) => {
         //   const length = 40
         //   let position = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
-        //   const dir = CesiumUtils.getVector(point, point.heading)
+        //   const dir = getVector(point, point.heading)
         //   const forward_l = length * Math.cos(action.pitch * Math.PI / 180)
-        //   position = CesiumUtils.translateByDirection(position, dir, forward_l)
+        //   position = translateByDirection(position, dir, forward_l)
         //   const y_offset = length * Math.sin(action.pitch * Math.PI / 180)
         //   const cartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(position)
         //   const lat = Cesium.Math.toDegrees(cartographic.latitude)
@@ -286,7 +290,7 @@ export default {
       }
       // return
       // 添加方向实体
-      const toPoint = CesiumUtils.distancePos(point.longitude, point.latitude, point.heading, 20)
+      const toPoint = distancePos(point.longitude, point.latitude, point.heading, 20)
       const headingEntity = viewer.entities.add(
         new Cesium.Entity({
           id: 'heading' + index,

@@ -101,7 +101,7 @@ export default {
 
     // viewer.camera.percentageChanged = 0.00001
     // viewer.camera.changed.addEventListener(function (event) {
-    //   console.log(CesiumUtils.getExtend(viewer))
+    //   console.log(getExtend(viewer))
     // })
 
     viewer.scene.renderError.addEventListener(function () {

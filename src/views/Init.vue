@@ -7,7 +7,9 @@
 
 <script>
 /* eslint-disable no-undef */
-import CesiumUtils from '@/utils/CesiumUtils.js'
+// import {
+//   getExtend
+// } from '@/utils/CesiumUtils.js'
 export default {
   data () {
     return {}
@@ -99,7 +101,7 @@ export default {
     // 监听视角变化
     viewer.camera.percentageChanged = 0.00001
     viewer.camera.changed.addEventListener(function (event) {
-      console.log(CesiumUtils.getExtend(viewer))
+      // console.log(getExtend(viewer))
       // console.log(viewer.camera.computeViewRectangle())
 
       // 中心点

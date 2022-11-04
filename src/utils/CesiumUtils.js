@@ -34,7 +34,7 @@ export function getEndPointByYawPitch (viewer, point, heading, action, distance)
  * @param {*} position
  * @return {*}
  */
-function cartesianToLongAndLat (position) {
+export function cartesianToLongAndLat (position) {
   const cartographic = Cesium.Ellipsoid.WGS84.cartesianToCartographic(position)
   const longitude = Cesium.Math.toDegrees(cartographic.longitude)
   const latitude = Cesium.Math.toDegrees(cartographic.latitude)
@@ -50,7 +50,7 @@ function cartesianToLongAndLat (position) {
  * @description: 获取视图矩形范围
  * @return {*}
  */
-function getExtend (viewer) {
+export function getExtend (viewer) {
   const extend = viewer.camera.computeViewRectangle()
   const params = {}
   if (typeof extend === 'undefined') {
@@ -92,7 +92,7 @@ function getExtend (viewer) {
  * @param {*} distance
  * @return {*}
  */
-function distancePos (lng, lat, deg, distance) {
+export function distancePos (lng, lat, deg, distance) {
   return {
     longitude: lng + distance * Math.sin(deg * Math.PI / 180) * 180 / (Math.PI * 6371229 * Math.cos(lat * Math.PI / 180)),
     latitude: lat + distance * Math.cos(deg * Math.PI / 180) / (Math.PI * 6371229 / 180)
@@ -105,7 +105,7 @@ function distancePos (lng, lat, deg, distance) {
  * @param {*} yaw
  * @return {*}
  */
-function getVector (point, yaw) {
+export function getVector (point, yaw) {
   const A = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
   const B = new Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude + 0.0001, point.altitude)
 
@@ -135,7 +135,7 @@ function getVector (point, yaw) {
  * @param {*} yaw
  * @return {*}
  */
-function translateByDirection (start, direction, offset) {
+export function translateByDirection (start, direction, offset) {
   const normalize = Cesium.Cartesian3.normalize(
     direction,
     new Cesium.Cartesian3()
@@ -152,12 +152,4 @@ function translateByDirection (start, direction, offset) {
     scalerNormalize,
     new Cesium.Cartesian3()
   )
-}
-
-export default {
-  cartesianToLongAndLat,
-  getExtend,
-  translateByDirection,
-  getVector,
-  distancePos
 }

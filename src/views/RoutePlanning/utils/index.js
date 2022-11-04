@@ -68,8 +68,8 @@ function mouseMoveAction (e) {
   //     // const ray = viewer.camera.getPickRay(e.endPosition)
   //     // const cartesian = viewer.scene.globe.pick(ray, viewer.scene)
   //     const _Cartesian3 = new Cesium.Cartesian3.fromDegrees(
-  //       MeasurementUtils.cartesianToLongAndLat(cartesian).longitude,
-  //       MeasurementUtils.cartesianToLongAndLat(cartesian).latitude,
+  //       cartesianToLongAndLat(cartesian).longitude,
+  //       cartesianToLongAndLat(cartesian).latitude,
   //       startHeight
   //     )
   //     position2 = _Cartesian3
@@ -83,7 +83,7 @@ function mouseMoveAction (e) {
   //       return
   //     }
   //     const heightGap = e.endPosition.y - startPoint.y
-  //     const cartographic = MeasurementUtils.cartesianToLongAndLat(pickedEntity.position.getValue())
+  //     const cartographic = cartesianToLongAndLat(pickedEntity.position.getValue())
   //     // height結果與cartographic.height相差無幾，注意：cartographic.height可以為0，也就是說，可以根據經緯度計算出高程。
   //     pickedEntityHeight = startHeight - (heightGap / 10)
   //     if (pickedEntityHeight < 0) {
@@ -179,7 +179,7 @@ function leftDoubleClickAction (e) {
   // if (!_entity) {
   //   return
   // }
-  // const startPosition = MeasurementUtils.cartesianToLongAndLat(_entity.position.getValue())
+  // const startPosition = cartesianToLongAndLat(_entity.position.getValue())
   // const startCartographic = Cesium.Cartesian3.fromDegrees(startPosition.longitude, startPosition.latitude, startPosition.altitude)
   // const endCartographic = Cesium.Cartesian3.fromDegrees(endPosition.longitude, endPosition.latitude, endPosition.height)
   // makeEntityTest([endPosition, startPosition])
