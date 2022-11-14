@@ -1,11 +1,7 @@
 <template>
-  <div
-    id="cesium-container"
-    style="width: 100%; height: 100%;">
-    <div
-      class="btn_container">
-      <button
-        id="clear">清除primitive</button>
+  <div id="cesium-container" style="width: 100%; height: 100%">
+    <div class="btn_container">
+      <button id="clear">清除</button>
     </div>
   </div>
 </template>
@@ -17,23 +13,20 @@
 /* eslint-disable vue/no-reserved-keys */
 import * as turf from '@turf/turf'
 export default {
-  data () {
+  data() {
     return {
       _primitive: null
     }
   },
-  computed: {
-
-  },
-  watch: {
-
-  },
-  mounted () {
+  computed: {},
+  watch: {},
+  mounted() {
     const _this = this
     // const china = Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
     // Cesium.Camera.DEFAULT_VIEW_RECTANGLE = china
     // Initialize the viewer widget with several custom options and mixins.
-    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYTJjNTM1Yy0wZDRjLTRlZWYtYTFkMi1hOGIwNTI2ZGU0MDgiLCJpZCI6ODI5MjAsImlhdCI6MTY0NTE2NDEyOH0.XndixRDpLnRAxnqSNQpT2JofpGyngIUWlmzbG53hEtM'
+    Cesium.Ion.defaultAccessToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYTJjNTM1Yy0wZDRjLTRlZWYtYTFkMi1hOGIwNTI2ZGU0MDgiLCJpZCI6ODI5MjAsImlhdCI6MTY0NTE2NDEyOH0.XndixRDpLnRAxnqSNQpT2JofpGyngIUWlmzbG53hEtM'
     const viewer = new Cesium.Viewer('cesium-container', {
       terrainProvider: Cesium.createWorldTerrain(),
       animation: false, // 是否显示左下角的仪表盘
@@ -56,27 +49,27 @@ export default {
     })
 
     // 随机生成坐标
-    const positions = turf.randomPoint(10000, {
-      bbox: [
-        70.01180980018789,
-        20.12881664932077,
-        134.27620577723778,
-        50.568644557429835
-      ]
-      // bbox: [
-      //   114.72692258196378,
-      //   38.1023045206586,
-      //   119.02498669643339,
-      //   40.94067311600792
-      // ]
-    }).features.map((_, index) => {
-      return {
-        longitude: _.geometry.coordinates[0],
-        latitude: _.geometry.coordinates[1],
-        altitude: index,
-        value: index
-      }
-    })
+    const positions = turf
+      .randomPoint(10000, {
+        bbox: [
+          70.01180980018789, 20.12881664932077, 134.27620577723778,
+          50.568644557429835
+        ]
+        // bbox: [
+        //   114.72692258196378,
+        //   38.1023045206586,
+        //   119.02498669643339,
+        //   40.94067311600792
+        // ]
+      })
+      .features.map((_, index) => {
+        return {
+          longitude: _.geometry.coordinates[0],
+          latitude: _.geometry.coordinates[1],
+          altitude: index,
+          value: index
+        }
+      })
     viewer.camera.flyTo({
       destination: Cesium.Rectangle.fromDegrees(
         70.01180980018789,
@@ -90,6 +83,20 @@ export default {
       alert('内存超出100%')
     })
 
+    document.getElementById('clear').onclick = function () {
+      const entity = viewer.entities.getById('bar')
+      if (entity) {
+        entity._children.map(entity => {
+          viewer.entities.remove(entity)
+        })
+        // viewer.entities.remove(entity)
+      }
+
+      if (_this._primitive) {
+        viewer.scene.primitives.remove(_this._primitive)
+      }
+    }
+
     // Entity 方式
     // const barEntity = new Cesium.Entity({
     //   id: 'bar',
@@ -99,16 +106,22 @@ export default {
     // positions.map((item, index) => {
     //   const entity = new Cesium.Entity({
     //     id: 'bar' + index,
-    //     position: Cesium.Cartesian3.fromDegrees(item.longitude, item.latitude, item.altitude),
+    //     position: Cesium.Cartesian3.fromDegrees(
+    //       item.longitude,
+    //       item.latitude,
+    //       item.altitude
+    //     ),
     //     show: true,
     //     cylinder: {
     //       topRadius: 1000,
     //       bottomRadius: 1000,
     //       heightReference: 0,
     //       length: 100000,
-    //       material: new Cesium.ColorMaterialProperty(Cesium.Color.fromRandom({
-    //         alpha: 0.5
-    //       })),
+    //       material: new Cesium.ColorMaterialProperty(
+    //         Cesium.Color.fromRandom({
+    //           alpha: 0.5
+    //         })
+    //       ),
     //       show: true
     //     },
     //     parent: barEntity
@@ -130,10 +143,19 @@ export default {
           }),
           modelMatrix: Cesium.Matrix4.multiplyByTranslation(
             Cesium.Transforms.eastNorthUpToFixedFrame(
-              Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)), new Cesium.Cartesian3(0.0, 0.0, 0.0), new Cesium.Matrix4()
+              Cesium.Cartesian3.fromDegrees(
+                point.longitude,
+                point.latitude,
+                point.altitude
+              )
+            ),
+            new Cesium.Cartesian3(0.0, 0.0, 0.0),
+            new Cesium.Matrix4()
           ),
           attributes: {
-            color: new Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.fromCssColorString('#0000ff').withAlpha(0.4)),
+            color: new Cesium.ColorGeometryInstanceAttribute.fromColor(
+              Cesium.Color.fromCssColorString('#0000ff').withAlpha(0.4)
+            ),
             show: new Cesium.ShowGeometryInstanceAttribute(true)
           }
         })
@@ -224,7 +246,12 @@ export default {
         id: 'CorridorGeometry',
         geometry: new Cesium.CorridorGeometry({
           vertexFormat: Cesium.VertexFormat.POSITION_ONLY,
-          positions: Cesium.Cartesian3.fromDegreesArray([positions[0].longitude, positions[0].latitude, positions[10].longitude, positions[10].latitude]),
+          positions: Cesium.Cartesian3.fromDegreesArray([
+            positions[0].longitude,
+            positions[0].latitude,
+            positions[10].longitude,
+            positions[10].latitude
+          ]),
           width: 10000
         }),
         attributes: {
@@ -247,7 +274,9 @@ export default {
       const pick = viewer.scene.pick(event.position)
       if (Cesium.defined(pick) && pick.id) {
         console.log('pick', pick)
-        const attributes = _this._primitive.getGeometryInstanceAttributes(pick.id)
+        const attributes = _this._primitive.getGeometryInstanceAttributes(
+          pick.id
+        )
         attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
           Cesium.Color.fromRandom({
             alpha: 1.0
@@ -256,22 +285,21 @@ export default {
       }
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>
 
 <style>
-* {
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-appearance: none;
-}
-.btn_container {
-  position: absolute;
-  z-index: 9;
-  top: 50px;
-  right: 50px;
-  padding: 20px;
-}
+  * {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: none;
+  }
+  .btn_container {
+    position: absolute;
+    z-index: 9;
+    top: 50px;
+    right: 50px;
+    padding: 20px;
+  }
 </style>
