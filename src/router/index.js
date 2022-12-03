@@ -17,6 +17,12 @@ const routes = [
     component: () => import('../views/Entity.vue')
   },
   {
+    path: '/Plot',
+    name: '标绘',
+    visible: true,
+    component: () => import('../views/Plot')
+  },
+  {
     path: '/Primitive',
     name: 'Primitive',
     visible: true,
