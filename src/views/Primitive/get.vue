@@ -210,7 +210,8 @@ export default {
         )
       }
     })
-    this._primitive = new Cesium.Primitive({
+    // GroundPrimitive 贴地
+    this._primitive = new Cesium.GroundPrimitive({
       releaseGeometryInstances: false,
       geometryInstances: instances,
       appearance: new Cesium.PerInstanceColorAppearance({
