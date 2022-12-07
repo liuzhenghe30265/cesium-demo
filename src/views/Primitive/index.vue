@@ -50,7 +50,7 @@ export default {
 
     // 随机生成坐标
     const positions = turf
-      .randomPoint(10000, {
+      .randomPoint(1000, {
         bbox: [
           70.01180980018789, 20.12881664932077, 134.27620577723778,
           50.568644557429835
@@ -132,35 +132,43 @@ export default {
     // Primitive
     const instances = []
     positions.map((point, index) => {
-      // 图片
-      instances.push(
-        new Cesium.GeometryInstance({
-          id: 'CylinderGeometry' + index,
-          geometry: new Cesium.CylinderGeometry({
-            length: 10000,
-            topRadius: 1000,
-            bottomRadius: 1000
-          }),
-          modelMatrix: Cesium.Matrix4.multiplyByTranslation(
-            Cesium.Transforms.eastNorthUpToFixedFrame(
-              Cesium.Cartesian3.fromDegrees(
-                point.longitude,
-                point.latitude,
-                point.altitude
-              )
-            ),
-            new Cesium.Cartesian3(0.0, 0.0, 0.0),
-            new Cesium.Matrix4()
-          ),
-          attributes: {
-            color: new Cesium.ColorGeometryInstanceAttribute.fromColor(
-              Cesium.Color.fromCssColorString('#0000ff').withAlpha(0.4)
-            ),
-            show: new Cesium.ShowGeometryInstanceAttribute(true)
-          }
+      // 模型（Primitive 内存：10000 个， 400M +-）
+      const origin = Cesium.Cartesian3.fromDegrees(
+        point.longitude,
+        point.latitude,
+        point.altitude
+      )
+      const modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(origin)
+      viewer.scene.primitives.add(
+        Cesium.Model.fromGltf({
+          url: 'model/Cesium_Air.glb',
+          scale: 1000,
+          id: 'Model' + index,
+          allowPicking: true,
+          show: true,
+          // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+          //   0.0,
+          //   500000.0
+          // ),
+          modelMatrix: modelMatrix
         })
       )
-      // // 圆柱、圆锥或者截断的圆锥
+      // ---------------------------------------
+      // 模型（内存：10000 个， 600M +-）
+      // viewer.entities.add({
+      //   name: 'glb 模型',
+      //   position: new Cesium.Cartesian3.fromDegrees(
+      //     point.longitude,
+      //     point.latitude,
+      //     point.altitude
+      //   ),
+      //   model: {
+      //     uri: 'model/Cesium_Air.glb',
+      //     scale: 1000
+      //   }
+      // })
+
+      // 圆柱、圆锥或者截断的圆锥
       // instances.push(
       //   new Cesium.GeometryInstance({
       //     id: 'CylinderGeometry' + index,
@@ -171,14 +179,27 @@ export default {
       //     }),
       //     modelMatrix: Cesium.Matrix4.multiplyByTranslation(
       //       Cesium.Transforms.eastNorthUpToFixedFrame(
-      //         Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)), new Cesium.Cartesian3(0.0, 0.0, 0.0), new Cesium.Matrix4()
+      //         Cesium.Cartesian3.fromDegrees(
+      //           point.longitude,
+      //           point.latitude,
+      //           point.altitude
+      //         )
+      //       ),
+      //       new Cesium.Cartesian3(0.0, 0.0, 0.0),
+      //       new Cesium.Matrix4()
       //     ),
       //     attributes: {
-      //       color: new Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.fromCssColorString('#0000ff').withAlpha(0.4)),
+      //       color: new Cesium.ColorGeometryInstanceAttribute.fromColor(
+      //         // Cesium.Color.fromCssColorString('#0000ff').withAlpha(0.4)
+      //         Cesium.Color.fromRandom({
+      //           alpha: 1.0
+      //         })
+      //       ),
       //       show: new Cesium.ShowGeometryInstanceAttribute(true)
       //     }
       //   })
       // )
+
       // // 圆形或者拉伸的圆形，圆圈或挤压圆
       // instances.push(
       //   new Cesium.GeometryInstance({
@@ -193,6 +214,7 @@ export default {
       //     }
       //   })
       // )
+
       // // 仅有轮廓的立方体，只有外部线条的的盒子
       // instances.push(
       //   new Cesium.GeometryInstance({
@@ -209,6 +231,7 @@ export default {
       //     }
       //   })
       // )
+
       // // 立方体
       // instances.push(
       //   new Cesium.GeometryInstance({
@@ -225,6 +248,7 @@ export default {
       //     }
       //   })
       // )
+
       // // 矩形
       // instances.push(
       //   new Cesium.GeometryInstance({
@@ -277,11 +301,13 @@ export default {
         const attributes = _this._primitive.getGeometryInstanceAttributes(
           pick.id
         )
-        attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
-          Cesium.Color.fromRandom({
-            alpha: 1.0
-          })
-        )
+        if (attributes) {
+          attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
+            Cesium.Color.fromRandom({
+              alpha: 1.0
+            })
+          )
+        }
       }
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
   },
