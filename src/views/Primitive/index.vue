@@ -12,6 +12,66 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable vue/no-reserved-keys */
 import * as turf from '@turf/turf'
+const circleSource = `
+czm_material czm_getMaterial(czm_materialInput materialInput)
+{
+    czm_material material = czm_getDefaultMaterial(materialInput);
+    vec2 st = materialInput.st;
+    vec3 diffuse = color.rgb;
+    float alpha = 0.0;
+    float u_time = (czm_frameNumber / 120.0);
+    float dis = distance(st, vec2(0.5));
+ 
+ 
+    alpha = 0.0;
+ 
+    if(dis <  fract(u_time * 0.5) / 2.0 ) {
+      diffuse = color.rgb;
+    }
+   
+    if(dis <  fract(u_time * 0.5 - 0.5) / 2.0 ) {
+      diffuse = color.rgb;
+      alpha = dis / fract(u_time * 0.5 - 0.5);
+    }
+ 
+ 
+    material.diffuse = diffuse;
+    material.alpha = alpha;
+    return material;
+}
+`
+const circleSource2 = `
+  #define M_PI 3.1415926535897932384626433832795
+
+  uniform sampler2D image;
+  uniform float radians;
+
+  czm_material czm_getMaterial(czm_materialInput materialInput)
+  {
+    czm_material material = czm_getDefaultMaterial(materialInput);
+    vec2 st = vec2(materialInput.st.x - 0.5, materialInput.st.y - 0.5);
+    float alpha = 1.3 - st.x - 0.5;
+    float current_radians = atan(st.y, st.x);
+    float radius = sqrt(st.x * st.x + st.y * st.y);
+    if (radius < 0.50) {
+      current_radians = current_radians - radians;
+      st = vec2(cos(current_radians) * radius, sin(current_radians) * radius);
+      st = vec2(st.x + 0.5, st.y + 0.5);
+      vec4 colorImage = texture2D(image, st);
+      material.diffuse = colorImage.rgb;
+      material.alpha = colorImage.a * alpha;
+    } else {
+      material.alpha = 0.0;
+    }
+
+    return material;
+  }
+`
+let rot = Cesium.Math.toRadians(30)
+function getRotationValue() {
+  rot += 0.01
+  return rot
+}
 export default {
   data() {
     return {
@@ -83,6 +143,15 @@ export default {
       alert('内存超出100%')
     })
 
+    let radians = 0
+    const EllipseGeometries = []
+    viewer.scene.preUpdate.addEventListener(() => {
+      radians -= Math.PI / 180
+      EllipseGeometries.map(item => {
+        item.appearance.material.uniforms.radians = radians
+      })
+    })
+
     document.getElementById('clear').onclick = function () {
       const entity = viewer.entities.getById('bar')
       if (entity) {
@@ -132,6 +201,64 @@ export default {
     // Primitive
     const instances = []
     positions.map((point, index) => {
+      // 圆环扩散
+      viewer.scene.primitives.add(
+        new Cesium.GroundPrimitive({
+          geometryInstances: new Cesium.GeometryInstance({
+            geometry: new Cesium.EllipseGeometry({
+              center: Cesium.Cartesian3.fromDegrees(
+                point.longitude,
+                point.latitude
+              ),
+              semiMajorAxis: 5000.0,
+              semiMinorAxis: 5000.0
+            })
+          }),
+          appearance: new Cesium.EllipsoidSurfaceAppearance({
+            material: new Cesium.Material({
+              fabric: {
+                type: 'mym',
+                uniforms: {
+                  color: new Cesium.Color.fromCssColorString(
+                    '#36aeff'
+                  ).withAlpha(0.1)
+                },
+                source: circleSource
+              }
+            })
+          })
+        })
+      )
+
+      // 圆环图片
+      const _EllipseGeometry = new Cesium.GroundPrimitive({
+        geometryInstances: new Cesium.GeometryInstance({
+          geometry: new Cesium.EllipseGeometry({
+            center: Cesium.Cartesian3.fromDegrees(
+              point.longitude,
+              point.latitude
+            ),
+            rotation: Cesium.Math.toRadians(10.0),
+            semiMajorAxis: 5000.0,
+            semiMinorAxis: 5000.0
+          })
+        }),
+        appearance: new Cesium.EllipsoidSurfaceAppearance({
+          material: new Cesium.Material({
+            fabric: {
+              type: 'Image',
+              uniforms: {
+                image: require('@/assets/images/circle3.png'),
+                radians: 0
+              },
+              source: circleSource2
+            }
+          })
+        })
+      })
+      viewer.scene.primitives.add(_EllipseGeometry)
+      EllipseGeometries.push(_EllipseGeometry)
+
       // 模型（Primitive 内存：10000 个， 400M +-）
       const origin = Cesium.Cartesian3.fromDegrees(
         point.longitude,
@@ -142,7 +269,7 @@ export default {
       viewer.scene.primitives.add(
         Cesium.Model.fromGltf({
           url: 'model/Cesium_Air.glb',
-          scale: 1000,
+          scale: 100,
           id: 'Model' + index,
           allowPicking: true,
           show: true,
@@ -154,7 +281,7 @@ export default {
         })
       )
       // ---------------------------------------
-      // 模型（内存：10000 个， 600M +-）
+      // 模型（Entity 内存：10000 个， 600M +-）
       // viewer.entities.add({
       //   name: 'glb 模型',
       //   position: new Cesium.Cartesian3.fromDegrees(
