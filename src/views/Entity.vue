@@ -337,7 +337,8 @@ export default {
         },
         label: {
           text: point.id + '',
-          fillColor: new Cesium.Color.fromCssColorString('#fff'),
+          style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+          fillColor: new Cesium.Color.fromCssColorString('#f00'),
           outlineColor: new Cesium.Color.fromCssColorString('#fff'),
           outlineWidth: 1,
           verticalOrigin: Cesium.VerticalOrigin.CENTER,
