@@ -21,20 +21,14 @@ czm_material czm_getMaterial(czm_materialInput materialInput)
     float alpha = 0.0;
     float u_time = (czm_frameNumber / 120.0);
     float dis = distance(st, vec2(0.5));
- 
- 
     alpha = 0.0;
- 
     if(dis <  fract(u_time * 0.5) / 2.0 ) {
       diffuse = color.rgb;
     }
-   
     if(dis <  fract(u_time * 0.5 - 0.5) / 2.0 ) {
       diffuse = color.rgb;
       alpha = dis / fract(u_time * 0.5 - 0.5);
     }
- 
- 
     material.diffuse = diffuse;
     material.alpha = alpha;
     return material;
@@ -42,10 +36,8 @@ czm_material czm_getMaterial(czm_materialInput materialInput)
 `
 const circleSource2 = `
   #define M_PI 3.1415926535897932384626433832795
-
   uniform sampler2D image;
   uniform float radians;
-
   czm_material czm_getMaterial(czm_materialInput materialInput)
   {
     czm_material material = czm_getDefaultMaterial(materialInput);
@@ -67,11 +59,23 @@ const circleSource2 = `
     return material;
   }
 `
-let rot = Cesium.Math.toRadians(30)
-function getRotationValue() {
-  rot += 0.01
-  return rot
+
+const circleSource3 = `
+czm_material czm_getMaterial(czm_materialInput materialInput)
+{
+  czm_material material = czm_getDefaultMaterial(materialInput);
+  vec2 st = fract (repeat *materialInput.st);
+  float time = czm_frameNumber * animationSpeed;
+  vec4 colorImage = texture2D(image, vec2(st.t,fract((st.s - time)) ));
+  vec4 fragColor;
+  fragColor.rgb = (colorImage.rgb+color.rgb) / 1.0;
+  fragColor = czm_gammaCorrect(fragColor);
+  material.alpha = colorImage.a * color.a;
+  material.diffuse = (colorImage.rgb+color.rgb)/2.0;
+  material.emission = fragColor.rgb;
+  return material;
 }
+`
 export default {
   data() {
     return {
@@ -391,6 +395,7 @@ export default {
       //   })
       // )
     })
+
     // 走廊：沿着地表的多段线(垂直于表面的折线)，且具有一定的宽度，可以拉伸到一定的高度
     instances.push(
       new Cesium.GeometryInstance({
@@ -411,6 +416,7 @@ export default {
         }
       })
     )
+
     this._primitive = new Cesium.Primitive({
       geometryInstances: instances,
       appearance: new Cesium.PerInstanceColorAppearance({
@@ -419,6 +425,40 @@ export default {
       })
     })
     viewer.scene.primitives.add(this._primitive)
+
+    // 流动纹理
+    // const PolylineGeometryPrimitive = new Cesium.Primitive({
+    //   geometryInstances: new Cesium.GeometryInstance({
+    //     geometry: new Cesium.PolylineGeometry({
+    //       positions: Cesium.Cartesian3.fromDegreesArray([
+    //         positions[0].longitude,
+    //         positions[0].latitude,
+    //         positions[10].longitude,
+    //         positions[10].latitude
+    //       ]),
+    //       width: 10000
+    //     }),
+    //     attributes: {
+    //       // color: new Cesium.ColorGeometryInstanceAttribute(1.0, 1.0, 0.0, 0.5),
+    //       // show: new Cesium.ShowGeometryInstanceAttribute(true)
+    //     }
+    //   }),
+    //   appearance: new Cesium.PolylineMaterialAppearance({
+    //     // translucent: true
+    //   })
+    // })
+    // PolylineGeometryPrimitive.appearance.material = new Cesium.Material({
+    //   fabric: {
+    //     uniforms: {
+    //       image: require('@/assets/images/circle3.png'),
+    //       animationSpeed: 0,
+    //       color: Cesium.Color.GREEN.withAlpha(0.5),
+    //       repeat: new Cesium.Cartesian2(1.0, 1.0)
+    //     },
+    //     source: circleSource3
+    //   }
+    // })
+    // viewer.scene.primitives.add(PolylineGeometryPrimitive)
 
     const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
     handler.setInputAction(function (event) {
