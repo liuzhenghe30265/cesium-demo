@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import * as turf from '@turf/turf'
+import { lineString, booleanClockwise } from '@turf/turf'
 
 /**
  * @description: 根据多边形裁切模型
@@ -114,8 +114,8 @@ export function isDirRes (polygon, isClockwise) {
     lineStringList.push([p[0], p[1]])
   })
 
-  const clockwiseRing = turf.lineString(lineStringList)
-  const isR = turf.booleanClockwise(clockwiseRing)
+  const clockwiseRing = lineString(lineStringList)
+  const isR = booleanClockwise(clockwiseRing)
 
   let points = []
   if (isClockwise) {

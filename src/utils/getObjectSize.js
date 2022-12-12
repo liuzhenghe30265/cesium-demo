@@ -1,8 +1,8 @@
-import sizeof from 'object-sizeof'
-
 /* eslint-disable no-undef */
 /* eslint-disable new-cap */
 /* eslint-disable no-unused-vars */
+
+import sizeof from 'object-sizeof'
 
 function formetSize (size) {
   let result = ''
