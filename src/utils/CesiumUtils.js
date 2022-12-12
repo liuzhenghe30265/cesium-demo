@@ -382,3 +382,18 @@ export function translateByDirection (start, direction, offset) {
   )
   return Cesium.Cartesian3.add(start, scalerNormalize, new Cesium.Cartesian3())
 }
+
+/**
+ * @description: 计算距离点位角度为 deg 的点位
+ * @param {*} longitude
+ * @param {*} latitude
+ * @param {*} deg
+ * @param {*} distance
+ * @return {*}
+ */
+export function distancePos (longitude, latitude, deg, distance) {
+  return {
+    longitude: longitude + distance * Math.sin(deg * Math.PI / 180) * 180 / (Math.PI * 6371229 * Math.cos(latitude * Math.PI / 180)),
+    latitude: latitude + distance * Math.cos(deg * Math.PI / 180) / (Math.PI * 6371229 / 180)
+  }
+}

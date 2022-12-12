@@ -5,9 +5,7 @@
 
 <script>
 /* eslint-disable no-undef */
-// import {
-//   getExtend
-// } from '@/utils/CesiumUtils.js'
+import { cartesianToLongAndLat } from '@/utils/CesiumUtils.js'
 export default {
   data() {
     return {}
@@ -34,19 +32,71 @@ export default {
       timeline: false, // 是否显示下边的时间轴
       navigationHelpButton: false, // 是否显示右上角的帮助按钮
       navigationInstructionsInitiallyVisible: true, // 是否显示导航
-      // scene3DOnly: true, // 是否指定仅为三维模式，全部使用三维模式可节约 GPU 资源
+      scene3DOnly: true, // 是否指定仅为三维模式，全部使用三维模式可节约 GPU 资源
       // requestRenderMode: true,
       imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
         url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'
       })
     })
 
-    viewer.camera.flyTo({
-      destination: Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
+    const tileset = new Cesium.Cesium3DTileset({
+      url: 'https://lab.earthsdk.com/model/f15b9e90ac2d11e99dbd8fd044883638/tileset.json', // 大雁塔
+      debugShowMemoryUsage: false
     })
+    viewer.scene.primitives.add(tileset)
+    viewer.zoomTo(tileset)
+
+    const list = []
+    const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
+    handler.setInputAction(function (event) {
+      const ray1 = viewer.camera.getPickRay(event.position)
+      const cartesian = viewer.scene.globe.pick(ray1, viewer.scene)
+      const pick = viewer.scene.pickPosition(event.position)
+      const pickModel = viewer.scene.pick(event.position)
+      let earthPosition = null
+      if (pick && pickModel && !pickModel.id) {
+        earthPosition = pick
+      } else {
+        earthPosition = cartesian
+      }
+      if (!earthPosition) {
+        return
+      }
+      list.push(cartesianToLongAndLat(earthPosition))
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
     const data = require('./mock.json')
-    console.log('..........data', data)
+    data.map(item => {
+      if (item.objectInfo && item.objectInfo.drawingMode === 'polygon') {
+        const hierarchy = []
+        item.objectInfo.activeShapePoints.map(point => {
+          const Cartesian3 = Cesium.Cartesian3.fromDegrees(
+            point.longitude,
+            point.latitude,
+            point.altitude
+          )
+          hierarchy.push(Cartesian3)
+          viewer.entities.add({
+            name: 'plotGraphic',
+            position: Cartesian3,
+            point: {
+              color: Cesium.Color.YELLOW,
+              pixelSize: 20
+            }
+          })
+        })
+        viewer.entities.add({
+          name: 'plotGraphic',
+          polygon: {
+            hierarchy: hierarchy,
+            // extrudedHeight: 200,
+            // perPositionHeight: true,
+            // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+            material: Cesium.Color.RED.withAlpha(0.6)
+          }
+        })
+      }
+    })
   },
   methods: {}
 }

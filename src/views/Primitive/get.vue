@@ -165,51 +165,6 @@ export default {
       )
     })
 
-    const mock = require('../Plot/mock.json')
-    mock.map((item, index) => {
-      const _hierarchy = []
-      item.objectInfo.activeShapePoints.map(point => {
-        _hierarchy.push(point.longitude)
-        _hierarchy.push(point.latitude)
-        _hierarchy.push(point.altitude)
-      })
-
-      if (item.objectInfo.drawingMode === 'polygon') {
-        const _polygonHierarchy = new Cesium.PolygonHierarchy(
-          Cesium.Cartesian3.fromDegreesArrayHeights(_hierarchy)
-        )
-        instances.push(
-          new Cesium.GeometryInstance({
-            geometry: new Cesium.PolygonGeometry({
-              polygonHierarchy: _polygonHierarchy,
-              perPositionHeight: true,
-              closeTop: true,
-              closeBottom: true,
-              arcType: Cesium.ArcType.RHUMB,
-              vertexFormat: Cesium.EllipsoidSurfaceAppearance.VERTEXT_FORMAT
-            }),
-            id: 'instance' + index,
-            attributes: {
-              color: new Cesium.ColorGeometryInstanceAttribute.fromColor(
-                Cesium.Color.fromCssColorString(item.objectInfo.colorValue.hex8)
-              ),
-              // color: new Cesium.ColorGeometryInstanceAttribute.fromColor(
-              //   Cesium.Color.fromCssColorString(
-              //     item.objectInfo.colorValue.hex
-              //   ).withAlpha(item.objectInfo.colorValue.a)
-              // ),
-              // color: new Cesium.ColorGeometryInstanceAttribute(
-              //   1.0,
-              //   0.0,
-              //   0.0,
-              //   0.1
-              // ),
-              show: new Cesium.ShowGeometryInstanceAttribute(true)
-            }
-          })
-        )
-      }
-    })
     // GroundPrimitive 贴地
     this._primitive = new Cesium.GroundPrimitive({
       releaseGeometryInstances: false,

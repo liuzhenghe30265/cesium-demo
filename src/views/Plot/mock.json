@@ -1,4 +1,106 @@
 [{
+    "objectInfo": {
+      "drawingMode": "polygon",
+      "activeShapePoints": [{
+          "longitude": 108.9590731,
+          "latitude": 34.2207323,
+          "altitude": 433.8002478011293
+        },
+        {
+          "longitude": 108.9594406,
+          "latitude": 34.2206687,
+          "altitude": 437.67214385836394
+        },
+        {
+          "longitude": 108.9598089,
+          "latitude": 34.2207343,
+          "altitude": 434.0186860644792
+        },
+        {
+          "longitude": 108.9599716,
+          "latitude": 34.2205291,
+          "altitude": 432.7168272745959
+        },
+        {
+          "longitude": 108.9597785,
+          "latitude": 34.2203304,
+          "altitude": 432.89115938023576
+        },
+        {
+          "longitude": 108.959431,
+          "latitude": 34.2202917,
+          "altitude": 431.4819832132671
+        },
+        {
+          "longitude": 108.9590894,
+          "latitude": 34.2203283,
+          "altitude": 432.67543662901693
+        },
+        {
+          "longitude": 108.9588939,
+          "latitude": 34.2205405,
+          "altitude": 432.14285244178194
+        }
+      ]
+    }
+  }, {
+    "objectInfo": {
+      "activeShapeComputed": "3644621.90",
+      "drawingMode": "polygon",
+      "activeShapePoints": [{
+          "longitude": 108.9616034,
+          "latitude": 34.2201179,
+          "altitude": 394.3478570137929
+        },
+        {
+          "longitude": 108.9623549,
+          "latitude": 34.2201201,
+          "altitude": 395.57450769792956
+        },
+        {
+          "longitude": 108.9623262,
+          "latitude": 34.2193178,
+          "altitude": 393.9494951335092
+        },
+        {
+          "longitude": 108.9616198,
+          "latitude": 34.2193686,
+          "altitude": 394.0080440035828
+        },
+        {
+          "longitude": 108.9615333,
+          "latitude": 34.2197026,
+          "altitude": 394.2057980203568
+        }
+      ]
+    }
+  }, {
+    "objectInfo": {
+      "activeShapeComputed": "3644621.90",
+      "drawingMode": "polygon",
+      "activeShapePoints": [{
+          "longitude": 108.957296,
+          "latitude": 34.2218138,
+          "altitude": 390.6196521165407
+        },
+        {
+          "longitude": 108.9578441,
+          "latitude": 34.2218129,
+          "altitude": 389.909354370483
+        },
+        {
+          "longitude": 108.9578404,
+          "latitude": 34.2199279,
+          "altitude": 425.1695841296371
+        },
+        {
+          "longitude": 108.9572397,
+          "latitude": 34.2199596,
+          "altitude": 397.1816249351297
+        }
+      ]
+    }
+  }, {
     "altitude": -0.6379561,
     "checkedItem": 1,
     "createdAt": "2022-11-26 21:34:25",
