@@ -6,6 +6,7 @@
 <script>
 /* eslint-disable no-undef */
 import { cartesianToLongAndLat } from '@/utils/CesiumUtils.js'
+import '@/utils/dynamicWallMaterialProperty'
 export default {
   data() {
     return {}
@@ -38,6 +39,7 @@ export default {
         url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'
       })
     })
+    window.viewer = viewer
 
     const tileset = new Cesium.Cesium3DTileset({
       url: 'https://lab.earthsdk.com/model/f15b9e90ac2d11e99dbd8fd044883638/tileset.json', // 大雁塔
@@ -68,14 +70,33 @@ export default {
     const data = require('./mock.json')
     data.map(item => {
       if (item.objectInfo && item.objectInfo.drawingMode === 'polygon') {
+        const positions = []
         const hierarchy = []
-        item.objectInfo.activeShapePoints.map(point => {
+        const maximumHeights = []
+        const minimumHeights = []
+        let points = []
+        if (
+          item.objectInfo.verticesPosition &&
+          item.objectInfo.verticesPosition.length > 0
+        ) {
+          points = item.objectInfo.verticesPosition
+        } else if (
+          item.objectInfo.activeShapePoints &&
+          item.objectInfo.activeShapePoints.length > 0
+        ) {
+          points = item.objectInfo.activeShapePoints
+        }
+        points.map(point => {
           const Cartesian3 = Cesium.Cartesian3.fromDegrees(
             point.longitude,
             point.latitude,
             point.altitude
           )
           hierarchy.push(Cartesian3)
+          positions.push(point.longitude)
+          positions.push(point.latitude)
+          minimumHeights.push(point.altitude)
+          maximumHeights.push(point.altitude + 100)
           viewer.entities.add({
             name: 'plotGraphic',
             position: Cartesian3,
@@ -85,6 +106,10 @@ export default {
             }
           })
         })
+        positions.push(points[0].longitude)
+        positions.push(points[0].latitude)
+        minimumHeights.push(points[0].altitude)
+        maximumHeights.push(points[0].altitude + 100)
         viewer.entities.add({
           name: 'plotGraphic',
           polygon: {
@@ -95,6 +120,19 @@ export default {
             material: Cesium.Color.RED.withAlpha(0.6)
           }
         })
+        // viewer.entities.add({
+        //   wall: {
+        //     positions: Cesium.Cartesian3.fromDegreesArray(positions),
+        //     maximumHeights: maximumHeights,
+        //     minimumHeights: minimumHeights,
+        //     material: Cesium.Color.BLUE.withAlpha(0.5)
+        //     // material: new Cesium.DynamicWallMaterialProperty({
+        //     //   color: Cesium.Color.fromCssColorString('#fff'),
+        //     //   trailImage: require('@/assets/images/colors.png'),
+        //     //   duration: 1000
+        //     // })
+        //   }
+        // })
       }
     })
   },
