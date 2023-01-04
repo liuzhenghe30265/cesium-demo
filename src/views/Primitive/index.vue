@@ -114,16 +114,14 @@ export default {
 
     // 随机生成坐标
     const positions = turf
-      .randomPoint(1000, {
+      .randomPoint(10000, {
         bbox: [
           70.01180980018789, 20.12881664932077, 134.27620577723778,
           50.568644557429835
         ]
         // bbox: [
-        //   114.72692258196378,
-        //   38.1023045206586,
-        //   119.02498669643339,
-        //   40.94067311600792
+        // 114.72692258196378, 38.1023045206586, 119.02498669643339,
+        // 40.94067311600792
         // ]
       })
       .features.map((_, index) => {
@@ -157,6 +155,14 @@ export default {
     })
 
     document.getElementById('clear').onclick = function () {
+      console.log('...........primitiveObj', primitiveObj)
+      for (const key in primitiveObj) {
+        if (Object.hasOwnProperty.call(primitiveObj, key)) {
+          const element = primitiveObj[key]
+          viewer.scene.primitives.remove(element)
+        }
+      }
+      // viewer.scene.primitives.removeAll()
       const entity = viewer.entities.getById('bar')
       if (entity) {
         entity._children.map(entity => {
@@ -204,86 +210,87 @@ export default {
 
     // Primitive
     const instances = []
+    // let primitiveObj = {}
     positions.map((point, index) => {
       // 圆环扩散
-      viewer.scene.primitives.add(
-        new Cesium.GroundPrimitive({
-          geometryInstances: new Cesium.GeometryInstance({
-            geometry: new Cesium.EllipseGeometry({
-              center: Cesium.Cartesian3.fromDegrees(
-                point.longitude,
-                point.latitude
-              ),
-              semiMajorAxis: 5000.0,
-              semiMinorAxis: 5000.0
-            })
-          }),
-          appearance: new Cesium.EllipsoidSurfaceAppearance({
-            material: new Cesium.Material({
-              fabric: {
-                type: 'mym',
-                uniforms: {
-                  color: new Cesium.Color.fromCssColorString(
-                    '#36aeff'
-                  ).withAlpha(0.1)
-                },
-                source: circleSource
-              }
-            })
-          })
-        })
-      )
+      // viewer.scene.primitives.add(
+      //   new Cesium.GroundPrimitive({
+      //     geometryInstances: new Cesium.GeometryInstance({
+      //       geometry: new Cesium.EllipseGeometry({
+      //         center: Cesium.Cartesian3.fromDegrees(
+      //           point.longitude,
+      //           point.latitude
+      //         ),
+      //         semiMajorAxis: 5000.0,
+      //         semiMinorAxis: 5000.0
+      //       })
+      //     }),
+      //     appearance: new Cesium.EllipsoidSurfaceAppearance({
+      //       material: new Cesium.Material({
+      //         fabric: {
+      //           type: 'mym',
+      //           uniforms: {
+      //             color: new Cesium.Color.fromCssColorString(
+      //               '#36aeff'
+      //             ).withAlpha(0.1)
+      //           },
+      //           source: circleSource
+      //         }
+      //       })
+      //     })
+      //   })
+      // )
 
       // 圆环图片
-      const _EllipseGeometry = new Cesium.GroundPrimitive({
-        geometryInstances: new Cesium.GeometryInstance({
-          geometry: new Cesium.EllipseGeometry({
-            center: Cesium.Cartesian3.fromDegrees(
-              point.longitude,
-              point.latitude
-            ),
-            rotation: Cesium.Math.toRadians(10.0),
-            semiMajorAxis: 5000.0,
-            semiMinorAxis: 5000.0
-          })
-        }),
-        appearance: new Cesium.EllipsoidSurfaceAppearance({
-          material: new Cesium.Material({
-            fabric: {
-              type: 'Image',
-              uniforms: {
-                image: require('@/assets/images/circle3.png'),
-                radians: 0
-              },
-              source: circleSource2
-            }
-          })
-        })
-      })
-      viewer.scene.primitives.add(_EllipseGeometry)
-      EllipseGeometries.push(_EllipseGeometry)
+      // const _EllipseGeometry = new Cesium.GroundPrimitive({
+      //   geometryInstances: new Cesium.GeometryInstance({
+      //     geometry: new Cesium.EllipseGeometry({
+      //       center: Cesium.Cartesian3.fromDegrees(
+      //         point.longitude,
+      //         point.latitude
+      //       ),
+      //       rotation: Cesium.Math.toRadians(10.0),
+      //       semiMajorAxis: 5000.0,
+      //       semiMinorAxis: 5000.0
+      //     })
+      //   }),
+      //   appearance: new Cesium.EllipsoidSurfaceAppearance({
+      //     material: new Cesium.Material({
+      //       fabric: {
+      //         type: 'Image',
+      //         uniforms: {
+      //           image: require('@/assets/images/circle3.png'),
+      //           radians: 0
+      //         },
+      //         source: circleSource2
+      //       }
+      //     })
+      //   })
+      // })
+      // viewer.scene.primitives.add(_EllipseGeometry)
+      // EllipseGeometries.push(_EllipseGeometry)
 
       // 模型（Primitive 内存：10000 个， 400M +-）
-      const origin = Cesium.Cartesian3.fromDegrees(
-        point.longitude,
-        point.latitude,
-        point.altitude
-      )
-      const modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(origin)
-      viewer.scene.primitives.add(
-        Cesium.Model.fromGltf({
-          url: 'model/Cesium_Air.glb',
-          scale: 100,
-          id: 'Model' + index,
-          allowPicking: true,
-          show: true,
-          // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-          //   0.0,
-          //   500000.0
-          // ),
-          modelMatrix: modelMatrix
-        })
-      )
+      // const origin = Cesium.Cartesian3.fromDegrees(
+      //   point.longitude,
+      //   point.latitude,
+      //   point.altitude
+      // )
+      // const modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(origin)
+      // viewer.scene.primitives.add(
+      //   Cesium.Model.fromGltf({
+      //     url: 'model/Cesium_Air.glb',
+      //     scale: 100,
+      //     id: 'Model' + index,
+      //     allowPicking: true,
+      //     show: true,
+      //     // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+      //     //   0.0,
+      //     //   500000.0
+      //     // ),
+      //     modelMatrix: modelMatrix
+      //   })
+      // )
       // ---------------------------------------
       // 模型（Entity 内存：10000 个， 600M +-）
       // viewer.entities.add({
@@ -331,20 +338,77 @@ export default {
       //   })
       // )
 
-      // // 圆形或者拉伸的圆形，圆圈或挤压圆
-      // instances.push(
-      //   new Cesium.GeometryInstance({
-      //     id: 'CircleGeometry' + index,
-      //     geometry: new Cesium.CircleGeometry({
-      //       center: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
-      //       radius: 5000
-      //     }),
-      //     attributes: {
-      //       color: new Cesium.ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 0.5),
-      //       show: new Cesium.ShowGeometryInstanceAttribute(true)
-      //     }
+      // 圆形或者拉伸的圆形，圆圈或挤压圆
+      // 10000 个 instance 添加到一个 primitive 中，内存 70 +-
+      instances.push(
+        new Cesium.GeometryInstance({
+          id: 'CircleGeometry_' + index,
+          geometry: new Cesium.CircleGeometry({
+            center: Cesium.Cartesian3.fromDegrees(
+              point.longitude,
+              point.latitude,
+              point.altitude
+            ),
+            radius: 5000
+          }),
+          attributes: {
+            color: new Cesium.ColorGeometryInstanceAttribute.fromColor(
+              Cesium.Color.fromRandom({
+                alpha: 1.0
+              })
+            ),
+            show: new Cesium.ShowGeometryInstanceAttribute(true)
+          }
+        })
+      )
+
+      // 10000 个 primitive，每个 primitive 存放一个 instance，内存 140 +-
+      // const primitive = new Cesium.Primitive({
+      //   geometryInstances: [
+      //     new Cesium.GeometryInstance({
+      //       id: 'CircleGeometry_' + index,
+      //       geometry: new Cesium.CircleGeometry({
+      //         center: Cesium.Cartesian3.fromDegrees(
+      //           point.longitude,
+      //           point.latitude,
+      //           point.altitude
+      //         ),
+      //         radius: 5000
+      //       }),
+      //       attributes: {
+      //         color: new Cesium.ColorGeometryInstanceAttribute.fromColor(
+      //           Cesium.Color.fromRandom({
+      //             alpha: 1.0
+      //           })
+      //         ),
+      //         show: new Cesium.ShowGeometryInstanceAttribute(true)
+      //       }
+      //     })
+      //   ],
+      //   appearance: new Cesium.PerInstanceColorAppearance({
+      //     // translucent: false,
+      //     // closed: true
       //   })
-      // )
+      // })
+      // primitiveObj['CircleGeometry_' + index] = primitive
+      // viewer.scene.primitives.add(primitive)
+
+      // 10000 个 entity，内存 170 +-
+      // viewer.entities.add({
+      //   position: Cesium.Cartesian3.fromDegrees(
+      //     point.longitude,
+      //     point.latitude,
+      //     point.altitude
+      //   ),
+      //   ellipse: {
+      //     semiMinorAxis: 5000, // 椭圆半短轴的长度，单位为米
+      //     semiMajorAxis: 5000, // 椭圆半长轴的长度，单位为米
+      //     height: 100,
+      //     material: Cesium.Color.fromRandom({
+      //       alpha: 1.0
+      //     })
+      //   }
+      // })
 
       // // 仅有轮廓的立方体，只有外部线条的的盒子
       // instances.push(
@@ -397,25 +461,25 @@ export default {
     })
 
     // 走廊：沿着地表的多段线(垂直于表面的折线)，且具有一定的宽度，可以拉伸到一定的高度
-    instances.push(
-      new Cesium.GeometryInstance({
-        id: 'CorridorGeometry',
-        geometry: new Cesium.CorridorGeometry({
-          vertexFormat: Cesium.VertexFormat.POSITION_ONLY,
-          positions: Cesium.Cartesian3.fromDegreesArray([
-            positions[0].longitude,
-            positions[0].latitude,
-            positions[10].longitude,
-            positions[10].latitude
-          ]),
-          width: 10000
-        }),
-        attributes: {
-          color: new Cesium.ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 0.5),
-          show: new Cesium.ShowGeometryInstanceAttribute(true)
-        }
-      })
-    )
+    // instances.push(
+    //   new Cesium.GeometryInstance({
+    //     id: 'CorridorGeometry',
+    //     geometry: new Cesium.CorridorGeometry({
+    //       vertexFormat: Cesium.VertexFormat.POSITION_ONLY,
+    //       positions: Cesium.Cartesian3.fromDegreesArray([
+    //         positions[0].longitude,
+    //         positions[0].latitude,
+    //         positions[10].longitude,
+    //         positions[10].latitude
+    //       ]),
+    //       width: 10000
+    //     }),
+    //     attributes: {
+    //       color: new Cesium.ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 0.5),
+    //       show: new Cesium.ShowGeometryInstanceAttribute(true)
+    //     }
+    //   })
+    // )
 
     this._primitive = new Cesium.Primitive({
       geometryInstances: instances,
@@ -464,7 +528,7 @@ export default {
     handler.setInputAction(function (event) {
       const pick = viewer.scene.pick(event.position)
       if (Cesium.defined(pick) && pick.id) {
-        console.log('pick', pick)
+        console.log('..............pick', pick)
         const attributes = _this._primitive.getGeometryInstanceAttributes(
           pick.id
         )
