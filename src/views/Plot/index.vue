@@ -5,6 +5,8 @@
 
 <script>
 /* eslint-disable no-undef */
+/* eslint-disable new-cap */
+/* eslint-disable no-unused-vars */
 import { cartesianToLongAndLat } from '@/utils/CesiumUtils.js'
 import '@/utils/dynamicWallMaterialProperty'
 import { flattenDeep } from 'lodash'
@@ -66,6 +68,7 @@ export default {
         return
       }
       list.push(cartesianToLongAndLat(earthPosition))
+      console.log('.............list', list)
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
     const data = require('./mock.json')
