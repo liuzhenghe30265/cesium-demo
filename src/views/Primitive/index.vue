@@ -77,6 +77,38 @@ czm_material czm_getMaterial(czm_materialInput materialInput)
 }
 `
 export default {
+  //   var z= new Array('./src/1.gltf', './src/2.gltf','./src/3.gltf' );
+  // var model,modelin,modelroot;
+  // var modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(Cesium.Cartesian3.fromDegrees(经度, 纬度,1));        //gltf数据加载位置——中点
+  // //加载gltf格式数据到cesium，z为模型名称，modelMatrix为模型中心点的经纬度坐标
+  // function model_add(url){
+  // /*        let index = url.lastIndexOf("/"); // lastIndexOf("/")  找到最后一个  /  的位置
+  //         let fileName = url.substr(index + 1); // substr() 截取剩余的字符，即得文件名xxx.doc*/
+  //         model=scene.primitives.add(Cesium.Model.fromGltf({
+  //             url : url,        //如果为bgltf则为.bgltf
+  //             modelMatrix : modelMatrix,
+  //             scale : 0.001,  //放大倍数
+  //         }));
+  //         /*获取3D model 的旋转矩阵modelMatrix*/
+  //         let m = model.modelMatrix;
+  //         //构建一个三阶旋转矩阵。模型旋转一定的角度，fromRotation[Z]来控制旋转轴，toRadians()为旋转角度，转为弧度再参与运算
+  //         let m1 = Cesium.Matrix3.fromRotationZ(Cesium.Math.toRadians(-78));
+  //         //矩阵计算
+  //         Cesium.Matrix4.multiplyByMatrix3(m,m1,m);
+  //         //将计算结果再赋值给modelMatrix
+  //         model.modelMatrix = m;
+  // }
+  // function mode3D_play(checkbox){
+  //     if(checkbox.checked==true){
+  //         model.show=true;
+  //     }else{
+  //         model.show=false;
+  //     }
+  // }
+  // for(let i=0;i<z.length;i++){
+  //     model_add(z[i]);
+  // }
+
   data() {
     return {
       _primitive: null
@@ -114,7 +146,7 @@ export default {
 
     // 随机生成坐标
     const positions = turf
-      .randomPoint(10000, {
+      .randomPoint(1000, {
         bbox: [
           70.01180980018789, 20.12881664932077, 134.27620577723778,
           50.568644557429835
@@ -277,20 +309,37 @@ export default {
       //   point.altitude
       // )
       // const modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(origin)
-      // viewer.scene.primitives.add(
-      //   Cesium.Model.fromGltf({
-      //     url: 'model/Cesium_Air.glb',
-      //     scale: 100,
-      //     id: 'Model' + index,
-      //     allowPicking: true,
-      //     show: true,
-      //     // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-      //     //   0.0,
-      //     //   500000.0
-      //     // ),
-      //     modelMatrix: modelMatrix
-      //   })
-      // )
+      const modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
+        Cesium.Cartesian3.fromDegrees(
+          point.longitude,
+          point.latitude,
+          point.altitude
+        )
+      )
+      const model = viewer.scene.primitives.add(
+        Cesium.Model.fromGltf({
+          url: 'model/Cesium_Air.glb',
+          scale: 1000,
+          id: 'Model' + index,
+          allowPicking: true,
+          show: true,
+          // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+          //   0.0,
+          //   500000.0
+          // ),
+          modelMatrix: modelMatrix
+        })
+      )
+      // 旋转角度
+      const headingPitchRoll = Cesium.HeadingPitchRoll.fromDegrees(30, 30, 30)
+      // 旋转矩阵
+      const rotationMatrix =
+        Cesium.Matrix3.fromHeadingPitchRoll(headingPitchRoll)
+      const m = model.modelMatrix
+      // 矩阵计算
+      Cesium.Matrix4.multiplyByMatrix3(m, rotationMatrix, m)
+      // 将计算结果再赋值给 modelMatrix
+      model.modelMatrix = m
       // ---------------------------------------
       // 模型（Entity 内存：10000 个， 600M +-）
       // viewer.entities.add({
