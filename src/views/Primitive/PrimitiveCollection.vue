@@ -1,13 +1,8 @@
 <template>
-  <div
-    id="cesium-container"
-    style="width: 100%; height: 100%;">
-    <div
-      class="btn_container">
-      <button
-        id="getPrimitive">查找primitive</button>
-      <button
-        id="clear">清除primitive</button>
+  <div id="cesium-container" style="width: 100%; height: 100%">
+    <div class="btn_container">
+      <button id="getPrimitive">查找primitive</button>
+      <button id="clear">清除primitive</button>
     </div>
   </div>
 </template>
@@ -18,32 +13,21 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable vue/no-reserved-keys */
 import { getObjectSize } from '@/utils/getObjectSize'
-import {
-  debounce,
-  includes,
-  isEqual,
-  findIndex,
-  uniq,
-  cloneDeep
-} from 'lodash'
+import { debounce, includes, isEqual, findIndex, uniq, cloneDeep } from 'lodash'
 import * as turf from '@turf/turf'
 export default {
-  data () {
-    return {
-    }
+  data() {
+    return {}
   },
-  computed: {
-
-  },
-  watch: {
-
-  },
-  mounted () {
+  computed: {},
+  watch: {},
+  mounted() {
     const _this = this
     // const china = Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
     // Cesium.Camera.DEFAULT_VIEW_RECTANGLE = china
     // Initialize the viewer widget with several custom options and mixins.
-    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYTJjNTM1Yy0wZDRjLTRlZWYtYTFkMi1hOGIwNTI2ZGU0MDgiLCJpZCI6ODI5MjAsImlhdCI6MTY0NTE2NDEyOH0.XndixRDpLnRAxnqSNQpT2JofpGyngIUWlmzbG53hEtM'
+    Cesium.Ion.defaultAccessToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYTJjNTM1Yy0wZDRjLTRlZWYtYTFkMi1hOGIwNTI2ZGU0MDgiLCJpZCI6ODI5MjAsImlhdCI6MTY0NTE2NDEyOH0.XndixRDpLnRAxnqSNQpT2JofpGyngIUWlmzbG53hEtM'
     const viewer = new Cesium.Viewer('cesium-container', {
       terrainProvider: Cesium.createWorldTerrain(),
       animation: false, // 是否显示左下角的仪表盘
@@ -66,27 +50,27 @@ export default {
     })
 
     // 随机生成坐标
-    const positions = turf.randomPoint(1000, {
-      bbox: [
-        70.01180980018789,
-        20.12881664932077,
-        134.27620577723778,
-        50.568644557429835
-      ]
-      // bbox: [
-      //   114.72692258196378,
-      //   38.1023045206586,
-      //   119.02498669643339,
-      //   40.94067311600792
-      // ]
-    }).features.map((_, index) => {
-      return {
-        longitude: _.geometry.coordinates[0],
-        latitude: _.geometry.coordinates[1],
-        altitude: 0,
-        value: index
-      }
-    })
+    const positions = turf
+      .randomPoint(1000, {
+        bbox: [
+          70.01180980018789, 20.12881664932077, 134.27620577723778,
+          50.568644557429835
+        ]
+        // bbox: [
+        //   114.72692258196378,
+        //   38.1023045206586,
+        //   119.02498669643339,
+        //   40.94067311600792
+        // ]
+      })
+      .features.map((_, index) => {
+        return {
+          longitude: _.geometry.coordinates[0],
+          latitude: _.geometry.coordinates[1],
+          altitude: 0,
+          value: index
+        }
+      })
 
     // const positions = require('@/assets/mock/positions.json')
 
@@ -144,7 +128,11 @@ export default {
         // color: Cesium.Color.fromRandom({
         //   alpha: 1.0
         // }),
-        position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude)
+        position: Cesium.Cartesian3.fromDegrees(
+          point.longitude,
+          point.latitude,
+          point.altitude
+        )
       })
     })
     console.log('viewer.scene.primitives', viewer.scene.primitives)
@@ -166,10 +154,13 @@ export default {
     //   })
     // })
 
-    const entity = getBillboardsById(this._BillboardCollection, 'BillboardCollection100')
+    const entity = getBillboardsById(
+      this._BillboardCollection,
+      'BillboardCollection100'
+    )
     console.log('.....entity', entity)
 
-    function getBillboardsById (collection, id) {
+    function getBillboardsById(collection, id) {
       let list = []
       // 判断集合类型
       if (collection instanceof Cesium.BillboardCollection) {
@@ -211,23 +202,21 @@ export default {
         }
       }
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
-  },
-  methods: {
   }
 }
 </script>
 
 <style>
-* {
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-appearance: none;
-}
-.btn_container {
-  position: absolute;
-  z-index: 9;
-  top: 50px;
-  right: 50px;
-  padding: 20px;
-}
+  * {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: none;
+  }
+  .btn_container {
+    position: absolute;
+    z-index: 9;
+    top: 50px;
+    right: 50px;
+    padding: 20px;
+  }
 </style>
