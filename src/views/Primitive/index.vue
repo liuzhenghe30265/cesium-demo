@@ -309,6 +309,14 @@ export default {
       //   point.altitude
       // )
       // const modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(origin)
+      let _color = new Cesium.Color(1, 1, 1, 0.3)
+      let _colorBlendMode = Cesium.ColorBlendMode.HIGHLIGHT
+      if (index % 2 === 0) {
+        // _color = null
+        // _colorBlendMode = null
+        _color = new Cesium.Color(0, 1, 1, 0.3)
+        _colorBlendMode = Cesium.ColorBlendMode.MIX
+      }
       const modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
         Cesium.Cartesian3.fromDegrees(
           point.longitude,
@@ -323,6 +331,8 @@ export default {
           id: 'Model' + index,
           allowPicking: true,
           show: true,
+          color: _color,
+          colorBlendMode: _colorBlendMode,
           // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
           //   0.0,
           //   500000.0
