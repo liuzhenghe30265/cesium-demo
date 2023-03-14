@@ -1,8 +1,15 @@
-
 <template>
   <div
     id="app"
-    style="width: 100%; height: 100%; position: relative">
+    style="width: 100%; height: 100%; position: relative"
+  >
+    <a
+      href="https://lab.earthsdk.com/model/f15b9e90ac2d11e99dbd8fd044883638/tileset.json"
+      target="blank"
+      style="  position: fixed;right: 0;bottom: 0;padding: 20px;z-index: 999;color: #fff;"
+    >
+      无法加载 tileset ？
+    </a>
     <!-- <div
       style="position: absolute;width: 100%;left: 0;bottom: 0;z-index: 999;">
       <timeline-slider-vue
@@ -15,12 +22,12 @@
         </div>
       </timeline-slider-vue>
     </div> -->
-    <div
-      class="nav">
+    <div class="nav">
       <router-link
         v-for="(item, index) of visibleRouters"
         :key="index"
-        :to="item.path">
+        :to="item.path"
+      >
         {{ item.name }}
       </router-link>
     </div>
@@ -31,7 +38,7 @@
 <script>
 import routes from '@/router/index.js'
 export default {
-  data () {
+  data() {
     return {
       lockDate: [], // 锁定的日期（滑动结束时自动跳到指定的日期）
       markDate: [], // 做标记的日期
@@ -46,16 +53,13 @@ export default {
       })
     }
   },
-  watch: {
-
-  },
-  mounted () {
-  },
+  watch: {},
+  mounted() {},
   methods: {
-    handleInput (value, date) {
+    handleInput(value, date) {
       console.log('input', value, date)
     },
-    handleChange (value, date) {
+    handleChange(value, date) {
       console.log('change', value, date)
     }
   }
