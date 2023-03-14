@@ -64,12 +64,12 @@ const routes = [
     visible: false,
     component: () => import('../views/Path.vue')
   },
-  {
-    path: '/EarthSdk',
-    name: 'EarthSdk',
-    visible: true,
-    component: () => import('../views/EarthSdk.vue')
-  },
+  // {
+  //   path: '/EarthSdk',
+  //   name: 'EarthSdk',
+  //   visible: true,
+  //   component: () => import('../views/EarthSdk.vue')
+  // },
   {
     path: '/Three',
     name: 'ThreeJS',
@@ -89,16 +89,10 @@ const routes = [
     component: () => import('../views/Three/Boom.vue')
   },
   {
-    path: '/RoutePlanning',
-    name: '航线规划',
-    visible: false,
-    component: () => import('../views/RoutePlanning')
-  },
-  {
     path: '/Playback',
     name: '任务预览',
     visible: true,
-    component: () => import('../views/RoutePlanning/Playback')
+    component: () => import('../views/Playback')
   }
   // {
   //   path: '/WebControl',
