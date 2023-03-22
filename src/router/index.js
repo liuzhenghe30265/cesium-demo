@@ -59,6 +59,12 @@ const routes = [
     component: () => import('../views/ClippingPlane.vue')
   },
   {
+    path: '/Video',
+    name: 'Video',
+    visible: true,
+    component: () => import('../views/Video')
+  },
+  {
     path: '/Path',
     name: '轨迹',
     visible: false,

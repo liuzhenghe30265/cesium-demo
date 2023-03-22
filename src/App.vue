@@ -74,7 +74,7 @@ export default {
 }
 .nav {
   position: fixed;
-  right: 0;
+  left: 0;
   top: 0;
   padding: 20px;
   z-index: 999;
