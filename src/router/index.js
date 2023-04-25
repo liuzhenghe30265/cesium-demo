@@ -8,104 +8,104 @@ const routes = [
     path: '/',
     name: '初始化',
     visible: true,
-    component: () => import('../views/Init.vue')
+    component: resolve => require(['@/views/Init.vue'], resolve)
   },
   {
     path: '/Entity',
     name: '实体',
     visible: true,
-    component: () => import('../views/Entity.vue')
+    component: resolve => require(['@/views/Entity.vue'], resolve)
   },
   {
     path: '/Plot',
     name: '标绘',
     visible: true,
-    component: () => import('../views/Plot')
+    component: resolve => require(['@/views/Plot'], resolve)
   },
   {
     path: '/Plot/Primitive',
     name: '标绘Primitive',
     visible: true,
-    component: () => import('../views/Plot/Primitive.vue')
+    component: resolve => require(['@/views/Plot/Primitive.vue'], resolve)
   },
   {
     path: '/Primitive',
     name: 'Primitive',
     visible: true,
-    component: () => import('../views/Primitive')
+    component: resolve => require(['@/views/Primitive'], resolve)
   },
   {
     path: '/Primitive/get',
     name: '操作Primitive',
     visible: true,
-    component: () => import('../views/Primitive/get.vue')
+    component: resolve => require(['@/views/Primitive/get.vue'], resolve)
   },
   {
     path: '/Primitive/PrimitiveCollection',
     name: 'PrimitiveCollection',
     visible: true,
-    component: () => import('../views/Primitive/PrimitiveCollection.vue')
+    component: resolve => require(['@/views/Primitive/PrimitiveCollection.vue'], resolve)
   },
   {
     path: '/Model',
     name: '模型',
     visible: true,
-    component: () => import('../views/Model.vue')
+    component: resolve => require(['@/views/Model.vue'], resolve)
   },
   {
     path: '/ClippingPlane',
     name: '模型切割',
     visible: true,
-    component: () => import('../views/ClippingPlane.vue')
+    component: resolve => require(['@/views/ClippingPlane.vue'], resolve)
   },
   {
     path: '/Video',
     name: 'Video',
     visible: true,
-    component: () => import('../views/Video')
+    component: resolve => require(['@/views/Video'], resolve)
   },
   {
     path: '/Path',
     name: '轨迹',
     visible: false,
-    component: () => import('../views/Path.vue')
+    component: resolve => require(['@/views/Path.vue'], resolve)
   },
-  // {
-  //   path: '/EarthSdk',
-  //   name: 'EarthSdk',
-  //   visible: true,
-  //   component: () => import('../views/EarthSdk.vue')
-  // },
+  {
+    path: '/EarthSdk',
+    name: 'EarthSdk',
+    visible: false,
+    component: resolve => require(['@/views/EarthSdk.vue'], resolve)
+  },
   {
     path: '/Three',
     name: 'ThreeJS',
     visible: true,
-    component: () => import('../views/Three')
+    component: resolve => require(['@/views/Three'], resolve)
   },
   {
     path: '/Three2',
     name: 'ThreeJSHushi',
     visible: false,
-    component: () => import('../views/Three/index2.vue')
+    component: resolve => require(['@/views/Three/index2.vue'], resolve)
   },
   {
     path: '/Boom',
     name: 'Three炸裂',
     visible: true,
-    component: () => import('../views/Three/Boom.vue')
+    component: resolve => require(['@/views/Three/Boom.vue'], resolve)
   },
   {
     path: '/Playback',
     name: '任务预览',
     visible: true,
-    component: () => import('../views/Playback')
+    component: resolve => require(['@/views/Playback'], resolve)
+  },
+  {
+    path: '/WebControl',
+    name: 'WebControl',
+    visible: false,
+    component: resolve => require(['@/views/WebControl'], resolve)
   }
-  // {
-  //   path: '/WebControl',
-  //   name: 'WebControl',
-  //   visible: true,
-  //   component: () => import('../views/WebControl')
-  // }
 ]
 
 const router = new VueRouter({
