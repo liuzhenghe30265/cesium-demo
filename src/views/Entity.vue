@@ -265,37 +265,37 @@ export default {
       }
       // return
       // 添加方向实体
-      const toPoint = distancePos(
-        point.longitude,
-        point.latitude,
-        point.heading,
-        20
-      )
-      const headingEntity = viewer.entities.add(
-        new Cesium.Entity({
-          id: 'heading' + index,
-          name: 'headingLine',
-          polyline: {
-            positions: Cesium.Cartesian3.fromDegreesArrayHeights([
-              point.longitude,
-              point.latitude,
-              point.altitude,
-              toPoint.longitude,
-              toPoint.latitude,
-              point.altitude
-            ]),
-            width: 10,
-            material: new Cesium.PolylineArrowMaterialProperty(
-              new Cesium.Color.fromCssColorString('#fff').withAlpha(1)
-            ),
-            scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
-            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-              0.0,
-              7000.0
-            )
-          }
-        })
-      )
+      // const toPoint = distancePos(
+      //   point.longitude,
+      //   point.latitude,
+      //   point.heading,
+      //   20
+      // )
+      // const headingEntity = viewer.entities.add(
+      //   new Cesium.Entity({
+      //     id: 'heading' + index,
+      //     name: 'headingLine',
+      //     polyline: {
+      //       positions: Cesium.Cartesian3.fromDegreesArrayHeights([
+      //         point.longitude,
+      //         point.latitude,
+      //         point.altitude,
+      //         toPoint.longitude,
+      //         toPoint.latitude,
+      //         point.altitude
+      //       ]),
+      //       width: 10,
+      //       material: new Cesium.PolylineArrowMaterialProperty(
+      //         new Cesium.Color.fromCssColorString('#fff').withAlpha(1)
+      //       ),
+      //       scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+      //       distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+      //         0.0,
+      //         7000.0
+      //       )
+      //     }
+      //   })
+      // )
       // 点
       const entity = viewer.entities.add(
         new Cesium.Entity({
@@ -332,6 +332,20 @@ export default {
               7000.0
             ),
             show: true
+          },
+          ellipsoid: {
+            radii: new Cesium.Cartesian3(0.5, 0.5, 0.5),
+            material: new Cesium.PolylineGlowMaterialProperty({
+              // color: new Cesium.Color.fromCssColorString('#FCB718').withAlpha(1)
+              color: Cesium.Color.AZURE
+            }),
+            show: true,
+            scaleByDistance: new Cesium.NearFarScalar(10, 0.5, 400000, 0.3),
+            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+              0.0,
+              7000.0
+            ),
+            zIndex: -1
           },
           label: {
             text: point.id + '',
@@ -450,7 +464,7 @@ export default {
           outlineColor: new Cesium.Color.fromCssColorString(
             '#FCB718'
           ).withAlpha(1),
-          outlineWidth: 1,
+          outlineWidth: 2.5,
           pixelOffset: new Cesium.Cartesian2(0.0, 0.0),
           show: true
         })
@@ -464,13 +478,22 @@ export default {
         polyline: {
           // positions: Cesium.Cartesian3.fromDegreesArray([116.3, 39.9, 116.47958024969756, 39.84829594348535, 116.56374186776782, 39.87785704033606]), // 无高度，贴地
           positions: Cesium.Cartesian3.fromDegreesArrayHeights(_list),
-          width: 2,
-          arcType: Cesium.ArcType.RHUMB,
-          material: new Cesium.PolylineDashMaterialProperty({
-            color: new Cesium.Color.fromCssColorString('#FCB718').withAlpha(1),
-            dashLength: 5 // 短划线长度
+          // width: 2,
+          // arcType: Cesium.ArcType.RHUMB,
+          // material: new Cesium.PolylineDashMaterialProperty({
+          //   color: new Cesium.Color.fromCssColorString('#FCB718').withAlpha(1),
+          //   dashLength: 5 // 短划线长度
+          // }),
+          // scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+          // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+          //   0.0,
+          //   7000.0
+          // )
+          width: 5,
+          material: new Cesium.PolylineGlowMaterialProperty({
+            // color: new Cesium.Color.fromCssColorString('#FCB718').withAlpha(1)
+            color: new Cesium.Color(0.09, 0.51, 0.99, 1.0)
           }),
-          scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
           distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
             0.0,
             7000.0
@@ -495,49 +518,51 @@ export default {
     const point2 = this.points[1]
     const point3 = this.points[2]
 
-    // 方式一：颜色填充
-    viewer.entities.add({
-      position: Cesium.Cartesian3.fromDegrees(
-        point1.longitude,
-        point1.latitude,
-        point1.altitude
-      ),
-      ellipse: {
-        // semiMinorAxis: 500, // 椭圆半短轴的长度，单位为米
-        // semiMajorAxis: 500, // 椭圆半长轴的长度，单位为米
-        semiMinorAxis: semiMinorAxisAnimate(), // 动态效果
-        semiMajorAxis: semiMajorAxisAnimate(),
-        height: 100,
-        material: Cesium.Color.RED.withAlpha(0.5),
-        outlineColor: Cesium.Color.RED
-        // extrudedHeight: undefined
-      }
-    })
+    // // 方式一：颜色填充
+    // viewer.entities.add({
+    //   position: Cesium.Cartesian3.fromDegrees(
+    //     point1.longitude,
+    //     point1.latitude,
+    //     point1.altitude
+    //   ),
+    //   ellipse: {
+    //     // semiMinorAxis: 500, // 椭圆半短轴的长度，单位为米
+    //     // semiMajorAxis: 500, // 椭圆半长轴的长度，单位为米
+    //     semiMinorAxis: semiMinorAxisAnimate(), // 动态效果
+    //     semiMajorAxis: semiMajorAxisAnimate(),
+    //     height: 100,
+    //     material: Cesium.Color.RED.withAlpha(0.5),
+    //     outlineColor: Cesium.Color.RED
+    //     // extrudedHeight: undefined
+    //   }
+    // })
 
-    // 方式二：使用图片
-    viewer.entities.add({
-      position: Cesium.Cartesian3.fromDegrees(
-        point2.longitude,
-        point2.latitude,
-        point2.altitude
-      ),
-      ellipse: {
-        semiMinorAxis: semiMinorAxisAnimate(), // 动态效果
-        semiMajorAxis: semiMajorAxisAnimate(),
-        height: point2.altitude,
-        material: new Cesium.ImageMaterialProperty({
-          image: require('@/assets/images/circle.png'),
-          repeat: new Cesium.Cartesian2(1.0, 1.0),
-          transparent: true,
-          color: colorOpacityAnimate()
-        })
-      }
-    })
+    // // 方式二：使用图片
+    // viewer.entities.add({
+    //   position: Cesium.Cartesian3.fromDegrees(
+    //     point2.longitude,
+    //     point2.latitude,
+    //     point2.altitude
+    //   ),
+    //   ellipse: {
+    //     semiMinorAxis: semiMinorAxisAnimate(), // 动态效果
+    //     semiMajorAxis: semiMajorAxisAnimate(),
+    //     height: point2.altitude,
+    //     material: new Cesium.ImageMaterialProperty({
+    //       image: require('@/assets/images/circle.png'),
+    //       repeat: new Cesium.Cartesian2(1.0, 1.0),
+    //       transparent: true,
+    //       color: colorOpacityAnimate()
+    //     })
+    //   }
+    // })
 
     // 获取到实体添加动画
     const entity1 = viewer.entities.getById('point' + 102883)
-    entity1.billboard.color = opacityAnimate()
-    entity1.billboard.scale = scaleAnimate()
+    if (entity1 && entity1.billboard) {
+      entity1.billboard.color = opacityAnimate()
+      entity1.billboard.scale = scaleAnimate()
+    }
 
     // const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
     // handler.setInputAction(function (event) {
@@ -565,45 +590,45 @@ export default {
     // }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
     // 添加流动线纹理流动纹理
-    const flowMaterial = new Cesium.PolylineTrailMaterialProperty({
-      color: Cesium.Color.RED,
-      duration: 3000,
-      trailImage: require('@/assets/images/colors.png')
-    })
-    const positions = makeCurve(
-      Cesium.Cartesian3.fromDegrees(
-        point1.longitude,
-        point1.latitude,
-        point1.altitude
-      ),
-      Cesium.Cartesian3.fromDegrees(
-        point2.longitude,
-        point2.latitude,
-        point2.altitude
-      )
-    )
-    viewer.entities.add({
-      polyline: {
-        positions: positions,
-        width: 5,
-        material: flowMaterial
-      }
-    })
+    // const flowMaterial = new Cesium.PolylineTrailMaterialProperty({
+    //   color: Cesium.Color.RED,
+    //   duration: 3000,
+    //   trailImage: require('@/assets/images/colors.png')
+    // })
+    // const positions = makeCurve(
+    //   Cesium.Cartesian3.fromDegrees(
+    //     point1.longitude,
+    //     point1.latitude,
+    //     point1.altitude
+    //   ),
+    //   Cesium.Cartesian3.fromDegrees(
+    //     point2.longitude,
+    //     point2.latitude,
+    //     point2.altitude
+    //   )
+    // )
+    // viewer.entities.add({
+    //   polyline: {
+    //     positions: positions,
+    //     width: 5,
+    //     material: flowMaterial
+    //   }
+    // })
 
     // 添加 glb 模型
-    const modelEntity = viewer.entities.add({
-      name: 'glb 模型',
-      position: new Cesium.Cartesian3.fromDegrees(
-        point3.longitude,
-        point3.latitude,
-        point3.altitude
-      ),
-      model: {
-        uri: 'model/Cesium_Air.glb',
-        minimumPixelSize: 256,
-        maxumunScale: 20000
-      }
-    })
+    // const modelEntity = viewer.entities.add({
+    //   name: 'glb 模型',
+    //   position: new Cesium.Cartesian3.fromDegrees(
+    //     point3.longitude,
+    //     point3.latitude,
+    //     point3.altitude
+    //   ),
+    //   model: {
+    //     uri: 'model/Cesium_Air.glb',
+    //     minimumPixelSize: 256,
+    //     maxumunScale: 20000
+    //   }
+    // })
     // 聚焦模型
     // viewer.trackedEntity = modelEntity
   },
