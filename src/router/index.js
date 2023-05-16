@@ -96,9 +96,15 @@ const routes = [
   },
   {
     path: '/Playback',
-    name: '任务预览',
+    name: '轨迹播放',
     visible: true,
     component: resolve => require(['@/views/Playback'], resolve)
+  },
+  {
+    path: '/Playback2',
+    name: '轨迹播放2',
+    visible: true,
+    component: resolve => require(['@/views/Playback/index2.vue'], resolve)
   },
   {
     path: '/WebControl',
