@@ -61,7 +61,7 @@ const routes = [
   {
     path: '/Video',
     name: 'Video',
-    visible: true,
+    visible: false,
     component: resolve => require(['@/views/Video'], resolve)
   },
   {
@@ -97,13 +97,13 @@ const routes = [
   {
     path: '/Playback',
     name: '轨迹播放',
-    visible: true,
+    visible: false,
     component: resolve => require(['@/views/Playback'], resolve)
   },
   {
     path: '/Playback2',
     name: '轨迹播放2',
-    visible: true,
+    visible: false,
     component: resolve => require(['@/views/Playback/index2.vue'], resolve)
   },
   {
