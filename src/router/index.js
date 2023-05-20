@@ -17,6 +17,12 @@ const routes = [
     component: resolve => require(['@/views/Entity.vue'], resolve)
   },
   {
+    path: '/Route',
+    name: '航线',
+    visible: true,
+    component: resolve => require(['@/views/Route'], resolve)
+  },
+  {
     path: '/Plot',
     name: '标绘',
     visible: true,
