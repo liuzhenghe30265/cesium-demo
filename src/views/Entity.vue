@@ -38,156 +38,617 @@ export default {
       url: '',
       points: [
         {
-          id: 102881,
-          latitude: 31.85376,
-          longitude: 120.217137,
-          altitude: 90,
-          heading: -2,
-          action: [
-            {
-              src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-              id: 164260,
-              yaw: 100,
-              roll: 100,
-              pitch: 100
-            }
-          ]
+          altitude: 68.72,
+          latitude: 39.2012737,
+          turnType: 2,
+          index: 1,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          routeId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
+          action: [],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.7421675,
+          direction: -2,
+          waypointNumber: 1,
+          heading: -153.58
         },
         {
-          id: 102882,
-          latitude: 31.8554312,
-          longitude: 120.216864,
-          altitude: 82.5,
-          heading: 90,
-          action: []
-        },
-        {
-          id: 102883,
-          latitude: 31.8556587,
-          longitude: 120.2185077,
-          altitude: 92.6,
-          heading: 180,
+          altitude: 68.72,
+          latitude: 39.198794949427224,
+          turnType: 2,
+          index: 2,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
           action: [
             {
-              src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-              id: 164262,
+              actionIndex: 1,
+              name: 'MTIS63u5wJTW4PIm1%2FuVj64fYlbanlCfFZ8NTSoNRFW5n7wsbS1uOmddy6Ekypi60XsqhPXo6ao%2FULRa%2FrakUs0BlwxzWnqn56gP3zntyOSH7aATb6RRMNYBbhRXMGmVjcOL5BboYKPEALuRvJRsBfELaonP7QBfV1FkMRyvRWQ=',
+              roll: 0,
+              target_type: 10,
+              action: 0,
+              zoom: 2,
+              target_id: 0,
+              pitch: 45,
+              pre_time: 1000,
               yaw: 0,
-              roll: 0,
-              pitch: 45
+              post_time: 1000
             }
-          ]
+          ],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.740578538038,
+          direction: -2,
+          waypointNumber: 2,
+          heading: -89.64
         },
         {
-          id: 102884,
-          latitude: 31.856109,
-          longitude: 120.2218049,
-          altitude: 93.4,
-          heading: 270,
-          action: []
-        },
-        {
-          id: 102886,
-          latitude: 31.8559722,
-          longitude: 120.2218505,
-          altitude: 62.27,
-          heading: 360,
+          altitude: 63.93,
+          latitude: 39.19881218044091,
+          turnType: 2,
+          index: 3,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          routeId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
           action: [
             {
-              src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-              id: 164264,
+              actionIndex: 1,
+              name: 'Zy2Z5K0IWTsHhBRMRFmaJW2on%2FqQa9iolSeEvnbJh3doSQIs5mjrO8bdBZfrpT3n0WCyMUKOXLSaBTvkYTNdPsrLS1Ps8xBYRXRc2zNdz57v+dAfvBzR%2FIoTvWl0IH%2Fp9yYQHCv8%2FFVIL+HVOGlzfQXycB4%2F3lZDSkuELL6q22E=',
+              roll: 0,
+              target_type: 10,
+              action: 1,
+              zoom: 2,
+              target_id: 0,
+              pitch: 45,
+              pre_time: 3000,
               yaw: 0,
-              roll: 0,
-              pitch: 1.7
-            }
-          ]
-        },
-        {
-          id: 102887,
-          latitude: 31.8559748,
-          longitude: 120.2218342,
-          altitude: 58.18,
-          heading: 270,
-          action: [
+              post_time: 1000
+            },
             {
-              src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-              id: 164266,
-              yaw: -1.4,
+              actionIndex: 1,
+              name: 'Sai4OUeRd+Ac6Uv3U%2F9wJPHtflBlHDmV2r20T3v7dqYk570l9kYx2sD5EeTH09iDvTzG%2F9MxNZtQkJUi%2F4+GFaIZtMxgKm1R+1b1T8BLjKiSBPVgKFahZ70dTbrROGTOjSc4QHx%2F6TDS6ZLJGiPe0iqBrQ5tPnHALa35E0LWaSU=',
               roll: 0,
-              pitch: 1.9
-            }
-          ]
-        },
-        {
-          id: 102888,
-          latitude: 31.8559665,
-          longitude: 120.2218342,
-          altitude: 51.39,
-          heading: 180,
-          action: [
-            {
-              src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-              id: 164268,
-              yaw: -2,
-              roll: 0,
-              pitch: 1.7
-            }
-          ]
-        },
-        {
-          id: 102889,
-          latitude: 31.8559705,
-          longitude: 120.2218332,
-          altitude: 44.96,
-          heading: 90,
-          action: []
-        },
-        {
-          id: 102892,
-          latitude: 31.8562512,
-          longitude: 120.2217962,
-          altitude: 62.04,
-          heading: 0,
-          action: [
-            {
-              src: 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-              id: 164271,
+              target_type: 10,
+              action: 1,
+              zoom: 2,
+              target_id: 0,
+              pitch: 45,
+              pre_time: 3000,
               yaw: 0,
+              post_time: 1000
+            },
+            {
+              actionIndex: 1,
+              name: 'fX1QTHLJnwj0FPevIEofVKyDUI47vOxuBX0FrOI9QT0mRMZ2T%2FE9Snoc%2FHcYnnisgHDjUg4YouPBHZZs5%2F%2FUIVuR7%2FazL5yM1OKBUoOPXfprS6C2oqxDcB+UPJjSMuaYFSlthPvkdLjlUzQrI9dO2j2hRyKYUBWMr7l2mcyJ2wc=',
               roll: 0,
-              pitch: 1.7
+              target_type: 10,
+              action: 1,
+              zoom: 3,
+              target_id: 0,
+              pitch: 52.142893346609696,
+              pre_time: 3000,
+              yaw: 0,
+              post_time: 1500
             }
-          ]
+          ],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.73705346721596,
+          direction: 288.8864713432471,
+          waypointNumber: 3,
+          heading: 288.8864713432471
         },
         {
-          id: 102893,
-          latitude: 31.8562451,
-          longitude: 120.2217842,
-          altitude: 58.18,
-          heading: 0,
-          action: []
+          altitude: 63.93,
+          latitude: 39.19881533462183,
+          turnType: 2,
+          index: 4,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          routeId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
+          action: [],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.73640429348586,
+          direction: -2,
+          waypointNumber: 4,
+          heading: 0
         },
         {
-          id: 102894,
-          latitude: 31.8562542,
-          longitude: 120.2217819,
-          altitude: 51.42,
-          heading: 0,
-          action: []
-        },
-        {
-          id: 102895,
-          latitude: 31.8562497,
-          longitude: 120.2217814,
-          altitude: 44.99,
-          heading: 0,
+          altitude: 43.93,
+          latitude: 39.19881533462183,
+          turnType: 2,
+          index: 5,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          routeId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
           action: [
             {
-              src: 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-              id: 164276,
-              yaw: -2.2,
+              actionIndex: 1,
+              name: 'OYMS9QH221YnJ2b1krVOiNl66%2FY2Z0CC%2Fx%2FiWksgdKa091kHcblWpPC8Xyc7yeEmSL1pSec0kan6bbpBI5s3aPswgn4soCSyJ3FYwE1IaJjkH923uzlJ8MoNFQgKwIxTBWXGL00+2ua0B3DJ5fR6S2aysmTehEAHDpodOge9pL8=',
               roll: 0,
-              pitch: 2
+              target_type: 4,
+              action: 1,
+              zoom: 6,
+              target_id: 270405,
+              pitch: 3.8967558291583893,
+              pre_time: 3000,
+              yaw: 1.0253485445317299,
+              post_time: 1000
+            },
+            {
+              actionIndex: 2,
+              name: 'hR31o5HOnIx%2FWJGAsP1koYwJXhN15pTE0nLqRAYUmz2e8buVBco6YYB3L9alVxXaxyjLvb0pRHbe9U81ZyOLRARwGqyexZCnh6QY1o4H1UWtMm6X2Im0OTcvHVGlsO6eSMesBTa0jQCTFWytIISXBqkne%2FePdzcfOuUFzfy0R8o=',
+              roll: 0,
+              target_type: 4,
+              action: 1,
+              zoom: 6,
+              target_id: 270408,
+              pitch: 3.7270767424283826,
+              pre_time: 3000,
+              yaw: -1.0622905471089223,
+              post_time: 1000
             }
-          ]
+          ],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.73640429348586,
+          direction: 47.88570183190478,
+          waypointNumber: 5,
+          heading: 47.88570183190478
+        },
+        {
+          altitude: 36.8,
+          latitude: 39.19879982828979,
+          turnType: 2,
+          index: 6,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          routeId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
+          action: [
+            {
+              actionIndex: 1,
+              name: 'fWVPSmHm3tYDZdUpGgrcT9AQhF5ewblPO50KRJZ0CZgrt1HKD8GW6uD8mR%2FyOQ4Cv+qp%2FpkNUROBB3JAwCoETYgvNL%2FGUPcqgxr4egaHL8YYTS9Q+GtKLwWjEJmPhru8FK9kUE%2Fm0FdOKIC+wOJNw9qF7aF7xOnBQk%2FN0StPvnE=',
+              roll: 0,
+              target_type: 4,
+              action: 1,
+              zoom: 8,
+              target_id: 270399,
+              pitch: 4.001273864584326,
+              pre_time: 3000,
+              yaw: 0.8546970498813964,
+              post_time: 1000
+            },
+            {
+              actionIndex: 2,
+              name: 'TC4vwKs02AM3ospAaN5hibDHk%2FlejZ9d6PSkla%2F+MBkOwAtGxfjFWPOGCFbhQ4DexQopEOIvpz7v5D5j34j3vhkFVLHz1RVrAOBC4+i9m+hu8fwRxXl0X6NyRxSzAiXFYhusJ8joDh7HKgw9+98kjMSC95qZnspbq4VNbh3mz6o=',
+              roll: 0,
+              target_type: 4,
+              action: 1,
+              zoom: 6,
+              target_id: 270402,
+              pitch: 3.6164834588837897,
+              pre_time: 3000,
+              yaw: -0.8975100272709139,
+              post_time: 1000
+            }
+          ],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.73641077686767,
+          direction: 45.6589149530172,
+          waypointNumber: 6,
+          heading: 45.6589149530172
+        },
+        {
+          altitude: 30.6875,
+          latitude: 39.198808464964486,
+          turnType: 2,
+          index: 7,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          routeId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
+          action: [
+            {
+              actionIndex: 1,
+              name: 'Cm8uTcQPjTm1teVsWd0HPREby0JPpGt4dFeDAptB+TJyhiu2i45rjYvCYyLksEynBg%2F17PFPUpdlIEuHJUCu7wl+k2K23jWyI5nDmm+ioccGQhWWOoDfa87gytHdmcO5tYxNQhY0B7u0bPNZrkNONJ1DcCppV2kENUEKvh45Wa4=',
+              roll: 0,
+              target_type: 4,
+              action: 1,
+              zoom: 6,
+              target_id: 270393,
+              pitch: 3.7450555642106482,
+              pre_time: 3000,
+              yaw: 0.8520014375929758,
+              post_time: 1000
+            },
+            {
+              actionIndex: 2,
+              name: 'TH8hRnG7O37GQ0Kav3XuHAP2ck3Addb9Fl42Ei9q9KLssJWoFRc3aQrVMIr86Tk24NJ%2FwYx6U679wGAXdh+xX2vvCtyh7PXahRYhBY8Dnhzx8J71RiGacJos0lwda9vDW8eK2Ct43FKXu3Hvh4OQP%2FwNKpbaGJHhngO%2Fmklxlsw=',
+              roll: 0,
+              target_type: 4,
+              action: 1,
+              zoom: 6,
+              target_id: 270396,
+              pitch: 3.8844008044312224,
+              pre_time: 3000,
+              yaw: -0.8793923089143332,
+              post_time: 1000
+            }
+          ],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.73641036225291,
+          direction: 45.85657850541294,
+          waypointNumber: 7,
+          heading: 45.85657850541294
+        },
+        {
+          altitude: 63.93,
+          latitude: 39.19881533462183,
+          turnType: 2,
+          index: 8,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          routeId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
+          action: [],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.73640429348586,
+          direction: -2,
+          waypointNumber: 8,
+          heading: 1.38
+        },
+        {
+          altitude: 64.035,
+          latitude: 39.199092434605575,
+          turnType: 2,
+          index: 9,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          routeId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
+          action: [],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.73641293848584,
+          direction: -2,
+          waypointNumber: 9,
+          heading: 0
+        },
+        {
+          altitude: 44.035,
+          latitude: 39.199092434605575,
+          turnType: 2,
+          index: 10,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          routeId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
+          action: [
+            {
+              actionIndex: 1,
+              name: 'G9s00qBv8Xub3EFxhpzPF81PTIqjVX8iOJhFvl1Cqak3zdntwp0ULBbgdcNGC%2FKHosK7lr5mh8KqEbsvdPFy42vYkk6oB6ujXdEDinBfbMzlrlD55f2e+ULZwXe9HGMh9r2Pyww3kS+GNN%2F0vuqLlM4Ff0ADsciWASwz+4wSCg4=',
+              roll: 0,
+              target_type: 4,
+              action: 1,
+              zoom: 6,
+              target_id: 269474,
+              pitch: 3.8222603163196944,
+              pre_time: 3000,
+              yaw: -1.145362629797351,
+              post_time: 1000
+            },
+            {
+              actionIndex: 2,
+              name: 'c3sn%2FXZhcvj1bwcbXY1XjqQcJsQK3zajQYs2rMK9Meyl1%2F0h9ICYLZYy%2F6miVb87I97vTlCrRvdOk%2FlRlosaRBnlH+cg%2Fwa%2F0oPsH79u3DoWwvyxAbdabwFVy1tMtslF8fY+VwxDauDS+KdWOKj8WG3fit8qLENqUCOtFzeN+m0=',
+              roll: 0,
+              target_type: 4,
+              action: 1,
+              zoom: 6,
+              target_id: 269477,
+              pitch: 3.8034765011923546,
+              pre_time: 3000,
+              yaw: 1.1862421209250291,
+              post_time: 1000
+            }
+          ],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.73641293848584,
+          direction: 134.03100842623542,
+          waypointNumber: 10,
+          heading: 134.03100842623542
+        },
+        {
+          altitude: 36.9975,
+          latitude: 39.19910597266718,
+          turnType: 2,
+          index: 11,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          routeId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
+          action: [
+            {
+              actionIndex: 1,
+              name: 'Tgx9vueZ8Qfg+Gz4HgxfzEI8+WxxKO3TQ7sp5yjwdagZUoaTtFzRlbIDtGcB9NN35JQq3xnNDiUVPzlrIFPd%2F9sknvzMY3Wi2jDuVmx13YbZ7XgrnxJlTZY6DEnwOWp0OUplsNnwRCi9lFWKDetoSpekrsVjqfCx0CIlzuKjz3A=',
+              roll: 0,
+              target_type: 4,
+              action: 1,
+              zoom: 6,
+              target_id: 269468,
+              pitch: 3.6898425770020147,
+              pre_time: 3000,
+              yaw: 1.1027318952354124,
+              post_time: 1000
+            },
+            {
+              actionIndex: 2,
+              name: 'PoRdZViSlpX4iKmxqMI1FJWhbYmbre7e4C%2FIBCND29NWsPJ4fvp3vBjy+gz24o5Z4NIk3Kj0ynukzQt563SJEry90HMuGbq+dexIwgZZDYsVv06qj+4bENPtNspATFgt3a0g1dq8ySabnlAqxnnuQCsy7NWS8+d1tdVbkb1TUH0=',
+              roll: 0,
+              target_type: 4,
+              action: 1,
+              zoom: 6,
+              target_id: 269471,
+              pitch: 3.9326158533196445,
+              pre_time: 3000,
+              yaw: -1.0688942622773945,
+              post_time: 1000
+            }
+          ],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.73641889815696,
+          direction: 135.77370333735928,
+          waypointNumber: 11,
+          heading: 135.77370333735928
+        },
+        {
+          altitude: 30.595,
+          latitude: 39.19909315865803,
+          turnType: 2,
+          index: 12,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          routeId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
+          action: [
+            {
+              actionIndex: 1,
+              name: 'GMZdytPCl4LdsaRFqWc+SfQxsrsjFgdfum7WmpF7XYDdXZ1FRBT3Vj%2FCPwQ56FHN5iRUJzo53gu%2FjODDO%2F2ADzryFytzrLfuFMgkfUDQSMEms2tLeN5EkhtcahQYarELSYMSTcKOZV03%2Fm1mGfujfIT+WiD+bKXaXXRolDYwcCk=',
+              roll: 0,
+              target_type: 4,
+              action: 1,
+              zoom: 6,
+              target_id: 269462,
+              pitch: 3.9171861713194467,
+              pre_time: 3000,
+              yaw: -0.5959983534177004,
+              post_time: 1000
+            },
+            {
+              actionIndex: 2,
+              name: 'hHWwjfaDjsdevG0wwFqsPTQBjP0KwrMXfGKYHyXyOLw6lAIrtdy6VyFfYVmOl05P3W7I+28spyE1aE6je4IdkvIlQjSCLUserlyVKzeW1ICzyoARdyVGjL65mWmbao98MkAfP%2F0YKM75YyTWP6hWAtcMe3f5P31Mv2uFsrIN7X8=',
+              roll: 0,
+              target_type: 4,
+              action: 1,
+              zoom: 5,
+              target_id: 269465,
+              pitch: 3.705304118688527,
+              pre_time: 3000,
+              yaw: 0.6230024170034794,
+              post_time: 1000
+            }
+          ],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.73641152860836,
+          direction: 133.6011550040397,
+          waypointNumber: 12,
+          heading: 133.6011550040397
+        },
+        {
+          altitude: 30.595,
+          latitude: 39.19909315865803,
+          turnType: 2,
+          index: 13,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          routeId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
+          action: [
+            {
+              actionIndex: 1,
+              name: 'I5uWtyFJbH0b2cFc0%2FQUwbo30uJkFx%2F6cBAHD16CJZRPagtjNAHo6YBlh2Xf6KO4GDv5%2FSQ2ctwZaqV8oN%2Fx%2FvniaWrVu1sbL0qc0Ii5qgct2h%2FGu7rxgWSQHIdYUvHXP689H58PsslmlQnk15ATLXo9XjF5bdr1xx9PeHPUL4M=',
+              roll: 0,
+              target_type: 10,
+              action: 1,
+              zoom: 2,
+              target_id: 0,
+              pitch: 0,
+              pre_time: 3000,
+              yaw: 0,
+              post_time: 1000
+            }
+          ],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.73641152860836,
+          direction: 92.8886578648563,
+          waypointNumber: 13,
+          heading: 92.8886578648563
+        },
+        {
+          altitude: 30.595,
+          latitude: 39.19909315865803,
+          turnType: 2,
+          index: 14,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          routeId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
+          action: [
+            {
+              actionIndex: 1,
+              name: 'I%2Frw5%2FdaYidRiyE8SlJEYxaWFuTkkAL+O1a7JG00HLR9wEgu+BdkfDRPjeoyDb4y%2FqVLKN5GJ9kDdp7I5bfZXRd6G%2Fn81HJiT5QG1tlZJjEb7pcqj6z0ulIzrkmoNQGECGc%2Fa0uaV%2F+5UXVzlgYoTCJ+pYJ9qmbSAgoJRh8Ba9w=',
+              roll: 0,
+              target_type: 10,
+              action: 1,
+              zoom: 2,
+              target_id: 0,
+              pitch: 0,
+              pre_time: 3000,
+              yaw: 0,
+              post_time: 1000
+            }
+          ],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.73641152860836,
+          direction: 267.6766967992813,
+          waypointNumber: 14,
+          heading: 267.6766967992813
+        },
+        {
+          altitude: 64.035,
+          latitude: 39.199092434605575,
+          turnType: 2,
+          index: 15,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          routeId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
+          action: [],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.73641293848584,
+          direction: -2,
+          waypointNumber: 15,
+          heading: 90.48
+        },
+        {
+          altitude: 68.72,
+          latitude: 39.1990652632048,
+          turnType: 2,
+          index: 16,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
+          action: [
+            {
+              actionIndex: 1,
+              name: 'gJY%2FYhpwEVAvErJIQrE%2F%2FcNhb9UIZL76izaQV4I%2FNe8Ei7TCPZ6x5deNzCnfCdaoHDttp1mIGtaNpv4DWwwuRDU%2FE023DOufT+OHtTfVLhI8G6GOsHDVSHg1GoKLZHAZ3kg3CyT+uRj2zoVEOcfIkWmbs4I6o6CwQs1vr5Op0ls=',
+              roll: 0,
+              target_type: 10,
+              action: 0,
+              zoom: 2,
+              target_id: 0,
+              pitch: 45,
+              pre_time: 1000,
+              yaw: 0,
+              post_time: 1000
+            }
+          ],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.74058044519552,
+          direction: -2,
+          waypointNumber: 16,
+          heading: 29.11
+        },
+        {
+          altitude: 68.72,
+          latitude: 39.2012737,
+          turnType: 2,
+          index: 17,
+          lineId: '',
+          speed: 10,
+          routeName: '创汉二线_13#塔_创汉一线_13#塔_自动生成',
+          organizationId: 0,
+          routeId: 0,
+          pointId: 0,
+          propertyType: 3,
+          singleType: 1,
+          action: [],
+          routeType: 5,
+          towerSn: '11773653740391989490',
+          longitude: 117.7421675,
+          direction: -2,
+          waypointNumber: 17,
+          heading: -2
         }
       ]
     }
@@ -299,7 +760,7 @@ export default {
       // 点
       const entity = viewer.entities.add(
         new Cesium.Entity({
-          id: 'point' + point.id,
+          id: 'point' + index,
           name: 'point',
           position: Cesium.Cartesian3.fromDegrees(
             point.longitude,
@@ -321,18 +782,18 @@ export default {
           //   distanceDisplayCondition: new Cesium.DistanceDisplayCondition(500, Number.MAX_VALUE), // 可视高度范围
           //   show: true
           // }),
-          billboard: {
-            image: require('@/assets/images/point.png'),
-            verticalOrigin: Cesium.VerticalOrigin.CENTER,
-            horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-            scale: 1,
-            scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
-            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-              0.0,
-              7000.0
-            ),
-            show: true
-          },
+          // billboard: {
+          //   image: require('@/assets/images/point.png'),
+          //   verticalOrigin: Cesium.VerticalOrigin.CENTER,
+          //   horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+          //   scale: 1,
+          //   scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+          //   distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+          //     0.0,
+          //     7000.0
+          //   ),
+          //   show: true
+          // },
           ellipsoid: {
             radii: new Cesium.Cartesian3(0.5, 0.5, 0.5),
             material: new Cesium.PolylineGlowMaterialProperty({
@@ -348,7 +809,7 @@ export default {
             zIndex: -1
           },
           label: {
-            text: point.id + '',
+            text: index + '',
             style: Cesium.LabelStyle.FILL_AND_OUTLINE,
             fillColor: new Cesium.Color.fromCssColorString('#f00'),
             outlineColor: new Cesium.Color.fromCssColorString('#fff'),
@@ -517,6 +978,7 @@ export default {
     const point1 = this.points[0]
     const point2 = this.points[1]
     const point3 = this.points[2]
+    const point4 = this.points[3]
 
     // // 方式一：颜色填充
     // viewer.entities.add({
@@ -616,21 +1078,79 @@ export default {
     // })
 
     // 添加 glb 模型
-    // const modelEntity = viewer.entities.add({
-    //   name: 'glb 模型',
-    //   position: new Cesium.Cartesian3.fromDegrees(
-    //     point3.longitude,
-    //     point3.latitude,
-    //     point3.altitude
-    //   ),
-    //   model: {
-    //     uri: 'model/Cesium_Air.glb',
-    //     minimumPixelSize: 256,
-    //     maxumunScale: 20000
-    //   }
-    // })
+    let factor = 0
+    const start = this.points[14]
+    const end = this.points[15]
+    const modelEntity = viewer.entities.add({
+      name: 'glb 模型',
+      // position: new Cesium.Cartesian3.fromDegrees(
+      //   start.longitude,
+      //   start.latitude,
+      //   start.altitude
+      // ),
+      position: new Cesium.CallbackProperty(function () {
+        if (factor > 5000) {
+          factor = 0
+        }
+        factor++
+        // 动态更新位置
+        return Cesium.Cartesian3.lerp(
+          new Cesium.Cartesian3.fromDegrees(
+            start.longitude,
+            start.latitude,
+            start.altitude
+          ),
+          new Cesium.Cartesian3.fromDegrees(
+            end.longitude,
+            end.latitude,
+            end.altitude
+          ),
+          factor / 5000.0,
+          new Cesium.Cartesian3()
+        )
+      }, false),
+      model: {
+        uri: 'model/Cesium_Air.glb',
+        minimumPixelSize: 256,
+        maxumunScale: 20000
+      }
+    })
     // 聚焦模型
-    // viewer.trackedEntity = modelEntity
+    viewer.trackedEntity = modelEntity
+    // viewer.scene.preRender.addEventListener(listenDeviceCamera)
+
+    // setTimeout(() => {
+    //   viewer.trackedEntity = null
+    //   viewer.scene.preRender.removeEventListener(listenDeviceCamera)
+    // }, 5000)
+
+    // function listenDeviceCamera() {
+    //   // const entity = modelEntity
+    //   // if (!entity) return
+    //   // const time = viewer.clock.currentTime
+    //   // const entityposition = Cesium.Property.getValueOrUndefined(
+    //   //   entity.position,
+    //   //   time,
+    //   //   new Cesium.Cartesian3()
+    //   // )
+    //   // if (!entityposition) return
+    //   // // const orientation = Cesium.Property.getValueOrUndefined(entity.orientation, time, new Cesium.Quaternion())
+    //   // const podOrientation = Cesium.Property.getValueOrUndefined(
+    //   //   entity.podOrientation,
+    //   //   time,
+    //   //   new Cesium.Quaternion()
+    //   // )
+    //   if (!podOrientation) return
+    //   viewer.scene.camera.setView({
+    //     destination: Cesium.Cartesian3.fromDegrees(116.3, 39.9, 5000.0),
+    //     orientation: {
+    //       heading: 0,
+    //       pitch: 0,
+    //       roll: 0
+    //     }
+    //     // orientation: new Cesium.HeadingPitchRoll.fromQuaternion(podOrientation)
+    //   })
+    // }
   },
   methods: {}
 }
