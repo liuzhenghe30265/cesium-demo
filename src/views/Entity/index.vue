@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script>
+  <script>
 /* eslint-disable no-undef */
 /* eslint-disable new-cap */
 /* eslint-disable no-unused-vars */
@@ -853,44 +853,44 @@ export default {
       )
 
       /**
-      // 扩展（航点动作上拍照图片）
-      if (point.action && point.action.length > 0) {
-        point.action.map((action) => {
-          const entity = viewer.entities.add(new Cesium.Entity({
-            id: 'action' + action.id,
-            name: 'action',
-            position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
-            // orientation: Cesium.Transforms.headingPitchRollQuaternion(
-            //   Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
-            //   new Cesium.HeadingPitchRoll(action.yaw, action.pitch, action.roll)
-            // ),
-            data: {
-              action
-            },
-            plane: {
-              plane: new Cesium.Plane(Cesium.Cartesian3.UNIT_Z, -50.0),
-              dimensions: new Cesium.Cartesian2(100.0, 80.0),
-              material: new Cesium.ImageMaterialProperty({
-                image: action.src, // 图片以材质的方式填充
-                repeat: new Cesium.Cartesian2(1, 1)
-              })
-            }
-            // billboard: {
-            //   width: 320,
-            //   height: 150,
-            //   // image: action.src,
-            //   image: require('@/assets/images/pic.jpeg'),
-            //   verticalOrigin: Cesium.VerticalOrigin.CENTER,
-            //   horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-            //   // scale: 0.2,
-            //   scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
-            //   distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0),
-            //   show: true
-            // }
-          }))
-        })
-      }
-       */
+        // 扩展（航点动作上拍照图片）
+        if (point.action && point.action.length > 0) {
+          point.action.map((action) => {
+            const entity = viewer.entities.add(new Cesium.Entity({
+              id: 'action' + action.id,
+              name: 'action',
+              position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
+              // orientation: Cesium.Transforms.headingPitchRollQuaternion(
+              //   Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.altitude),
+              //   new Cesium.HeadingPitchRoll(action.yaw, action.pitch, action.roll)
+              // ),
+              data: {
+                action
+              },
+              plane: {
+                plane: new Cesium.Plane(Cesium.Cartesian3.UNIT_Z, -50.0),
+                dimensions: new Cesium.Cartesian2(100.0, 80.0),
+                material: new Cesium.ImageMaterialProperty({
+                  image: action.src, // 图片以材质的方式填充
+                  repeat: new Cesium.Cartesian2(1, 1)
+                })
+              }
+              // billboard: {
+              //   width: 320,
+              //   height: 150,
+              //   // image: action.src,
+              //   image: require('@/assets/images/pic.jpeg'),
+              //   verticalOrigin: Cesium.VerticalOrigin.CENTER,
+              //   horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+              //   // scale: 0.2,
+              //   scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+              //   distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 7000.0),
+              //   show: true
+              // }
+            }))
+          })
+        }
+         */
     })
 
     // 线

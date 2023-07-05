@@ -37,6 +37,7 @@ export default {
     this.tileset = new Cesium.Cesium3DTileset({
       url: 'https://lab.earthsdk.com/model/3610c2b0d08411eab7a4adf1d6568ff7/tileset.json', // 上海（白）
       // url: 'https://lab.earthsdk.com/model/908311a0ac2f11e99dbd8fd044883638/tileset.json', // 上海（蓝）
+      // url: 'https://lab.earthsdk.com/model/de2a2300ac2d11e99dbd8fd044883638/tileset.json', // 大雁塔（单体）
       // url: 'https://lab.earthsdk.com/model/f15b9e90ac2d11e99dbd8fd044883638/tileset.json', // 大雁塔
       debugShowMemoryUsage: false
     })
@@ -55,10 +56,10 @@ export default {
     handler.setInputAction(function (event) {
       // 平面坐标系转笛卡尔空间直角坐标系
       /**
-        position: Cartesian2 {x: 683.0753784179688, y: 512.71826171875}
-        转
-        Cartesian3{x: -2174106.926252774, y: 4386734.375324652, z: 4074136.167795586}
-       */
+          position: Cartesian2 {x: 683.0753784179688, y: 512.71826171875}
+          转
+          Cartesian3{x: -2174106.926252774, y: 4386734.375324652, z: 4074136.167795586}
+         */
       console.log(
         '平面坐标系转笛卡尔空间直角坐标系',
         viewer.scene.pickPosition(event.position)

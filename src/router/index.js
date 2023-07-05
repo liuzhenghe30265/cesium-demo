@@ -14,7 +14,7 @@ const routes = [
     path: '/Entity',
     name: '实体',
     visible: true,
-    component: resolve => require(['@/views/Entity.vue'], resolve)
+    component: resolve => require(['@/views/Entity'], resolve)
   },
   {
     path: '/Route',
@@ -23,16 +23,28 @@ const routes = [
     component: resolve => require(['@/views/Route'], resolve)
   },
   {
+    path: '/3DTileset',
+    name: '3DTileset加载',
+    visible: true,
+    component: resolve => require(['@/views/3DTileset'], resolve)
+  },
+  {
+    path: '/3DTilesetCompare',
+    name: '3DTilesetCompare',
+    visible: true,
+    component: resolve => require(['@/views/3DTileset/Compare.vue'], resolve)
+  },
+  {
+    path: '/3DTilesetClippingPlane',
+    name: '3DTileset切割',
+    visible: true,
+    component: resolve => require(['@/views/3DTileset/ClippingPlane.vue'], resolve)
+  },
+  {
     path: '/Plot',
     name: '标绘',
     visible: true,
     component: resolve => require(['@/views/Plot'], resolve)
-  },
-  {
-    path: '/Plot/Primitive',
-    name: '标绘Primitive',
-    visible: true,
-    component: resolve => require(['@/views/Plot/Primitive.vue'], resolve)
   },
   {
     path: '/Primitive',
@@ -41,8 +53,14 @@ const routes = [
     component: resolve => require(['@/views/Primitive'], resolve)
   },
   {
+    path: '/Primitive/Plot',
+    name: 'Primitive Plot',
+    visible: true,
+    component: resolve => require(['@/views/Primitive/plot.vue'], resolve)
+  },
+  {
     path: '/Primitive/get',
-    name: '操作Primitive',
+    name: 'Primitive 拾取',
     visible: true,
     component: resolve => require(['@/views/Primitive/get.vue'], resolve)
   },
@@ -53,16 +71,10 @@ const routes = [
     component: resolve => require(['@/views/Primitive/PrimitiveCollection.vue'], resolve)
   },
   {
-    path: '/Model',
-    name: '模型',
+    path: '/Primitive/Model',
+    name: 'PrimitiveModel',
     visible: true,
-    component: resolve => require(['@/views/Model.vue'], resolve)
-  },
-  {
-    path: '/ClippingPlane',
-    name: '模型切割',
-    visible: true,
-    component: resolve => require(['@/views/ClippingPlane.vue'], resolve)
+    component: resolve => require(['@/views/Primitive/model.vue'], resolve)
   },
   {
     path: '/Video',

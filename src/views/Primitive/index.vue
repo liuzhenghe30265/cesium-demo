@@ -223,6 +223,7 @@ export default {
     // Primitive
     const instances = []
     // let primitiveObj = {}
+    console.log('............positions', positions)
     positions.map((point, index) => {
       // 圆环扩散
       // viewer.scene.primitives.add(
@@ -298,11 +299,7 @@ export default {
         _colorBlendMode = Cesium.ColorBlendMode.MIX
       }
       const modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
-        Cesium.Cartesian3.fromDegrees(
-          point.longitude,
-          point.latitude,
-          point.altitude
-        )
+        Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, 10000)
       )
       const model = viewer.scene.primitives.add(
         Cesium.Model.fromGltf({

@@ -16,13 +16,16 @@
       </timeline-slider-vue>
     </div> -->
     <div class="nav">
-      <router-link
-        v-for="(item, index) of visibleRouters"
-        :key="index"
-        :to="item.path"
-      >
-        {{ item.name }}
-      </router-link>
+      <ul>
+        <li
+          v-for="(item, index) of visibleRouters"
+          :key="index"
+        >
+          <router-link :to="item.path">
+            {{ item.name }}
+          </router-link>
+        </li>
+      </ul>
       <a
         href="https://lab.earthsdk.com/model/"
         target="blank"
@@ -75,8 +78,10 @@ export default {
   position: fixed;
   left: 0;
   top: 0;
+  bottom: 0;
   padding: 20px;
   z-index: 999;
+  overflow-y: auto;
   a {
     color: #fff;
     margin: 10px;

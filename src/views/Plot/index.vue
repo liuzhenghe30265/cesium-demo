@@ -78,7 +78,11 @@ export default {
         this.active === item.name
           ? (this.active = '')
           : (this.active = item.name)
-      this.$PlotUtil.StartPlot(this.active)
+      if (this.active) {
+        this.$PlotUtil.StartPlot(this.active)
+      } else {
+        this.$PlotUtil.Destory()
+      }
     }
   }
 }
@@ -87,7 +91,7 @@ export default {
 <style lang="scss" scoped>
 .btns {
   position: absolute;
-  left: 50px;
+  right: 50px;
   top: 100px;
   z-index: 999;
   .ul {

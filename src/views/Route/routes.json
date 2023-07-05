@@ -59,7 +59,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         },
         {
             "index": 4,
@@ -96,7 +96,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         },
         {
             "index": 5,
@@ -133,7 +133,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         },
         {
             "index": 6,
@@ -170,7 +170,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         },
         {
             "index": 7,
@@ -207,7 +207,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         }
     ]
 }, {
@@ -619,7 +619,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         },
         {
             "index": 3,
@@ -656,7 +656,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         },
         {
             "index": 4,
@@ -693,7 +693,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         },
         {
             "index": 5,
@@ -730,7 +730,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         },
         {
             "index": 6,
@@ -767,7 +767,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         }
     ]
 }, {
@@ -831,7 +831,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         },
         {
             "index": 4,
@@ -868,7 +868,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         },
         {
             "index": 5,
@@ -905,7 +905,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         },
         {
             "index": 6,
@@ -942,7 +942,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         },
         {
             "index": 7,
@@ -979,7 +979,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         },
         {
             "index": 8,
@@ -1016,7 +1016,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         },
         {
             "index": 9,
@@ -1028,7 +1028,7 @@
             "altitude": 30.27,
             "heading": 318.55,
             "action": [],
-            "turnType": 2
+            "turnType": 1
         },
         {
             "index": 10,
@@ -1065,7 +1065,7 @@
                 "yaw": 0,
                 "zoom": 1
             }],
-            "turnType": 2
+            "turnType": 1
         }
     ]
 }, {

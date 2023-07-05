@@ -66,7 +66,7 @@ export default {
     })
     viewer.scene.primitives.add(BasePrimitive)
 
-    const data = require('./mock.json')
+    const data = require('./plots.json')
     data.map(item => {
       if (item.objectInfo && item.objectInfo.drawingMode === 'polygon') {
         const _id = `${item.id}_plotPolygon`
@@ -179,7 +179,7 @@ export default {
             positions: Cesium.Cartesian3.fromDegreesArrayHeights(positions),
             width: 2,
             material: Cesium.Material.fromType('Color', {
-              color: Cesium.Color.fromCssColorString('#f60').withAlpha(1)
+              color: Cesium.Color.fromCssColorString('#ffff00').withAlpha(1)
             })
           })
         }

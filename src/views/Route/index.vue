@@ -10,7 +10,7 @@
         :key="index"
         class="li"
         :class="{active: item.name === active}"
-        @click="handleClick(item)"
+        @click="handleClick(item, index)"
       >
         {{ item.name }}
       </div>
@@ -26,6 +26,7 @@ import routes from './routes.json'
 export default {
   data() {
     return {
+      colors: ['#D0021B', '#F8E71C', '#7ED321', '#4A90E2', '#BD10E0'],
       active: '',
       list: []
     }
@@ -34,21 +35,19 @@ export default {
   watch: {},
   mounted() {
     window.$InitMap()
-    viewer.camera.flyTo({
-      destination: Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
-    })
 
     this.list = routes
   },
   methods: {
-    handleClick(item) {
+    handleClick(item, index) {
       this.active = item.name
       ClearRouteGraphic('Route')
       AddRouteGraphic({
         id: 'Route', // 航线所有元素 ID 前缀（用于多处绘制/清除航线）
         list: item.list, // 航点数据
         indexReverse: false,
-        color: '#ff0000',
+        // color: '#ff0000',
+        color: this.colors[index],
         lineVisible: true,
         pointVisible: true,
         altitudeVisible: true,
@@ -63,7 +62,7 @@ export default {
 <style lang="scss" scoped>
 .ul {
   position: fixed;
-  left: 50px;
+  right: 50px;
   top: 100px;
   .li {
     padding: 10px 0;
