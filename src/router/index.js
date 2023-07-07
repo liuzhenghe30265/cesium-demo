@@ -29,6 +29,12 @@ const routes = [
     component: resolve => require(['@/views/3DTileset'], resolve)
   },
   {
+    path: '/WMS',
+    name: 'WMS',
+    visible: true,
+    component: resolve => require(['@/views/WMS'], resolve)
+  },
+  {
     path: '/3DTilesetCompare',
     name: '3DTilesetCompare',
     visible: true,
