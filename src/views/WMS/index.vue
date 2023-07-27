@@ -19,7 +19,7 @@
   </div>
 </template>
 
-  <script>
+<script>
 /* eslint-disable no-undef */
 // import {
 //   getExtend
@@ -30,11 +30,17 @@ export default {
     return {
       defaultCheckedKeys: [],
       defaultProps: {
-        children: 'children',
-        label: 'name'
+        label: 'id'
       },
-      basePath: '',
-      layers: []
+      basePath: 'https://wms.geo.admin.ch/',
+      layers: [
+        {
+          id: 'ch.bafu.hydroweb-warnkarte_national'
+        },
+        {
+          id: 'ch.swisstopo.pixelkarte-farbe-pk1000.noscale'
+        }
+      ]
     }
   },
   computed: {},
@@ -72,6 +78,39 @@ export default {
       viewer.imageryLayers.remove(layer)
     }
 
+    // 全球
+    // viewer.imageryLayers.add(
+    //   new Cesium.ImageryLayer(
+    //     new Cesium.WebMapServiceImageryProvider({
+    //       url: 'https://ahocevar.com/geoserver/ne/wms',
+    //       layers: 'ne:ne_10m_admin_0_countries',
+    //       parameters: {
+    //         transparent: true,
+    //         format: 'image/png'
+    //       }
+    //     })
+    //   )
+    // )
+
+    viewer.imageryLayers.add(
+      new Cesium.ImageryLayer(
+        new Cesium.WebMapServiceImageryProvider({
+          url: 'http://openlayers.vip/geoserver/cite/wms',
+          layers: 'cite:xintai18,cite:2000',
+          parameters: {
+            transparent: true,
+            format: 'image/png',
+            srs: 'EPSG:4326'
+          },
+          tileWidth: 1024,
+          tileHeight: 1024
+        })
+      )
+    )
+    // viewer.camera.flyTo({
+    //   destination: Cesium.Rectangle.fromDegrees(104.23828125000001, 30.805664062499996, 104.26025390624999, 30.827636718749996)
+    // })
+
     // Australia
     viewer.imageryLayers.add(
       new Cesium.ImageryLayer(
@@ -93,16 +132,40 @@ export default {
     viewer.imageryLayers.add(
       new Cesium.ImageryLayer(
         new Cesium.WebMapServiceImageryProvider({
-          url: 'https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi?',
-          layers: 'nexrad-n0r',
-          credit: 'Radar data courtesy Iowa Environmental Mesonet',
+          url: 'https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r-t.cgi',
+          layers: 'nexrad-n0r-wmst',
           parameters: {
-            transparent: 'true',
+            transparent: true,
             format: 'image/png'
           }
         })
       )
     )
+    // viewer.imageryLayers.add(
+    //   new Cesium.ImageryLayer(
+    //     new Cesium.WebMapServiceImageryProvider({
+    //       url: 'https://ahocevar.com/geoserver/wms',
+    //       layers: 'topp:states',
+    //       parameters: {
+    //         transparent: true,
+    //         format: 'image/png'
+    //       }
+    //     })
+    //   )
+    // )
+    // viewer.imageryLayers.add(
+    //   new Cesium.ImageryLayer(
+    //     new Cesium.WebMapServiceImageryProvider({
+    //       url: 'https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi',
+    //       layers: 'nexrad-n0r',
+    //       credit: 'Radar data courtesy Iowa Environmental Mesonet',
+    //       parameters: {
+    //         transparent: 'true',
+    //         format: 'image/png'
+    //       }
+    //     })
+    //   )
+    // )
     // viewer.imageryLayers.add(
     //   new Cesium.ImageryLayer(
     //     new Cesium.WebMapServiceImageryProvider({
