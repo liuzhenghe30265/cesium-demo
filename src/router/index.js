@@ -29,12 +29,6 @@ const routes = [
     component: resolve => require(['@/views/3DTileset'], resolve)
   },
   {
-    path: '/WMS',
-    name: 'WMS',
-    visible: true,
-    component: resolve => require(['@/views/WMS'], resolve)
-  },
-  {
     path: '/3DTilesetCompare',
     name: '3DTilesetCompare',
     visible: true,
@@ -45,6 +39,12 @@ const routes = [
     name: '3DTileset切割',
     visible: true,
     component: resolve => require(['@/views/3DTileset/ClippingPlane.vue'], resolve)
+  },
+  {
+    path: '/WMS',
+    name: 'WMS',
+    visible: true,
+    component: resolve => require(['@/views/WMS'], resolve)
   },
   {
     path: '/Plot',

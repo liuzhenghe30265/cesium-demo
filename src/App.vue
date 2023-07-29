@@ -15,7 +15,7 @@
         </div>
       </timeline-slider-vue>
     </div> -->
-    <div class="nav">
+    <div v-if="currentMode === 'dev'" class="nav">
       <ul>
         <li
           v-for="(item, index) of visibleRouters"
@@ -49,6 +49,9 @@ export default {
     }
   },
   computed: {
+    currentMode() {
+      return process.env.VUE_APP_CURRENTMODE
+    },
     visibleRouters: function () {
       return routes.options.routes.filter(route => {
         return route.visible
