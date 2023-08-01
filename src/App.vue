@@ -15,24 +15,26 @@
         </div>
       </timeline-slider-vue>
     </div> -->
-    <div v-if="currentMode === 'dev'" class="nav">
-      <ul>
-        <li
-          v-for="(item, index) of visibleRouters"
-          :key="index"
-        >
-          <router-link :to="item.path">
-            {{ item.name }}
-          </router-link>
-        </li>
-      </ul>
-      <a
-        href="https://lab.earthsdk.com/model/"
-        target="blank"
+    <ul
+      v-if="navVisible"
+      class="nav"
+    >
+      <li
+        v-for="(item, index) of visibleRouters"
+        :key="index"
       >
-        无法加载 tileset ？
-      </a>
-    </div>
+        <router-link :to="item.path">
+          {{ item.name }}
+        </router-link>
+      </li>
+    </ul>
+    <a
+      href="https://lab.earthsdk.com/model/"
+      target="blank"
+      style="position: fixed;left: 0;top: 0;z-index: 999;color: #fff;"
+    >
+      无法加载 tileset ？
+    </a>
     <router-view />
   </div>
 </template>
@@ -49,6 +51,9 @@ export default {
     }
   },
   computed: {
+    navVisible() {
+      return this.getQueryVariable('nav')
+    },
     currentMode() {
       return process.env.VUE_APP_CURRENTMODE
     },
@@ -61,6 +66,17 @@ export default {
   watch: {},
   mounted() {},
   methods: {
+    getQueryVariable(variable) {
+      const query = window.location.search.substring(1)
+      const vars = query.split('&')
+      for (let i = 0; i < vars.length; i++) {
+        const pair = vars[i].split('=')
+        if (pair[0] === variable) {
+          return pair[1]
+        }
+      }
+      return false
+    },
     handleInput(value, date) {
       console.log('input', value, date)
     },
