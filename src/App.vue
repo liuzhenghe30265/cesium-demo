@@ -1,8 +1,5 @@
 <template>
-  <div
-    id="app"
-    style="width: 100%; height: 100%; position: relative"
-  >
+  <div id="app" style="width: 100%; height: 100%; position: relative">
     <!-- <div
       style="position: absolute;width: 100%;left: 0;bottom: 0;z-index: 999;">
       <timeline-slider-vue
@@ -15,24 +12,15 @@
         </div>
       </timeline-slider-vue>
     </div> -->
-    <ul
-      v-if="navVisible"
-      class="nav"
-    >
-      <li
-        v-for="(item, index) of visibleRouters"
-        :key="index"
-      >
+    <ul v-if="navVisible" class="nav">
+      <li v-for="(item, index) of visibleRouters" :key="index">
         <router-link :to="item.path">
           {{ item.name }}
         </router-link>
       </li>
     </ul>
-    <a
-      href="https://lab.earthsdk.com/model/"
-      target="blank"
-      style="position: fixed;left: 0;top: 0;z-index: 999;color: #fff;"
-    >
+    <a href="https://lab.earthsdk.com/model/" target="blank"
+      style="position: fixed;left: 0;top: 0;z-index: 999;color: #fff;">
       无法加载 tileset ？
     </a>
     <router-view />
@@ -52,7 +40,7 @@ export default {
   },
   computed: {
     navVisible() {
-      return this.getQueryVariable('nav')
+      return this.getQueryVariable('nav') || this.currentMode === 'dev'
     },
     currentMode() {
       return process.env.VUE_APP_CURRENTMODE
@@ -64,7 +52,7 @@ export default {
     }
   },
   watch: {},
-  mounted() {},
+  mounted() { },
   methods: {
     getQueryVariable(variable) {
       const query = window.location.search.substring(1)
@@ -93,6 +81,7 @@ export default {
   -webkit-tap-highlight-color: transparent;
   -webkit-appearance: none;
 }
+
 .nav {
   position: fixed;
   left: 0;
@@ -101,14 +90,17 @@ export default {
   padding: 20px;
   z-index: 999;
   overflow-y: auto;
+
   a {
     color: #fff;
     margin: 10px;
+
     &.router-link-exact-active {
       color: red;
     }
   }
 }
+
 .btns {
   position: fixed;
   right: 0;
@@ -122,9 +114,11 @@ export default {
   color: #fff;
   padding: 20px;
   box-sizing: border-box;
+
   i {
     font-style: normal;
     cursor: pointer;
+
     &[class^='el-icon'] {
       font-size: 48px;
     }
