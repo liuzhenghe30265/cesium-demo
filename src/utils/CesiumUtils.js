@@ -20,7 +20,7 @@ import { point, bearing, polygon, area } from '@turf/turf'
  * @param {*} points [Cartesian3, Cartesian3, Cartesian3]
  * @return {*}
  */
-export function getPolygonArea (points) {
+export function getPolygonArea(points) {
   let area = 0
   for (let i = 0; i < points.length; i++) {
     const j = (i + 1) % points.length
@@ -36,7 +36,7 @@ export function getPolygonArea (points) {
  * @param {*} entity
  * @return {*}
  */
-export function getPolygonCenterByEntity (entity) {
+export function getPolygonCenterByEntity(entity) {
   if (entity && entity.polygon) {
     const _positions = entity.polygon.hierarchy.getValue(Cesium.JulianDate.now()).positions
     const _center = Cesium.BoundingSphere.fromPoints(_positions).center
@@ -49,7 +49,7 @@ export function getPolygonCenterByEntity (entity) {
  * @param {*} points
  * @return {*}
  */
-export function getPolygonCenterByPoints (points) {
+export function getPolygonCenterByPoints(points) {
   const polygon = new Cesium.PolygonGeometry({
     polygonHierarchy: new Cesium.PolygonHierarchy(
       Cesium.Cartesian3.fromDegreesArrayHeights(points)
@@ -68,7 +68,7 @@ export function getPolygonCenterByPoints (points) {
  * @param {*} pointB
  * @return {*}
  */
-export function getHeadingDegByTwoPoints (pointA, pointB) {
+export function getHeadingDegByTwoPoints(pointA, pointB) {
   const point1 = point([pointA.longitude, pointA.latitude])
   const point2 = point([pointB.longitude, pointB.latitude])
   const result = parseFloat(bearing(point1, point2)) // 当前镜头与目标位角度
@@ -83,7 +83,7 @@ export function getHeadingDegByTwoPoints (pointA, pointB) {
  * @param {*} distance
  * @return {*}
  */
-export function getEndPointByYawPitch (point, heading, action, distance) {
+export function getEndPointByYawPitch(point, heading, action, distance) {
   const { scene } = viewer
   let position = new Cesium.Cartesian3.fromDegrees(
     point.longitude,
@@ -117,7 +117,7 @@ export function getEndPointByYawPitch (point, heading, action, distance) {
  * @param {*} array
  * @return {*}
  */
-export function makeLineSegment (array) {
+export function makeLineSegment(array) {
   const result = []
   for (let index = 0; index < array.length; index++) {
     const element1 = array[index]
@@ -139,7 +139,7 @@ export function makeLineSegment (array) {
  * @param {*} positions
  * @return {*}
  */
-export function getSpaceDistance (positions) {
+export function getSpaceDistance(positions) {
   const _positions = filter(positions, _ => {
     return _
   })
@@ -163,7 +163,7 @@ export function getSpaceDistance (positions) {
  * @param {*} latitude
  * @return {*}
  */
-export function regLongAndLat (longitude, latitude) {
+export function regLongAndLat(longitude, latitude) {
   const patt = /^(([1-9]\d*)(\.\d+)?)$|^0\.\d*[1-9]$/ // 不为 0
   if (patt.test(longitude) && patt.test(latitude)) {
     const longPatt =
@@ -181,7 +181,7 @@ export function regLongAndLat (longitude, latitude) {
  * @param {*} pointB
  * @return {*}
  */
-export function getTwoCartesianPointCenter (pointA, pointB) {
+export function getTwoCartesianPointCenter(pointA, pointB) {
   if (!pointA || !pointB) {
     return
   }
@@ -199,7 +199,7 @@ export function getTwoCartesianPointCenter (pointA, pointB) {
  * @param {*} pointB
  * @return {*}
  */
-export function getTwoPointCenter (pointA, pointB) {
+export function getTwoPointCenter(pointA, pointB) {
   if (!pointA || !pointB) {
     return
   }
@@ -227,7 +227,7 @@ export function getTwoPointCenter (pointA, pointB) {
  * @param {*} pointB
  * @return {*}
  */
-export function getTwoCartesianPointDistance (pointA, pointB) {
+export function getTwoCartesianPointDistance(pointA, pointB) {
   if (!pointA || !pointB) {
     return
   }
@@ -244,7 +244,7 @@ export function getTwoCartesianPointDistance (pointA, pointB) {
  * @param {*} pointB
  * @return {*}
  */
-export function getTwoPointDistance (pointA, pointB) {
+export function getTwoPointDistance(pointA, pointB) {
   if (!pointA || !pointB) {
     return
   }
@@ -269,7 +269,7 @@ export function getTwoPointDistance (pointA, pointB) {
  * @param {*} b Cartesian3
  * @return {*} Cartesian3
  */
-export function getCenterPointByToPoint (a, b) {
+export function getCenterPointByToPoint(a, b) {
   const center = new Cesium.Cartesian3(
     (a.x + b.x) / 2,
     (a.y + b.y) / 2,
@@ -283,7 +283,7 @@ export function getCenterPointByToPoint (a, b) {
  * @param {*} position
  * @return {*}
  */
-export function cartesianToWindowPosition (position) {
+export function cartesianToWindowPosition(position) {
   const result = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
     viewer.scene,
     position
@@ -296,7 +296,7 @@ export function cartesianToWindowPosition (position) {
  * @param {*} position
  * @return {*}
  */
-export function LongAndLatToWindowPosition (position) {
+export function LongAndLatToWindowPosition(position) {
   const _position = Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude, position.altitude)
   const result = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
     viewer.scene,
@@ -310,7 +310,7 @@ export function LongAndLatToWindowPosition (position) {
  * @param {*} Cartesian3
  * @return {*}
  */
-export function cartesianToLongAndLat (position, test) {
+export function cartesianToLongAndLat(position, test) {
   const cartographic = Cesium.Ellipsoid.WGS84.cartesianToCartographic(position)
   const longitude = Cesium.Math.toDegrees(cartographic.longitude)
   const latitude = Cesium.Math.toDegrees(cartographic.latitude)
@@ -328,7 +328,7 @@ export function cartesianToLongAndLat (position, test) {
  * @param {*} yaw
  * @return {*}
  */
-export function getVector (point, yaw) {
+export function getVector(point, yaw) {
   const A = new Cesium.Cartesian3.fromDegrees(
     parseFloat(point.longitude),
     parseFloat(point.latitude),
@@ -368,7 +368,7 @@ export function getVector (point, yaw) {
  * @param {*} yaw
  * @return {*}
  */
-export function translateByDirection (start, direction, offset) {
+export function translateByDirection(start, direction, offset) {
   const normalize = Cesium.Cartesian3.normalize(
     direction,
     new Cesium.Cartesian3()
@@ -391,7 +391,7 @@ export function translateByDirection (start, direction, offset) {
  * @param {*} distance
  * @return {*}
  */
-export function distancePos (longitude, latitude, deg, distance) {
+export function distancePos(longitude, latitude, deg, distance) {
   return {
     longitude: longitude + distance * Math.sin(deg * Math.PI / 180) * 180 / (Math.PI * 6371229 * Math.cos(latitude * Math.PI / 180)),
     latitude: latitude + distance * Math.cos(deg * Math.PI / 180) / (Math.PI * 6371229 / 180)

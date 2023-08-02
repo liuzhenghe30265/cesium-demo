@@ -1,5 +1,5 @@
 {
-  "name": "earthsdk-vue-cli-app",
+  "name": "cesium-demo",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,7 +12,7 @@
   "dependencies": {
     "@turf/turf": "^6.5.0",
     "axios": "^0.21.1",
-    "cesium": "~1.83.0",
+    "cesium": "^1.103.0",
     "cesiumvectortile": "^1.2.2",
     "copy-webpack-plugin": "^5.0.4",
     "core-js": "^2.6.5",

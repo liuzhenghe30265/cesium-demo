@@ -12,6 +12,9 @@ import TimelineSliderVue from 'timeline-slider-vue'
 import 'timeline-slider-vue/lib/timeline-slider-vue.css'
 Vue.use(TimelineSliderVue)
 
+import { InitMap } from '@/utils/InitMap.js'
+window.$InitMap = InitMap
+
 // new Vue({
 //   render: h => h(App),
 //   router,

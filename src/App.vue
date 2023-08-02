@@ -1,8 +1,5 @@
-
 <template>
-  <div
-    id="app"
-    style="width: 100%; height: 100%; position: relative">
+  <div id="app" style="width: 100%; height: 100%; position: relative">
     <!-- <div
       style="position: absolute;width: 100%;left: 0;bottom: 0;z-index: 999;">
       <timeline-slider-vue
@@ -15,15 +12,17 @@
         </div>
       </timeline-slider-vue>
     </div> -->
-    <div
-      class="nav">
-      <router-link
-        v-for="(item, index) of visibleRouters"
-        :key="index"
-        :to="item.path">
-        {{ item.name }}
-      </router-link>
-    </div>
+    <ul v-if="navVisible" class="nav">
+      <li v-for="(item, index) of visibleRouters" :key="index">
+        <router-link :to="item.path">
+          {{ item.name }}
+        </router-link>
+      </li>
+    </ul>
+    <a href="https://lab.earthsdk.com/model/" target="blank"
+      style="position: fixed;left: 0;top: 0;z-index: 999;color: #fff;">
+      无法加载 tileset ？
+    </a>
     <router-view />
   </div>
 </template>
@@ -31,7 +30,7 @@
 <script>
 import routes from '@/router/index.js'
 export default {
-  data () {
+  data() {
     return {
       lockDate: [], // 锁定的日期（滑动结束时自动跳到指定的日期）
       markDate: [], // 做标记的日期
@@ -40,22 +39,36 @@ export default {
     }
   },
   computed: {
+    navVisible() {
+      return this.getQueryVariable('nav') || this.currentMode === 'dev'
+    },
+    currentMode() {
+      return process.env.VUE_APP_CURRENTMODE
+    },
     visibleRouters: function () {
       return routes.options.routes.filter(route => {
         return route.visible
       })
     }
   },
-  watch: {
-
-  },
-  mounted () {
-  },
+  watch: {},
+  mounted() { },
   methods: {
-    handleInput (value, date) {
+    getQueryVariable(variable) {
+      const query = window.location.search.substring(1)
+      const vars = query.split('&')
+      for (let i = 0; i < vars.length; i++) {
+        const pair = vars[i].split('=')
+        if (pair[0] === variable) {
+          return pair[1]
+        }
+      }
+      return false
+    },
+    handleInput(value, date) {
       console.log('input', value, date)
     },
-    handleChange (value, date) {
+    handleChange(value, date) {
       console.log('change', value, date)
     }
   }
@@ -68,20 +81,26 @@ export default {
   -webkit-tap-highlight-color: transparent;
   -webkit-appearance: none;
 }
+
 .nav {
   position: fixed;
-  right: 0;
+  left: 0;
   top: 0;
+  bottom: 0;
   padding: 20px;
   z-index: 999;
+  overflow-y: auto;
+
   a {
     color: #fff;
     margin: 10px;
+
     &.router-link-exact-active {
       color: red;
     }
   }
 }
+
 .btns {
   position: fixed;
   right: 0;
@@ -95,9 +114,11 @@ export default {
   color: #fff;
   padding: 20px;
   box-sizing: border-box;
+
   i {
     font-style: normal;
     cursor: pointer;
+
     &[class^='el-icon'] {
       font-size: 48px;
     }

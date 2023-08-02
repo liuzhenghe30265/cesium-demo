@@ -2,42 +2,48 @@
 <template>
   <div
     id="cesium-container"
-    style="width: 100%; height: 100%;">
-    <div
-      class="btns_container">
+    style="width: 100%; height: 100%;"
+  >
+    <div class="btns_container">
       <div
         class="pub_btn"
-        @click="handleMeasureEarth('POINT')">
+        @click="handleMeasureEarth('POINT')"
+      >
         位置测量
       </div>
       <div
         class="pub_btn"
-        @click="handleMeasureEarth('SPACE_DISTANCE')">
+        @click="handleMeasureEarth('SPACE_DISTANCE')"
+      >
         距离测量
       </div>
       <div
         class="pub_btn"
-        @click="handleMeasureEarth('SPACE_AREA')">
+        @click="handleMeasureEarth('SPACE_AREA')"
+      >
         面积测量
       </div>
       <div
         class="pub_btn"
-        @click="handleMeasureEarth('clear')">
+        @click="handleMeasureEarth('clear')"
+      >
         清除
       </div>
       <div
         class="pub_btn"
-        @click="handleMeasureEarth('SPACE_VOLUME')">
+        @click="handleMeasureEarth('SPACE_VOLUME')"
+      >
         体积测量
       </div>
       <div
         style="margin-top: 5px"
-        class="pub_button_li">
-        <div
-          v-if="!startShow && computing">
+        class="pub_button_li"
+      >
+        <div v-if="!startShow && computing">
           <button
             class="xbsj-button pub_btn"
-            @click="buttonClick">
+            @click="buttonClick"
+          >
             {{ buttonText }}
           </button>
           <br>
@@ -50,10 +56,12 @@
           border-right: 1px solid;
           float: left;
           margin-right: 14px;
-        ">
+        "
+        >
           <button
             class="xbsj-button pub_btn"
-            @click="buttonClick">
+            @click="buttonClick"
+          >
             {{ buttonText }}
           </button>
           <br>
@@ -75,28 +83,28 @@
             m³</span>
           <br>
         </div>
-        <div
-          style="width: 252px; float: left">
-          <span
-            style="vertical-align: middle">采样间距:</span>
+        <div style="width: 252px; float: left">
+          <span style="vertical-align: middle">采样间距:</span>
           <input
             v-model.number="gridWidth"
             :class="!computing ? '' : 'notInput'"
-            class="gridWidth">
+            class="gridWidth"
+          >
           m
           <br>
-          <span
-            style="vertical-align: middle">基准面高程:</span>
+          <span style="vertical-align: middle">基准面高程:</span>
           <input
             v-model.number="height"
             :class="!computing ? '' : 'notInput'"
-            class="gridWidth">
+            class="gridWidth"
+          >
           m
           <br>
           <button
             class="xbsj-button pub_btn"
             :disabled="computing"
-            @click="startClick">
+            @click="startClick"
+          >
             开始分析
           </button>
         </div>
@@ -108,7 +116,7 @@
 <script>
 /* eslint-disable no-undef */
 export default {
-  data () {
+  data() {
     return {
       text: {
         cancelComputing: '取消计算',
@@ -133,7 +141,7 @@ export default {
     }
   },
   computed: {
-    buttonText () {
+    buttonText() {
       // 如果正在计算，返回取消计算
       if (this.computing) {
         return this.text.cancelComputing
@@ -142,10 +150,8 @@ export default {
       }
     }
   },
-  watch: {
-
-  },
-  mounted () {
+  watch: {},
+  mounted() {
     const earth = new XE.Earth(document.getElementById('cesium-container'), {
       terrainExaggeration: 1,
       geocoder: false, // 地理位置查询定位控件，默认使用bing地图服务.
@@ -182,20 +188,22 @@ export default {
 
     // 添加默认地球影像
     earth.sceneTree.root = {
-      children: [{
-        czmObject: {
-          name: '默认离线影像',
-          xbsjType: 'Imagery',
-          xbsjImageryProvider: {
-            XbsjImageryProvider: {
-              url: 'https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-              srcCoordType: 'WGS84',
-              dstCoordType: 'WGS84',
-              maximumLevel: 16
+      children: [
+        {
+          czmObject: {
+            name: '默认离线影像',
+            xbsjType: 'Imagery',
+            xbsjImageryProvider: {
+              XbsjImageryProvider: {
+                url: 'https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+                srcCoordType: 'WGS84',
+                dstCoordType: 'WGS84',
+                maximumLevel: 16
+              }
             }
           }
         }
-      }]
+      ]
     }
 
     const tileset = new Cesium.Cesium3DTileset({
@@ -208,7 +216,7 @@ export default {
     // earth.camera.flyAround([2.1206125026580582, 0.545178729438238, 15], 3000, [0, -Math.PI / 5, 0], 0, 3.14 / 50)
   },
   methods: {
-    startClick () {
+    startClick() {
       if (this._cutFillComputing.positions.length !== 2) {
         this._cutFillComputing.compute()
         this.startShow = false
@@ -216,7 +224,7 @@ export default {
         return
       }
     },
-    buttonClick () {
+    buttonClick() {
       // 清空结果 停止
       this._cutFillComputing.clearResults()
       this._cutFillComputing.polygonCreating = false
@@ -227,7 +235,7 @@ export default {
         this.startShow = true
       })
     },
-    handleMeasureEarth (val) {
+    handleMeasureEarth(val) {
       if (val === 'clear') {
         earth.analyzation.measurement.clearResults()
         return
@@ -248,7 +256,7 @@ export default {
           'results.fill',
           'results.total'
         ]
-        props.forEach((p) => {
+        props.forEach(p => {
           this._disposers.push(XE.MVVM.bind(this, p, this._cutFillComputing, p))
         })
         this._cutFillComputing.polygonCreating = true

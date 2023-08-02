@@ -1,37 +1,40 @@
 <template>
   <div
     id="cesium-container"
-    style="width: 100%; height: 100%;">
-    <div
-      style="position: absolute;width: 400px;right: 50px;top: 100px;z-index: 9;">
+    style="width: 100%; height: 100%;"
+  >
+    <div style="position: absolute;width: 400px;right: 50px;top: 100px;z-index: 9;">
       <div>
         <el-slider
           v-model="sliderVal"
           :min="0"
           :max="100"
-          @input="handleChange" />
+          @input="handleChange"
+        />
       </div>
     </div>
-    <div
-      class="model_container">
+    <div class="model_container">
       <ThreeModel
         :id="'three_model_a'"
         ref="ThreeModelA"
         :url="'model/shengDock.glb'"
         :size="20"
-        class="three_model" />
+        class="three_model"
+      />
       <ThreeModel
         :id="'three_model_b'"
         ref="ThreeModelB"
         :url="'model/shengfeiji.glb'"
         :size="200"
-        class="three_model" />
+        class="three_model"
+      />
       <ThreeModel
         :id="'three_model_c'"
         ref="ThreeModelC"
         :url="'model/SnowyVillage.glb'"
         :size="5"
-        class="three_model" />
+        class="three_model"
+      />
     </div>
   </div>
 </template>
@@ -46,43 +49,16 @@ export default {
   components: {
     ThreeModel
   },
-  data () {
+  data() {
     return {
       sliderVal: 0,
       paused: false
     }
   },
-  computed: {
-
-  },
-  watch: {
-
-  },
-  mounted () {
-    // const china = Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
-    // Cesium.Camera.DEFAULT_VIEW_RECTANGLE = china
-    // Initialize the viewer widget with several custom options and mixins.
-    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYTJjNTM1Yy0wZDRjLTRlZWYtYTFkMi1hOGIwNTI2ZGU0MDgiLCJpZCI6ODI5MjAsImlhdCI6MTY0NTE2NDEyOH0.XndixRDpLnRAxnqSNQpT2JofpGyngIUWlmzbG53hEtM'
-    const viewer = new Cesium.Viewer('cesium-container', {
-      terrainProvider: Cesium.createWorldTerrain(),
-      animation: false, // 是否显示左下角的仪表盘
-      baseLayerPicker: false, // 是否显示图层选择器按钮，右上角那个地图图标
-      fullscreenButton: false, // 是否显示全屏按钮
-      vrButton: false, // 是否显示VR按钮
-      geocoder: false, // 是否显示搜索按钮
-      homeButton: false, // 是否显示主页按钮
-      infoBox: false, // 是否显示提示信息
-      sceneModePicker: false, // 是否显示右上角的模式切换按钮
-      selectionIndicator: false, // 是否显示选取指示器组件
-      timeline: false, // 是否显示下边的时间轴
-      navigationHelpButton: false, // 是否显示右上角的帮助按钮
-      navigationInstructionsInitiallyVisible: true, // 是否显示导航
-      // scene3DOnly: true, // 是否指定仅为三维模式，全部使用三维模式可节约 GPU 资源
-      // requestRenderMode: true,
-      imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
-        url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'
-      })
-    })
+  computed: {},
+  watch: {},
+  mounted() {
+    window.$InitMap()
 
     // 1. Fly to a position with a top-down view
     // viewer.camera.flyTo({
@@ -140,7 +116,6 @@ export default {
     viewer.camera.percentageChanged = 0.00001
     viewer.camera.changed.addEventListener(function (event) {
       // console.log(viewer.camera.computeViewRectangle())
-
       // 中心点
       // const result = viewer.camera.pickEllipsoid(new Cesium.Cartesian2(viewer.canvas.clientWidth / 2, viewer.canvas.clientHeight / 2))
       // let longitude = null
@@ -162,12 +137,10 @@ export default {
       //   )
       // }
       // console.log('中心点', longitude, latitude)
-
       // console.log('position', viewer.camera.position)
       // console.log('heading', viewer.camera.heading)
       // console.log('pitch', viewer.camera.pitch)
       // console.log('roll', viewer.camera.roll)
-
       // const cameraHeight = viewer.scene.globe.ellipsoid.cartesianToCartographic(viewer.camera.position).height
       // console.log('cameraHeight', cameraHeight)
     })
@@ -181,14 +154,29 @@ export default {
         转
         Cartesian3{x: -2174106.926252774, y: 4386734.375324652, z: 4074136.167795586}
        */
-      console.log('平面坐标系转笛卡尔空间直角坐标系', viewer.scene.pickPosition(event.position))
+      console.log(
+        '平面坐标系转笛卡尔空间直角坐标系',
+        viewer.scene.pickPosition(event.position)
+      )
 
       // 空间直角坐标系转经纬度
-      const earthPosition = viewer.camera.pickEllipsoid(event.position, viewer.scene.globe.ellipsoid)
-      const cartographic = Cesium.Cartographic.fromCartesian(earthPosition, viewer.scene.globe.ellipsoid, new Cesium.Cartographic())
+      const earthPosition = viewer.camera.pickEllipsoid(
+        event.position,
+        viewer.scene.globe.ellipsoid
+      )
+      const cartographic = Cesium.Cartographic.fromCartesian(
+        earthPosition,
+        viewer.scene.globe.ellipsoid,
+        new Cesium.Cartographic()
+      )
       const longitude = Cesium.Math.toDegrees(cartographic.longitude)
       const latitude = Cesium.Math.toDegrees(cartographic.latitude)
-      console.log('空间直角坐标系转经纬度', longitude, latitude, cartographic.height)
+      console.log(
+        '空间直角坐标系转经纬度',
+        longitude,
+        latitude,
+        cartographic.height
+      )
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
     // handler.setInputAction(function (event) {
@@ -240,7 +228,7 @@ export default {
     // handler.removeInputAction(Cesium.ScreenSpaceEventType.WHEEL)
   },
   methods: {
-    handleChange (val) {
+    handleChange(val) {
       this.$refs.ThreeModelA.applyScalar(val)
       this.$refs.ThreeModelB.applyScalar(val)
       this.$refs.ThreeModelC.applyScalar(val)
@@ -250,11 +238,6 @@ export default {
 </script>
 
 <style lang="scss">
-* {
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-appearance: none;
-}
 .model_container {
   position: absolute;
   z-index: 999;
