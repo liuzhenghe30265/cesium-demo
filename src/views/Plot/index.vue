@@ -12,9 +12,10 @@
 
 <script>
 /* eslint-disable no-undef */
+/* eslint-disable new-cap */
 import PlotUtil from '@/utils/CesiumUtils/Plot/index.js'
 export default {
-  data() {
+  data () {
     return {
       $PlotUtil: null,
       active: '',
@@ -27,16 +28,16 @@ export default {
         },
         {
           name: 'polygon'
-        },
-        {
-          name: 'text'
         }
+        // {
+        //   name: 'text'
+        // }
       ]
     }
   },
   computed: {},
   watch: {},
-  mounted() {
+  mounted () {
     // const mock = require('./mock.json')
     // const list = []
     // mock.data.forEach((item, index) => {
@@ -59,7 +60,7 @@ export default {
     this.initPlotUtil()
   },
   methods: {
-    DecryptPlotData(data) {
+    DecryptPlotData (data) {
       if (!data) return
       const _data = JSON.parse(JSON.stringify(data))
       if (_data.objectInfo) {
@@ -129,14 +130,158 @@ export default {
       }
       return _data
     },
-    initPlotUtil() {
+    addGraphic (data) {
+      if (data.drawingMode === 'point') {
+        viewer.entities.add({
+          position: Cesium.Cartesian3.fromDegrees(data.centerPoint.longitude, data.centerPoint.latitude, data.centerPoint.altitude),
+          point: {
+            color: new Cesium.Color.fromCssColorString('#17E980'),
+            // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+            // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 30000.0),
+            scaleByDistance: new Cesium.NearFarScalar(1.0e2, 1.0, 0.7e4, 0.8),
+            pixelSize: 14,
+            outlineWidth: 2,
+            outlineColor: Cesium.Color.fromCssColorString('#fff')
+          },
+          label: {
+            text: `经度：${data.centerPoint.longitude}\n纬度：${data.centerPoint.latitude}\n海拔：${data.centerPoint.altitude}`,
+            font: '30px sans-serif',
+            // pixelOffset: new Cesium.Cartesian2(0.0, 45.0),
+            // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+            fillColor: Cesium.Color.fromCssColorString('#fff'),
+            style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+            outlineWidth: 2,
+            outlineColor: Cesium.Color.fromCssColorString('#000'),
+            disableDepthTestDistance: Number.POSITIVE_INFINITY,
+            // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 30000.0),
+            scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.5)
+          }
+        })
+      } else if (data.drawingMode === 'polyline') {
+        viewer.entities.add({
+          position: Cesium.Cartesian3.fromDegrees(data.centerPoint.longitude, data.centerPoint.latitude, data.centerPoint.altitude),
+          label: {
+            text: `${data.activeShapeComputed}m`,
+            font: '30px sans-serif',
+            // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+            fillColor: Cesium.Color.fromCssColorString('#fff'),
+            style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+            outlineWidth: 2,
+            outlineColor: Cesium.Color.fromCssColorString('#000'),
+            disableDepthTestDistance: Number.POSITIVE_INFINITY,
+            // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 30000.0),
+            scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.5)
+          }
+        })
+        if (data.activeSubLine && data.activeSubLine.length > 0) {
+          const _polylineColor = Cesium.Color.fromCssColorString('#17E980')
+          data.activeSubLine.map((line, lineIndex) => {
+            if (line.distance <= 0) return
+            const positions = Cesium.Cartesian3.fromDegreesArrayHeights(
+              [
+                line.start.longitude, line.start.latitude, line.start.altitude,
+                line.end.longitude, line.end.latitude, line.end.altitude
+              ]
+            )
+            viewer.entities.add({
+              position: Cesium.Cartesian3.fromDegrees(line.centerPoint.longitude, line.centerPoint.latitude, line.centerPoint.altitude),
+              polyline: {
+                // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+                positions: positions,
+                material: _polylineColor,
+                depthFailMaterial: new Cesium.PolylineDashMaterialProperty({
+                  _polylineColor
+                }),
+                width: 5
+              },
+              label: {
+                text: `${line.distance}米`,
+                font: '30px sans-serif',
+                fillColor: Cesium.Color.fromCssColorString('#fff'),
+                style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                outlineWidth: 2,
+                outlineColor: Cesium.Color.fromCssColorString('#000'),
+                disableDepthTestDistance: Number.POSITIVE_INFINITY,
+                // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 30000.0),
+                scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.5)
+              }
+            })
+          })
+        }
+      } else if (data.drawingMode === 'polygon') {
+        const vertices = data.verticesPosition || data.activeShapePoints || []
+        const _hierarchy = []
+        if (vertices.length > 0) {
+          vertices.map(point => {
+            _hierarchy.push(Cesium.Cartesian3.fromDegrees(
+              point.longitude,
+              point.latitude,
+              point.altitude
+            ))
+          })
+        }
+        if (_hierarchy.length > 0) {
+          const dynamicPositions = new Cesium.CallbackProperty(function () {
+            return new Cesium.PolygonHierarchy(_hierarchy)
+          }, false) // 使贴地多边形在模型上有立体效果
+          const center = data.centerPoint
+          const altitudes = vertices.map(_ => _.altitude)
+          const max = altitudes.sort()[altitudes.length - 1]
+          center.altitude = max
+          const polygonColor = Cesium.Color.fromCssColorString('#17E980')
+          viewer.entities.add({
+            position: Cesium.Cartesian3.fromDegrees(data.centerPoint.longitude, data.centerPoint.latitude, data.centerPoint.altitude),
+            polygon: {
+              // hierarchy: hierarchy,
+              hierarchy: dynamicPositions,
+              // extrudedHeight: 200,
+              // perPositionHeight: true,
+              // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+              material: new Cesium.ColorMaterialProperty(
+                polygonColor
+              )
+            },
+            label: {
+              text: `${data.activeShapeComputed}平方米`,
+              font: '30px sans-serif',
+              fillColor: Cesium.Color.fromCssColorString('#fff'),
+              style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+              outlineWidth: 2,
+              outlineColor: Cesium.Color.fromCssColorString('#000'),
+              disableDepthTestDistance: Number.POSITIVE_INFINITY,
+              // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+              // eyeOffset: new Cesium.Cartesian3(0, 0, -10000),
+              // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 10000.0),
+              scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.5)
+            }
+          })
+        }
+      } else if (data.drawingMode === 'text') {
+        const _fillColor = Cesium.Color.fromCssColorString('#17E980')
+        viewer.entities.add({
+          position: Cesium.Cartesian3.fromDegrees(data.centerPoint.longitude, data.centerPoint.latitude, data.centerPoint.altitude),
+          label: {
+            text: text,
+            font: _font,
+            fillColor: _fillColor,
+            disableDepthTestDistance: Number.POSITIVE_INFINITY,
+            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 30000.0),
+            scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.5),
+            show: visible
+          }
+        })
+      }
+    },
+    initPlotUtil () {
+      const _this = this
       this.$PlotUtil = new PlotUtil({
-        defaultColorValue: '#FF000080',
+        defaultColorValue: '#17E980',
         PlottingStatus: function (value) {
           console.log('..................PlottingStatus', value)
         },
         Finish: function (data) {
           console.log('..................Finish', data)
+          _this.addGraphic(data)
         },
         VerticesFinish: function (data) {
           console.log('..................VerticesFinish', data)
@@ -146,7 +291,7 @@ export default {
         }
       })
     },
-    handleClick(item) {
+    handleClick (item) {
       this.active =
         this.active === item.name
           ? (this.active = '')
