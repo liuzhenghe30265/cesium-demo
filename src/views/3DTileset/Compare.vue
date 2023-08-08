@@ -28,8 +28,8 @@ export default {
 
     try {
       const left = await new Cesium.Cesium3DTileset({
-        // url: '/model/truck/bad/terra_b3dms/tileset.json',
-        url: 'https://lab.earthsdk.com/model/3610c2b0d08411eab7a4adf1d6568ff7/tileset.json',
+        url: '/model/truck/bad/terra_b3dms/tileset.json',
+        // url: 'https://lab.earthsdk.com/model/3610c2b0d08411eab7a4adf1d6568ff7/tileset.json',
         debugShowMemoryUsage: false
       })
       viewer.scene.primitives.add(left)
@@ -38,8 +38,8 @@ export default {
       viewer.zoomTo(left)
 
       const right = await new Cesium.Cesium3DTileset({
-        // url: '/model/truck/good/terra_b3dms/tileset.json',
-        url: 'https://lab.earthsdk.com/model/908311a0ac2f11e99dbd8fd044883638/tileset.json',
+        url: '/model/truck/good/terra_b3dms/tileset.json',
+        // url: 'https://lab.earthsdk.com/model/908311a0ac2f11e99dbd8fd044883638/tileset.json',
         debugShowMemoryUsage: false
       })
       viewer.scene.primitives.add(right)
