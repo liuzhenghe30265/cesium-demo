@@ -7,6 +7,7 @@
 
   <script>
 /* eslint-disable no-undef */
+/* eslint-disable new-cap */
 // import {
 //   getExtend
 // } from '@/utils/CesiumUtils.js'

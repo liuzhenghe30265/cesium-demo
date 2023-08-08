@@ -3,7 +3,7 @@
 import {
     // FineBezier,
     PositionIsLegal,
-    // EqualPosition,
+    EqualPosition,
     getTwoPointDistance,
     getTwoPointCenter,
     getHeadingDegByTwoPoints
@@ -54,7 +54,7 @@ function addLabelGraphic(LabelCollection, position, text, options) {
             horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
             showBackground: options.showBackground,
             backgroundColor: new Cesium.Color(0.165, 0.165, 0.165, 0.6),
-            scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.8, 0.5e4, 0.2),
+            scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.5, 0.5e4, 0.2),
             distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 12000.0)
         })
     }
@@ -379,8 +379,6 @@ export function AddRouteGraphic(options) {
     options.PolylineGeometryPrimitive.id = collectionID
     viewer.scene.primitives.add(options.PolylineGeometryPrimitive)
 
-    const _image = currentRoute.wayPointImage || require('@/assets/images/waypoint.png')
-
     for (let index = 0; index < _list.length; index++) {
         const point = _list[index]
         point.longitude = parseFloat(point.longitude)
@@ -396,6 +394,9 @@ export function AddRouteGraphic(options) {
         if (point.collection && point.collection.length > 0) {
             // 一个位置存在多个点
             pointLabel = point.collection.map(_ => _.index).join('\n')
+        } else if (index === 0 || (options.endIcon && index === _list.length - 1)) {
+            // 起始点有图标，不显示序号
+            pointLabel = ''
         } else {
             if (currentRoute.indexReverse) {
                 pointLabel = `${_list.length - index}`
@@ -404,7 +405,31 @@ export function AddRouteGraphic(options) {
             }
         }
 
-        const _color = currentRoute.color ? Cesium.Color.fromCssColorString(currentRoute.color) : new Cesium.Color.fromCssColorString('#fff')
+        let _image = currentRoute.image || require('@/assets/images/controls/routePlanning/point.png')
+        // let _image = currentRoute.image || require('@/assets/images/controls/routePlanning/pointn3.png')
+        let waypointColor = currentRoute.color ? Cesium.Color.fromCssColorString(currentRoute.color) : new Cesium.Color.fromCssColorString('#fff')
+        if (point.turnType === 2) {
+            _image = require('@/assets/images/controls/routePlanning/point_w.png')
+            waypointColor = new Cesium.Color.fromCssColorString('#fff')
+        }
+        if (index === 0) {
+            // 起飞点/返航点
+            _image = require('@/assets/images/controls/routePlanning/start0.png')
+            waypointColor = new Cesium.Color.fromCssColorString('#fff')
+        } else if (index === _list.length - 1) {
+            if (options.endIcon) {
+                _image = require('@/assets/images/controls/routePlanning/end0.png')
+                waypointColor = new Cesium.Color.fromCssColorString('#fff')
+            }
+            const _start = _list[0]
+            const _end = _list[_list.length - 1]
+            if (EqualPosition(_start, _end)) {
+                // 起始点在同一位置，使用相同图标
+                _image = require('@/assets/images/controls/routePlanning/start0.png')
+                waypointColor = new Cesium.Color.fromCssColorString('#fff')
+                pointLabel = ''
+            }
+        }
 
         const point2 = _list[index + 1]
         if (point && point2) {
@@ -467,7 +492,7 @@ export function AddRouteGraphic(options) {
 
         if (currentRoute.pointVisible) {
             // 航点图标标注
-            addBillboardGraphic(currentRoute.BillboardCollection, point, _image, _color)
+            addBillboardGraphic(currentRoute.BillboardCollection, point, _image, waypointColor)
             // 航点序号标注
             addLabelGraphic(
                 currentRoute.LabelCollection,
@@ -475,8 +500,9 @@ export function AddRouteGraphic(options) {
                 `${pointLabel}`,
                 {
                     showBackground: false,
+                    // fillColor: point.turnType === 2 ? new Cesium.Color.fromCssColorString('#333') : new Cesium.Color.fromCssColorString('#fff'),
                     fillColor: new Cesium.Color.fromCssColorString('#fff'),
-                    outlineColor: new Cesium.Color.fromCssColorString('#333')
+                    outlineColor: point.turnType === 2 ? new Cesium.Color.fromCssColorString('#fff') : new Cesium.Color.fromCssColorString('#333')
                 }
             )
         }

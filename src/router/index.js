@@ -17,12 +17,6 @@ const routes = [
     component: resolve => require(['@/views/Entity'], resolve)
   },
   {
-    path: '/Route',
-    name: '航线',
-    visible: true,
-    component: resolve => require(['@/views/Route'], resolve)
-  },
-  {
     path: '/3DTileset',
     name: '3DTileset加载',
     visible: true,
@@ -57,6 +51,12 @@ const routes = [
     name: 'Primitive',
     visible: true,
     component: resolve => require(['@/views/Primitive'], resolve)
+  },
+  {
+    path: '/Primitive/Route',
+    name: 'Primitive 航线',
+    visible: true,
+    component: resolve => require(['@/views/Primitive/route'], resolve)
   },
   {
     path: '/Primitive/Plot',
