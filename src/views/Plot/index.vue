@@ -5,6 +5,7 @@
         <div v-for="(item, index) of btns" :key="index" class="li" :class="{ active: item.name === active }"
           @click="handleClick(item)">
           {{ item.name }}</div>
+        <div class="li" :class="{ disabled: plottingStatus }" @click="handleSave">保存</div>
       </div>
     </div>
   </div>
@@ -15,8 +16,10 @@
 /* eslint-disable new-cap */
 import PlotUtil from '@/utils/CesiumUtils/Plot/index.js'
 export default {
-  data () {
+  data() {
     return {
+      plottingStatus: false,
+      plotData: {},
       $PlotUtil: null,
       active: '',
       btns: [
@@ -37,7 +40,7 @@ export default {
   },
   computed: {},
   watch: {},
-  mounted () {
+  mounted() {
     // const mock = require('./mock.json')
     // const list = []
     // mock.data.forEach((item, index) => {
@@ -50,17 +53,23 @@ export default {
 
     window.$InitMap()
 
-    const tileset = new Cesium.Cesium3DTileset({
-      url: 'https://lab.earthsdk.com/model/f15b9e90ac2d11e99dbd8fd044883638/tileset.json', // 大雁塔
-      debugShowMemoryUsage: false
+    viewer.camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(116.8699909, 28.4630142, 1000.0),
+      orientation: {
+        heading: Cesium.Math.toRadians(0.0),
+        pitch: Cesium.Math.toRadians(-35.0),
+        roll: 0.0
+      }
     })
-    viewer.scene.primitives.add(tileset)
-    viewer.zoomTo(tileset)
 
     this.initPlotUtil()
   },
   methods: {
-    DecryptPlotData (data) {
+    handleSave() {
+      this.addGraphic(this.plotData)
+      this.$PlotUtil.Destory()
+    },
+    DecryptPlotData(data) {
       if (!data) return
       const _data = JSON.parse(JSON.stringify(data))
       if (_data.objectInfo) {
@@ -130,12 +139,13 @@ export default {
       }
       return _data
     },
-    addGraphic (data) {
+    addGraphic(data) {
+      const _color = new Cesium.Color.fromCssColorString('#17E980')
       if (data.drawingMode === 'point') {
         viewer.entities.add({
           position: Cesium.Cartesian3.fromDegrees(data.centerPoint.longitude, data.centerPoint.latitude, data.centerPoint.altitude),
           point: {
-            color: new Cesium.Color.fromCssColorString('#17E980'),
+            color: _color,
             // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
             // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 30000.0),
             scaleByDistance: new Cesium.NearFarScalar(1.0e2, 1.0, 0.7e4, 0.8),
@@ -144,7 +154,7 @@ export default {
             outlineColor: Cesium.Color.fromCssColorString('#fff')
           },
           label: {
-            text: `经度：${data.centerPoint.longitude}\n纬度：${data.centerPoint.latitude}\n海拔：${data.centerPoint.altitude}`,
+            text: `经度：${data.centerPoint.longitude}\n纬度：${data.centerPoint.latitude}\n海拔：${data.centerPoint.altitude}米`,
             font: '30px sans-serif',
             // pixelOffset: new Cesium.Cartesian2(0.0, 45.0),
             // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
@@ -174,7 +184,6 @@ export default {
           }
         })
         if (data.activeSubLine && data.activeSubLine.length > 0) {
-          const _polylineColor = Cesium.Color.fromCssColorString('#17E980')
           data.activeSubLine.map((line, lineIndex) => {
             if (line.distance <= 0) return
             const positions = Cesium.Cartesian3.fromDegreesArrayHeights(
@@ -188,9 +197,9 @@ export default {
               polyline: {
                 // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
                 positions: positions,
-                material: _polylineColor,
+                material: _color,
                 depthFailMaterial: new Cesium.PolylineDashMaterialProperty({
-                  _polylineColor
+                  _color
                 }),
                 width: 5
               },
@@ -228,7 +237,6 @@ export default {
           const altitudes = vertices.map(_ => _.altitude)
           const max = altitudes.sort()[altitudes.length - 1]
           center.altitude = max
-          const polygonColor = Cesium.Color.fromCssColorString('#17E980')
           viewer.entities.add({
             position: Cesium.Cartesian3.fromDegrees(data.centerPoint.longitude, data.centerPoint.latitude, data.centerPoint.altitude),
             polygon: {
@@ -238,7 +246,7 @@ export default {
               // perPositionHeight: true,
               // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
               material: new Cesium.ColorMaterialProperty(
-                polygonColor
+                _color
               )
             },
             label: {
@@ -257,13 +265,12 @@ export default {
           })
         }
       } else if (data.drawingMode === 'text') {
-        const _fillColor = Cesium.Color.fromCssColorString('#17E980')
         viewer.entities.add({
           position: Cesium.Cartesian3.fromDegrees(data.centerPoint.longitude, data.centerPoint.latitude, data.centerPoint.altitude),
           label: {
             text: text,
             font: _font,
-            fillColor: _fillColor,
+            fillColor: _color,
             disableDepthTestDistance: Number.POSITIVE_INFINITY,
             distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 30000.0),
             scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.5),
@@ -272,16 +279,17 @@ export default {
         })
       }
     },
-    initPlotUtil () {
+    initPlotUtil() {
       const _this = this
       this.$PlotUtil = new PlotUtil({
         defaultColorValue: '#17E980',
         PlottingStatus: function (value) {
+          _this.plottingStatus = value
           console.log('..................PlottingStatus', value)
         },
         Finish: function (data) {
           console.log('..................Finish', data)
-          _this.addGraphic(data)
+          _this.plotData = data
         },
         VerticesFinish: function (data) {
           console.log('..................VerticesFinish', data)
@@ -291,7 +299,7 @@ export default {
         }
       })
     },
-    handleClick (item) {
+    handleClick(item) {
       this.active =
         this.active === item.name
           ? (this.active = '')
@@ -319,6 +327,11 @@ export default {
 
       &.active {
         color: red;
+      }
+
+      &.disabled {
+        pointer-events: none;
+        opacity: .5;
       }
     }
   }

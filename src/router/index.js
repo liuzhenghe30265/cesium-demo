@@ -92,13 +92,13 @@ const routes = [
     path: '/Path',
     name: '轨迹',
     visible: false,
-    component: resolve => require(['@/views/Path.vue'], resolve)
+    component: resolve => require(['@/views/Path'], resolve)
   },
   {
     path: '/EarthSdk',
     name: 'EarthSdk',
     visible: false,
-    component: resolve => require(['@/views/EarthSdk.vue'], resolve)
+    component: resolve => require(['@/views/EarthSdk'], resolve)
   },
   {
     path: '/Three',
