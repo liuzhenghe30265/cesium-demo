@@ -1,15 +1,9 @@
 <template>
-  <div
-    id="cesium-container"
-    style="width: 100%; height: 100%;"
-  />
+  <div id="cesium-container" style="width: 100%; height: 100%;" />
 </template>
 
 <script>
 /* eslint-disable no-undef */
-// import {
-//   getExtend
-// } from '@/utils/CesiumUtils.js'
 export default {
   data() {
     return {}
@@ -73,8 +67,11 @@ export default {
     // 监听视角变化
     viewer.camera.percentageChanged = 0.00001
     viewer.camera.changed.addEventListener(function (event) {
-      // console.log(getExtend(viewer))
-      // console.log(viewer.camera.computeViewRectangle())
+      // 计算当前视角地图范围
+      // const Rectangle = viewer.camera.computeViewRectangle()
+      // console.log('Rectangle', viewer.camera.computeViewRectangle())
+      // const extent = [Rectangle.west / Math.PI * 180, Rectangle.south / Math.PI * 180, Rectangle.east / Math.PI * 180, Rectangle.north / Math.PI * 180]
+      // console.log('extent', extent)
       // 中心点
       // const result = viewer.camera.pickEllipsoid(new Cesium.Cartesian2(viewer.canvas.clientWidth / 2, viewer.canvas.clientHeight / 2))
       // let longitude = null
@@ -190,5 +187,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

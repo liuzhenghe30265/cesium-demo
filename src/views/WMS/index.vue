@@ -1,44 +1,116 @@
 <template>
-  <div
-    id="cesium-container"
-    style="width: 100%; height: 100%;"
-  >
+  <div id="cesium-container" style="width: 100%; height: 100%;">
     <div class="layer_container">
-      <button id="btn">清除</button>
-      <el-tree
-        ref="tree"
-        :data="layers"
-        show-checkbox
-        node-key="id"
-        :props="defaultProps"
-        :default-checked-keys="defaultCheckedKeys"
-        highlight-current
-        @check="handleCheckChange"
-      />
+      <!-- <button id="btn">清除</button> -->
+      <el-tree ref="tree" :data="layers" show-checkbox node-key="id" :props="defaultProps"
+        :default-checked-keys="defaultCheckedKeys" highlight-current @check="handleCheckChange"
+        @node-click="handleNodeClick" />
+      <hr>
+      <el-tree :data="geoserverData" show-checkbox node-key="name" :props="defaultProps2"
+        :default-checked-keys="defaultCheckedKeys2" highlight-current @check="handleCheckChange2"
+        @node-click="handleNodeClick2" />
     </div>
   </div>
 </template>
 
 <script>
 /* eslint-disable no-undef */
-// import {
-//   getExtend
-// } from '@/utils/CesiumUtils.js'
-import { findIndex } from 'lodash'
+// import { findIndex } from 'lodash'
 export default {
   data() {
     return {
+      defaultCheckedKeys2: [],
+      defaultProps2: {
+        label: 'name'
+      },
+      geoserverData: [
+        {
+          name: 'cite:2000',
+          extend: [114.4491417723215, 38.96451275547338, 118.24157311104125, 41.29160446951736],
+          params: {
+            url: 'http://openlayers.vip/geoserver/cite/wms',
+            // layers: 'cite:xintai18',
+            layers: 'cite:2000',
+            parameters: {
+              transparent: true,
+              format: 'image/png',
+              srs: 'EPSG:4326'
+            },
+            tileWidth: 1024,
+            tileHeight: 1024
+          },
+          show: true
+        },
+        {
+          name: 'Hydrography:bores',
+          extend: [94.64056826887258, -48.14609083097633, 168.6166421757639, 1.1923869679885182],
+          params: {
+            url: 'https://nationalmap.gov.au/proxy/http://geoserver.nationalmap.nicta.com.au/geotopo_250k/ows',
+            layers: 'Hydrography:bores',
+            parameters: {
+              transparent: true,
+              format: 'image/png',
+              srs: 'EPSG:4326'
+            },
+            tileWidth: 1024,
+            tileHeight: 1024
+          },
+          show: true
+        },
+        {
+          name: 'nexrad-n0r-wmst',
+          extend: [-139.34594331881885, 12.18220843541583, -48.577899873626464, 51.47356906279533],
+          params: {
+            url: 'https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r-t.cgi',
+            layers: 'nexrad-n0r-wmst',
+            parameters: {
+              transparent: true,
+              format: 'image/png'
+            }
+          },
+          show: true
+        },
+        {
+          name: 'nexrad-n0r',
+          extend: [-139.34594331881885, 12.18220843541583, -48.577899873626464, 51.47356906279533],
+          params: {
+            url: 'https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi',
+            layers: 'nexrad-n0r',
+            credit: 'Radar data courtesy Iowa Environmental Mesonet',
+            parameters: {
+              transparent: 'true',
+              format: 'image/png'
+            }
+          },
+          show: true
+        },
+        {
+          name: 'goes_conus_ir',
+          extend: [-139.34594331881885, 12.18220843541583, -48.577899873626464, 51.47356906279533],
+          params: {
+            url: 'https://mesonet.agron.iastate.edu/cgi-bin/wms/goes/conus_ir.cgi?',
+            layers: 'goes_conus_ir',
+            credit: 'Radar data courtesy Iowa Environmental Mesonet',
+            parameters: {
+              transparent: 'true',
+              format: 'image/png'
+            }
+          },
+          show: false
+        }
+      ],
       defaultCheckedKeys: [],
       defaultProps: {
         label: 'id'
       },
+      $imageryLayer: null,
       basePath: 'https://wms.geo.admin.ch/',
       layers: [
         {
-          id: 'ch.bafu.hydroweb-warnkarte_national'
+          id: 'ch.swisstopo.pixelkarte-farbe-pk1000.noscale'
         },
         {
-          id: 'ch.swisstopo.pixelkarte-farbe-pk1000.noscale'
+          id: 'ch.bafu.hydroweb-warnkarte_national'
         }
       ]
     }
@@ -47,6 +119,18 @@ export default {
   watch: {},
   mounted() {
     window.$InitMap()
+
+    viewer.camera.flyTo({
+      destination: Cesium.Rectangle.fromDegrees(-139.34594331881885, 12.18220843541583, -48.577899873626464, 51.47356906279533)
+    })
+
+    // viewer.camera.changed.addEventListener(function (event) {
+    //   // 计算当前视角地图范围
+    //   const Rectangle = viewer.camera.computeViewRectangle()
+    //   // console.log('Rectangle', viewer.camera.computeViewRectangle())
+    //   const extent = [Rectangle.west / Math.PI * 180, Rectangle.south / Math.PI * 180, Rectangle.east / Math.PI * 180, Rectangle.north / Math.PI * 180]
+    //   console.log('extent', extent)
+    // })
 
     const _layers = this.layers.map(_ => _.id)
     this.defaultCheckedKeys = _layers
@@ -67,121 +151,61 @@ export default {
     const imageryLayer = new Cesium.ImageryLayer(wmsImageryProvider)
     imageryLayer.name = '666'
     imageryLayer.id = '666'
+    this.$imageryLayer = imageryLayer
     viewer.imageryLayers.add(imageryLayer)
 
-    document.getElementById('btn').onclick = function () {
-      const layer = viewer.imageryLayers.get(
-        findIndex(viewer.imageryLayers._layers, function (_) {
-          return _.id === '666'
-        })
+    // document.getElementById('btn').onclick = function () {
+    //   const layer = viewer.imageryLayers.get(
+    //     findIndex(viewer.imageryLayers._layers, function (_) {
+    //       return _.id === '666'
+    //     })
+    //   )
+    //   viewer.imageryLayers.remove(layer)
+    // }
+
+    const checked = []
+    for (let index = 0; index < this.geoserverData.length; index++) {
+      const geoserver = this.geoserverData[index]
+      const imageryLayer = new Cesium.ImageryLayer(
+        new Cesium.WebMapServiceImageryProvider(geoserver.params)
       )
-      viewer.imageryLayers.remove(layer)
+      viewer.imageryLayers.add(imageryLayer)
+      imageryLayer.show = geoserver.show
+      geoserver.imageryLayer = imageryLayer
+      if (geoserver.show) {
+        checked.push(geoserver.params.layers)
+      }
     }
-
-    // 全球
-    // viewer.imageryLayers.add(
-    //   new Cesium.ImageryLayer(
-    //     new Cesium.WebMapServiceImageryProvider({
-    //       url: 'https://ahocevar.com/geoserver/ne/wms',
-    //       layers: 'ne:ne_10m_admin_0_countries',
-    //       parameters: {
-    //         transparent: true,
-    //         format: 'image/png'
-    //       }
-    //     })
-    //   )
-    // )
-
-    viewer.imageryLayers.add(
-      new Cesium.ImageryLayer(
-        new Cesium.WebMapServiceImageryProvider({
-          url: 'http://openlayers.vip/geoserver/cite/wms',
-          layers: 'cite:xintai18,cite:2000',
-          parameters: {
-            transparent: true,
-            format: 'image/png',
-            srs: 'EPSG:4326'
-          },
-          tileWidth: 1024,
-          tileHeight: 1024
-        })
-      )
-    )
-    // viewer.camera.flyTo({
-    //   destination: Cesium.Rectangle.fromDegrees(104.23828125000001, 30.805664062499996, 104.26025390624999, 30.827636718749996)
-    // })
-
-    // Australia
-    viewer.imageryLayers.add(
-      new Cesium.ImageryLayer(
-        new Cesium.WebMapServiceImageryProvider({
-          url: 'https://nationalmap.gov.au/proxy/http://geoserver.nationalmap.nicta.com.au/geotopo_250k/ows',
-          layers: 'Hydrography:bores',
-          parameters: {
-            transparent: true,
-            format: 'image/png',
-            srs: 'EPSG:4326'
-          },
-          tileWidth: 1024,
-          tileHeight: 1024
-        })
-      )
-    )
-
-    // U. S.
-    viewer.imageryLayers.add(
-      new Cesium.ImageryLayer(
-        new Cesium.WebMapServiceImageryProvider({
-          url: 'https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r-t.cgi',
-          layers: 'nexrad-n0r-wmst',
-          parameters: {
-            transparent: true,
-            format: 'image/png'
-          }
-        })
-      )
-    )
-    // viewer.imageryLayers.add(
-    //   new Cesium.ImageryLayer(
-    //     new Cesium.WebMapServiceImageryProvider({
-    //       url: 'https://ahocevar.com/geoserver/wms',
-    //       layers: 'topp:states',
-    //       parameters: {
-    //         transparent: true,
-    //         format: 'image/png'
-    //       }
-    //     })
-    //   )
-    // )
-    // viewer.imageryLayers.add(
-    //   new Cesium.ImageryLayer(
-    //     new Cesium.WebMapServiceImageryProvider({
-    //       url: 'https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi',
-    //       layers: 'nexrad-n0r',
-    //       credit: 'Radar data courtesy Iowa Environmental Mesonet',
-    //       parameters: {
-    //         transparent: 'true',
-    //         format: 'image/png'
-    //       }
-    //     })
-    //   )
-    // )
-    // viewer.imageryLayers.add(
-    //   new Cesium.ImageryLayer(
-    //     new Cesium.WebMapServiceImageryProvider({
-    //       url: 'https://mesonet.agron.iastate.edu/cgi-bin/wms/goes/conus_ir.cgi?',
-    //       layers: 'goes_conus_ir',
-    //       credit: 'Radar data courtesy Iowa Environmental Mesonet',
-    //       parameters: {
-    //         transparent: 'true',
-    //         format: 'image/png'
-    //       }
-    //     })
-    //   )
-    // )
+    this.$nextTick(() => {
+      this.defaultCheckedKeys2 = checked
+    })
   },
   methods: {
+    handleNodeClick2(data) {
+      if (data.extend && data.extend.length === 4) {
+        viewer.camera.flyTo({
+          destination: Cesium.Rectangle.fromDegrees(data.extend[0], data.extend[1], data.extend[2], data.extend[3])
+        })
+      }
+    },
+    handleCheckChange2(data, checked, indeterminate) {
+      const checkedNodes = checked.checkedNodes
+      for (let index = 0; index < this.geoserverData.length; index++) {
+        const geoserver = this.geoserverData[index]
+        geoserver.imageryLayer.show = false
+      }
+      for (let index = 0; index < checkedNodes.length; index++) {
+        const geoserver = checkedNodes[index]
+        geoserver.imageryLayer.show = true
+      }
+    },
+    handleNodeClick() {
+      viewer.camera.flyTo({
+        destination: Cesium.Rectangle.fromDegrees(2.8072690264062663, 44.499893714855965, 11.838455896965069, 49.566047660998066)
+      })
+    },
     handleCheckChange(data, checked, indeterminate) {
+      viewer.imageryLayers.remove(this.$imageryLayer)
       const ids = this.$refs.tree.getCheckedKeys()
       const _layers = ids.join(',')
       const imageryLayer = new Cesium.ImageryLayer(
@@ -200,20 +224,21 @@ export default {
       )
       imageryLayer.id = '666'
       imageryLayer.name = '666'
+      this.$imageryLayer = imageryLayer
       viewer.imageryLayers.add(imageryLayer)
 
-      const allLayers = viewer.imageryLayers._layers.filter(
-        _ => _.name === '666'
-      )
-      const removeLayers = allLayers.filter(
-        _ => _.imageryProvider.layers !== _layers
-      )
-      setTimeout(() => {
-        for (let index = 0; index < removeLayers.length; index++) {
-          const layer = removeLayers[index]
-          viewer.imageryLayers.remove(layer)
-        }
-      }, 1000)
+      // const allLayers = viewer.imageryLayers._layers.filter(
+      //   _ => _.name === '666'
+      // )
+      // const removeLayers = allLayers.filter(
+      //   _ => _.imageryProvider.layers !== _layers
+      // )
+      // setTimeout(() => {
+      //   for (let index = 0; index < removeLayers.length; index++) {
+      //     const layer = removeLayers[index]
+      //     viewer.imageryLayers.remove(layer)
+      //   }
+      // }, 1000)
     }
   }
 }
