@@ -157,6 +157,25 @@ export default {
       alert('内存超出100%')
     })
 
+    this.$nextTick(async () => {
+      // this.$worker.run(function (data) {
+      //   console.log('.........workew', )
+      // }, [data])
+
+      const groups = await this.$worker.run(
+        function (data) {
+          var result = []
+          var count = Math.ceil(data.length / 10)
+          for (let index = 0; index < count; index++) {
+            result.push(data.slice(index * 10, (index + 1) * 10))
+          }
+          return result
+        },
+        [positions]
+      )
+      console.log('...............groups', groups)
+    })
+
     let radians = 0
     const EllipseGeometries = []
     viewer.scene.preUpdate.addEventListener(() => {
