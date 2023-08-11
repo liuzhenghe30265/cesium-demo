@@ -1,5 +1,7 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-multi-str */
 // 动态墙材质
-function DynamicWallMaterialProperty (options) {
+function DynamicWallMaterialProperty(options) {
   // 默认参数设置
   this._definitionChanged = new Cesium.Event()
   this._color = undefined

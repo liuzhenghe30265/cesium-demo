@@ -17,6 +17,12 @@ const routes = [
     component: resolve => require(['@/views/Entity'], resolve)
   },
   {
+    path: '/WallMaterial',
+    name: '动态光墙效果',
+    visible: true,
+    component: resolve => require(['@/views/Entity/WallMaterial'], resolve)
+  },
+  {
     path: '/3DTileset',
     name: '3DTileset加载',
     visible: true,
