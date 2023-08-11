@@ -10,7 +10,7 @@
 /* eslint-disable new-cap */
 // import {
 //   getExtend
-// } from '@/utils/CesiumUtils.js'
+// } from '@/utils/CesiumUtils/common.js'
 export default {
   data() {
     return {}

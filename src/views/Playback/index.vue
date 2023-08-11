@@ -24,7 +24,7 @@ import {
   translateByDirection,
   getVector,
   distancePos
-} from '@/utils/CesiumUtils.js'
+} from '@/utils/CesiumUtils/common.js'
 // import * as turf from '@turf/turf'
 import Playback from './utils/Playback'
 export default {

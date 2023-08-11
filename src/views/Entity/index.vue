@@ -30,7 +30,7 @@ import {
   translateByDirection,
   getVector,
   distancePos
-} from '@/utils/CesiumUtils.js'
+} from '@/utils/CesiumUtils/common.js'
 export default {
   data() {
     return {

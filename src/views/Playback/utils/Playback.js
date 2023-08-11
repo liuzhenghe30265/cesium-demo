@@ -3,7 +3,7 @@
 /* eslint-disable no-unused-vars */
 import {
   getEndPointByYawPitch
-} from '@/utils/CesiumUtils.js'
+} from '@/utils/CesiumUtils/common.js'
 
 export default class Playback {
   /**

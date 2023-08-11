@@ -74,7 +74,7 @@ export function FlyToEntity(points) {
     })
   }
   viewer.flyTo(entity, {
-    duration: 1,
+    duration: 1
   })
 }
 

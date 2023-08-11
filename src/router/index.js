@@ -89,6 +89,12 @@ const routes = [
     component: resolve => require(['@/views/Primitive/model.vue'], resolve)
   },
   {
+    path: '/FirePoint',
+    name: '着火点',
+    visible: true,
+    component: resolve => require(['@/views/Primitive/FirePoint'], resolve)
+  },
+  {
     path: '/Video',
     name: 'Video',
     visible: false,

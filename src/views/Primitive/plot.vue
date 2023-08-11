@@ -9,7 +9,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable new-cap */
 /* eslint-disable no-unused-vars */
-import { cartesianToLongAndLat } from '@/utils/CesiumUtils.js'
+import { cartesianToLongAndLat } from '@/utils/CesiumUtils/common.js'
 import '@/utils/dynamicWallMaterialProperty'
 // import { flattenDeep } from 'lodash'
 export default {
@@ -250,9 +250,4 @@ export default {
 </script>
 
 <style>
-* {
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-appearance: none;
-}
 </style>

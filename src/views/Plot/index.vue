@@ -53,14 +53,21 @@ export default {
 
     window.$InitMap()
 
-    viewer.camera.flyTo({
-      destination: Cesium.Cartesian3.fromDegrees(116.8699909, 28.4630142, 1000.0),
-      orientation: {
-        heading: Cesium.Math.toRadians(0.0),
-        pitch: Cesium.Math.toRadians(-35.0),
-        roll: 0.0
-      }
+    // viewer.camera.flyTo({
+    //   destination: Cesium.Cartesian3.fromDegrees(116.8699909, 28.4630142, 1000.0),
+    //   orientation: {
+    //     heading: Cesium.Math.toRadians(0.0),
+    //     pitch: Cesium.Math.toRadians(-35.0),
+    //     roll: 0.0
+    //   }
+    // })
+
+    const tileset = new Cesium.Cesium3DTileset({
+      url: 'https://lab.earthsdk.com/model/f15b9e90ac2d11e99dbd8fd044883638/tileset.json', // 大雁塔
+      debugShowMemoryUsage: false
     })
+    viewer.scene.primitives.add(tileset)
+    viewer.zoomTo(tileset)
 
     this.initPlotUtil()
   },
