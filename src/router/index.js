@@ -23,6 +23,12 @@ const routes = [
     component: resolve => require(['@/views/Entity/WallMaterial'], resolve)
   },
   {
+    path: '/FloodAnalysis',
+    name: '淹没分析',
+    visible: true,
+    component: resolve => require(['@/views/Entity/FloodAnalysis'], resolve)
+  },
+  {
     path: '/3DTileset',
     name: '3DTileset加载',
     visible: true,
