@@ -1,7 +1,8 @@
 <template>
   <div
     :id="id"
-    class="three_container" />
+    class="three_container"
+  />
 </template>
 
 <script>
@@ -30,7 +31,7 @@ export default {
       default: ''
     }
   },
-  data () {
+  data() {
     return {
       modelMixer: null,
       modelClock: null,
@@ -46,31 +47,33 @@ export default {
       enableRotate: null
     }
   },
-  computed: {
-
-  },
-  watch: {
-  },
-  mounted () {
+  computed: {},
+  watch: {},
+  mounted() {
     window.cancelAnimationFrame(this.clearAnim)
     this.init()
   },
-  beforeDestroy () {
+  beforeDestroy() {
     window.cancelAnimationFrame(this.clearAnim)
   },
   methods: {
-    applyScalar (scalar) {
+    applyScalar(scalar) {
       if (!this.model) {
         return
       }
       this.model.traverse(function (value) {
-        console.log('..........value', value)
         if (!value.isMesh || !value.worldDir) return
         // 爆炸公式
-        value.position.copy(new THREE.Vector3().copy(value.userData.oldPs).add(new THREE.Vector3().copy(value.worldDir).multiplyScalar(scalar)))
+        value.position.copy(
+          new THREE.Vector3()
+            .copy(value.userData.oldPs)
+            .add(
+              new THREE.Vector3().copy(value.worldDir).multiplyScalar(scalar)
+            )
+        )
       })
     },
-    async init () {
+    async init() {
       const _this = this
       const element = document.getElementById(this.id)
       const width = element.clientWidth // 窗口宽度
@@ -96,7 +99,7 @@ export default {
       // 设置环境
       this.renderer.setClearColor(0x000000, 0)
       // 设置场景大小
-      this.renderer.setSize(400, 400)
+      this.renderer.setSize(800, 800)
       // 渲染器开启阴影效果
       this.renderer.shadowMap.enabled = true
 
@@ -145,49 +148,62 @@ export default {
 
       // 加载模型
       const loader = new GLTFLoader()
-      await loader.load(this.url, (gltf) => {
-        gltf.scene.name = 'Cesium_Air'
-        gltf.scene.scale.set(_this.size, _this.size, _this.size) //  设置模型大小缩放
-        gltf.scene.position.set(0, 0, 0)
-        gltf.scene.translateY(0)
-        _this.modelMixer = new THREE.AnimationMixer(gltf.scene)
-        _this.modelClock = new THREE.Clock()
-        if (gltf.animations.length > 0) {
-          // http://www.yanhuangxueyuan.com/threejs/docs/index.html#api/zh/animation/AnimationAction
-          _this.modelAnimationAction = _this.modelMixer.clipAction(gltf.animations[0])
-          _this.modelAnimationAction.timeScale = 1
-          // _this.modelAnimationAction.loop = THREE.LoopOnce // 播放一次
-          _this.modelAnimationAction.clampWhenFinished = true
-        }
-        _this.scene.add(gltf.scene)
-        _this.model = gltf.scene
-
-        // 模型包围盒
-        const modelBox3 = new THREE.Box3()
-        const meshBox3 = new THREE.Box3()
-
-        // 获取模型的包围盒
-        modelBox3.expandByObject(_this.model)
-        // 计算模型的中心点坐标，这个为爆炸中心
-        const modelWorldPs = new THREE.Vector3().addVectors(modelBox3.max, modelBox3.min).multiplyScalar(0.5)
-
-        _this.model.traverse(function (value) {
-          if (value.isMesh) {
-            meshBox3.setFromObject(value)
-            // 获取每个 mesh 的中心点，爆炸方向为爆炸中心点指向 mesh 中心点
-            const worldPs = new THREE.Vector3().addVectors(meshBox3.max, meshBox3.min).multiplyScalar(0.5)
-            if (isNaN(worldPs.x)) return
-            // 计算爆炸方向
-            value.worldDir = new THREE.Vector3().subVectors(worldPs, modelWorldPs).normalize()
-            // 保存初始坐标
-            value.userData.oldPs = value.getWorldPosition(new THREE.Vector3())
+      await loader.load(
+        this.url,
+        gltf => {
+          gltf.scene.name = 'Cesium_Air'
+          gltf.scene.scale.set(_this.size, _this.size, _this.size) //  设置模型大小缩放
+          gltf.scene.position.set(0, 0, 0)
+          gltf.scene.translateY(0)
+          _this.modelMixer = new THREE.AnimationMixer(gltf.scene)
+          _this.modelClock = new THREE.Clock()
+          if (gltf.animations.length > 0) {
+            // http://www.yanhuangxueyuan.com/threejs/docs/index.html#api/zh/animation/AnimationAction
+            _this.modelAnimationAction = _this.modelMixer.clipAction(
+              gltf.animations[0]
+            )
+            _this.modelAnimationAction.timeScale = 1
+            // _this.modelAnimationAction.loop = THREE.LoopOnce // 播放一次
+            _this.modelAnimationAction.clampWhenFinished = true
           }
-        })
-      }, (_xhr) => {
-        // console.log((_xhr.loaded / _xhr.total) * 100 + '% loaded')
-      }, (_error) => {
-        // console.error(_error)
-      })
+          _this.scene.add(gltf.scene)
+          _this.model = gltf.scene
+
+          // 模型包围盒
+          const modelBox3 = new THREE.Box3()
+          const meshBox3 = new THREE.Box3()
+
+          // 获取模型的包围盒
+          modelBox3.expandByObject(_this.model)
+          // 计算模型的中心点坐标，这个为爆炸中心
+          const modelWorldPs = new THREE.Vector3()
+            .addVectors(modelBox3.max, modelBox3.min)
+            .multiplyScalar(0.5)
+
+          _this.model.traverse(function (value) {
+            if (value.isMesh) {
+              meshBox3.setFromObject(value)
+              // 获取每个 mesh 的中心点，爆炸方向为爆炸中心点指向 mesh 中心点
+              const worldPs = new THREE.Vector3()
+                .addVectors(meshBox3.max, meshBox3.min)
+                .multiplyScalar(0.5)
+              if (isNaN(worldPs.x)) return
+              // 计算爆炸方向
+              value.worldDir = new THREE.Vector3()
+                .subVectors(worldPs, modelWorldPs)
+                .normalize()
+              // 保存初始坐标
+              value.userData.oldPs = value.getWorldPosition(new THREE.Vector3())
+            }
+          })
+        },
+        _xhr => {
+          // console.log((_xhr.loaded / _xhr.total) * 100 + '% loaded')
+        },
+        _error => {
+          // console.error(_error)
+        }
+      )
 
       const animate = () => {
         // 循环调用函数
@@ -208,8 +224,3 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-$pub-color: #fcb718;
-.three_container {
-}
-</style>

@@ -119,19 +119,13 @@ const routes = [
     component: resolve => require(['@/views/EarthSdk'], resolve)
   },
   {
-    path: '/Three',
+    path: '/ThreeJS',
     name: 'ThreeJS',
     visible: true,
     component: resolve => require(['@/views/Three'], resolve)
   },
   {
-    path: '/Three2',
-    name: 'ThreeJSHushi',
-    visible: false,
-    component: resolve => require(['@/views/Three/index2.vue'], resolve)
-  },
-  {
-    path: '/Boom',
+    path: '/ThreeJSBoom',
     name: 'Three炸裂',
     visible: true,
     component: resolve => require(['@/views/Three/Boom.vue'], resolve)
