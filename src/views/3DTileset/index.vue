@@ -90,38 +90,38 @@ export default {
         // )
 
         // 中心点坐标
-        const centerPosition = cartesianToLongAndLat(center)
-        console.log('中心点', centerPosition)
-        viewer.entities.add(
-          new Cesium.Entity({
-            position: Cesium.Cartesian3.fromDegrees(
-              centerPosition.longitude,
-              centerPosition.latitude,
-              maxHeightPosition.altitude
-            ),
-            point: new Cesium.PointGraphics({
-              pixelSize: 10,
-              heightReference: Cesium.HeightReference.NONE,
-              color: new Cesium.Color.fromCssColorString('#d81e06').withAlpha(
-                1
-              ),
-              outlineColor: new Cesium.Color.fromCssColorString(
-                '#d81e06'
-              ).withAlpha(1),
-              outlineWidth: 1
-            }),
-            label: {
-              text: `中心点\n${centerPosition.longitude}\n${centerPosition.latitude}\n${centerPosition.altitude}`,
-              style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-              font: '16px sans-serif',
-              fillColor: new Cesium.Color.fromCssColorString('#fff'),
-              outlineColor: new Cesium.Color.fromCssColorString('#333'),
-              outlineWidth: 1,
-              verticalOrigin: Cesium.VerticalOrigin.CENTER,
-              horizontalOrigin: Cesium.HorizontalOrigin.CENTER
-            }
-          })
-        )
+        // const centerPosition = cartesianToLongAndLat(center)
+        // console.log('中心点', centerPosition)
+        // viewer.entities.add(
+        //   new Cesium.Entity({
+        //     position: Cesium.Cartesian3.fromDegrees(
+        //       centerPosition.longitude,
+        //       centerPosition.latitude,
+        //       maxHeightPosition.altitude
+        //     ),
+        //     point: new Cesium.PointGraphics({
+        //       pixelSize: 10,
+        //       heightReference: Cesium.HeightReference.NONE,
+        //       color: new Cesium.Color.fromCssColorString('#d81e06').withAlpha(
+        //         1
+        //       ),
+        //       outlineColor: new Cesium.Color.fromCssColorString(
+        //         '#d81e06'
+        //       ).withAlpha(1),
+        //       outlineWidth: 1
+        //     }),
+        //     label: {
+        //       text: `中心点\n${centerPosition.longitude}\n${centerPosition.latitude}\n${centerPosition.altitude}`,
+        //       style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+        //       font: '16px sans-serif',
+        //       fillColor: new Cesium.Color.fromCssColorString('#fff'),
+        //       outlineColor: new Cesium.Color.fromCssColorString('#333'),
+        //       outlineWidth: 1,
+        //       verticalOrigin: Cesium.VerticalOrigin.CENTER,
+        //       horizontalOrigin: Cesium.HorizontalOrigin.CENTER
+        //     }
+        //   })
+        // )
       })
       .catch(error => {
         console.log(error)
