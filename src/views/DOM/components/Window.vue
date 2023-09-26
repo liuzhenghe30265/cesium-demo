@@ -14,6 +14,7 @@
 </template>
 
 <script>
+/* eslint-disable no-undef */
 export default {
   name: 'Window',
 
@@ -40,10 +41,6 @@ export default {
 
   methods: {
     eventListener() {
-      // const value = 1 - viewer.camera.positionCartographic.height / 10000
-      // const scale = value < 0.2 ? 0.2 : value > 1 ? 1 : value
-      // this.$parent.$el.style.transform = `scale(${scale})`
-
       const position = Cesium.Cartesian3.fromDegrees(
         this.messageData.longitude,
         this.messageData.latitude,
