@@ -17,12 +17,6 @@ const routes = [
     component: resolve => require(['@/views/Entity'], resolve)
   },
   {
-    path: '/DOM',
-    name: 'DOM',
-    visible: true,
-    component: resolve => require(['@/views/DOM'], resolve)
-  },
-  {
     path: '/WallMaterial',
     name: '动态光墙效果',
     visible: true,
@@ -33,6 +27,12 @@ const routes = [
     name: '淹没分析',
     visible: true,
     component: resolve => require(['@/views/Entity/FloodAnalysis'], resolve)
+  },
+  {
+    path: '/DOM',
+    name: 'DOM',
+    visible: true,
+    component: resolve => require(['@/views/DOM'], resolve)
   },
   {
     path: '/3DTileset',
