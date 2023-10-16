@@ -1,14 +1,32 @@
 <template>
-  <div id="cesium-container" style="width: 100%; height: 100%;">
+  <div
+    id="cesium-container"
+    style="width: 100%; height: 100%;"
+  >
     <div class="layer_container">
       <!-- <button id="btn">清除</button> -->
-      <el-tree ref="tree" :data="layers" show-checkbox node-key="id" :props="defaultProps"
-        :default-checked-keys="defaultCheckedKeys" highlight-current @check="handleCheckChange"
-        @node-click="handleNodeClick" />
+      <el-tree
+        ref="tree"
+        :data="layers"
+        show-checkbox
+        node-key="id"
+        :props="defaultProps"
+        :default-checked-keys="defaultCheckedKeys"
+        highlight-current
+        @check="handleCheckChange"
+        @node-click="handleNodeClick"
+      />
       <hr>
-      <el-tree :data="geoserverData" show-checkbox node-key="name" :props="defaultProps2"
-        :default-checked-keys="defaultCheckedKeys2" highlight-current @check="handleCheckChange2"
-        @node-click="handleNodeClick2" />
+      <el-tree
+        :data="geoserverData"
+        show-checkbox
+        node-key="name"
+        :props="defaultProps2"
+        :default-checked-keys="defaultCheckedKeys2"
+        highlight-current
+        @check="handleCheckChange2"
+        @node-click="handleNodeClick2"
+      />
     </div>
   </div>
 </template>
@@ -26,7 +44,10 @@ export default {
       geoserverData: [
         {
           name: 'cite:2000',
-          extend: [114.4491417723215, 38.96451275547338, 118.24157311104125, 41.29160446951736],
+          extend: [
+            114.4491417723215, 38.96451275547338, 118.24157311104125,
+            41.29160446951736
+          ],
           params: {
             url: 'http://openlayers.vip/geoserver/cite/wms',
             // layers: 'cite:xintai18',
@@ -43,7 +64,10 @@ export default {
         },
         {
           name: 'Hydrography:bores',
-          extend: [94.64056826887258, -48.14609083097633, 168.6166421757639, 1.1923869679885182],
+          extend: [
+            94.64056826887258, -48.14609083097633, 168.6166421757639,
+            1.1923869679885182
+          ],
           params: {
             url: 'https://nationalmap.gov.au/proxy/http://geoserver.nationalmap.nicta.com.au/geotopo_250k/ows',
             layers: 'Hydrography:bores',
@@ -59,7 +83,10 @@ export default {
         },
         {
           name: 'nexrad-n0r-wmst',
-          extend: [-139.34594331881885, 12.18220843541583, -48.577899873626464, 51.47356906279533],
+          extend: [
+            -139.34594331881885, 12.18220843541583, -48.577899873626464,
+            51.47356906279533
+          ],
           params: {
             url: 'https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r-t.cgi',
             layers: 'nexrad-n0r-wmst',
@@ -72,7 +99,10 @@ export default {
         },
         {
           name: 'nexrad-n0r',
-          extend: [-139.34594331881885, 12.18220843541583, -48.577899873626464, 51.47356906279533],
+          extend: [
+            -139.34594331881885, 12.18220843541583, -48.577899873626464,
+            51.47356906279533
+          ],
           params: {
             url: 'https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi',
             layers: 'nexrad-n0r',
@@ -86,7 +116,10 @@ export default {
         },
         {
           name: 'goes_conus_ir',
-          extend: [-139.34594331881885, 12.18220843541583, -48.577899873626464, 51.47356906279533],
+          extend: [
+            -139.34594331881885, 12.18220843541583, -48.577899873626464,
+            51.47356906279533
+          ],
           params: {
             url: 'https://mesonet.agron.iastate.edu/cgi-bin/wms/goes/conus_ir.cgi?',
             layers: 'goes_conus_ir',
@@ -121,7 +154,44 @@ export default {
     window.$InitMap()
 
     viewer.camera.flyTo({
-      destination: Cesium.Rectangle.fromDegrees(-139.34594331881885, 12.18220843541583, -48.577899873626464, 51.47356906279533)
+      destination: Cesium.Rectangle.fromDegrees(
+        -139.34594331881885,
+        12.18220843541583,
+        -48.577899873626464,
+        51.47356906279533
+      )
+    })
+
+    // var geometryService = new Cesium.GeometryService(
+    //   'https://sampleserver6.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer'
+    // )
+    // var bufferParams = new Cesium.BufferParameters({
+    //   geometries: [
+    //     Cesium.PolygonGeometry.fromPositions({
+    //       positions: Cesium.Cartesian3.fromDegreesArray([
+    //         -72.0, 40.0, -70.0, 35.0, -75.0, 30.0, -70.0, 30.0, -68.0, 40.0
+    //       ]),
+    //       vertexFormat: Cesium.EllipsoidSurfaceAppearance.VERTEX_FORMAT
+    //     })
+    //   ],
+    //   bufferDistance: 10000,
+    //   unit: 'meter',
+    //   spatialReference: new Cesium.SpatialReference({ wkid: 4326 })
+    // })
+
+    // geometryService.buffer(bufferParams).then(function (result) {
+    //   console.log('..............', result)
+    // })
+
+    var resource = new Cesium.Resource({
+      url: 'https://geoserve.example.com/query',
+      queryParameters: {
+        latitude: 40.0,
+        longitude: -105.0
+      }
+    })
+    resource.fetchJson().then(function (result) {
+      console.log(result)
     })
 
     // viewer.camera.changed.addEventListener(function (event) {
@@ -184,7 +254,12 @@ export default {
     handleNodeClick2(data) {
       if (data.extend && data.extend.length === 4) {
         viewer.camera.flyTo({
-          destination: Cesium.Rectangle.fromDegrees(data.extend[0], data.extend[1], data.extend[2], data.extend[3])
+          destination: Cesium.Rectangle.fromDegrees(
+            data.extend[0],
+            data.extend[1],
+            data.extend[2],
+            data.extend[3]
+          )
         })
       }
     },
@@ -201,7 +276,12 @@ export default {
     },
     handleNodeClick() {
       viewer.camera.flyTo({
-        destination: Cesium.Rectangle.fromDegrees(2.8072690264062663, 44.499893714855965, 11.838455896965069, 49.566047660998066)
+        destination: Cesium.Rectangle.fromDegrees(
+          2.8072690264062663,
+          44.499893714855965,
+          11.838455896965069,
+          49.566047660998066
+        )
       })
     },
     handleCheckChange(data, checked, indeterminate) {
