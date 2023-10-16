@@ -59,6 +59,12 @@ const routes = [
     component: resolve => require(['@/views/WMS'], resolve)
   },
   {
+    path: '/WMS/Query',
+    name: 'WMS Query',
+    visible: true,
+    component: resolve => require(['@/views/WMS/Query'], resolve)
+  },
+  {
     path: '/Plot',
     name: '标绘',
     visible: true,

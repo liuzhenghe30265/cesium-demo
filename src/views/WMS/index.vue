@@ -153,6 +153,39 @@ export default {
   mounted() {
     window.$InitMap()
 
+    const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
+    handler.setInputAction(function (event) {
+      // 平面坐标系转笛卡尔空间直角坐标系
+      /**
+        position: Cartesian2 {x: 683.0753784179688, y: 512.71826171875}
+        转
+        Cartesian3{x: -2174106.926252774, y: 4386734.375324652, z: 4074136.167795586}
+       */
+      console.log(
+        '平面坐标系转笛卡尔空间直角坐标系',
+        viewer.scene.pickPosition(event.position)
+      )
+
+      // 空间直角坐标系转经纬度
+      const earthPosition = viewer.camera.pickEllipsoid(
+        event.position,
+        viewer.scene.globe.ellipsoid
+      )
+      const cartographic = Cesium.Cartographic.fromCartesian(
+        earthPosition,
+        viewer.scene.globe.ellipsoid,
+        new Cesium.Cartographic()
+      )
+      const longitude = Cesium.Math.toDegrees(cartographic.longitude)
+      const latitude = Cesium.Math.toDegrees(cartographic.latitude)
+      console.log(
+        '空间直角坐标系转经纬度',
+        longitude,
+        latitude,
+        cartographic.height
+      )
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+
     viewer.camera.flyTo({
       destination: Cesium.Rectangle.fromDegrees(
         -139.34594331881885,

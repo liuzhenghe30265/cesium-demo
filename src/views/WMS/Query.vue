@@ -1,0 +1,164 @@
+<template>
+  <div
+    id="cesium-container"
+    style="width: 100%; height: 100%;"
+  >
+    <div style="position: absolute;z-index: 999;bottom: 0;left: 0;background: #fff;width: 100%;padding: 20px;box-sizing: border-box;">
+      <div> {{ position }}</div>
+      <div>{{ info }}</div>
+    </div>
+  </div>
+</template>
+
+  <script>
+/* eslint-disable no-undef */
+import axios from 'axios'
+export default {
+  data() {
+    return {
+      position: '',
+      info: ''
+    }
+  },
+  computed: {},
+  watch: {},
+  mounted() {
+    const _this = this
+    window.$InitMap()
+
+    const imageryLayer = new Cesium.ImageryLayer(
+      new Cesium.WebMapServiceImageryProvider({
+        url: 'http://openlayers.vip/geoserver/cite/wms',
+        layers: 'cite:2000',
+        parameters: {
+          transparent: true,
+          format: 'image/png',
+          srs: 'EPSG:4326'
+        },
+        tileWidth: 1024,
+        tileHeight: 1024
+      })
+    )
+    viewer.imageryLayers.add(imageryLayer)
+
+    viewer.camera.flyTo({
+      destination: Cesium.Rectangle.fromDegrees(
+        114.4491417723215,
+        38.96451275547338,
+        118.24157311104125,
+        41.29160446951736
+      )
+    })
+
+    /**
+     * @description: 根据用户点击的坐标计算 bbox 参数
+     * @param {*} latlng
+     * @param {*} zoom
+     * @return {*}
+     */
+    function PositionToBbox(latlng, zoom) {
+      const box = getZoomBbox(zoom)
+      const boxMin = {
+        lat: latlng.lat - box,
+        lng: latlng.lng - box
+      }
+      const boxMax = {
+        lat: latlng.lat + box,
+        lng: latlng.lng + box
+      }
+      return `${boxMin.lng},${boxMin.lat},${boxMax.lng},${boxMax.lat}`
+    }
+
+    /**
+     * @description: 计算用户坐标`应该减去的差值
+     * @param {*} zoom
+     * @return {*}
+     */
+    function getZoomBbox(zoom) {
+      const level0 = 142.03125
+      let box = level0 / Math.pow(2, zoom)
+      box = box / 2
+      return box
+    }
+
+    function geoServerQuery(data) {
+      return axios({
+        method: 'get',
+        url: `http://openlayers.vip/geoserver/cite/wms`,
+        headers: {
+          // Authorization: "",
+        },
+        params: data
+      })
+        .then(res => {
+          if (res && res.data) {
+            return res.data
+          }
+        })
+        .catch(() => {
+          return false
+        })
+    }
+
+    // 鼠标事件
+    const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
+    handler.setInputAction(function (movement) {
+      const earthPosition = viewer.camera.pickEllipsoid(
+        movement.endPosition,
+        viewer.scene.globe.ellipsoid
+      )
+      const cartographic = Cesium.Cartographic.fromCartesian(
+        earthPosition,
+        viewer.scene.globe.ellipsoid,
+        new Cesium.Cartographic()
+      )
+      const longitude = Cesium.Math.toDegrees(cartographic.longitude)
+      const latitude = Cesium.Math.toDegrees(cartographic.latitude)
+      if (longitude && latitude) {
+        console.log('.................', longitude, latitude)
+        _this.position = `${longitude}, ${latitude}`
+        geoServerQuery({
+          service: 'wms',
+          version: '1.1.1',
+          request: 'getfeatureinfo',
+          format: 'image/png',
+          transparent: true,
+          query_layers: 'cite:2000',
+          layers: 'cite:2000',
+          exceptions: 'application/vnd.ogc.se_inimage',
+          info_format: 'application/json',
+          feature_count: 50,
+          x: 50,
+          y: 50,
+          srs: 'epsg:4490',
+          width: 101,
+          height: 101,
+          bbox: PositionToBbox(
+            {
+              lng: longitude,
+              lat: latitude
+            },
+            24
+          )
+        })
+          .then(res => {
+            console.log('..............res', res)
+            if (res && res.features && res.features.length > 0) {
+              _this.info = res.features[0].properties
+            } else {
+              _this.info = ''
+            }
+          })
+          .catch(err => {
+            _this.info = ''
+            console.log(err)
+          })
+      }
+    }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
+  },
+  methods: {}
+}
+</script>
+
+<style>
+</style>
