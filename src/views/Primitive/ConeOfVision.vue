@@ -8,6 +8,7 @@
 <script>
 /* eslint-disable no-undef */
 export default {
+  name: 'ConeOfVision',
   data() {
     return {}
   },
@@ -20,16 +21,8 @@ export default {
       destination: Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
     })
 
-    const endPosition = Cesium.Cartesian3.fromDegrees(
-      117.111111,
-      39.111111,
-      100
-    )
-    const startPosition = Cesium.Cartesian3.fromDegrees(
-      117.22222,
-      39.22222,
-      100
-    )
+    const startPosition = Cesium.Cartesian3.fromDegrees(117.0, 39.0, 0)
+    const endPosition = Cesium.Cartesian3.fromDegrees(115.0, 37.0, 0)
     // 视锥
     const spotLightCamera = new Cesium.Camera(viewer.scene)
     const direction = Cesium.Cartesian3.normalize(
@@ -40,8 +33,8 @@ export default {
       ),
       new Cesium.Cartesian3()
     )
-    spotLightCamera.position = startPosition // firstPos 是相机起点
-    spotLightCamera.direction = direction // direction 是相机面向的方向
+    spotLightCamera.position = startPosition // 相机起点
+    spotLightCamera.direction = direction // 相机面向的方向
     spotLightCamera.up = Cesium.Cartesian3.clone(viewer.camera.up)
     spotLightCamera.frustum.fov = Cesium.Math.PI_OVER_THREE
     spotLightCamera.frustum.near = 0.1
