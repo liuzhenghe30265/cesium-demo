@@ -77,6 +77,12 @@ const routes = [
     component: resolve => require(['@/views/Primitive'], resolve)
   },
   {
+    path: '/Primitive/ConeOfVision',
+    name: 'Primitive 视锥',
+    visible: true,
+    component: resolve => require(['@/views/Primitive/ConeOfVision'], resolve)
+  },
+  {
     path: '/Primitive/Route',
     name: 'Primitive 航线',
     visible: true,
