@@ -5,15 +5,59 @@
   >
     <div
       class="control"
-      style="position: absolute;right: 50px;top: 50px;z-index: 999;width: 400px;color: #fff;"
+      style="position: absolute;right: 50px;top: 50px;z-index: 999;width: 200px;color: #fff;"
     >
+      <div>
+        <span>width</span>
+        <el-slider
+          v-model="width"
+          :min="0"
+          :max="1000"
+          @input="handleChange"
+        />
+      </div>
+      <div>
+        <span>height</span>
+        <el-slider
+          v-model="height"
+          :min="0"
+          :max="1000"
+          @input="handleChange"
+        />
+      </div>
+      <div>
+        <span>fov</span>
+        <el-slider
+          v-model="fov"
+          :min="0"
+          :max="179"
+          @input="handleChange"
+        />
+      </div>
+      <div>
+        <span>near</span>
+        <el-slider
+          v-model="near"
+          :min="0"
+          :max="10000"
+          @input="handleChange"
+        />
+      </div>
+      <div>
+        <span>far</span>
+        <el-slider
+          v-model="far"
+          :min="0"
+          :max="near"
+          @input="handleChange"
+        />
+      </div>
       <div>
         <span>heading</span>
         <el-slider
           v-model="heading"
           :min="0"
           :max="360"
-          show-input
           @input="handleChange"
         />
       </div>
@@ -23,7 +67,6 @@
           v-model="pitch"
           :min="0"
           :max="360"
-          show-input
           @input="handleChange"
         />
       </div>
@@ -33,7 +76,6 @@
           v-model="roll"
           :min="0"
           :max="360"
-          show-input
           @input="handleChange"
         />
       </div>
@@ -52,6 +94,11 @@ export default {
       longitude: 117,
       latitude: 39,
       altitude: 100,
+      width: 150,
+      height: 100,
+      fov: 90.0,
+      near: 200.0,
+      far: 10.0,
       roll: 0,
       pitch: 0,
       heading: 0,
@@ -79,15 +126,14 @@ export default {
         latitude: this.latitude,
         altitude: this.altitude
       },
-      headingPitchRoll: {
-        heading: this.heading,
-        pitch: this.pitch,
-        roll: this.roll
-      },
-      fov: 90, // 视场的角度（FOV），以弧度表示
-      near: 200.0, // 近平面的距离
-      far: 10.0, // 远平面的距离
-      aspectRatio: 150 / 100 // 截锥的宽度和高度的纵横比
+      fov: this.fov, // 视场的角度（FOV），以弧度表示
+      near: this.near, // 近平面的距离
+      far: this.far, // 远平面的距离
+      heading: this.heading,
+      pitch: this.pitch,
+      roll: this.roll,
+      width: this.width,
+      height: this.height
     })
 
     // * 视锥（primitive，根据两个坐标绘制）
@@ -156,18 +202,14 @@ export default {
   },
   methods: {
     handleChange() {
-      this.frustum.update(
-        {
-          longitude: this.longitude,
-          latitude: this.latitude,
-          altitude: this.altitude
-        },
-        {
-          heading: this.heading,
-          pitch: this.pitch,
-          roll: this.roll
-        }
-      )
+      this.frustum.UpdateWidth(this.width)
+      this.frustum.UpdateHeight(this.height)
+      this.frustum.UpdateHeading(this.heading)
+      this.frustum.UpdatePitch(this.pitch)
+      this.frustum.UpdateRoll(this.roll)
+      this.frustum.UpdateFov(this.fov)
+      this.frustum.UpdateNear(this.near)
+      this.frustum.UpdateFar(this.far)
     }
   }
 }
