@@ -41,7 +41,8 @@ export default {
     let timer = null
     // 模型一
     const tileseta = createClippingPlaneFun(
-      'https://lab.earthsdk.com/model/3610c2b0d08411eab7a4adf1d6568ff7/tileset.json',
+      '/model/truck/good/terra_b3dms/tileset.json',
+      // 'https://lab.earthsdk.com/model/3610c2b0d08411eab7a4adf1d6568ff7/tileset.json',
       new Cesium.ClippingPlaneCollection({
         planes: [
           new Cesium.ClippingPlane(new Cesium.Cartesian3(1.0, 0.0, 0.0), 0.0) // 左
@@ -56,7 +57,8 @@ export default {
 
     // 模型二
     const tilesetb = createClippingPlaneFun(
-      'https://lab.earthsdk.com/model/908311a0ac2f11e99dbd8fd044883638/tileset.json',
+      '/model/truck/bad/terra_b3dms/tileset.json',
+      // 'https://lab.earthsdk.com/model/908311a0ac2f11e99dbd8fd044883638/tileset.json',
       new Cesium.ClippingPlaneCollection({
         planes: [
           new Cesium.ClippingPlane(new Cesium.Cartesian3(-1.0, 0.0, 0.0), 0.0) // 右

@@ -23,7 +23,7 @@ export default {
   mounted() {
     window.$InitMap()
     const tileset = new Cesium.Cesium3DTileset({
-      url: 'https://lab.earthsdk.com/model/3610c2b0d08411eab7a4adf1d6568ff7/tileset.json',
+      url: 'http://earthsdk.com/v/last/Apps/assets/dayanta/tileset.json',
       debugShowMemoryUsage: false
     })
     viewer.scene.primitives.add(tileset)
@@ -33,8 +33,9 @@ export default {
       polygon: {
         hierarchy: new Cesium.PolygonHierarchy(
           Cesium.Cartesian3.fromDegreesArrayHeights([
-            121.4631015, 31.2671618, 0, 121.5367499, 31.2658501, 0, 121.5328263,
-            31.2059886, 0, 121.4590159, 31.2055623, 0
+            108.95641933453238, 34.22432161641172, 0, 108.96253588703804,
+            34.22439761612171, 0, 108.96232768137122, 34.21756975247353, 0,
+            108.95619302773214, 34.21776743510424, 0
           ])
         ),
         // extrudedHeight: 200,
@@ -82,8 +83,8 @@ export default {
         viewer.terrainProvider,
         gridPositions
       )
-      let maxHeight = 100
-      let minHeight = 0
+      let maxHeight = 460
+      let minHeight = 480
       Promise.resolve(promise).then(function (updatedPositions) {
         for (let i = 0; i < updatedPositions.length; i++) {
           const height = updatedPositions[i].height

@@ -1,11 +1,23 @@
 <template>
-  <div id="cesium-container" style="width: 100%; height: 100%">
+  <div
+    id="cesium-container"
+    style="width: 100%; height: 100%"
+  >
     <div class="btns">
       <div class="ul">
-        <div v-for="(item, index) of btns" :key="index" class="li" :class="{ active: item.name === active }"
-          @click="handleClick(item)">
+        <div
+          v-for="(item, index) of btns"
+          :key="index"
+          class="li"
+          :class="{ active: item.name === active }"
+          @click="handleClick(item)"
+        >
           {{ item.name }}</div>
-        <div class="li" :class="{ disabled: plottingStatus }" @click="handleSave">保存</div>
+        <div
+          class="li"
+          :class="{ disabled: plottingStatus }"
+          @click="handleSave"
+        >保存</div>
       </div>
     </div>
   </div>
@@ -63,7 +75,8 @@ export default {
     // })
 
     const tileset = new Cesium.Cesium3DTileset({
-      url: 'https://lab.earthsdk.com/model/f15b9e90ac2d11e99dbd8fd044883638/tileset.json', // 大雁塔
+      url: 'http://earthsdk.com/v/last/Apps/assets/dayanta/tileset.json', // 大雁塔
+      // url: 'https://lab.earthsdk.com/model/f15b9e90ac2d11e99dbd8fd044883638/tileset.json', // 大雁塔
       debugShowMemoryUsage: false
     })
     viewer.scene.primitives.add(tileset)
@@ -150,7 +163,11 @@ export default {
       const _color = new Cesium.Color.fromCssColorString('#17E980')
       if (data.drawingMode === 'point') {
         viewer.entities.add({
-          position: Cesium.Cartesian3.fromDegrees(data.centerPoint.longitude, data.centerPoint.latitude, data.centerPoint.altitude),
+          position: Cesium.Cartesian3.fromDegrees(
+            data.centerPoint.longitude,
+            data.centerPoint.latitude,
+            data.centerPoint.altitude
+          ),
           point: {
             color: _color,
             // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
@@ -176,7 +193,11 @@ export default {
         })
       } else if (data.drawingMode === 'polyline') {
         viewer.entities.add({
-          position: Cesium.Cartesian3.fromDegrees(data.centerPoint.longitude, data.centerPoint.latitude, data.centerPoint.altitude),
+          position: Cesium.Cartesian3.fromDegrees(
+            data.centerPoint.longitude,
+            data.centerPoint.latitude,
+            data.centerPoint.altitude
+          ),
           label: {
             text: `${data.activeShapeComputed}m`,
             font: '30px sans-serif',
@@ -193,14 +214,20 @@ export default {
         if (data.activeSubLine && data.activeSubLine.length > 0) {
           data.activeSubLine.map((line, lineIndex) => {
             if (line.distance <= 0) return
-            const positions = Cesium.Cartesian3.fromDegreesArrayHeights(
-              [
-                line.start.longitude, line.start.latitude, line.start.altitude,
-                line.end.longitude, line.end.latitude, line.end.altitude
-              ]
-            )
+            const positions = Cesium.Cartesian3.fromDegreesArrayHeights([
+              line.start.longitude,
+              line.start.latitude,
+              line.start.altitude,
+              line.end.longitude,
+              line.end.latitude,
+              line.end.altitude
+            ])
             viewer.entities.add({
-              position: Cesium.Cartesian3.fromDegrees(line.centerPoint.longitude, line.centerPoint.latitude, line.centerPoint.altitude),
+              position: Cesium.Cartesian3.fromDegrees(
+                line.centerPoint.longitude,
+                line.centerPoint.latitude,
+                line.centerPoint.altitude
+              ),
               polyline: {
                 // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
                 positions: positions,
@@ -219,7 +246,12 @@ export default {
                 outlineColor: Cesium.Color.fromCssColorString('#000'),
                 disableDepthTestDistance: Number.POSITIVE_INFINITY,
                 // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 30000.0),
-                scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.5)
+                scaleByDistance: new Cesium.NearFarScalar(
+                  1.0e2,
+                  0.6,
+                  0.7e4,
+                  0.5
+                )
               }
             })
           })
@@ -229,11 +261,13 @@ export default {
         const _hierarchy = []
         if (vertices.length > 0) {
           vertices.map(point => {
-            _hierarchy.push(Cesium.Cartesian3.fromDegrees(
-              point.longitude,
-              point.latitude,
-              point.altitude
-            ))
+            _hierarchy.push(
+              Cesium.Cartesian3.fromDegrees(
+                point.longitude,
+                point.latitude,
+                point.altitude
+              )
+            )
           })
         }
         if (_hierarchy.length > 0) {
@@ -245,16 +279,18 @@ export default {
           const max = altitudes.sort()[altitudes.length - 1]
           center.altitude = max
           viewer.entities.add({
-            position: Cesium.Cartesian3.fromDegrees(data.centerPoint.longitude, data.centerPoint.latitude, data.centerPoint.altitude),
+            position: Cesium.Cartesian3.fromDegrees(
+              data.centerPoint.longitude,
+              data.centerPoint.latitude,
+              data.centerPoint.altitude
+            ),
             polygon: {
               // hierarchy: hierarchy,
               hierarchy: dynamicPositions,
               // extrudedHeight: 200,
               // perPositionHeight: true,
               // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-              material: new Cesium.ColorMaterialProperty(
-                _color
-              )
+              material: new Cesium.ColorMaterialProperty(_color)
             },
             label: {
               text: `${data.activeShapeComputed}平方米`,
@@ -273,13 +309,20 @@ export default {
         }
       } else if (data.drawingMode === 'text') {
         viewer.entities.add({
-          position: Cesium.Cartesian3.fromDegrees(data.centerPoint.longitude, data.centerPoint.latitude, data.centerPoint.altitude),
+          position: Cesium.Cartesian3.fromDegrees(
+            data.centerPoint.longitude,
+            data.centerPoint.latitude,
+            data.centerPoint.altitude
+          ),
           label: {
             text: text,
             font: _font,
             fillColor: _color,
             disableDepthTestDistance: Number.POSITIVE_INFINITY,
-            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 30000.0),
+            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+              0.0,
+              30000.0
+            ),
             scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.5),
             show: visible
           }
@@ -338,7 +381,7 @@ export default {
 
       &.disabled {
         pointer-events: none;
-        opacity: .5;
+        opacity: 0.5;
       }
     }
   }

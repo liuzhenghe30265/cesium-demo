@@ -3,7 +3,7 @@
     id="cesium-container"
     style="width: 100%; height: 100%;"
   >
-    <div style="position: absolute;width: 400px;right: 50px;top: 100px;z-index: 9;">
+    <div style="position: absolute;width: 400px;right: 50px;top: 100px;z-index: 999;">
       <div>
         <el-slider
           v-model="sliderVal"
@@ -54,7 +54,7 @@ export default {
 <style lang="scss">
 .model_container {
   position: absolute;
-  z-index: 999;
+  z-index: 9;
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
