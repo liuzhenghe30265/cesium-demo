@@ -47,82 +47,70 @@ export default {
     viewer.scene.primitives.add(this.tileset)
     this.tileset.readyPromise
       .then(async tileset => {
-        // 获取3D Tiles的包围盒
         const boundingSphere = tileset.boundingSphere
 
-        // 获取包围盒的中心点
+        // * 中心点
         const center = boundingSphere.center
+        addEntity(center, '中心点')
 
+        // * 最高点
         const result = await Cesium.sampleTerrainMostDetailed(
           viewer.terrainProvider,
           [center]
         )
-        const maxHeightPosition = cartesianToLongAndLat(result[0])
-        // console.log('最高点', maxHeightPosition)
+        addEntity(result[0], '最高点')
+
+        // * 半径加中心点
         // viewer.entities.add(
         //   new Cesium.Entity({
-        //     position: Cesium.Cartesian3.fromDegrees(
-        //       maxHeightPosition.longitude,
-        //       maxHeightPosition.latitude,
-        //       maxHeightPosition.altitude
-        //     ),
-        //     point: new Cesium.PointGraphics({
-        //       pixelSize: 10,
-        //       heightReference: Cesium.HeightReference.NONE,
-        //       color: new Cesium.Color.fromCssColorString('#d81e06').withAlpha(
-        //         1
+        //     position: center,
+        //     ellipsoid: {
+        //       radii: new Cesium.Cartesian3(
+        //         boundingSphere.radius,
+        //         boundingSphere.radius,
+        //         boundingSphere.radius
         //       ),
-        //       outlineColor: new Cesium.Color.fromCssColorString(
-        //         '#d81e06'
-        //       ).withAlpha(1),
-        //       outlineWidth: 1
-        //     }),
-        //     label: {
-        //       text: `最高点\n${maxHeightPosition.longitude}\n${maxHeightPosition.latitude}\n${maxHeightPosition.altitude}`,
-        //       style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-        //       font: '16px sans-serif',
-        //       fillColor: new Cesium.Color.fromCssColorString('#fff'),
-        //       outlineColor: new Cesium.Color.fromCssColorString('#333'),
-        //       outlineWidth: 1,
-        //       verticalOrigin: Cesium.VerticalOrigin.CENTER,
-        //       horizontalOrigin: Cesium.HorizontalOrigin.CENTER
+        //       material: new Cesium.PolylineGlowMaterialProperty({
+        //         color: Cesium.Color.AZURE
+        //       })
         //     }
         //   })
         // )
 
-        // 中心点坐标
-        // const centerPosition = cartesianToLongAndLat(center)
-        // console.log('中心点', centerPosition)
-        // viewer.entities.add(
-        //   new Cesium.Entity({
-        //     position: Cesium.Cartesian3.fromDegrees(
-        //       centerPosition.longitude,
-        //       centerPosition.latitude,
-        //       maxHeightPosition.altitude
-        //     ),
-        //     point: new Cesium.PointGraphics({
-        //       pixelSize: 10,
-        //       heightReference: Cesium.HeightReference.NONE,
-        //       color: new Cesium.Color.fromCssColorString('#d81e06').withAlpha(
-        //         1
-        //       ),
-        //       outlineColor: new Cesium.Color.fromCssColorString(
-        //         '#d81e06'
-        //       ).withAlpha(1),
-        //       outlineWidth: 1
-        //     }),
-        //     label: {
-        //       text: `中心点\n${centerPosition.longitude}\n${centerPosition.latitude}\n${centerPosition.altitude}`,
-        //       style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-        //       font: '16px sans-serif',
-        //       fillColor: new Cesium.Color.fromCssColorString('#fff'),
-        //       outlineColor: new Cesium.Color.fromCssColorString('#333'),
-        //       outlineWidth: 1,
-        //       verticalOrigin: Cesium.VerticalOrigin.CENTER,
-        //       horizontalOrigin: Cesium.HorizontalOrigin.CENTER
-        //     }
-        //   })
-        // )
+        // * 顶点
+        const halfAxes =
+          tileset.root.boundingVolume._orientedBoundingBox.halfAxes
+        const x = new Cesium.Cartesian3()
+        const y = new Cesium.Cartesian3()
+        const z = new Cesium.Cartesian3()
+
+        Cesium.Matrix3.getColumn(halfAxes, 0, x)
+        Cesium.Matrix3.getColumn(halfAxes, 1, y)
+        Cesium.Matrix3.getColumn(halfAxes, 2, z)
+
+        const temp1 = new Cesium.Cartesian3()
+        const temp2 = new Cesium.Cartesian3()
+        const temp3 = new Cesium.Cartesian3()
+
+        Cesium.Cartesian3.subtract(center, x, temp1)
+        Cesium.Cartesian3.subtract(temp1, y, temp2)
+        Cesium.Cartesian3.subtract(temp2, z, temp3)
+
+        addEntity(temp1, 1)
+        addEntity(temp2, 2)
+        addEntity(temp3, 3)
+
+        const temp4 = new Cesium.Cartesian3()
+        const temp5 = new Cesium.Cartesian3()
+        const temp6 = new Cesium.Cartesian3()
+
+        Cesium.Cartesian3.add(center, x, temp4)
+        Cesium.Cartesian3.add(temp4, y, temp5)
+        Cesium.Cartesian3.add(temp5, z, temp6)
+
+        addEntity(temp4, 4)
+        addEntity(temp5, 5)
+        addEntity(temp6, 6)
       })
       .catch(error => {
         console.log(error)
@@ -137,6 +125,30 @@ export default {
           .catch(() => {})
       })
     viewer.zoomTo(this.tileset) // 视角切换到模型的位置
+
+    function addEntity(position, label) {
+      viewer.entities.add(
+        new Cesium.Entity({
+          position: position,
+          point: {
+            color: Cesium.Color.RED,
+            pixelSize: 10
+          },
+          label: {
+            text: `${label}`,
+            pixelOffset: new Cesium.Cartesian2(0.0, -30.0),
+            style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+            fillColor: new Cesium.Color.fromCssColorString('#fff'),
+            outlineColor: new Cesium.Color.fromCssColorString('#000'),
+            outlineWidth: 1,
+            verticalOrigin: Cesium.VerticalOrigin.CENTER,
+            horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+            scaleByDistance: new Cesium.NearFarScalar(1.0e2, 0.6, 0.7e4, 0.2),
+            showBackground: false
+          }
+        })
+      )
+    }
 
     // const new_tileset = new Cesium.Cesium3DTileset({
     //   // url: 'https://lab.earthsdk.com/model/3610c2b0d08411eab7a4adf1d6568ff7/tileset.json', // 上海（白）
