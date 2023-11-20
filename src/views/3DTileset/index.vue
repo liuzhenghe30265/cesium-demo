@@ -44,9 +44,40 @@ export default {
       // url: 'https://lab.earthsdk.com/model/f15b9e90ac2d11e99dbd8fd044883638/tileset.json', // 大雁塔
       debugShowMemoryUsage: false
     })
+
+    // 获取3DTiles数据集的边界球体
+    var boundingSphere = this.tileset.tilesetBoundingSphere
+    console.log('.............boundingSphere', boundingSphere)
+
+    // 获取3DTiles数据集的边界框
+    var boundingBox = this.tileset.tilesetBoundingBox
+    console.log('...........boundingBox', boundingBox)
+
+    this.tileset.tileVisible.addEventListener(function (tile) {
+      var content = tile.content
+      var featuresLength = content.featuresLength
+      console.log('...........featuresLength', featuresLength)
+      // for (var i = 0; i < featuresLength; ++i) {
+      //   var feature = content.getFeature(i)
+      //   var geometry = feature.geometry
+      //   var positions = geometry.boundingSphereWC.positions
+      //   console.log(positions)
+      // }
+    })
+
     viewer.scene.primitives.add(this.tileset)
     this.tileset.readyPromise
       .then(async tileset => {
+        console.log('............tileset', tileset)
+
+        var properties = tileset.properties
+        console.log('.............properties', properties)
+        if (Cesium.defined(properties)) {
+          for (var name in properties) {
+            console.log('............', properties[name])
+          }
+        }
+
         const boundingSphere = tileset.boundingSphere
 
         // * 中心点
@@ -77,7 +108,28 @@ export default {
         //   })
         // )
 
-        // * 顶点
+        // * 顶点 v2
+        const verticesPosition = {}
+        const radius = 100
+        const centerPosition = cartesianToLongAndLat(center)
+        for (let index = 0; index < 10; index++) {
+          const angle = index * 36
+          const endPosition = getLonAndLat(
+            centerPosition.longitude,
+            centerPosition.latitude,
+            angle,
+            radius
+          )
+          const _position = Cesium.Cartesian3.fromDegrees(
+            endPosition.longitude,
+            endPosition.latitude,
+            centerPosition.altitude
+          )
+          verticesPosition[angle] = endPosition
+          addEntity(_position, index)
+        }
+
+        // * 顶点 v1
         const halfAxes =
           tileset.root.boundingVolume._orientedBoundingBox.halfAxes
         const x = new Cesium.Cartesian3()
@@ -114,15 +166,15 @@ export default {
       })
       .catch(error => {
         console.log(error)
-        this.$confirm('无法加载 tileset，去处理？', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        })
-          .then(() => {
-            window.open('https://lab.earthsdk.com/model/', '_blank')
-          })
-          .catch(() => {})
+        // this.$confirm('无法加载 tileset，去处理？', '提示', {
+        //   confirmButtonText: '确定',
+        //   cancelButtonText: '取消',
+        //   type: 'warning'
+        // })
+        //   .then(() => {
+        //     window.open('https://lab.earthsdk.com/model/', '_blank')
+        //   })
+        //   .catch(() => {})
       })
     viewer.zoomTo(this.tileset) // 视角切换到模型的位置
 
@@ -148,6 +200,113 @@ export default {
           }
         })
       )
+    }
+
+    function getLonAndLatV2(longitude, latitude, angle, distance) {
+      var _angle = Cesium.Math.toRadians(angle) // 角度以弧度为单位
+      var end = Cesium.Cartesian3.fromDegrees(
+        longitude + distance * Math.cos(_angle),
+        latitude,
+
+        distance * Math.sin(_angle)
+      )
+
+      // 将新的坐标转换回经纬度
+      var endLatLon = Cesium.Cartographic.fromCartesian(end)
+      var endLat = Cesium.Math.toDegrees(endLatLon.latitude)
+      var endLon = Cesium.Math.toDegrees(endLatLon.longitude)
+      return {
+        longitude: endLon,
+        latitude: endLat
+      }
+    }
+
+    const getLonAndLat = function (lng, lat, brng, dist) {
+      /**
+       * 根据一个经纬度及距离角度，算出另外一个经纬度
+       * @param {*} lng 经度 113.3960698
+       * @param {*} lat 纬度 22.941386
+       * @param {*} brng 方位角 45 ---- 正北方：000°或360° 正东方：090° 正南方：180° 正西方：270°
+       * @param {*} dist 90000距离(米)
+       *
+       */
+      function rad(d) {
+        return (d * Math.PI) / 180.0
+      }
+
+      /**
+       * 弧度换成度
+       * @param  {Float} x 弧度
+       * @return {Float}   度
+       */
+      function deg(x) {
+        return (x * 180) / Math.PI
+      }
+      // 大地坐标系资料WGS-84 长半径a=6378137 短半径b=6356752.3142 扁率f=1/298.2572236
+      var a = 6378137
+      var b = 6356752.3142
+      var f = 1 / 298.257223563
+
+      var lon1 = lng * 1
+      var lat1 = lat * 1
+      var s = dist
+      var alpha1 = rad(brng)
+      var sinAlpha1 = Math.sin(alpha1)
+      var cosAlpha1 = Math.cos(alpha1)
+
+      var tanU1 = (1 - f) * Math.tan(rad(lat1))
+      var cosU1 = 1 / Math.sqrt(1 + tanU1 * tanU1)
+      var sinU1 = tanU1 * cosU1
+      var sigma1 = Math.atan2(tanU1, cosAlpha1)
+      var sinAlpha = cosU1 * sinAlpha1
+      var cosSqAlpha = 1 - sinAlpha * sinAlpha
+      var uSq = (cosSqAlpha * (a * a - b * b)) / (b * b)
+      var A =
+        1 + (uSq / 16384) * (4096 + uSq * (-768 + uSq * (320 - 175 * uSq)))
+      var B = (uSq / 1024) * (256 + uSq * (-128 + uSq * (74 - 47 * uSq)))
+
+      var sigma = s / (b * A)
+      var sigmaP = 2 * Math.PI
+      while (Math.abs(sigma - sigmaP) > 1e-12) {
+        var cos2SigmaM = Math.cos(2 * sigma1 + sigma)
+        var sinSigma = Math.sin(sigma)
+        var cosSigma = Math.cos(sigma)
+        var deltaSigma =
+          B *
+          sinSigma *
+          (cos2SigmaM +
+            (B / 4) *
+              (cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM) -
+                (B / 6) *
+                  cos2SigmaM *
+                  (-3 + 4 * sinSigma * sinSigma) *
+                  (-3 + 4 * cos2SigmaM * cos2SigmaM)))
+        sigmaP = sigma
+        sigma = s / (b * A) + deltaSigma
+      }
+
+      var tmp = sinU1 * sinSigma - cosU1 * cosSigma * cosAlpha1
+      var lat2 = Math.atan2(
+        sinU1 * cosSigma + cosU1 * sinSigma * cosAlpha1,
+        (1 - f) * Math.sqrt(sinAlpha * sinAlpha + tmp * tmp)
+      )
+      var lambda = Math.atan2(
+        sinSigma * sinAlpha1,
+        cosU1 * cosSigma - sinU1 * sinSigma * cosAlpha1
+      )
+      var C = (f / 16) * cosSqAlpha * (4 + f * (4 - 3 * cosSqAlpha))
+      var L =
+        lambda -
+        (1 - C) *
+          f *
+          sinAlpha *
+          (sigma +
+            C *
+              sinSigma *
+              (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)))
+
+      // var revAz = Math.atan2(sinAlpha, -tmp) // final bearing
+      return { longitude: lon1 + deg(L), latitude: deg(lat2) }
     }
 
     // const new_tileset = new Cesium.Cesium3DTileset({

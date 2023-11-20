@@ -19,10 +19,10 @@
         </router-link>
       </li>
     </ul>
-    <a href="https://lab.earthsdk.com/model/" target="blank"
+    <!-- <a href="https://lab.earthsdk.com/model/" target="blank"
       style="position: fixed;left: 0;top: 0;z-index: 999;color: #fff;">
       无法加载 tileset ？
-    </a>
+    </a> -->
     <router-view />
   </div>
 </template>
