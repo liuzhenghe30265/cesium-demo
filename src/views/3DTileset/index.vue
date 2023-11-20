@@ -37,7 +37,7 @@ export default {
 
     // 添加 3DTileset
     this.tileset = new Cesium.Cesium3DTileset({
-      url: 'http://earthsdk.com/v/last/Apps/assets/dayanta/tileset.json',
+      url: '/model/truck/good/terra_b3dms/tileset.json',
       // url: 'https://lab.earthsdk.com/model/3610c2b0d08411eab7a4adf1d6568ff7/tileset.json', // 上海（白）
       // url: 'https://lab.earthsdk.com/model/908311a0ac2f11e99dbd8fd044883638/tileset.json', // 上海（蓝）
       // url: 'https://lab.earthsdk.com/model/de2a2300ac2d11e99dbd8fd044883638/tileset.json', // 大雁塔（单体）
@@ -45,38 +45,10 @@ export default {
       debugShowMemoryUsage: false
     })
 
-    // 获取3DTiles数据集的边界球体
-    var boundingSphere = this.tileset.tilesetBoundingSphere
-    console.log('.............boundingSphere', boundingSphere)
-
-    // 获取3DTiles数据集的边界框
-    var boundingBox = this.tileset.tilesetBoundingBox
-    console.log('...........boundingBox', boundingBox)
-
-    this.tileset.tileVisible.addEventListener(function (tile) {
-      var content = tile.content
-      var featuresLength = content.featuresLength
-      console.log('...........featuresLength', featuresLength)
-      // for (var i = 0; i < featuresLength; ++i) {
-      //   var feature = content.getFeature(i)
-      //   var geometry = feature.geometry
-      //   var positions = geometry.boundingSphereWC.positions
-      //   console.log(positions)
-      // }
-    })
-
     viewer.scene.primitives.add(this.tileset)
     this.tileset.readyPromise
       .then(async tileset => {
-        console.log('............tileset', tileset)
-
-        var properties = tileset.properties
-        console.log('.............properties', properties)
-        if (Cesium.defined(properties)) {
-          for (var name in properties) {
-            console.log('............', properties[name])
-          }
-        }
+        window.$tileset = tileset
 
         const boundingSphere = tileset.boundingSphere
 
@@ -184,7 +156,7 @@ export default {
           position: position,
           point: {
             color: Cesium.Color.RED,
-            pixelSize: 10
+            pixelSize: 20
           },
           label: {
             text: `${label}`,
