@@ -18,6 +18,9 @@ Vue.use(TimelineSliderVue)
 import { InitMap } from '@/utils/InitMap.js'
 window.$InitMap = InitMap
 
+import LiveVideo from '@/components/LiveVideo'
+Vue.component('LiveVideo', LiveVideo)
+
 // new Vue({
 //   render: h => h(App),
 //   router,

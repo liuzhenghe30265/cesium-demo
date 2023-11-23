@@ -36,7 +36,10 @@ module.exports = {
         from: './node_modules/earthsdk/dist/XbsjEarth',
         to: 'tool/earthsdk/XbsjEarth',
         toType: 'dir'
-      }
+      },
+      { from: './node_modules/@liveqing/liveplayer/dist/component/crossdomain.xml', to: 'tool/liveplayer' },
+      { from: './node_modules/@liveqing/liveplayer/dist/component/liveplayer-lib.min.js', to: 'tool/liveplayer' },
+      { from: './node_modules/@liveqing/liveplayer/dist/component/liveplayer.swf', to: 'tool/liveplayer' }
     ]
     webpackArr.push(
       {
