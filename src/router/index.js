@@ -35,6 +35,12 @@ const routes = [
     component: resolve => require(['@/views/Entity/FloodAnalysis'], resolve)
   },
   {
+    path: '/RhumbBearing',
+    name: '方向角计算',
+    visible: true,
+    component: resolve => require(['@/views/Entity/RhumbBearing'], resolve)
+  },
+  {
     path: '/DOM',
     name: 'DOM',
     visible: true,

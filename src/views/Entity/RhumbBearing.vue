@@ -1,0 +1,258 @@
+
+<template>
+  <div
+    id="cesium-container"
+    style="width: 100%; height: 100%;"
+  />
+</template>
+
+<script>
+/* eslint-disable no-undef */
+/**
+ * 根据两个坐标，计算连接的线段与正北的夹角
+ *
+ */
+import * as turf from '@turf/turf'
+export default {
+  data() {
+    return {}
+  },
+  computed: {},
+  watch: {},
+  mounted() {
+    window.$InitMap()
+    viewer.camera.flyTo({
+      destination: Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
+    })
+
+    const altitude = 100000
+    const distance = 1000
+    const pointO = {
+      longitude: 116.407387,
+      latitude: 39.904179,
+      altitude: altitude
+    }
+    const pointN = {
+      label: 'N 0°',
+      longitude: turf.rhumbDestination(
+        turf.point([pointO.longitude, pointO.latitude]),
+        distance,
+        0
+      ).geometry.coordinates[0],
+      latitude: turf.rhumbDestination(
+        turf.point([pointO.longitude, pointO.latitude]),
+        distance,
+        0
+      ).geometry.coordinates[1],
+      altitude: altitude
+    }
+    const pointE = {
+      label: 'E 90°',
+      longitude: turf.rhumbDestination(
+        turf.point([pointO.longitude, pointO.latitude]),
+        distance,
+        90
+      ).geometry.coordinates[0],
+      latitude: turf.rhumbDestination(
+        turf.point([pointO.longitude, pointO.latitude]),
+        distance,
+        90
+      ).geometry.coordinates[1],
+      altitude: altitude
+    }
+    const pointS = {
+      label: 'S 180°',
+      longitude: turf.rhumbDestination(
+        turf.point([pointO.longitude, pointO.latitude]),
+        distance,
+        180
+      ).geometry.coordinates[0],
+      latitude: turf.rhumbDestination(
+        turf.point([pointO.longitude, pointO.latitude]),
+        distance,
+        180
+      ).geometry.coordinates[1],
+      altitude: altitude
+    }
+    const pointW = {
+      label: 'W 270°',
+      longitude: turf.rhumbDestination(
+        turf.point([pointO.longitude, pointO.latitude]),
+        distance,
+        270
+      ).geometry.coordinates[0],
+      latitude: turf.rhumbDestination(
+        turf.point([pointO.longitude, pointO.latitude]),
+        distance,
+        270
+      ).geometry.coordinates[1],
+      altitude: altitude
+    }
+    const list = [pointN, pointE, pointS, pointW]
+    for (let index = 0; index < list.length; index++) {
+      const point = list[index]
+      viewer.entities.add(
+        new Cesium.Entity({
+          position: Cesium.Cartesian3.fromDegrees(
+            point.longitude,
+            point.latitude,
+            point.altitude
+          ),
+          label: {
+            font: '14px sans-serif',
+            text: point.label,
+            fillColor: new Cesium.Color.fromCssColorString('#fff'),
+            outlineColor: new Cesium.Color.fromCssColorString('#fff'),
+            outlineWidth: 1,
+            // verticalOrigin: Cesium.VerticalOrigin.CENTER,
+            // horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+            showBackground: true
+          },
+          polyline: {
+            positions: Cesium.Cartesian3.fromDegreesArrayHeights([
+              pointO.longitude,
+              pointO.latitude,
+              pointO.altitude,
+              point.longitude,
+              point.latitude,
+              point.altitude
+            ]),
+            width: 10,
+            material: new Cesium.PolylineArrowMaterialProperty(
+              new Cesium.Color.fromCssColorString('#fff').withAlpha(1)
+            )
+          }
+        })
+      )
+    }
+
+    const lines = [
+      [
+        {
+          longitude: 112.9634812162806,
+          latitude: 36.97040252777073,
+          altitude
+        },
+        {
+          longitude: 119.32663938454708,
+          latitude: 42.26995861317594,
+          altitude
+        }
+      ],
+      [
+        {
+          longitude: 117.9592990653408,
+          latitude: 38.38163978720803,
+          altitude
+        },
+        {
+          longitude: 123.42464237870345,
+          latitude: 33.296977534577685,
+          altitude
+        }
+      ],
+      [
+        {
+          longitude: 111.53663125569267,
+          latitude: 30.989726449061138,
+          altitude
+        },
+        {
+          longitude: 93.66207819341395,
+          latitude: 42.32870629780615,
+          altitude
+        }
+      ],
+      [
+        {
+          longitude: 90.91200448882437,
+          latitude: 40.709266162020185,
+          altitude
+        },
+        {
+          longitude: 109.04284513782429,
+          latitude: 28.780767151167282,
+          altitude
+        }
+      ]
+    ]
+    for (let index = 0; index < lines.length; index++) {
+      const line = lines[index]
+      const angle = turf.rhumbBearing(
+        turf.point([line[0].longitude, line[0].latitude]),
+        turf.point([line[1].longitude, line[1].latitude])
+      )
+      viewer.entities.add(
+        new Cesium.Entity({
+          position: Cesium.Cartesian3.fromDegrees(
+            line[1].longitude,
+            line[1].latitude,
+            line[1].altitude
+          ),
+          label: {
+            font: '14px sans-serif',
+            text: `${angle.toFixed(0)}°`,
+            fillColor: new Cesium.Color.fromCssColorString('#fff'),
+            outlineColor: new Cesium.Color.fromCssColorString('#fff'),
+            outlineWidth: 1,
+            verticalOrigin: Cesium.VerticalOrigin.CENTER,
+            horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+            showBackground: true
+          },
+          polyline: {
+            positions: Cesium.Cartesian3.fromDegreesArrayHeights([
+              line[0].longitude,
+              line[0].latitude,
+              line[0].altitude,
+              line[1].longitude,
+              line[1].latitude,
+              line[1].altitude
+            ]),
+            width: 10,
+            material: new Cesium.PolylineArrowMaterialProperty(
+              new Cesium.Color.fromCssColorString('#fff').withAlpha(1)
+            )
+          }
+        })
+      )
+    }
+
+    const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
+    handler.setInputAction(function (event) {
+      // 平面坐标系转笛卡尔空间直角坐标系
+      /**
+        position: Cartesian2 {x: 683.0753784179688, y: 512.71826171875}
+        转
+        Cartesian3{x: -2174106.926252774, y: 4386734.375324652, z: 4074136.167795586}
+       */
+      console.log(
+        '平面坐标系转笛卡尔空间直角坐标系',
+        viewer.scene.pickPosition(event.position)
+      )
+
+      // 空间直角坐标系转经纬度
+      const earthPosition = viewer.camera.pickEllipsoid(
+        event.position,
+        viewer.scene.globe.ellipsoid
+      )
+      const cartographic = Cesium.Cartographic.fromCartesian(
+        earthPosition,
+        viewer.scene.globe.ellipsoid,
+        new Cesium.Cartographic()
+      )
+      const longitude = Cesium.Math.toDegrees(cartographic.longitude)
+      const latitude = Cesium.Math.toDegrees(cartographic.latitude)
+      console.log(
+        '空间直角坐标系转经纬度',
+        longitude,
+        latitude,
+        cartographic.height
+      )
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+  },
+  methods: {}
+}
+</script>
+
+  <style></style>
+  `
