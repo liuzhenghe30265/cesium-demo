@@ -1,5 +1,11 @@
 <template>
   <div id="app" style="width: 100%; height: 100%; position: relative">
+    <!-- <div class="auto_scroll">
+      <div ref="newsContent" class="scroll_container">
+        <div v-for="(news, index) in messageList" :key="index" class="scroll_item" :style="scrollStyle(news)"
+          v-html="news" />
+      </div>
+    </div> -->
     <!-- <div
       style="position: absolute;width: 100%;left: 0;bottom: 0;z-index: 999;">
       <timeline-slider-vue
@@ -30,8 +36,9 @@
 <script>
 import routes from '@/router/index.js'
 export default {
-  data() {
+  data () {
     return {
+      messageList: ['明日气温相比今日不会有太大变化，适宜穿着棉服类衣物。', '明日气温相比今日不会有太大变化，适宜穿着棉服类衣物。'],
       lockDate: [], // 锁定的日期（滑动结束时自动跳到指定的日期）
       markDate: [], // 做标记的日期
       mask: true,
@@ -39,10 +46,17 @@ export default {
     }
   },
   computed: {
-    navVisible() {
+    scrollStyle () {
+      return value => {
+        return {
+          animation: `marquee ${value.length / 2}s linear infinite`
+        }
+      }
+    },
+    navVisible () {
       return this.getQueryVariable('nav') || this.currentMode === 'dev'
     },
-    currentMode() {
+    currentMode () {
       return process.env.VUE_APP_CURRENTMODE
     },
     visibleRouters: function () {
@@ -52,9 +66,9 @@ export default {
     }
   },
   watch: {},
-  mounted() { },
+  mounted () { },
   methods: {
-    getQueryVariable(variable) {
+    getQueryVariable (variable) {
       const query = window.location.search.substring(1)
       const vars = query.split('&')
       for (let i = 0; i < vars.length; i++) {
@@ -65,10 +79,10 @@ export default {
       }
       return false
     },
-    handleInput(value, date) {
+    handleInput (value, date) {
       console.log('input', value, date)
     },
-    handleChange(value, date) {
+    handleChange (value, date) {
       console.log('change', value, date)
     }
   }
@@ -80,6 +94,30 @@ export default {
   outline: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-appearance: none;
+}
+
+.auto_scroll {
+  overflow: hidden;
+  width: 400px;
+  border: 1px solid red;
+  padding: 10px;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+.scroll_container {
+  display: flex;
+  white-space: nowrap;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 .nav {
