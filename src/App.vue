@@ -1,5 +1,9 @@
 <template>
-  <div id="app" style="width: 100%; height: 100%; position: relative">
+  <div
+    id="app"
+    style="width: 100%; height: 100%; position: relative"
+  >
+    <FloatingBallVue />
     <!-- <div class="auto_scroll">
       <div ref="newsContent" class="scroll_container">
         <div v-for="(news, index) in messageList" :key="index" class="scroll_item" :style="scrollStyle(news)"
@@ -36,9 +40,12 @@
 <script>
 import routes from '@/router/index.js'
 export default {
-  data () {
+  data() {
     return {
-      messageList: ['明日气温相比今日不会有太大变化，适宜穿着棉服类衣物。', '明日气温相比今日不会有太大变化，适宜穿着棉服类衣物。'],
+      messageList: [
+        '明日气温相比今日不会有太大变化，适宜穿着棉服类衣物。',
+        '明日气温相比今日不会有太大变化，适宜穿着棉服类衣物。'
+      ],
       lockDate: [], // 锁定的日期（滑动结束时自动跳到指定的日期）
       markDate: [], // 做标记的日期
       mask: true,
@@ -46,17 +53,17 @@ export default {
     }
   },
   computed: {
-    scrollStyle () {
+    scrollStyle() {
       return value => {
         return {
           animation: `marquee ${value.length / 2}s linear infinite`
         }
       }
     },
-    navVisible () {
+    navVisible() {
       return this.getQueryVariable('nav') || this.currentMode === 'dev'
     },
-    currentMode () {
+    currentMode() {
       return process.env.VUE_APP_CURRENTMODE
     },
     visibleRouters: function () {
@@ -66,9 +73,9 @@ export default {
     }
   },
   watch: {},
-  mounted () { },
+  mounted() {},
   methods: {
-    getQueryVariable (variable) {
+    getQueryVariable(variable) {
       const query = window.location.search.substring(1)
       const vars = query.split('&')
       for (let i = 0; i < vars.length; i++) {
@@ -79,10 +86,10 @@ export default {
       }
       return false
     },
-    handleInput (value, date) {
+    handleInput(value, date) {
       console.log('input', value, date)
     },
-    handleChange (value, date) {
+    handleChange(value, date) {
       console.log('change', value, date)
     }
   }

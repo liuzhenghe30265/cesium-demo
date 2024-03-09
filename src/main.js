@@ -15,6 +15,9 @@ import TimelineSliderVue from 'timeline-slider-vue'
 import 'timeline-slider-vue/lib/timeline-slider-vue.css'
 Vue.use(TimelineSliderVue)
 
+import FloatingBallVue from 'floating-ball-vue'
+Vue.use(FloatingBallVue)
+
 import { InitMap } from '@/utils/InitMap.js'
 window.$InitMap = InitMap
 
