@@ -18,6 +18,9 @@ Vue.use(TimelineSliderVue)
 import FloatingBallVue from 'floating-ball-vue'
 Vue.use(FloatingBallVue)
 
+import PicturePreviewVue from 'picture-preview-vue'
+Vue.prototype.$PicturePreviewVue = PicturePreviewVue
+
 import { InitMap } from '@/utils/InitMap.js'
 window.$InitMap = InitMap
 

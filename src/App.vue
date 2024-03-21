@@ -4,12 +4,23 @@
     style="width: 100%; height: 100%; position: relative"
   >
     <FloatingBallVue />
-    <!-- <div class="auto_scroll">
-      <div ref="newsContent" class="scroll_container">
-        <div v-for="(news, index) in messageList" :key="index" class="scroll_item" :style="scrollStyle(news)"
-          v-html="news" />
+    <div
+      class="auto_scroll"
+      @click="handleTest"
+    >
+      <div
+        ref="newsContent"
+        class="scroll_container"
+      >
+        <div
+          v-for="(news, index) in messageList"
+          :key="index"
+          class="scroll_item"
+          :style="scrollStyle(news)"
+          v-html="news"
+        />
       </div>
-    </div> -->
+    </div>
     <!-- <div
       style="position: absolute;width: 100%;left: 0;bottom: 0;z-index: 999;">
       <timeline-slider-vue
@@ -22,8 +33,14 @@
         </div>
       </timeline-slider-vue>
     </div> -->
-    <ul v-if="navVisible" class="nav">
-      <li v-for="(item, index) of visibleRouters" :key="index">
+    <ul
+      v-if="navVisible"
+      class="nav"
+    >
+      <li
+        v-for="(item, index) of visibleRouters"
+        :key="index"
+      >
         <router-link :to="item.path">
           {{ item.name }}
         </router-link>
@@ -75,6 +92,22 @@ export default {
   watch: {},
   mounted() {},
   methods: {
+    handleTest() {
+      // this.$PicturePreviewVue(
+      //   'https://file.iviewui.com/images/image-demo-1.jpg'
+      // )
+      this.$PicturePreviewVue({
+        urlList: [
+          'https://file.iviewui.com/images/image-demo-1.jpg',
+          'https://file.iviewui.com/images/image-demo-2.jpg',
+          'https://file.iviewui.com/images/image-demo-3.jpg',
+          'https://file.iviewui.com/images/image-demo-4.jpg',
+          'https://file.iviewui.com/images/image-demo-5.jpg',
+          'https://file.iviewui.com/images/image-demo-6.jpg'
+        ],
+        initialIndex: 0
+      })
+    },
     getQueryVariable(variable) {
       const query = window.location.search.substring(1)
       const vars = query.split('&')
@@ -106,10 +139,14 @@ export default {
 .auto_scroll {
   overflow: hidden;
   width: 400px;
-  border: 1px solid red;
+  border: 1px solid #fff;
   padding: 10px;
   margin: 10px;
   box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  bottom: 50px;
+  z-index: 999;
 }
 
 .scroll_container {
