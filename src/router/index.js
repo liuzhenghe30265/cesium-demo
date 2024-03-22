@@ -139,7 +139,7 @@ const routes = [
   {
     path: '/Path',
     name: '轨迹',
-    visible: false,
+    visible: true,
     component: resolve => require(['@/views/Path'], resolve)
   },
   {
