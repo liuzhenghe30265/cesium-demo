@@ -21,18 +21,22 @@
         />
       </div>
     </div>
-    <!-- <div
-      style="position: absolute;width: 100%;left: 0;bottom: 0;z-index: 999;">
-      <timeline-slider-vue
+    <div
+      v-if="false"
+      style="position: absolute;width: 100%;left: 0;bottom: 0;z-index: 999;"
+    >
+      <TimelineSliderVue
         @change="handleChange"
-        @input="handleInput">
+        @input="handleInput"
+      >
         <div
           slot="sliderContent"
-          slot-scope="scope">
+          slot-scope="scope"
+        >
           {{ scope.data }}
         </div>
-      </timeline-slider-vue>
-    </div> -->
+      </TimelineSliderVue>
+    </div>
     <ul
       v-if="navVisible"
       class="nav"
