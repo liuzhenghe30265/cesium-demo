@@ -97,6 +97,7 @@ export default {
       //   'https://file.iviewui.com/images/image-demo-1.jpg'
       // )
       this.$PicturePreviewVue({
+        url: 'https://file.iviewui.com/images/image-demo-3.jpg',
         urlList: [
           'https://file.iviewui.com/images/image-demo-1.jpg',
           'https://file.iviewui.com/images/image-demo-2.jpg',
@@ -104,8 +105,7 @@ export default {
           'https://file.iviewui.com/images/image-demo-4.jpg',
           'https://file.iviewui.com/images/image-demo-5.jpg',
           'https://file.iviewui.com/images/image-demo-6.jpg'
-        ],
-        initialIndex: 0
+        ]
       })
     },
     getQueryVariable(variable) {
