@@ -41,7 +41,8 @@ export default {
     let timer = null
     // 模型一
     const tileseta = createClippingPlaneFun(
-      '/model/truck/good/terra_b3dms/tileset.json',
+      'https://image.giiiis.com/shanghai/tileset.json',
+      // '/model/truck/good/terra_b3dms/tileset.json',
       // 'https://lab.earthsdk.com/model/3610c2b0d08411eab7a4adf1d6568ff7/tileset.json',
       new Cesium.ClippingPlaneCollection({
         planes: [
@@ -57,7 +58,8 @@ export default {
 
     // 模型二
     const tilesetb = createClippingPlaneFun(
-      '/model/truck/bad/terra_b3dms/tileset.json',
+      'https://image.giiiis.com/shanghai/tileset.json',
+      // '/model/truck/bad/terra_b3dms/tileset.json',
       // 'https://lab.earthsdk.com/model/908311a0ac2f11e99dbd8fd044883638/tileset.json',
       new Cesium.ClippingPlaneCollection({
         planes: [
@@ -70,6 +72,16 @@ export default {
         // edgeColor: Cesium.Color.WHITE,
         // edgeWidth: 0.0,
         unionClippingRegions: true
+      }),
+      new Cesium.Cesium3DTileStyle({
+        color: {
+          conditions: [
+            ["${feature['building']} === 'office'", "color('red')"],
+            ["${feature['building']} === 'commercial'", "color('orange')"],
+            ["${feature['building']} === 'residential'", "color('yellow',0.8)"],
+            ['true', "color('blue',0.8)"]
+          ]
+        }
       })
     )
 

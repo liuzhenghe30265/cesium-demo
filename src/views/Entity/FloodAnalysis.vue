@@ -23,7 +23,8 @@ export default {
   mounted() {
     window.$InitMap()
     const tileset = new Cesium.Cesium3DTileset({
-      url: 'http://earthsdk.com/v/last/Apps/assets/dayanta/tileset.json',
+      url: 'https://image.giiiis.com/dayanta/tileset.json',
+      // url: 'http://earthsdk.com/v/last/Apps/assets/dayanta/tileset.json',
       debugShowMemoryUsage: false
     })
     viewer.scene.primitives.add(tileset)

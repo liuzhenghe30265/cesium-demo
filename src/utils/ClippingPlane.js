@@ -8,7 +8,7 @@ import { lineString, booleanClockwise } from '@turf/turf'
  * @param {*} model 裁切方式（正切/反切）
  * @return {*}
  */
-export function cutModelByPolygon (tileset, polygon, model) {
+export function cutModelByPolygon(tileset, polygon, model) {
   tileset.readyPromise.then((_tileset) => {
     const inverseTransform = getInverseTransform(_tileset) // 转换矩阵
     // 切割的多边形
@@ -32,7 +32,7 @@ export function cutModelByPolygon (tileset, polygon, model) {
   })
 }
 
-export function createPlaneUpdateFunction (plane) {
+export function createPlaneUpdateFunction(plane) {
   return function () {
     return plane
   }
@@ -44,7 +44,7 @@ export function createPlaneUpdateFunction (plane) {
  * @param {*} clippingPlanes 切割面
  * @return {*}
  */
-export function createClippingPlaneFun (url, clippingPlanes) {
+export function createClippingPlaneFun(url, clippingPlanes, style) {
   const option = {
     url: url,
     maximumScreenSpaceError: 8,
@@ -53,6 +53,9 @@ export function createClippingPlaneFun (url, clippingPlanes) {
   const tileset = viewer.scene.primitives.add(
     new Cesium.Cesium3DTileset(option)
   )
+  if (style) {
+    tileset.style = style
+  }
   tileset.readyPromise.then(function (tileset) {
     if (
       !Cesium.Matrix4.equals(
@@ -108,7 +111,7 @@ export function createClippingPlaneFun (url, clippingPlanes) {
   return tileset
 }
 
-export function isDirRes (polygon, isClockwise) {
+export function isDirRes(polygon, isClockwise) {
   const lineStringList = []
   polygon.forEach((p) => {
     lineStringList.push([p[0], p[1]])
@@ -142,7 +145,7 @@ export function isDirRes (polygon, isClockwise) {
   return points
 }
 
-export function getOriginCoordinateSystemPoint (point, inverseTransform) {
+export function getOriginCoordinateSystemPoint(point, inverseTransform) {
   const val = Cesium.Cartesian3.fromDegrees(point[0], point[1])
   return Cesium.Matrix4.multiplyByPoint(
     inverseTransform, val, new Cesium.Cartesian3(0, 0, 0))
@@ -155,7 +158,7 @@ export function getOriginCoordinateSystemPoint (point, inverseTransform) {
  * @param {*} inverseTransform
  * @return {*}
  */
-export function createPlane (p1, p2, inverseTransform) {
+export function createPlane(p1, p2, inverseTransform) {
   const p1C3 = getOriginCoordinateSystemPoint(p1, inverseTransform)
   const p2C3 = getOriginCoordinateSystemPoint(p2, inverseTransform)
   const up = new Cesium.Cartesian3(0, 0, 10)
@@ -171,7 +174,7 @@ export function createPlane (p1, p2, inverseTransform) {
  * @param {*} tileset
  * @return {*}
  */
-export function getInverseTransform (tileset) {
+export function getInverseTransform(tileset) {
   let transform
   const tmp = tileset.root.transform
   if ((tmp && tmp.equals(Cesium.Matrix4.IDENTITY)) || !tmp) {

@@ -28,7 +28,8 @@ export default {
 
     try {
       const left = await new Cesium.Cesium3DTileset({
-        url: '/model/truck/good/terra_b3dms/tileset.json',
+        url: 'https://image.giiiis.com/shanghai/tileset.json',
+        // url: '/model/truck/good/terra_b3dms/tileset.json',
         // url: 'https://lab.earthsdk.com/model/3610c2b0d08411eab7a4adf1d6568ff7/tileset.json',
         debugShowMemoryUsage: false
       })
@@ -38,9 +39,20 @@ export default {
       viewer.zoomTo(left)
 
       const right = await new Cesium.Cesium3DTileset({
-        url: '/model/truck/bad/terra_b3dms/tileset.json',
+        url: 'https://image.giiiis.com/shanghai/tileset.json',
+        // url: '/model/truck/bad/terra_b3dms/tileset.json',
         // url: 'https://lab.earthsdk.com/model/908311a0ac2f11e99dbd8fd044883638/tileset.json',
         debugShowMemoryUsage: false
+      })
+      right.style = new Cesium.Cesium3DTileStyle({
+        color: {
+          conditions: [
+            ["${feature['building']} === 'office'", "color('red')"],
+            ["${feature['building']} === 'commercial'", "color('orange')"],
+            ["${feature['building']} === 'residential'", "color('yellow',0.8)"],
+            ['true', "color('blue',0.8)"]
+          ]
+        }
       })
       viewer.scene.primitives.add(right)
       right.splitDirection = Cesium.SplitDirection.RIGHT

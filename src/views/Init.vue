@@ -1,9 +1,13 @@
 <template>
-  <div id="cesium-container" style="width: 100%; height: 100%;" />
+  <div
+    id="cesium-container"
+    style="width: 100%; height: 100%;"
+  />
 </template>
 
 <script>
 /* eslint-disable no-undef */
+import { GetCesiumVersion, screenTo3D } from 'lk-cesium-utils'
 export default {
   data() {
     return {}
@@ -12,6 +16,7 @@ export default {
   watch: {},
   mounted() {
     window.$InitMap()
+    console.log(GetCesiumVersion())
     // 1. Fly to a position with a top-down view
     // viewer.camera.flyTo({
     //   destination: Cesium.Cartesian3.fromDegrees(116.3, 39.9, 15000.0)
@@ -104,6 +109,7 @@ export default {
     // 鼠标事件
     const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
     handler.setInputAction(function (event) {
+      console.log('...........screenTo3D', screenTo3D(event))
       // 平面坐标系转笛卡尔空间直角坐标系
       /**
         position: Cartesian2 {x: 683.0753784179688, y: 512.71826171875}

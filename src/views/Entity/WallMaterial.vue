@@ -27,7 +27,8 @@ export default {
     // })
 
     const tileset = new Cesium.Cesium3DTileset({
-      url: 'http://earthsdk.com/v/last/Apps/assets/dayanta/tileset.json', // 大雁塔
+      url: 'https://image.giiiis.com/dayanta/tileset.json', // 大雁塔
+      // url: 'http://earthsdk.com/v/last/Apps/assets/dayanta/tileset.json', // 大雁塔
       debugShowMemoryUsage: false
     })
     viewer.scene.primitives.add(tileset)
