@@ -4,7 +4,7 @@
     style="width: 100%; height: 100%; position: relative"
   >
     <FloatingBallVue />
-    <div
+    <!-- <div
       class="auto_scroll"
       @click="handleTest"
     >
@@ -20,7 +20,7 @@
           v-html="news"
         />
       </div>
-    </div>
+    </div> -->
     <div
       v-if="false"
       style="position: absolute;width: 100%;left: 0;bottom: 0;z-index: 999;"
