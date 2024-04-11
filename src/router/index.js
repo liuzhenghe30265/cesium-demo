@@ -65,6 +65,12 @@ const routes = [
     component: resolve => require(['@/views/3DTileset/ClippingPlane.vue'], resolve)
   },
   {
+    path: '/AutoWaypoint',
+    name: 'AutoWaypoint',
+    visible: true,
+    component: resolve => require(['@/views/3DTileset/AutoWaypoint.vue'], resolve)
+  },
+  {
     path: '/WMS',
     name: 'WMS',
     visible: true,
