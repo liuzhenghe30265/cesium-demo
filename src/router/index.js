@@ -53,6 +53,12 @@ const routes = [
     component: resolve => require(['@/views/3DTileset'], resolve)
   },
   {
+    path: '/3DTilesetTranslate',
+    name: '3DTilesetTranslate',
+    visible: true,
+    component: resolve => require(['@/views/3DTileset/Translate'], resolve)
+  },
+  {
     path: '/3DTilesetCompare',
     name: '3DTilesetCompare',
     visible: true,

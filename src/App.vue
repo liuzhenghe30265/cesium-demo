@@ -82,7 +82,7 @@ export default {
       }
     },
     navVisible() {
-      return this.getQueryVariable('nav') || this.currentMode === 'dev'
+      return this.getQueryVariable('nav')
     },
     currentMode() {
       return process.env.VUE_APP_CURRENTMODE
