@@ -4,6 +4,9 @@
       id="cesium-container"
       style="width: 100%; height: 100%;"
     />
+    <div style="position: absolute; bottom: 50px; right: 50px;z-index: 999;color: #fff;">
+      modelMatrix: {{ currentModelMatrix }}
+    </div>
   </div>
 </template>
 
@@ -17,8 +20,10 @@ import { cloneDeep } from 'lodash'
 export default {
   data() {
     return {
+      currentModelMatrix: '',
       cut: false,
       tileset: null,
+      oldModelMatrix: null,
       newPosition: {},
       oldPosition: {}
     }
@@ -26,6 +31,7 @@ export default {
   computed: {},
   watch: {},
   mounted() {
+    const flag = true
     window.$InitMap()
 
     const _this = this
@@ -43,6 +49,36 @@ export default {
     this.tileset.readyPromise
       .then(async tileset => {
         window.$tileset = tileset
+        this.handleModelMatrix()
+        this.oldModelMatrix = window.$tileset.modelMatrix
+
+        // * 手动调整模型盖高度
+        // const offsetHeight = 36.9
+        // const cartographic = Cesium.Cartographic.fromCartesian(
+        //   tileset.boundingSphere.center
+        // )
+        // console.log('................cartographic', cartographic)
+        // const surface = Cesium.Cartesian3.fromRadians(
+        //   cartographic.longitude,
+        //   cartographic.latitude,
+        //   cartographic.height
+        // )
+        // const offset = Cesium.Cartesian3.fromRadians(
+        //   cartographic.longitude,
+        //   cartographic.latitude,
+        //   offsetHeight
+        // )
+        // const translation = Cesium.Cartesian3.subtract(
+        //   offset,
+        //   surface,
+        //   new Cesium.Cartesian3()
+        // )
+        // tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation)
+        // console.log(
+        //   '...........tileset.modelMatrix',
+        //   tileset.modelMatrix,
+        //   Object.values(tileset.modelMatrix)
+        // )
 
         this.oldPosition = cloneDeep(
           cartesianToLongAndLat(tileset.boundingSphere.center)
@@ -58,34 +94,93 @@ export default {
 
     document.addEventListener('keydown', event => {
       const e = event || window.event
+      let modelMatrix = window.$tileset.modelMatrix
+
+      // 定义移动速度
+      const moveSpeed = 100.0
       switch (e.keyCode) {
         case 33:
           // up
-          handleClick('Z', 'up')
+          if (flag) {
+            handleClick('Z', 'up')
+          } else {
+            modelMatrix = Cesium.Matrix4.multiplyByTranslation(
+              modelMatrix,
+              new Cesium.Cartesian3(0, -1, 0),
+              modelMatrix
+            )
+          }
           break
         case 34:
           // down
-          handleClick('Z', 'down')
+          if (flag) {
+            handleClick('Z', 'down')
+          } else {
+            modelMatrix = Cesium.Matrix4.multiplyByTranslation(
+              modelMatrix,
+              new Cesium.Cartesian3(0, 1, 0),
+              modelMatrix
+            )
+          }
           break
         case 37:
           // 左
-          handleClick('XY', 'left')
+          if (flag) {
+            handleClick('XY', 'left')
+          } else {
+            modelMatrix = Cesium.Matrix4.multiplyByTranslation(
+              modelMatrix,
+              new Cesium.Cartesian3(-1, 0, 0),
+              modelMatrix
+            )
+          }
           break
         case 38:
           // 上
-          handleClick('XY', 'up')
+          if (flag) {
+            handleClick('XY', 'up')
+          } else {
+            modelMatrix = Cesium.Matrix4.multiplyByTranslation(
+              modelMatrix,
+              new Cesium.Cartesian3(0, 0, -1),
+              modelMatrix
+            )
+          }
           break
         case 39:
           // 右
-          handleClick('XY', 'right')
+          if (flag) {
+            handleClick('XY', 'right')
+          } else {
+            modelMatrix = Cesium.Matrix4.multiplyByTranslation(
+              modelMatrix,
+              new Cesium.Cartesian3(1, 0, 0),
+              modelMatrix
+            )
+          }
           break
         case 40:
           // 下
-          handleClick('XY', 'down')
+          if (flag) {
+            handleClick('XY', 'down')
+          } else {
+            modelMatrix = Cesium.Matrix4.multiplyByTranslation(
+              modelMatrix,
+              new Cesium.Cartesian3(0, 0, 1),
+              modelMatrix
+            )
+          }
           break
         default:
           break
       }
+      if (!flag) {
+        window.$tileset.modelMatrix = modelMatrix
+        _this.handleModelMatrix()
+      }
+    })
+    document.addEventListener('keyup', event => {
+      // const e = event || window.event
     })
 
     function handleClick(type, value) {
@@ -93,14 +188,16 @@ export default {
       // * 中心点
       const center = boundingSphere.center
 
-      const step = 0.00001
+      let step = 0.001
       if (type === 'Z') {
+        step = 0.1
         if (value === 'up') {
           _this.newPosition.altitude += step
         } else if (value === 'down') {
           _this.newPosition.altitude -= step
         }
       } else if (type === 'XY') {
+        step = 0.0001
         if (value === 'left') {
           _this.newPosition.longitude -= step
         } else if (value === 'right') {
@@ -111,6 +208,8 @@ export default {
           _this.newPosition.latitude -= step
         }
       }
+      window.$tileset.modelMatrix = _this.oldModelMatrix
+
       const offset = Cesium.Cartesian3.fromDegrees(
         _this.newPosition.longitude,
         _this.newPosition.latitude,
@@ -122,10 +221,7 @@ export default {
         new Cesium.Cartesian3()
       )
       window.$tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation)
-      console.log(
-        '............tileset.modelMatrix',
-        window.$tileset.modelMatrix
-      )
+      _this.handleModelMatrix()
     }
 
     const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
@@ -161,6 +257,10 @@ export default {
       )
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
   },
-  methods: {}
+  methods: {
+    handleModelMatrix() {
+      this.currentModelMatrix = Object.values(window.$tileset.modelMatrix)
+    }
+  }
 }
 </script>
