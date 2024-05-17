@@ -10,115 +10,60 @@
 /* eslint-disable new-cap */
 // import { GetCesiumVersion, screenTo3D } from 'lk-cesium-utils'
 import { cartesianToLongAndLat } from '@/utils/CesiumUtils/common.js'
+import DrawDeviceUtil from '@/utils/DrawDevice.js'
 export default {
   data() {
-    return {}
+    return {
+      $DrawDeviceUtil: null
+    }
   },
   computed: {},
   watch: {},
   mounted() {
+    const mock = require('./mock.json')
     window.$InitMap()
-
     viewer.camera.flyTo({
       destination: Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
     })
 
-    const mock = require('./mock.json')
-    console.log('...........mock', mock)
-    // model: {
-    //       uri: 'model/Cesium_Air.glb',
-    //       scale: 1,
-    //       minimumPixelSize: 90
-    //     },
-
-    // * 添加飞机模型
-    const animate = {
-      pointWidth: 20,
-      alp: 0.8,
-      r: 0,
-      g: 1,
-      b: 0
-    }
-    const orientation = Cesium.Transforms.headingPitchRollQuaternion(
-      Cesium.Cartesian3.fromDegrees(
-        mock[0].longitude,
-        mock[0].latitude,
-        mock[0].altitude
-      ),
-      new Cesium.HeadingPitchRoll(
-        Cesium.Math.toRadians(0),
-        Cesium.Math.toRadians(0),
-        Cesium.Math.toRadians(0)
-      )
-    )
-    const options = {
-      position: new Cesium.SampledPositionProperty(),
-      // position: new Cesium.Cartesian3.fromDegrees(
-      //   mock[0].longitude,
-      //   mock[0].latitude,
-      //   mock[0].altitude
-      // ),
-      orientation: orientation,
-      model: {
-        runAnimations: false,
+    this.$DrawDeviceUtil = new DrawDeviceUtil()
+    const deviceInfo = [
+      {
+        id: 1,
         uri: 'model/Cesium_Air.glb',
-        scale: 0.2
+        scale: 0.2,
+        position: {
+          longitude: mock[0].longitude,
+          latitude: mock[0].latitude,
+          altitude: mock[0].altitude
+        }
       },
-      point: {
-        pixelSize: new Cesium.CallbackProperty(function () {
-          animate.pointWidth += 0.2
-          if (animate.pointWidth >= 35) {
-            animate.pointWidth = 25
-          }
-          return animate.pointWidth
-        }, false),
-        color: new Cesium.CallbackProperty(function () {
-          animate.alp -= 0.01
-          if (animate.alp <= 0.3) {
-            animate.alp = 0.8
-          }
-          return new Cesium.Color(animate.r, animate.g, animate.b, animate.alp)
-        }, false),
-        outlineWidth: 0,
-        scaleByDistance: new Cesium.NearFarScalar(110, 1, 400000, 0.6),
-        show: true
-      },
-      path: {
-        show: true,
-        leadTime: 0,
-        trailTime: 3600,
-        width: 2,
-        resolution: 1,
-        material: new Cesium.PolylineGlowMaterialProperty({
-          glowPower: 0.3,
-          taperPower: 1,
-          color: Cesium.Color.PALEGOLDENROD
-        })
+      {
+        id: 2,
+        uri: 'model/Cesium_Air.glb',
+        scale: 0.2,
+        position: {
+          longitude: mock[mock.length - 1].longitude,
+          latitude: mock[mock.length - 1].latitude,
+          altitude: mock[mock.length - 1].altitude
+        }
       }
-    }
-    const entity = viewer.entities.add(options)
-    console.log('.............entity', entity)
+    ]
+    // * 添加设备
+    this.$DrawDeviceUtil.AddDevices(deviceInfo)
 
     // * 模拟 ws 上报实时位置信息
     let count = 0
     setInterval(() => {
       count += 1
-      const point = mock[count]
-      const p2 = new Cesium.Cartesian3.fromDegrees(
-        point.longitude,
-        point.latitude,
-        point.altitude
-      )
-      const start = viewer.clock.currentTime
-      const time = 0.7
-      const stop = Cesium.JulianDate.addSeconds(
-        start,
-        time,
-        new Cesium.JulianDate()
-      )
-      entity.position.addSample(stop, p2)
+      const position = mock[count]
+      const position2 = mock[mock.length - count]
+      // * 更新位置
+      this.$DrawDeviceUtil.UpdatePosition(1, position)
+      this.$DrawDeviceUtil.UpdatePosition(2, position2)
     }, 300)
 
+    // * 锁定
     const matrix3Scratch = new Cesium.Matrix3()
     const orientationScratch = new Cesium.Quaternion()
     function getModelMatrix(entity, time, result) {
