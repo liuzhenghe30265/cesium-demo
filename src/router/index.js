@@ -17,10 +17,10 @@ const routes = [
     component: resolve => require(['@/views/Entity'], resolve)
   },
   {
-    path: '/Material',
-    name: 'Material',
+    path: '/FlightAnimation',
+    name: '飞行动画',
     visible: true,
-    component: resolve => require(['@/views/Material'], resolve)
+    component: resolve => require(['@/views/Entity/FlightAnimation'], resolve)
   },
   {
     path: '/WallMaterial',
@@ -39,6 +39,12 @@ const routes = [
     name: '方向角计算',
     visible: true,
     component: resolve => require(['@/views/Entity/RhumbBearing'], resolve)
+  },
+  {
+    path: '/Material',
+    name: 'Material',
+    visible: true,
+    component: resolve => require(['@/views/Material'], resolve)
   },
   {
     path: '/DOM',
@@ -177,12 +183,6 @@ const routes = [
     name: '轨迹播放',
     visible: false,
     component: resolve => require(['@/views/Playback'], resolve)
-  },
-  {
-    path: '/Playback2',
-    name: '轨迹播放2',
-    visible: false,
-    component: resolve => require(['@/views/Playback/index2.vue'], resolve)
   },
   {
     path: '/WebControl',

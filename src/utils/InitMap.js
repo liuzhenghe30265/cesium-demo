@@ -6,7 +6,8 @@ export function InitMap() {
     Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYTJjNTM1Yy0wZDRjLTRlZWYtYTFkMi1hOGIwNTI2ZGU0MDgiLCJpZCI6ODI5MjAsImlhdCI6MTY0NTE2NDEyOH0.XndixRDpLnRAxnqSNQpT2JofpGyngIUWlmzbG53hEtM'
     const viewer = new Cesium.Viewer('cesium-container', {
         terrainProvider: Cesium.createWorldTerrain(),
-        animation: false, // 是否显示左下角的仪表盘
+        animation: true, // 是否显示左下角的仪表盘
+        shouldAnimate: true, // true 如果时钟在默认情况下试图提前模拟时间
         baseLayerPicker: true, // 是否显示图层选择器按钮，右上角那个地图图标
         fullscreenButton: true, // 是否显示全屏按钮
         vrButton: true, // 是否显示VR按钮
