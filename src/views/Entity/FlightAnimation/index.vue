@@ -21,6 +21,7 @@ export default {
   watch: {},
   mounted() {
     const mock = require('./mock.json')
+    const mock2 = require('./mock2.json')
     window.$InitMap()
     viewer.camera.flyTo({
       destination: Cesium.Rectangle.fromDegrees(100, 10, 120, 70)
@@ -43,9 +44,9 @@ export default {
         uri: 'model/Cesium_Air.glb',
         scale: 0.2,
         position: {
-          longitude: mock[mock.length - 1].longitude,
-          latitude: mock[mock.length - 1].latitude,
-          altitude: mock[mock.length - 1].altitude
+          longitude: mock2[mock2.length - 1].longitude,
+          latitude: mock2[mock2.length - 1].latitude,
+          altitude: mock2[mock2.length - 1].altitude
         }
       }
     ]
@@ -57,13 +58,15 @@ export default {
     setInterval(() => {
       count += 1
       const position = mock[count]
-      const position2 = mock[mock.length - count]
+      const position2 = mock2[count]
       // * 更新位置
       this.$DrawDeviceUtil.UpdatePosition(1, position)
       this.$DrawDeviceUtil.UpdatePosition(2, position2)
     }, 300)
 
     // * 锁定
+    const entity = this.$DrawDeviceUtil.devices[2]
+
     const matrix3Scratch = new Cesium.Matrix3()
     const orientationScratch = new Cesium.Quaternion()
     function getModelMatrix(entity, time, result) {
@@ -104,6 +107,7 @@ export default {
       return result
     }
     let lock = false
+    let lockFirst = false // 第一人称锁定
     var scratch = new Cesium.Matrix4()
     var camera = viewer.scene.camera
     viewer.scene.preRender.addEventListener(function () {
@@ -118,6 +122,33 @@ export default {
       }
     })
 
+    // 第一人称
+    function listenDeviceCamera() {
+      const time = viewer.clock.currentTime
+      const entityposition = Cesium.Property.getValueOrUndefined(
+        entity.position,
+        time,
+        new Cesium.Cartesian3()
+      )
+      // 源
+      // const podOrientation = Cesium.Quaternion.fromHeadingPitchRoll(
+      //   new Cesium.HeadingPitchRoll(
+      //     Cesium.Math.toRadians(podRang.yaw),
+      //     Cesium.Math.toRadians(podRang.pitch),
+      //     Cesium.Math.toRadians(podRang.roll)
+      //   )
+      // )
+      const podOrientation = Cesium.Property.getValueOrUndefined(
+        entity.orientation,
+        time,
+        new Cesium.Quaternion()
+      )
+      viewer.scene.camera.setView({
+        destination: entityposition,
+        orientation: new Cesium.HeadingPitchRoll.fromQuaternion(podOrientation)
+      })
+    }
+
     const DOM = document.createElement('div')
     DOM.setAttribute('id', 'debugBtn')
     DOM.innerHTML = '锁定'
@@ -127,7 +158,14 @@ export default {
     DOM.style.zIndex = 999
     document.body.appendChild(DOM)
     document.getElementById('debugBtn').onclick = function () {
-      lock = !lock
+      // lock = !lock
+      lockFirst = !lockFirst
+      if (lockFirst) {
+        // 第一人称锁定
+        viewer.scene.preRender.addEventListener(listenDeviceCamera)
+      } else {
+        viewer.scene.preRender.removeEventListener(listenDeviceCamera)
+      }
     }
 
     // 鼠标事件

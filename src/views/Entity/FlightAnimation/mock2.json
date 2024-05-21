@@ -1,0 +1,4410 @@
+[
+    {
+        "yaw": 154.01,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0237894,
+        "latitude": 44.1107115,
+        "altitude": 540
+    },
+    {
+        "yaw": 152.85,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0238115,
+        "latitude": 44.1107061,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 152.70000000000002,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0238403,
+        "latitude": 44.1106991,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 152.35000000000002,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0238835,
+        "latitude": 44.1106887,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 152.17999999999998,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0239261,
+        "latitude": 44.1106786,
+        "altitude": 540
+    },
+    {
+        "yaw": 153.57,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0239719,
+        "latitude": 44.1106681,
+        "altitude": 540
+    },
+    {
+        "yaw": 154.44,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0240172,
+        "latitude": 44.1106582,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 155.19,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0240691,
+        "latitude": 44.1106465,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 157.06,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.02411,
+        "latitude": 44.1106364,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 157.35999999999999,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0241499,
+        "latitude": 44.1106261,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 159.06,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0241979,
+        "latitude": 44.1106139,
+        "altitude": 540
+    },
+    {
+        "yaw": 159.55,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0242384,
+        "latitude": 44.1106041,
+        "altitude": 540
+    },
+    {
+        "yaw": 159.97,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0242787,
+        "latitude": 44.1105948,
+        "altitude": 540
+    },
+    {
+        "yaw": 160.72,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0243186,
+        "latitude": 44.1105855,
+        "altitude": 540
+    },
+    {
+        "yaw": 161.27,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.024366,
+        "latitude": 44.1105743,
+        "altitude": 540
+    },
+    {
+        "yaw": 161.79,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0244059,
+        "latitude": 44.1105649,
+        "altitude": 540
+    },
+    {
+        "yaw": 162.19,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0244459,
+        "latitude": 44.1105552,
+        "altitude": 540
+    },
+    {
+        "yaw": 162.3,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0244864,
+        "latitude": 44.1105457,
+        "altitude": 540
+    },
+    {
+        "yaw": 162.22,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0245351,
+        "latitude": 44.1105344,
+        "altitude": 540
+    },
+    {
+        "yaw": 162.22,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0245758,
+        "latitude": 44.1105252,
+        "altitude": 540
+    },
+    {
+        "yaw": 163.5,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0246159,
+        "latitude": 44.1105159,
+        "altitude": 540
+    },
+    {
+        "yaw": 160.47,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0246547,
+        "latitude": 44.1105068,
+        "altitude": 540
+    },
+    {
+        "yaw": 162.57000000000002,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0246775,
+        "latitude": 44.1105016,
+        "altitude": 540
+    },
+    {
+        "yaw": 161.28,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0246935,
+        "latitude": 44.1104977,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 164.04999999999998,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0247061,
+        "latitude": 44.1104941,
+        "altitude": 540
+    },
+    {
+        "yaw": 163.54999999999998,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0247142,
+        "latitude": 44.1104922,
+        "altitude": 540
+    },
+    {
+        "yaw": 164.07999999999998,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0247212,
+        "latitude": 44.1104907,
+        "altitude": 540
+    },
+    {
+        "yaw": 162.58,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0247275,
+        "latitude": 44.1104894,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 162.79,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0247343,
+        "latitude": 44.110488,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 161.59,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0247386,
+        "latitude": 44.110487,
+        "altitude": 540
+    },
+    {
+        "yaw": 160.85,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0247411,
+        "latitude": 44.1104863,
+        "altitude": 540
+    },
+    {
+        "yaw": 160.55,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0247427,
+        "latitude": 44.1104859,
+        "altitude": 540
+    },
+    {
+        "yaw": 159.94,
+        "pitch": -30,
+        "roll": 0,
+        "longitude": 87.0247441,
+        "latitude": 44.1104858,
+        "altitude": 540
+    },
+    {
+        "yaw": 184.99,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0247448,
+        "latitude": 44.1104856,
+        "altitude": 540
+    },
+    {
+        "yaw": 188.52,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0247453,
+        "latitude": 44.1104854,
+        "altitude": 540
+    },
+    {
+        "yaw": 200.38,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0247462,
+        "latitude": 44.1104853,
+        "altitude": 540
+    },
+    {
+        "yaw": 208.41,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0247468,
+        "latitude": 44.1104852,
+        "altitude": 540
+    },
+    {
+        "yaw": 214.8,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0247472,
+        "latitude": 44.1104853,
+        "altitude": 540
+    },
+    {
+        "yaw": 219.1,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0247473,
+        "latitude": 44.1104853,
+        "altitude": 540
+    },
+    {
+        "yaw": 220.48,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0247481,
+        "latitude": 44.1104849,
+        "altitude": 540
+    },
+    {
+        "yaw": 220.81,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.024755,
+        "latitude": 44.1104834,
+        "altitude": 540
+    },
+    {
+        "yaw": 220.60999999999999,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0247688,
+        "latitude": 44.1104802,
+        "altitude": 540
+    },
+    {
+        "yaw": 220.33,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0247941,
+        "latitude": 44.1104742,
+        "altitude": 540
+    },
+    {
+        "yaw": 220.07000000000002,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0248228,
+        "latitude": 44.1104675,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 220.3,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0248581,
+        "latitude": 44.1104593,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 219.95,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0248996,
+        "latitude": 44.1104499,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 219.79,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0249551,
+        "latitude": 44.1104375,
+        "altitude": 540
+    },
+    {
+        "yaw": 219.88000000000002,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0250012,
+        "latitude": 44.1104277,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 220.89999999999998,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0250456,
+        "latitude": 44.1104183,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 222.45000000000002,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0250876,
+        "latitude": 44.1104086,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 222.98999999999998,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0251363,
+        "latitude": 44.1103967,
+        "altitude": 540
+    },
+    {
+        "yaw": 224.64000000000001,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0251767,
+        "latitude": 44.1103868,
+        "altitude": 540
+    },
+    {
+        "yaw": 225.74,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0252172,
+        "latitude": 44.1103772,
+        "altitude": 540
+    },
+    {
+        "yaw": 226.28,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0252659,
+        "latitude": 44.1103662,
+        "altitude": 540
+    },
+    {
+        "yaw": 226.85,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0253063,
+        "latitude": 44.1103572,
+        "altitude": 540
+    },
+    {
+        "yaw": 227.14,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0253464,
+        "latitude": 44.1103481,
+        "altitude": 540
+    },
+    {
+        "yaw": 227.46,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0253862,
+        "latitude": 44.1103389,
+        "altitude": 540
+    },
+    {
+        "yaw": 228.79000000000002,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0254258,
+        "latitude": 44.1103301,
+        "altitude": 540
+    },
+    {
+        "yaw": 230.81,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0254492,
+        "latitude": 44.1103254,
+        "altitude": 540
+    },
+    {
+        "yaw": 229.29,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0254649,
+        "latitude": 44.1103214,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 230.22,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0254761,
+        "latitude": 44.1103184,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 229.32,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0254863,
+        "latitude": 44.1103157,
+        "altitude": 540
+    },
+    {
+        "yaw": 229.14,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0254936,
+        "latitude": 44.1103142,
+        "altitude": 540
+    },
+    {
+        "yaw": 228.82,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0255002,
+        "latitude": 44.1103131,
+        "altitude": 540
+    },
+    {
+        "yaw": 227.95000000000002,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.025506,
+        "latitude": 44.110312,
+        "altitude": 540
+    },
+    {
+        "yaw": 227.24,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.025512,
+        "latitude": 44.1103106,
+        "altitude": 540
+    },
+    {
+        "yaw": 227,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0255153,
+        "latitude": 44.1103097,
+        "altitude": 540
+    },
+    {
+        "yaw": 225.70000000000002,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0255173,
+        "latitude": 44.1103091,
+        "altitude": 540
+    },
+    {
+        "yaw": 225.93,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0255184,
+        "latitude": 44.1103089,
+        "altitude": 540
+    },
+    {
+        "yaw": 224.52,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0255194,
+        "latitude": 44.1103088,
+        "altitude": 540
+    },
+    {
+        "yaw": 222.55,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0255204,
+        "latitude": 44.1103086,
+        "altitude": 540
+    },
+    {
+        "yaw": 235.26,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0255211,
+        "latitude": 44.1103084,
+        "altitude": 540
+    },
+    {
+        "yaw": 237.53,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0255216,
+        "latitude": 44.1103081,
+        "altitude": 540
+    },
+    {
+        "yaw": 243.60000000000002,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0255219,
+        "latitude": 44.110308,
+        "altitude": 540
+    },
+    {
+        "yaw": 251.43,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0255221,
+        "latitude": 44.110308,
+        "altitude": 540
+    },
+    {
+        "yaw": 256.15000000000003,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0255221,
+        "latitude": 44.1103079,
+        "altitude": 540
+    },
+    {
+        "yaw": 257.18,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0255227,
+        "latitude": 44.1103078,
+        "altitude": 540
+    },
+    {
+        "yaw": 258.7,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0255288,
+        "latitude": 44.1103067,
+        "altitude": 540
+    },
+    {
+        "yaw": 259.19,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0255418,
+        "latitude": 44.110304,
+        "altitude": 540
+    },
+    {
+        "yaw": 259.8,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0255663,
+        "latitude": 44.1102983,
+        "altitude": 540
+    },
+    {
+        "yaw": 259.75,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0255942,
+        "latitude": 44.1102919,
+        "altitude": 540
+    },
+    {
+        "yaw": 259.68,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0256287,
+        "latitude": 44.1102841,
+        "altitude": 540
+    },
+    {
+        "yaw": 260.32,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.025678,
+        "latitude": 44.110273,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 259.64,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0257243,
+        "latitude": 44.1102626,
+        "altitude": 540
+    },
+    {
+        "yaw": 259.39,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0257702,
+        "latitude": 44.1102526,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 259.47,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0258148,
+        "latitude": 44.110243,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 260.44,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0258659,
+        "latitude": 44.1102314,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 261.25,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0259074,
+        "latitude": 44.1102219,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 261.95,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0259487,
+        "latitude": 44.1102126,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 262.62,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0259967,
+        "latitude": 44.1102017,
+        "altitude": 540
+    },
+    {
+        "yaw": 262.62,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0260367,
+        "latitude": 44.1101928,
+        "altitude": 540
+    },
+    {
+        "yaw": 263.21000000000004,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0260768,
+        "latitude": 44.1101839,
+        "altitude": 540
+    },
+    {
+        "yaw": 262.94,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0261168,
+        "latitude": 44.1101749,
+        "altitude": 540
+    },
+    {
+        "yaw": 262.99,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.026164,
+        "latitude": 44.1101643,
+        "altitude": 540
+    },
+    {
+        "yaw": 264.16,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0261949,
+        "latitude": 44.1101572,
+        "altitude": 540
+    },
+    {
+        "yaw": 264.45,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0262173,
+        "latitude": 44.1101523,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 265.59,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.026233,
+        "latitude": 44.1101489,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 265.03000000000003,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0262463,
+        "latitude": 44.1101459,
+        "altitude": 540
+    },
+    {
+        "yaw": 265.03999999999996,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0262545,
+        "latitude": 44.1101442,
+        "altitude": 540
+    },
+    {
+        "yaw": 265.15,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0262614,
+        "latitude": 44.1101428,
+        "altitude": 540
+    },
+    {
+        "yaw": 264.89,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0262677,
+        "latitude": 44.1101416,
+        "altitude": 540
+    },
+    {
+        "yaw": 264.2,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0262745,
+        "latitude": 44.11014,
+        "altitude": 540
+    },
+    {
+        "yaw": 263.91999999999996,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.026279,
+        "latitude": 44.1101388,
+        "altitude": 540
+    },
+    {
+        "yaw": 264.27,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0262821,
+        "latitude": 44.110138,
+        "altitude": 540
+    },
+    {
+        "yaw": 263.28000000000003,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0262839,
+        "latitude": 44.1101375,
+        "altitude": 540
+    },
+    {
+        "yaw": 263.17,
+        "pitch": -25,
+        "roll": 0,
+        "longitude": 87.0262854,
+        "latitude": 44.1101372,
+        "altitude": 540
+    },
+    {
+        "yaw": 241.32000000000002,
+        "pitch": -34.9,
+        "roll": -1,
+        "longitude": 87.0262861,
+        "latitude": 44.110137,
+        "altitude": 540
+    },
+    {
+        "yaw": 240.07,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.026287,
+        "latitude": 44.1101368,
+        "altitude": 540
+    },
+    {
+        "yaw": 234.82,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0262877,
+        "latitude": 44.1101366,
+        "altitude": 540
+    },
+    {
+        "yaw": 234.13,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0262883,
+        "latitude": 44.1101364,
+        "altitude": 540
+    },
+    {
+        "yaw": 235.36,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0262886,
+        "latitude": 44.1101363,
+        "altitude": 540
+    },
+    {
+        "yaw": 232.16,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0262911,
+        "latitude": 44.1101359,
+        "altitude": 540
+    },
+    {
+        "yaw": 230.62,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0263032,
+        "latitude": 44.1101335,
+        "altitude": 540
+    },
+    {
+        "yaw": 228.12,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0263206,
+        "latitude": 44.1101296,
+        "altitude": 540
+    },
+    {
+        "yaw": 226.76000000000002,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0263451,
+        "latitude": 44.1101236,
+        "altitude": 540
+    },
+    {
+        "yaw": 226.78,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0263829,
+        "latitude": 44.110114,
+        "altitude": 540
+    },
+    {
+        "yaw": 226.7,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0264217,
+        "latitude": 44.1101046,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 227.12,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0264661,
+        "latitude": 44.1100941,
+        "altitude": 540
+    },
+    {
+        "yaw": 225.52,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.026522,
+        "latitude": 44.1100811,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 225.84,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0265676,
+        "latitude": 44.1100712,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 227.29,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0266112,
+        "latitude": 44.1100609,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 229.08,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0266529,
+        "latitude": 44.1100511,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 230.17000000000002,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0267017,
+        "latitude": 44.1100392,
+        "altitude": 540
+    },
+    {
+        "yaw": 230.82999999999998,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0267419,
+        "latitude": 44.1100293,
+        "altitude": 540
+    },
+    {
+        "yaw": 231.96,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0267822,
+        "latitude": 44.1100196,
+        "altitude": 540
+    },
+    {
+        "yaw": 232.14000000000001,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0268301,
+        "latitude": 44.1100083,
+        "altitude": 540
+    },
+    {
+        "yaw": 232.61,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0268666,
+        "latitude": 44.1099997,
+        "altitude": 540
+    },
+    {
+        "yaw": 233.59,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0268939,
+        "latitude": 44.1099933,
+        "altitude": 540
+    },
+    {
+        "yaw": 232.55,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.026913,
+        "latitude": 44.109989,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 235.78,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0269287,
+        "latitude": 44.1099851,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 234.69,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.026938,
+        "latitude": 44.1099828,
+        "altitude": 540
+    },
+    {
+        "yaw": 234.51,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0269455,
+        "latitude": 44.1099812,
+        "altitude": 540
+    },
+    {
+        "yaw": 233.66,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0269522,
+        "latitude": 44.1099797,
+        "altitude": 540
+    },
+    {
+        "yaw": 233.1,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0269594,
+        "latitude": 44.1099782,
+        "altitude": 540
+    },
+    {
+        "yaw": 232.79999999999998,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0269646,
+        "latitude": 44.109977,
+        "altitude": 540
+    },
+    {
+        "yaw": 232.3,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0269688,
+        "latitude": 44.1099759,
+        "altitude": 540
+    },
+    {
+        "yaw": 231.67,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0269716,
+        "latitude": 44.1099752,
+        "altitude": 540
+    },
+    {
+        "yaw": 231.33,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0269735,
+        "latitude": 44.1099746,
+        "altitude": 540
+    },
+    {
+        "yaw": 231.26000000000002,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0269743,
+        "latitude": 44.1099745,
+        "altitude": 540
+    },
+    {
+        "yaw": 230.72,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0269751,
+        "latitude": 44.1099744,
+        "altitude": 540
+    },
+    {
+        "yaw": 241.81,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0269756,
+        "latitude": 44.1099745,
+        "altitude": 540
+    },
+    {
+        "yaw": 249.61,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0269763,
+        "latitude": 44.1099743,
+        "altitude": 540
+    },
+    {
+        "yaw": 263.32,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.026977,
+        "latitude": 44.1099739,
+        "altitude": 540
+    },
+    {
+        "yaw": 272.62,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0269774,
+        "latitude": 44.1099737,
+        "altitude": 540
+    },
+    {
+        "yaw": 280.87,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0269776,
+        "latitude": 44.1099735,
+        "altitude": 540
+    },
+    {
+        "yaw": 283.27000000000004,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0269777,
+        "latitude": 44.1099735,
+        "altitude": 540
+    },
+    {
+        "yaw": 286.3,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0269773,
+        "latitude": 44.1099731,
+        "altitude": 540
+    },
+    {
+        "yaw": 286.26,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0269744,
+        "latitude": 44.1099677,
+        "altitude": 540
+    },
+    {
+        "yaw": 286.84999999999997,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0269696,
+        "latitude": 44.1099578,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.12,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0269617,
+        "latitude": 44.109943,
+        "altitude": 540
+    },
+    {
+        "yaw": 289.96999999999997,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0269513,
+        "latitude": 44.1099233,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 289.39,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0269357,
+        "latitude": 44.1098937,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 291.33000000000004,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0269206,
+        "latitude": 44.1098643,
+        "altitude": 540
+    },
+    {
+        "yaw": 291.95,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.026904,
+        "latitude": 44.1098321,
+        "altitude": 540
+    },
+    {
+        "yaw": 292.02000000000004,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0268835,
+        "latitude": 44.1097942,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 291.52000000000004,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0268672,
+        "latitude": 44.1097636,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 290.70000000000005,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0268525,
+        "latitude": 44.1097342,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 289.98,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0268387,
+        "latitude": 44.1097052,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.81,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0268221,
+        "latitude": 44.1096706,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.53000000000003,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0268079,
+        "latitude": 44.1096417,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.78,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0267931,
+        "latitude": 44.109613,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.85,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0267786,
+        "latitude": 44.1095845,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.08000000000004,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0267613,
+        "latitude": 44.1095503,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.48,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0267469,
+        "latitude": 44.1095218,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.05,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0267326,
+        "latitude": 44.1094932,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.14,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0267151,
+        "latitude": 44.1094587,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.04,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0267003,
+        "latitude": 44.1094299,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.76,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0266854,
+        "latitude": 44.109401,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.40999999999997,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0266706,
+        "latitude": 44.109372,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.33,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.026653,
+        "latitude": 44.1093372,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.42,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0266382,
+        "latitude": 44.1093078,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.85,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0266234,
+        "latitude": 44.1092784,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 287.28,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0266082,
+        "latitude": 44.109249,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.7,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0265903,
+        "latitude": 44.1092138,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.77,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0265754,
+        "latitude": 44.1091845,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.26,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0265604,
+        "latitude": 44.1091552,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.13,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0265455,
+        "latitude": 44.1091258,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.18,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0265296,
+        "latitude": 44.109096,
+        "altitude": 540
+    },
+    {
+        "yaw": 285.12,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0265203,
+        "latitude": 44.1090787,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 288.40999999999997,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0265144,
+        "latitude": 44.1090669,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 286.54999999999995,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0265108,
+        "latitude": 44.1090587,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 287.24,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.026508,
+        "latitude": 44.109051,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.45,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0265057,
+        "latitude": 44.1090457,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.18,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0265032,
+        "latitude": 44.1090411,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 287.45,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0265006,
+        "latitude": 44.1090364,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 287.77,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0264989,
+        "latitude": 44.1090334,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 288.35999999999996,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0264979,
+        "latitude": 44.1090316,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.71000000000004,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0264973,
+        "latitude": 44.1090305,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.61,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.026497,
+        "latitude": 44.1090297,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.25,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0264968,
+        "latitude": 44.1090291,
+        "altitude": 540
+    },
+    {
+        "yaw": 289.21,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0264963,
+        "latitude": 44.1090284,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.8,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0264949,
+        "latitude": 44.1090244,
+        "altitude": 540
+    },
+    {
+        "yaw": 289.15,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0264905,
+        "latitude": 44.109013,
+        "altitude": 540
+    },
+    {
+        "yaw": 290.74,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0264846,
+        "latitude": 44.1089977,
+        "altitude": 540
+    },
+    {
+        "yaw": 291.08,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0264765,
+        "latitude": 44.1089774,
+        "altitude": 540
+    },
+    {
+        "yaw": 292.48,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0264643,
+        "latitude": 44.1089466,
+        "altitude": 540
+    },
+    {
+        "yaw": 292.59,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.026452,
+        "latitude": 44.1089159,
+        "altitude": 540
+    },
+    {
+        "yaw": 292.91,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0264382,
+        "latitude": 44.108882,
+        "altitude": 540
+    },
+    {
+        "yaw": 292.7,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0264239,
+        "latitude": 44.1088484,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 292.13,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0264076,
+        "latitude": 44.1088094,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 290.94,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263956,
+        "latitude": 44.1087788,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 290.87,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263858,
+        "latitude": 44.108754,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 287.96,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263779,
+        "latitude": 44.1087341,
+        "altitude": 540
+    },
+    {
+        "yaw": 286.59999999999997,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263744,
+        "latitude": 44.1087232,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 288.64000000000004,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263726,
+        "latitude": 44.1087157,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 287.26000000000005,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263709,
+        "latitude": 44.1087087,
+        "altitude": 540
+    },
+    {
+        "yaw": 286.71000000000004,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.026369,
+        "latitude": 44.1087039,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.2,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.026367,
+        "latitude": 44.1086997,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.97,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263649,
+        "latitude": 44.108696,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.15000000000003,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263633,
+        "latitude": 44.1086927,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.07,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263622,
+        "latitude": 44.1086898,
+        "altitude": 540
+    },
+    {
+        "yaw": 289.3,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263616,
+        "latitude": 44.1086882,
+        "altitude": 540
+    },
+    {
+        "yaw": 289.15,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.026361,
+        "latitude": 44.1086873,
+        "altitude": 540
+    },
+    {
+        "yaw": 289.65,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263606,
+        "latitude": 44.1086866,
+        "altitude": 540
+    },
+    {
+        "yaw": 289.21,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263604,
+        "latitude": 44.108686,
+        "altitude": 540
+    },
+    {
+        "yaw": 289.63,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263602,
+        "latitude": 44.1086856,
+        "altitude": 540
+    },
+    {
+        "yaw": 289.43,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.02636,
+        "latitude": 44.1086842,
+        "altitude": 540
+    },
+    {
+        "yaw": 290.77,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263572,
+        "latitude": 44.1086769,
+        "altitude": 540
+    },
+    {
+        "yaw": 291.51,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263528,
+        "latitude": 44.1086651,
+        "altitude": 540
+    },
+    {
+        "yaw": 291.32,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263465,
+        "latitude": 44.1086479,
+        "altitude": 540
+    },
+    {
+        "yaw": 291.69,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263376,
+        "latitude": 44.108626,
+        "altitude": 540
+    },
+    {
+        "yaw": 292.31,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263245,
+        "latitude": 44.1085932,
+        "altitude": 540
+    },
+    {
+        "yaw": 292.08,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0263118,
+        "latitude": 44.1085611,
+        "altitude": 540
+    },
+    {
+        "yaw": 292.32,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262981,
+        "latitude": 44.1085276,
+        "altitude": 540
+    },
+    {
+        "yaw": 294.23999999999995,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262817,
+        "latitude": 44.1084932,
+        "altitude": 540.2
+    },
+    {
+        "yaw": 288.39000000000004,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262713,
+        "latitude": 44.1084742,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 288.66,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262681,
+        "latitude": 44.1084639,
+        "altitude": 540
+    },
+    {
+        "yaw": 285.5,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262687,
+        "latitude": 44.1084574,
+        "altitude": 540
+    },
+    {
+        "yaw": 285.37,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262705,
+        "latitude": 44.1084503,
+        "altitude": 540
+    },
+    {
+        "yaw": 286.19,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262699,
+        "latitude": 44.1084454,
+        "altitude": 540
+    },
+    {
+        "yaw": 286.40000000000003,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262675,
+        "latitude": 44.1084412,
+        "altitude": 540
+    },
+    {
+        "yaw": 286.84999999999997,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262649,
+        "latitude": 44.1084379,
+        "altitude": 540
+    },
+    {
+        "yaw": 286.91999999999996,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262628,
+        "latitude": 44.1084349,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.93,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.026262,
+        "latitude": 44.1084333,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.91,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262616,
+        "latitude": 44.1084322,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.03,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262612,
+        "latitude": 44.1084309,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.42,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262608,
+        "latitude": 44.1084302,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.49,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262607,
+        "latitude": 44.1084296,
+        "altitude": 540
+    },
+    {
+        "yaw": 303.54,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262603,
+        "latitude": 44.1084293,
+        "altitude": 540
+    },
+    {
+        "yaw": 327.77000000000004,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262598,
+        "latitude": 44.1084289,
+        "altitude": 540
+    },
+    {
+        "yaw": 344.91,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262596,
+        "latitude": 44.1084283,
+        "altitude": 540
+    },
+    {
+        "yaw": -4.550000000000001,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262595,
+        "latitude": 44.1084282,
+        "altitude": 540
+    },
+    {
+        "yaw": 0.6700000000000008,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262594,
+        "latitude": 44.1084279,
+        "altitude": 540
+    },
+    {
+        "yaw": 5.58,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262594,
+        "latitude": 44.1084278,
+        "altitude": 540
+    },
+    {
+        "yaw": 12.12,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262595,
+        "latitude": 44.1084278,
+        "altitude": 540
+    },
+    {
+        "yaw": 14.57,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262596,
+        "latitude": 44.1084278,
+        "altitude": 540
+    },
+    {
+        "yaw": 17.19,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262589,
+        "latitude": 44.1084282,
+        "altitude": 540
+    },
+    {
+        "yaw": 17.189999999999998,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262529,
+        "latitude": 44.1084299,
+        "altitude": 540
+    },
+    {
+        "yaw": 17.09,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0262368,
+        "latitude": 44.1084341,
+        "altitude": 540
+    },
+    {
+        "yaw": 19.23,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.026216,
+        "latitude": 44.1084397,
+        "altitude": 540
+    },
+    {
+        "yaw": 20.04,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0261883,
+        "latitude": 44.1084469,
+        "altitude": 540
+    },
+    {
+        "yaw": 20.5,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0261543,
+        "latitude": 44.108456,
+        "altitude": 540
+    },
+    {
+        "yaw": 20.259999999999998,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0261055,
+        "latitude": 44.1084693,
+        "altitude": 540
+    },
+    {
+        "yaw": 22.439999999999998,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0260608,
+        "latitude": 44.1084815,
+        "altitude": 540
+    },
+    {
+        "yaw": 22.66,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0260158,
+        "latitude": 44.1084939,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 22.509999999999998,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0259647,
+        "latitude": 44.1085081,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 21.46,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0259237,
+        "latitude": 44.1085187,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 20.74,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0258832,
+        "latitude": 44.1085289,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 19.64,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.025835,
+        "latitude": 44.108541,
+        "altitude": 540
+    },
+    {
+        "yaw": 18.51,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0257955,
+        "latitude": 44.1085514,
+        "altitude": 540
+    },
+    {
+        "yaw": 17.599999999999998,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.025756,
+        "latitude": 44.108562,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.73,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0257164,
+        "latitude": 44.1085724,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.91,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0256689,
+        "latitude": 44.1085851,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.080000000000002,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0256293,
+        "latitude": 44.1085956,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.43,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0255895,
+        "latitude": 44.1086061,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.450000000000003,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0255495,
+        "latitude": 44.1086166,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.67,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0255018,
+        "latitude": 44.1086293,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.48,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0254698,
+        "latitude": 44.1086384,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 15.68,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0254467,
+        "latitude": 44.1086446,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.14,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0254281,
+        "latitude": 44.1086491,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 13.740000000000002,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0254177,
+        "latitude": 44.1086515,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 13.98,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0254095,
+        "latitude": 44.1086533,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 14.8,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.025403,
+        "latitude": 44.1086552,
+        "altitude": 540
+    },
+    {
+        "yaw": 15.33,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253958,
+        "latitude": 44.1086574,
+        "altitude": 540
+    },
+    {
+        "yaw": 15.940000000000001,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253901,
+        "latitude": 44.108659,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.59,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253854,
+        "latitude": 44.1086602,
+        "altitude": 540
+    },
+    {
+        "yaw": 17.02,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253824,
+        "latitude": 44.1086607,
+        "altitude": 540
+    },
+    {
+        "yaw": 17.02,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253805,
+        "latitude": 44.1086613,
+        "altitude": 540
+    },
+    {
+        "yaw": 18.01,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253795,
+        "latitude": 44.1086616,
+        "altitude": 540
+    },
+    {
+        "yaw": 15.71,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253784,
+        "latitude": 44.1086619,
+        "altitude": 540
+    },
+    {
+        "yaw": 14.27,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253777,
+        "latitude": 44.1086621,
+        "altitude": 540
+    },
+    {
+        "yaw": 10.89,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253769,
+        "latitude": 44.1086624,
+        "altitude": 540
+    },
+    {
+        "yaw": 9.08,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253763,
+        "latitude": 44.1086627,
+        "altitude": 540
+    },
+    {
+        "yaw": 8.11,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253759,
+        "latitude": 44.1086628,
+        "altitude": 540
+    },
+    {
+        "yaw": 7.73,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253755,
+        "latitude": 44.1086627,
+        "altitude": 540
+    },
+    {
+        "yaw": 6.609999999999999,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253756,
+        "latitude": 44.1086627,
+        "altitude": 540
+    },
+    {
+        "yaw": 364.03000000000003,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253758,
+        "latitude": 44.1086628,
+        "altitude": 540
+    },
+    {
+        "yaw": 362.71999999999997,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253758,
+        "latitude": 44.1086629,
+        "altitude": 540
+    },
+    {
+        "yaw": 361.73,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253757,
+        "latitude": 44.1086612,
+        "altitude": 540
+    },
+    {
+        "yaw": 361.17,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253734,
+        "latitude": 44.1086547,
+        "altitude": 540
+    },
+    {
+        "yaw": 360.84,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253686,
+        "latitude": 44.1086433,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 362.13,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253598,
+        "latitude": 44.1086232,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 361.67,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253504,
+        "latitude": 44.1086011,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 361.82,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253388,
+        "latitude": 44.1085744,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 361.22,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253255,
+        "latitude": 44.1085433,
+        "altitude": 540
+    },
+    {
+        "yaw": 359.67,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0253095,
+        "latitude": 44.1085083,
+        "altitude": 540
+    },
+    {
+        "yaw": 359.71999999999997,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0252987,
+        "latitude": 44.1084879,
+        "altitude": 540.2
+    },
+    {
+        "yaw": 358.94,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0252927,
+        "latitude": 44.1084747,
+        "altitude": 540.2
+    },
+    {
+        "yaw": 358.01,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0252906,
+        "latitude": 44.1084653,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 356.66,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.02529,
+        "latitude": 44.1084602,
+        "altitude": 540
+    },
+    {
+        "yaw": 355.56,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0252889,
+        "latitude": 44.1084565,
+        "altitude": 540
+    },
+    {
+        "yaw": 355.63,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0252874,
+        "latitude": 44.1084535,
+        "altitude": 540
+    },
+    {
+        "yaw": 356.03,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0252851,
+        "latitude": 44.1084501,
+        "altitude": 540
+    },
+    {
+        "yaw": 355.8,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0252836,
+        "latitude": 44.1084473,
+        "altitude": 540
+    },
+    {
+        "yaw": 355.92,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0252825,
+        "latitude": 44.1084451,
+        "altitude": 540
+    },
+    {
+        "yaw": 356.09000000000003,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0252819,
+        "latitude": 44.1084433,
+        "altitude": 540
+    },
+    {
+        "yaw": 356.16,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0252815,
+        "latitude": 44.1084424,
+        "altitude": 540
+    },
+    {
+        "yaw": 356.31,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0252812,
+        "latitude": 44.1084419,
+        "altitude": 540
+    },
+    {
+        "yaw": 356.08,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0252808,
+        "latitude": 44.1084413,
+        "altitude": 540
+    },
+    {
+        "yaw": 356.17,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0252805,
+        "latitude": 44.1084407,
+        "altitude": 540
+    },
+    {
+        "yaw": -0.57,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0252804,
+        "latitude": 44.1084403,
+        "altitude": 540
+    },
+    {
+        "yaw": 4.030000000000001,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0252803,
+        "latitude": 44.1084401,
+        "altitude": 540
+    },
+    {
+        "yaw": 5.389999999999999,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0252803,
+        "latitude": 44.1084398,
+        "altitude": 540
+    },
+    {
+        "yaw": 10.970000000000002,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0252802,
+        "latitude": 44.1084396,
+        "altitude": 540
+    },
+    {
+        "yaw": 14.92,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.02528,
+        "latitude": 44.1084394,
+        "altitude": 540
+    },
+    {
+        "yaw": 15.929999999999998,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0252793,
+        "latitude": 44.1084394,
+        "altitude": 540
+    },
+    {
+        "yaw": 17.06,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0252717,
+        "latitude": 44.1084412,
+        "altitude": 540
+    },
+    {
+        "yaw": 17.56,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0252578,
+        "latitude": 44.1084444,
+        "altitude": 540
+    },
+    {
+        "yaw": 18.44,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0252368,
+        "latitude": 44.108449,
+        "altitude": 540
+    },
+    {
+        "yaw": 19.71,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0252025,
+        "latitude": 44.1084569,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 20.11,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0251666,
+        "latitude": 44.108465,
+        "altitude": 540
+    },
+    {
+        "yaw": 20.55,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0251249,
+        "latitude": 44.1084744,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 21.24,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0250792,
+        "latitude": 44.1084849,
+        "altitude": 540
+    },
+    {
+        "yaw": 21.799999999999997,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0250252,
+        "latitude": 44.108498,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 22.310000000000002,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0249818,
+        "latitude": 44.1085085,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 21.84,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.02494,
+        "latitude": 44.1085178,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 20.5,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0248912,
+        "latitude": 44.1085279,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 19.52,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0248506,
+        "latitude": 44.1085365,
+        "altitude": 540
+    },
+    {
+        "yaw": 18.45,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0248103,
+        "latitude": 44.1085455,
+        "altitude": 540
+    },
+    {
+        "yaw": 17.74,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0247621,
+        "latitude": 44.1085564,
+        "altitude": 540
+    },
+    {
+        "yaw": 17.009999999999998,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.024722,
+        "latitude": 44.1085656,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.14,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.024682,
+        "latitude": 44.1085747,
+        "altitude": 540
+    },
+    {
+        "yaw": 15.899999999999999,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.024642,
+        "latitude": 44.1085837,
+        "altitude": 540
+    },
+    {
+        "yaw": 15.889999999999999,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0245933,
+        "latitude": 44.1085947,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.15,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0245527,
+        "latitude": 44.1086039,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.02,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0245121,
+        "latitude": 44.1086132,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.369999999999997,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0244631,
+        "latitude": 44.1086242,
+        "altitude": 540
+    },
+    {
+        "yaw": 17.38,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0244272,
+        "latitude": 44.1086327,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 16.14,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0244009,
+        "latitude": 44.108639,
+        "altitude": 540
+    },
+    {
+        "yaw": 14.24,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0243822,
+        "latitude": 44.1086426,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 15.77,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0243676,
+        "latitude": 44.1086456,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 14.26,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0243592,
+        "latitude": 44.1086476,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 14.959999999999999,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0243519,
+        "latitude": 44.1086497,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.77,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.024345,
+        "latitude": 44.1086513,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 17.11,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0243375,
+        "latitude": 44.1086529,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 17.939999999999998,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0243325,
+        "latitude": 44.108654,
+        "altitude": 540
+    },
+    {
+        "yaw": 18.939999999999998,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0243292,
+        "latitude": 44.1086545,
+        "altitude": 540
+    },
+    {
+        "yaw": 19.2,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0243272,
+        "latitude": 44.1086548,
+        "altitude": 540
+    },
+    {
+        "yaw": 19.18,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.024326,
+        "latitude": 44.1086551,
+        "altitude": 540
+    },
+    {
+        "yaw": 20.16,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0243251,
+        "latitude": 44.1086555,
+        "altitude": 540
+    },
+    {
+        "yaw": 29.009999999999998,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0243243,
+        "latitude": 44.1086558,
+        "altitude": 540
+    },
+    {
+        "yaw": 36.599999999999994,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0243236,
+        "latitude": 44.108656,
+        "altitude": 540
+    },
+    {
+        "yaw": 40.47,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0243227,
+        "latitude": 44.108656,
+        "altitude": 540
+    },
+    {
+        "yaw": 49.769999999999996,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0243222,
+        "latitude": 44.1086559,
+        "altitude": 540
+    },
+    {
+        "yaw": 54.88,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0243219,
+        "latitude": 44.1086558,
+        "altitude": 540
+    },
+    {
+        "yaw": 55.900000000000006,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0243209,
+        "latitude": 44.1086561,
+        "altitude": 540
+    },
+    {
+        "yaw": 57.05,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0243145,
+        "latitude": 44.1086581,
+        "altitude": 540
+    },
+    {
+        "yaw": 58.290000000000006,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.024302,
+        "latitude": 44.108662,
+        "altitude": 540
+    },
+    {
+        "yaw": 60.11,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0242776,
+        "latitude": 44.1086685,
+        "altitude": 540
+    },
+    {
+        "yaw": 61.39,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0242498,
+        "latitude": 44.1086758,
+        "altitude": 540
+    },
+    {
+        "yaw": 62.120000000000005,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0242152,
+        "latitude": 44.1086846,
+        "altitude": 540
+    },
+    {
+        "yaw": 62.629999999999995,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0241751,
+        "latitude": 44.108695,
+        "altitude": 540
+    },
+    {
+        "yaw": 62.46,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0241206,
+        "latitude": 44.1087094,
+        "altitude": 540
+    },
+    {
+        "yaw": 62.12,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0240754,
+        "latitude": 44.1087215,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 62.919999999999995,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0240313,
+        "latitude": 44.1087332,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 62.36,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0239895,
+        "latitude": 44.1087443,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 60.699999999999996,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0239404,
+        "latitude": 44.1087571,
+        "altitude": 540
+    },
+    {
+        "yaw": 63.919999999999995,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0239067,
+        "latitude": 44.1087657,
+        "altitude": 540
+    },
+    {
+        "yaw": 63,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0238825,
+        "latitude": 44.108772,
+        "altitude": 540
+    },
+    {
+        "yaw": 58.940000000000005,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.023863,
+        "latitude": 44.1087772,
+        "altitude": 540
+    },
+    {
+        "yaw": 59.44,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0238519,
+        "latitude": 44.1087799,
+        "altitude": 540
+    },
+    {
+        "yaw": 58.39,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0238438,
+        "latitude": 44.1087819,
+        "altitude": 540
+    },
+    {
+        "yaw": 56.940000000000005,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0238372,
+        "latitude": 44.1087838,
+        "altitude": 540
+    },
+    {
+        "yaw": 57.58,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0238302,
+        "latitude": 44.1087858,
+        "altitude": 540
+    },
+    {
+        "yaw": 57.769999999999996,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0238251,
+        "latitude": 44.1087872,
+        "altitude": 540
+    },
+    {
+        "yaw": 58.24,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0238203,
+        "latitude": 44.1087886,
+        "altitude": 540
+    },
+    {
+        "yaw": 59.16,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0238159,
+        "latitude": 44.1087897,
+        "altitude": 540
+    },
+    {
+        "yaw": 58.989999999999995,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0238136,
+        "latitude": 44.1087902,
+        "altitude": 540
+    },
+    {
+        "yaw": 59.050000000000004,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0238122,
+        "latitude": 44.1087906,
+        "altitude": 540
+    },
+    {
+        "yaw": 59.599999999999994,
+        "pitch": 0,
+        "roll": 0,
+        "longitude": 87.0238111,
+        "latitude": 44.1087909,
+        "altitude": 540
+    },
+    {
+        "yaw": 59.470000000000006,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0238102,
+        "latitude": 44.1087912,
+        "altitude": 540
+    },
+    {
+        "yaw": 55.38,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0238094,
+        "latitude": 44.1087912,
+        "altitude": 540
+    },
+    {
+        "yaw": 51.05,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0238086,
+        "latitude": 44.1087914,
+        "altitude": 540
+    },
+    {
+        "yaw": 42.19,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0238082,
+        "latitude": 44.1087915,
+        "altitude": 540
+    },
+    {
+        "yaw": 36.53,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0238079,
+        "latitude": 44.1087914,
+        "altitude": 540
+    },
+    {
+        "yaw": 28.770000000000003,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.023808,
+        "latitude": 44.1087915,
+        "altitude": 540
+    },
+    {
+        "yaw": 28.79,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0238079,
+        "latitude": 44.1087917,
+        "altitude": 540
+    },
+    {
+        "yaw": 24.4,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0238082,
+        "latitude": 44.108792,
+        "altitude": 540
+    },
+    {
+        "yaw": 24.46,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0238106,
+        "latitude": 44.1087957,
+        "altitude": 540
+    },
+    {
+        "yaw": 23.35,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0238157,
+        "latitude": 44.1088044,
+        "altitude": 540
+    },
+    {
+        "yaw": 22.279999999999998,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.023824,
+        "latitude": 44.1088216,
+        "altitude": 540
+    },
+    {
+        "yaw": 21.78,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0238336,
+        "latitude": 44.1088412,
+        "altitude": 540
+    },
+    {
+        "yaw": 21.47,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0238454,
+        "latitude": 44.1088657,
+        "altitude": 540
+    },
+    {
+        "yaw": 21.419999999999998,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0238596,
+        "latitude": 44.1088944,
+        "altitude": 540
+    },
+    {
+        "yaw": 21.049999999999997,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0238786,
+        "latitude": 44.1089331,
+        "altitude": 540
+    },
+    {
+        "yaw": 21.1,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0238941,
+        "latitude": 44.1089645,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 20.86,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0239062,
+        "latitude": 44.108989,
+        "altitude": 540.2
+    },
+    {
+        "yaw": 20.93,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.023914,
+        "latitude": 44.1090047,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 21.919999999999998,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0239201,
+        "latitude": 44.1090151,
+        "altitude": 540
+    },
+    {
+        "yaw": 21.35,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0239235,
+        "latitude": 44.1090209,
+        "altitude": 540
+    },
+    {
+        "yaw": 21.55,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0239258,
+        "latitude": 44.1090252,
+        "altitude": 540
+    },
+    {
+        "yaw": 21.4,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0239279,
+        "latitude": 44.1090297,
+        "altitude": 540
+    },
+    {
+        "yaw": 20.98,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0239297,
+        "latitude": 44.1090332,
+        "altitude": 540
+    },
+    {
+        "yaw": 21.31,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0239315,
+        "latitude": 44.1090365,
+        "altitude": 540
+    },
+    {
+        "yaw": 20.78,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0239334,
+        "latitude": 44.1090401,
+        "altitude": 540
+    },
+    {
+        "yaw": 21.04,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0239346,
+        "latitude": 44.1090423,
+        "altitude": 540
+    },
+    {
+        "yaw": 20.51,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0239351,
+        "latitude": 44.1090438,
+        "altitude": 540
+    },
+    {
+        "yaw": 20.86,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0239354,
+        "latitude": 44.1090446,
+        "altitude": 540
+    },
+    {
+        "yaw": 18.900000000000002,
+        "pitch": -35,
+        "roll": 0,
+        "longitude": 87.0239357,
+        "latitude": 44.1090453,
+        "altitude": 540
+    },
+    {
+        "yaw": 20.36,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.023936,
+        "latitude": 44.1090458,
+        "altitude": 540
+    },
+    {
+        "yaw": 19.81,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0239361,
+        "latitude": 44.1090463,
+        "altitude": 540
+    },
+    {
+        "yaw": 20.080000000000002,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0239363,
+        "latitude": 44.1090465,
+        "altitude": 540
+    },
+    {
+        "yaw": 19.37,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0239361,
+        "latitude": 44.1090468,
+        "altitude": 540
+    },
+    {
+        "yaw": 19.610000000000003,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.02393,
+        "latitude": 44.1090485,
+        "altitude": 540
+    },
+    {
+        "yaw": 20.45,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0239174,
+        "latitude": 44.1090519,
+        "altitude": 540
+    },
+    {
+        "yaw": 21.46,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0238976,
+        "latitude": 44.1090568,
+        "altitude": 540
+    },
+    {
+        "yaw": 22.34,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0238644,
+        "latitude": 44.1090649,
+        "altitude": 540
+    },
+    {
+        "yaw": 22.22,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0238301,
+        "latitude": 44.1090735,
+        "altitude": 540
+    },
+    {
+        "yaw": 22,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0237898,
+        "latitude": 44.1090837,
+        "altitude": 540
+    },
+    {
+        "yaw": 23.4,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0237449,
+        "latitude": 44.1090954,
+        "altitude": 540
+    },
+    {
+        "yaw": 23.279999999999998,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0236912,
+        "latitude": 44.1091096,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 23.44,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0236483,
+        "latitude": 44.1091207,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 21.52,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.023607,
+        "latitude": 44.1091308,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 21.650000000000002,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0235613,
+        "latitude": 44.1091416,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 19.189999999999998,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0235337,
+        "latitude": 44.1091489,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 15.87,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0235146,
+        "latitude": 44.1091537,
+        "altitude": 540
+    },
+    {
+        "yaw": 18.27,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234996,
+        "latitude": 44.1091566,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 15.209999999999999,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234905,
+        "latitude": 44.109158,
+        "altitude": 539.9
+    },
+    {
+        "yaw": 15.14,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234829,
+        "latitude": 44.1091594,
+        "altitude": 540
+    },
+    {
+        "yaw": 15.57,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234751,
+        "latitude": 44.1091616,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.049999999999997,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234695,
+        "latitude": 44.1091634,
+        "altitude": 540
+    },
+    {
+        "yaw": 16.81,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234645,
+        "latitude": 44.1091648,
+        "altitude": 540
+    },
+    {
+        "yaw": 17.259999999999998,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234596,
+        "latitude": 44.1091662,
+        "altitude": 540
+    },
+    {
+        "yaw": 17.35,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.023457,
+        "latitude": 44.1091668,
+        "altitude": 540
+    },
+    {
+        "yaw": 17.75,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234553,
+        "latitude": 44.1091672,
+        "altitude": 540
+    },
+    {
+        "yaw": 18.29,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234542,
+        "latitude": 44.1091677,
+        "altitude": 540
+    },
+    {
+        "yaw": 18.12,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234533,
+        "latitude": 44.1091681,
+        "altitude": 540
+    },
+    {
+        "yaw": 363.53999999999996,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234526,
+        "latitude": 44.1091683,
+        "altitude": 540
+    },
+    {
+        "yaw": 349.04999999999995,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234518,
+        "latitude": 44.1091685,
+        "altitude": 540
+    },
+    {
+        "yaw": 326.97,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234515,
+        "latitude": 44.1091687,
+        "altitude": 540
+    },
+    {
+        "yaw": 315.27,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.023451,
+        "latitude": 44.1091689,
+        "altitude": 540
+    },
+    {
+        "yaw": 306.38,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234507,
+        "latitude": 44.1091692,
+        "altitude": 540
+    },
+    {
+        "yaw": 296.97,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234504,
+        "latitude": 44.1091691,
+        "altitude": 540
+    },
+    {
+        "yaw": 298.7,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234504,
+        "latitude": 44.109169,
+        "altitude": 540
+    },
+    {
+        "yaw": 295.03000000000003,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234497,
+        "latitude": 44.1091692,
+        "altitude": 540
+    },
+    {
+        "yaw": 292.45,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.023443,
+        "latitude": 44.1091701,
+        "altitude": 540
+    },
+    {
+        "yaw": 293.37,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234256,
+        "latitude": 44.1091735,
+        "altitude": 540
+    },
+    {
+        "yaw": 293.31,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0234037,
+        "latitude": 44.1091774,
+        "altitude": 540
+    },
+    {
+        "yaw": 293.69,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0233683,
+        "latitude": 44.1091836,
+        "altitude": 540
+    },
+    {
+        "yaw": 294.08,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0233318,
+        "latitude": 44.1091906,
+        "altitude": 540
+    },
+    {
+        "yaw": 293.91,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.023289,
+        "latitude": 44.1091986,
+        "altitude": 540
+    },
+    {
+        "yaw": 294.22999999999996,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0232425,
+        "latitude": 44.1092076,
+        "altitude": 540
+    },
+    {
+        "yaw": 295.53,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0231895,
+        "latitude": 44.109218,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 292.89,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.023157,
+        "latitude": 44.1092249,
+        "altitude": 540.2
+    },
+    {
+        "yaw": 291.9,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0231355,
+        "latitude": 44.1092293,
+        "altitude": 540.1
+    },
+    {
+        "yaw": 289.4,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0231223,
+        "latitude": 44.1092313,
+        "altitude": 540
+    },
+    {
+        "yaw": 289.4,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0231123,
+        "latitude": 44.1092321,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.19,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0231062,
+        "latitude": 44.1092329,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.68,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0231008,
+        "latitude": 44.109234,
+        "altitude": 540
+    },
+    {
+        "yaw": 287.58,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230956,
+        "latitude": 44.1092354,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.32,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230899,
+        "latitude": 44.1092367,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.59,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230857,
+        "latitude": 44.1092375,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.70000000000005,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230829,
+        "latitude": 44.109238,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.95000000000005,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230808,
+        "latitude": 44.1092385,
+        "altitude": 540
+    },
+    {
+        "yaw": 288.89,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230799,
+        "latitude": 44.1092388,
+        "altitude": 540
+    },
+    {
+        "yaw": 289.15999999999997,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230792,
+        "latitude": 44.109239,
+        "altitude": 540
+    },
+    {
+        "yaw": 289.06,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230784,
+        "latitude": 44.1092391,
+        "altitude": 540
+    },
+    {
+        "yaw": 289.39,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230778,
+        "latitude": 44.1092391,
+        "altitude": 540
+    },
+    {
+        "yaw": 289.33,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230773,
+        "latitude": 44.1092392,
+        "altitude": 540
+    },
+    {
+        "yaw": 290.10999999999996,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.023077,
+        "latitude": 44.1092394,
+        "altitude": 540.5
+    },
+    {
+        "yaw": 289.27000000000004,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230771,
+        "latitude": 44.1092395,
+        "altitude": 541.4
+    },
+    {
+        "yaw": 289.10999999999996,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230771,
+        "latitude": 44.1092395,
+        "altitude": 542.4
+    },
+    {
+        "yaw": 289.48999999999995,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230769,
+        "latitude": 44.1092395,
+        "altitude": 543.4
+    },
+    {
+        "yaw": 289.52000000000004,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230767,
+        "latitude": 44.1092395,
+        "altitude": 544.6
+    },
+    {
+        "yaw": 289.32,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230767,
+        "latitude": 44.1092395,
+        "altitude": 545.6
+    },
+    {
+        "yaw": 289.53000000000003,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230769,
+        "latitude": 44.1092396,
+        "altitude": 546.6
+    },
+    {
+        "yaw": 289.90000000000003,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.023077,
+        "latitude": 44.1092395,
+        "altitude": 547.6
+    },
+    {
+        "yaw": 288.78,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.023077,
+        "latitude": 44.1092393,
+        "altitude": 548.8
+    },
+    {
+        "yaw": 289.37,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230768,
+        "latitude": 44.1092393,
+        "altitude": 549.8
+    },
+    {
+        "yaw": 289.48999999999995,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.023077,
+        "latitude": 44.1092393,
+        "altitude": 550.8
+    },
+    {
+        "yaw": 289.15,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230771,
+        "latitude": 44.1092394,
+        "altitude": 552
+    },
+    {
+        "yaw": 289.26000000000005,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230772,
+        "latitude": 44.1092394,
+        "altitude": 553
+    },
+    {
+        "yaw": 289.45000000000005,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230771,
+        "latitude": 44.1092392,
+        "altitude": 554
+    },
+    {
+        "yaw": 289.21000000000004,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230771,
+        "latitude": 44.1092391,
+        "altitude": 555.2
+    },
+    {
+        "yaw": 289.02,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230772,
+        "latitude": 44.1092392,
+        "altitude": 556.2
+    },
+    {
+        "yaw": 289.22999999999996,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230773,
+        "latitude": 44.1092392,
+        "altitude": 557.2
+    },
+    {
+        "yaw": 288.98,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230773,
+        "latitude": 44.1092393,
+        "altitude": 558.3
+    },
+    {
+        "yaw": 288.97,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230773,
+        "latitude": 44.1092394,
+        "altitude": 559
+    },
+    {
+        "yaw": 288.92,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230775,
+        "latitude": 44.1092392,
+        "altitude": 559.5
+    },
+    {
+        "yaw": 289.02,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230774,
+        "latitude": 44.1092391,
+        "altitude": 559.7
+    },
+    {
+        "yaw": 288.81,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230774,
+        "latitude": 44.1092392,
+        "altitude": 559.9
+    },
+    {
+        "yaw": 288.65,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230773,
+        "latitude": 44.1092393,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.62,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230772,
+        "latitude": 44.1092393,
+        "altitude": 560
+    },
+    {
+        "yaw": 289.06,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230751,
+        "latitude": 44.1092395,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.62,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230642,
+        "latitude": 44.1092416,
+        "altitude": 560
+    },
+    {
+        "yaw": 289.13,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230478,
+        "latitude": 44.1092452,
+        "altitude": 560
+    },
+    {
+        "yaw": 289.57,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0230241,
+        "latitude": 44.1092505,
+        "altitude": 559.9
+    },
+    {
+        "yaw": 290.18,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.022987,
+        "latitude": 44.1092584,
+        "altitude": 559.9
+    },
+    {
+        "yaw": 290.82,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0229483,
+        "latitude": 44.1092665,
+        "altitude": 560
+    },
+    {
+        "yaw": 291.42,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0229043,
+        "latitude": 44.109276,
+        "altitude": 560
+    },
+    {
+        "yaw": 290.66,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0228582,
+        "latitude": 44.1092862,
+        "altitude": 560
+    },
+    {
+        "yaw": 291.22,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0228046,
+        "latitude": 44.1092981,
+        "altitude": 560.1
+    },
+    {
+        "yaw": 290.9,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0227614,
+        "latitude": 44.1093075,
+        "altitude": 560.1
+    },
+    {
+        "yaw": 290.51,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0227195,
+        "latitude": 44.1093163,
+        "altitude": 560.1
+    },
+    {
+        "yaw": 289.91,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.02267,
+        "latitude": 44.1093264,
+        "altitude": 560
+    },
+    {
+        "yaw": 289.7,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0226294,
+        "latitude": 44.1093348,
+        "altitude": 560
+    },
+    {
+        "yaw": 289.55,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.022589,
+        "latitude": 44.1093434,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.95,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0225484,
+        "latitude": 44.1093521,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.59000000000003,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0225003,
+        "latitude": 44.1093624,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.31,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.02246,
+        "latitude": 44.109371,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.39000000000004,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0224197,
+        "latitude": 44.1093796,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.22999999999996,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0223789,
+        "latitude": 44.1093883,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.24,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.02233,
+        "latitude": 44.1093988,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.31,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0222891,
+        "latitude": 44.1094075,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.2,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.022248,
+        "latitude": 44.1094162,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.69,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0221986,
+        "latitude": 44.1094268,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.21999999999997,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0221574,
+        "latitude": 44.1094359,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.26000000000005,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.022116,
+        "latitude": 44.1094448,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.05,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.022066,
+        "latitude": 44.1094552,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.65,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0220246,
+        "latitude": 44.1094641,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.07000000000005,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.021983,
+        "latitude": 44.109473,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.32,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0219411,
+        "latitude": 44.1094817,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.39,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0218992,
+        "latitude": 44.1094907,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.49,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0218491,
+        "latitude": 44.1095016,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.51,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0218074,
+        "latitude": 44.1095105,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.55,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0217655,
+        "latitude": 44.1095194,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.54,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0217236,
+        "latitude": 44.1095283,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.58,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0216733,
+        "latitude": 44.109539,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.68,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0216311,
+        "latitude": 44.1095481,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.81,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.021589,
+        "latitude": 44.1095572,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.22,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.021547,
+        "latitude": 44.1095663,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.72999999999996,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0215047,
+        "latitude": 44.1095753,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.09999999999997,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0214539,
+        "latitude": 44.1095863,
+        "altitude": 560
+    },
+    {
+        "yaw": 289.53000000000003,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0214119,
+        "latitude": 44.1095952,
+        "altitude": 560
+    },
+    {
+        "yaw": 287.61,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0213702,
+        "latitude": 44.109604,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.21,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0213282,
+        "latitude": 44.109613,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.62,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0212777,
+        "latitude": 44.1096237,
+        "altitude": 560
+    },
+    {
+        "yaw": 287.84999999999997,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0212357,
+        "latitude": 44.1096326,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.2,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0211941,
+        "latitude": 44.1096415,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.89000000000004,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0211521,
+        "latitude": 44.1096504,
+        "altitude": 560
+    },
+    {
+        "yaw": 287.51,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0211018,
+        "latitude": 44.1096612,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.71,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0210597,
+        "latitude": 44.1096702,
+        "altitude": 560
+    },
+    {
+        "yaw": 288.15,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0210175,
+        "latitude": 44.1096791,
+        "altitude": 560
+    },
+    {
+        "yaw": 289.96,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0209776,
+        "latitude": 44.1096877,
+        "altitude": 560
+    },
+    {
+        "yaw": 287.28999999999996,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0209424,
+        "latitude": 44.1096957,
+        "altitude": 560
+    },
+    {
+        "yaw": 287,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.020922,
+        "latitude": 44.1097002,
+        "altitude": 559.9
+    },
+    {
+        "yaw": 285.22999999999996,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0209079,
+        "latitude": 44.1097031,
+        "altitude": 559.9
+    },
+    {
+        "yaw": 285.09000000000003,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0208978,
+        "latitude": 44.1097048,
+        "altitude": 560
+    },
+    {
+        "yaw": 285.35,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0208885,
+        "latitude": 44.1097065,
+        "altitude": 560
+    },
+    {
+        "yaw": 286.06,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.020882,
+        "latitude": 44.1097079,
+        "altitude": 560.1
+    },
+    {
+        "yaw": 286.73,
+        "pitch": -45,
+        "roll": 0,
+        "longitude": 87.0208763,
+        "latitude": 44.1097093,
+        "altitude": 560.1
+    }
+]
