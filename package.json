@@ -30,6 +30,7 @@
     "eslint-plugin-vue": "~7.4.0",
     "floating-ball-vue": "1.1.4",
     "lib-flexible": "^0.3.2",
+    "lk-cesium-utils": "^1.0.3",
     "lodash": "^4.17.20",
     "lodash.merge": "^4.6.2",
     "nipplejs": "^0.9.0",
