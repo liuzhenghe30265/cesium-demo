@@ -1,55 +1,40 @@
 <template>
-  <div
-    id="cesium-container"
-    style="width: 100%; height: 100%;"
-  />
+  <div id="cesium-container" style="width: 100%; height: 100%;" />
 </template>
 
 <script>
 /* eslint-disable no-undef */
-import { Message } from 'element-ui'
-import Window from './components/Window.vue'
 import * as turf from '@turf/turf'
-
-function MonomerMessage(
-  h,
-  {
-    component = null,
-    componentName = '',
-    messageData = {},
-    confirmValidate = () => {},
-    ...rest
-  }
-) {
-  return Message({
-    message: h(Window, {
+import TipDom from './components/TipDom.vue'
+import FloatingDom from './components/FloatingDom'
+export function MyTip (h, {
+  component = null,
+  componentName = '',
+  messageData = {},
+  confirmValidate = () => { },
+  ...rest
+}) {
+  return FloatingDom({
+    message: h(TipDom, {
       props: { messageData }
     }),
     duration: 0,
     ...rest
   })
 }
-window.$MyMessage = MonomerMessage
+window.$MyTip = MyTip
 
 export default {
-  data() {
+  data () {
     return {}
   },
   computed: {},
   watch: {},
-  mounted() {
+  mounted () {
+    // return
     window.$InitMap()
-    viewer.camera.flyTo({
-      destination: Cesium.Rectangle.fromDegrees(
-        70.01180980018789,
-        20.12881664932077,
-        134.27620577723778,
-        50.568644557429835
-      )
-    })
-
     const positions = turf
-      .randomPoint(20, {
+      .randomPoint(10, {
         bbox: [
           70.01180980018789, 20.12881664932077, 134.27620577723778,
           50.568644557429835
@@ -59,14 +44,15 @@ export default {
         return {
           longitude: parseFloat(_.geometry.coordinates[0]).toFixed(7),
           latitude: parseFloat(_.geometry.coordinates[1]).toFixed(7),
-          altitude: index
+          altitude: index * 10
         }
       })
 
     for (let index = 0; index < positions.length; index++) {
       const element = positions[index]
-      $MyMessage(this.$createElement, {
-        customClass: 'my_message',
+      $MyTip(this.$createElement, {
+        floatting: true,
+        customClass: 'my_tip',
         messageData: element
       })
     }
@@ -76,16 +62,15 @@ export default {
 </script>
 
 <style lang="scss">
-.el-message {
-  &.my_message {
+.floating_dom {
+  &.my_tip {
     width: max-content;
     min-width: auto;
     transition: none;
-    transform: scale(0.5);
     background-color: rgba($color: #ffffff, $alpha: 0.8);
-    .el-icon-info {
-      display: none;
-    }
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 12px;
   }
 }
 </style>

@@ -1,10 +1,6 @@
 <template>
-  <div style="display: flex; align-items: center;">
-    <img
-      :src="require('@/assets/images/site.png')"
-      alt=""
-      style="width: 20px;height: 20px;"
-    >
+  <div class="tip_dom" style="display: flex; align-items: center;">
+    <img class="icon" :src="require('@/assets/images/site.png')" alt="" style="width: 20px;height: 20px;">
     <div>
       <div>经度：{{ messageData.longitude }}</div>
       <div>纬度：{{ messageData.latitude }}</div>
@@ -16,31 +12,31 @@
 <script>
 /* eslint-disable no-undef */
 export default {
-  name: 'Window',
+  name: 'TipDom',
 
   props: {
     messageData: {
       type: Object,
-      default() {
+      default () {
         return {}
       }
     }
   },
 
-  data() {
+  data () {
     return {}
   },
 
-  mounted() {
+  mounted () {
     viewer.scene.preRender.addEventListener(this.eventListener)
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
     viewer.scene.preRender.removeEventListener(this.eventListener)
   },
 
   methods: {
-    eventListener() {
+    eventListener () {
       const position = Cesium.Cartesian3.fromDegrees(
         this.messageData.longitude,
         this.messageData.latitude,
@@ -50,7 +46,15 @@ export default {
         viewer.scene,
         position
       )
+      // const cameraHeight = viewer.camera.positionCartographic.height
+      // const value = 1 - cameraHeight / 5000
+      // const scale = value < 0.2 ? 0.2 : value > 1 ? 1 : value
+      // if (scale === 0.2) {
+      //   this.$parent.$el.style.display = 'none'
+      //   return
+      // }
       if (position) {
+        this.$parent.$el.style.transform = `translateX(-50%) translateY(-50%)`
         this.$parent.$el.style.left = `${result.x}px`
         this.$parent.$el.style.top = `${result.y}px`
       }
@@ -58,3 +62,20 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.tip_dom {
+  .icon {
+    animation: scale 2s linear infinite;
+  }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+</style>
