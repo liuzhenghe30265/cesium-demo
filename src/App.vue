@@ -1,50 +1,24 @@
 <template>
-  <div
-    id="app"
-    style="width: 100%; height: 100%; position: relative"
-  >
-    <FloatingBallVue />
-    <!-- <div
-      class="auto_scroll"
-      @click="handleTest"
-    >
-      <div
-        ref="newsContent"
-        class="scroll_container"
-      >
-        <div
-          v-for="(news, index) in messageList"
-          :key="index"
-          class="scroll_item"
-          :style="scrollStyle(news)"
-          v-html="news"
-        />
+  <div id="app" style="width: 100%; height: 100%; position: relative">
+    <FloatingBallVue v-if="false" />
+
+    <div v-if="false" class="auto_scroll" @click="handleTest">
+      <div ref="newsContent" class="scroll_container">
+        <div v-for="(news, index) in messageList" :key="index" class="scroll_item" :style="scrollStyle(news)"
+          v-html="news" />
       </div>
-    </div> -->
-    <div
-      v-if="false"
-      style="position: absolute;width: 100%;left: 0;bottom: 0;z-index: 999;"
-    >
-      <TimelineSliderVue
-        @change="handleChange"
-        @input="handleInput"
-      >
-        <div
-          slot="sliderContent"
-          slot-scope="scope"
-        >
+    </div>
+
+    <div v-if="false" style="position: absolute;width: 100%;left: 0;bottom: 0;z-index: 999;">
+      <TimelineSliderVue @change="handleChange" @input="handleInput">
+        <div slot="sliderContent" slot-scope="scope">
           {{ scope.data }}
         </div>
       </TimelineSliderVue>
     </div>
-    <ul
-      v-if="navVisible"
-      class="nav"
-    >
-      <li
-        v-for="(item, index) of visibleRouters"
-        :key="index"
-      >
+
+    <ul v-if="navVisible" class="nav">
+      <li v-for="(item, index) of visibleRouters" :key="index">
         <router-link :to="item.path">
           {{ item.name }}
         </router-link>
@@ -61,7 +35,7 @@
 <script>
 import routes from '@/router/index.js'
 export default {
-  data() {
+  data () {
     return {
       messageList: [
         '明日气温相比今日不会有太大变化，适宜穿着棉服类衣物。',
@@ -74,17 +48,17 @@ export default {
     }
   },
   computed: {
-    scrollStyle() {
+    scrollStyle () {
       return value => {
         return {
           animation: `marquee ${value.length / 2}s linear infinite`
         }
       }
     },
-    navVisible() {
+    navVisible () {
       return this.getQueryVariable('nav')
     },
-    currentMode() {
+    currentMode () {
       return process.env.VUE_APP_CURRENTMODE
     },
     visibleRouters: function () {
@@ -94,9 +68,9 @@ export default {
     }
   },
   watch: {},
-  mounted() {},
+  mounted () { },
   methods: {
-    handleTest() {
+    handleTest () {
       // this.$PicturePreviewVue(
       //   'https://file.iviewui.com/images/image-demo-1.jpg'
       // )
@@ -112,7 +86,7 @@ export default {
         ]
       })
     },
-    getQueryVariable(variable) {
+    getQueryVariable (variable) {
       const query = window.location.search.substring(1)
       const vars = query.split('&')
       for (let i = 0; i < vars.length; i++) {
@@ -123,10 +97,10 @@ export default {
       }
       return false
     },
-    handleInput(value, date) {
+    handleInput (value, date) {
       console.log('input', value, date)
     },
-    handleChange(value, date) {
+    handleChange (value, date) {
       console.log('change', value, date)
     }
   }

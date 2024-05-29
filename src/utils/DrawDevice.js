@@ -1,5 +1,6 @@
 /* eslint-disable new-cap */
 /* eslint-disable no-undef */
+import { cartesianToLongAndLat } from '@/utils/CesiumUtils/common.js'
 
 // * 绘制设备图形
 
@@ -9,11 +10,89 @@ export default class DrawDeviceUtil {
      * @memberof DrawDeviceUtil
      */
     constructor(options) {
+        this.matrix3Scratch = null
+        this.orientationScratch = null
+        this.lockScratch = null
+        this.lockEntity = null
         this.devices = {}
         this.eventHandler = null
     }
 
-    UpdatePosition(id, position) {
+    getModelMatrix (entity, time, result) {
+        const entityposition = Cesium.Property.getValueOrUndefined(
+            entity.position,
+            time,
+            new Cesium.Cartesian3()
+        )
+        if (!entityposition) return null
+        let position = cartesianToLongAndLat(entityposition)
+        if (!position) return null
+        position = Cesium.Cartesian3.fromDegrees(
+            position.longitude,
+            position.latitude,
+            position.altitude
+        )
+        if (!Cesium.defined(position)) {
+            return undefined
+        }
+        const orientation = Cesium.Property.getValueOrUndefined(
+            entity.orientation,
+            time,
+            this.orientationScratch
+        )
+        if (Cesium.defined(orientation)) {
+            result = Cesium.Matrix4.fromRotationTranslation(
+                Cesium.Matrix3.fromQuaternion(orientation, this.matrix3Scratch),
+                position,
+                result
+            )
+        } else {
+            result = Cesium.Transforms.eastNorthUpToFixedFrame(
+                position,
+                undefined,
+                result
+            )
+        }
+        return result
+    }
+    eventListener () {
+        if (this.lockEntity) {
+            if (this.getModelMatrix(this.lockEntity, viewer.clock.currentTime, this.lockScratch)) {
+                viewer.scene.camera.lookAtTransform(this.lockScratch, new Cesium.Cartesian3(-20, 0, 10))
+            } else {
+                viewer.scene.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
+            }
+        } else {
+            viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
+        }
+    }
+    UnLockEntity () {
+        this.lockEntity = null
+        // viewer.scene.preRender.removeEventListener(this.eventListener)
+        viewer.scene.preRender.removeEventListener(this.eventListener.bind(this)) // ! 使用 bind 无效
+    }
+    LockEntity (id) {
+        this.UnLockEntity()
+        if (this.devices[id]) {
+            const entity = this.devices[id]
+            this.lockEntity = entity
+            this.lockScratch = new Cesium.Matrix4()
+            this.matrix3Scratch = new Cesium.Matrix3()
+            this.orientationScratch = new Cesium.Quaternion()
+            viewer.scene.preRender.addEventListener(this.eventListener.bind(this))
+        }
+    }
+
+    FlyToEntity (id) {
+        if (this.devices[id]) {
+            const entity = this.devices[id]
+            viewer.flyTo(entity, {
+                duration: 1
+            })
+        }
+    }
+
+    UpdatePosition (id, position) {
         if (this.devices[id]) {
             const entity = this.devices[id]
             const p2 = new Cesium.Cartesian3.fromDegrees(
@@ -32,7 +111,7 @@ export default class DrawDeviceUtil {
         }
     }
 
-    addDevice(data) {
+    addDevice (data) {
         const animate = {
             pointWidth: 20,
             alp: 0.8,
@@ -101,7 +180,7 @@ export default class DrawDeviceUtil {
         return entity
     }
 
-    AddDevices(list) {
+    AddDevices (list) {
         if (list && list.length) {
             for (let index = 0; index < list.length; index++) {
                 const device = list[index]
@@ -112,14 +191,14 @@ export default class DrawDeviceUtil {
         }
     }
 
-    removeInputActionFun() {
+    removeInputActionFun () {
         if (this.eventHandler) {
             this.eventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK)
             this.eventHandler.removeInputAction(Cesium.ScreenSpaceEventType.MOUSE_MOVE)
         }
     }
 
-    initInputActionFun() {
+    initInputActionFun () {
         this.removeInputActionFun()
         this.eventHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
         this.eventHandler.setInputAction(function (event) {
@@ -130,11 +209,11 @@ export default class DrawDeviceUtil {
         }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
     }
 
-    Init() {
+    Init () {
         this.initInputActionFun()
     }
 
-    Destory() {
+    Destory () {
         this.removeInputActionFun()
         this.eventHandler = null
     }
