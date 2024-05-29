@@ -11,21 +11,14 @@
 <script>
 /* eslint-disable no-undef */
 /* eslint-disable new-cap */
-// import { GetCesiumVersion, screenTo3D } from 'lk-cesium-utils'
-// import { cartesianToLongAndLat } from '@/utils/CesiumUtils/common.js'
 import DrawDeviceUtil from '@/utils/DrawDevice.js'
 const mock = require('./mock.json')
 const mock2 = require('./mock2.json')
 const mock3 = require('./mock3.json')
 const mock4 = require('./mock4.json')
 const mock5 = require('./mock5.json')
-// for (let index = 0; index < mock4.length; index++) {
-//   const element = mock4[index]
-//   element.longitude += 20
-//   element.latitude -= 20
-// }
-// console.log('........mock4', mock4)
 export default {
+  name: 'FlightAnimation',
   data () {
     return {
       lock: '',
@@ -33,7 +26,7 @@ export default {
         {
           id: 1,
           uri: 'model/Cesium_Air.glb',
-          scale: 0.2,
+          scale: 1,
           position: {
             longitude: mock[0].longitude,
             latitude: mock[0].latitude,
@@ -43,7 +36,7 @@ export default {
         {
           id: 2,
           uri: 'model/Cesium_Air.glb',
-          scale: 0.2,
+          scale: 0.9,
           position: {
             longitude: mock2[mock2.length - 1].longitude,
             latitude: mock2[mock2.length - 1].latitude,
@@ -53,7 +46,7 @@ export default {
         {
           id: 3,
           uri: 'model/Cesium_Air.glb',
-          scale: 0.2,
+          scale: 0.8,
           position: {
             longitude: mock3[mock3.length - 1].longitude,
             latitude: mock3[mock3.length - 1].latitude,
@@ -63,7 +56,7 @@ export default {
         {
           id: 4,
           uri: 'model/Cesium_Air.glb',
-          scale: 0.2,
+          scale: 1,
           position: {
             longitude: mock4[mock4.length - 1].longitude,
             latitude: mock4[mock4.length - 1].latitude,
@@ -73,7 +66,7 @@ export default {
         {
           id: 5,
           uri: 'model/Cesium_Air.glb',
-          scale: 0.2,
+          scale: 1,
           position: {
             longitude: mock5[mock5.length - 1].longitude,
             latitude: mock5[mock5.length - 1].latitude,
