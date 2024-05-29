@@ -55,7 +55,8 @@ export default class DrawDeviceUtil {
         }
         return result
     }
-    eventListener () {
+    eventListenerBind () {
+        // 解决 addEventListener 使用了 bind(this)，eventListener 中虽然可以拿到 this，但 removeEventListener 无法移除 eventListener
         if (this.lockEntity) {
             if (this.getModelMatrix(this.lockEntity, viewer.clock.currentTime, this.lockScratch)) {
                 viewer.scene.camera.lookAtTransform(this.lockScratch, new Cesium.Cartesian3(-20, 0, 10))
@@ -66,10 +67,10 @@ export default class DrawDeviceUtil {
             viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
         }
     }
+    eventListener = this.eventListenerBind.bind(this)
     UnLockEntity () {
         this.lockEntity = null
-        // viewer.scene.preRender.removeEventListener(this.eventListener)
-        viewer.scene.preRender.removeEventListener(this.eventListener.bind(this)) // ! 使用 bind 无效
+        viewer.scene.preRender.removeEventListener(this.eventListener)
     }
     LockEntity (id) {
         this.UnLockEntity()
@@ -79,7 +80,7 @@ export default class DrawDeviceUtil {
             this.lockScratch = new Cesium.Matrix4()
             this.matrix3Scratch = new Cesium.Matrix3()
             this.orientationScratch = new Cesium.Quaternion()
-            viewer.scene.preRender.addEventListener(this.eventListener.bind(this))
+            viewer.scene.preRender.addEventListener(this.eventListener)
         }
     }
 
