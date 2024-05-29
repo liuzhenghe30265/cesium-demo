@@ -113,12 +113,6 @@ export default {
       Cesium.ScreenSpaceEventType.LEFT_CLICK)
   },
   methods: {
-    handleLockEntity () {
-
-    },
-    handleUnlockEntity () {
-
-    },
     handleClick (data) {
       this.lock = this.lock === data.id ? '' : data.id
       if (this.lock) {
