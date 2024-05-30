@@ -1,13 +1,31 @@
 <template>
-  <div id="cesium-container" style="width: 100%; height: 100%;" />
+  <div
+    id="cesium-container"
+    style="width: 100%; height: 100%;" />
 </template>
 
 <script>
 /* eslint-disable no-undef */
 import * as turf from '@turf/turf'
+
+// 方式一：
+import TipUtil from './components/TipUtil'
+function tipUtil ({
+  ...rest
+}) {
+  return TipUtil({
+    ...rest
+  })
+}
+function MyTip (data) {
+  return tipUtil(data)
+}
+window.$MyTip = MyTip
+
+// 方式二：
+import FloatingDom from '@/components/FloatingDom'
 import TipDom from './components/TipDom.vue'
-import FloatingDom from './components/FloatingDom'
-export function MyTip (h, {
+function MyTip2 (h, {
   component = null,
   componentName = '',
   messageData = {},
@@ -22,16 +40,17 @@ export function MyTip (h, {
     ...rest
   })
 }
-window.$MyTip = MyTip
+window.$MyTip2 = MyTip2
 
 export default {
   data () {
-    return {}
+    return {
+      tipObj: {}
+    }
   },
   computed: {},
   watch: {},
   mounted () {
-    // return
     window.$InitMap()
     const positions = turf
       .randomPoint(10, {
@@ -47,14 +66,20 @@ export default {
           altitude: index * 10
         }
       })
-
     for (let index = 0; index < positions.length; index++) {
       const element = positions[index]
-      $MyTip(this.$createElement, {
+      this.tipObj[index] = $MyTip({
+        duration: 0,
         floatting: true,
         customClass: 'my_tip',
         messageData: element
       })
+      // this.tipObj[index] = $MyTip2(this.$createElement, {
+      //   duration: 0,
+      //   floatting: true,
+      //   customClass: 'my_tip',
+      //   messageData: element
+      // })
     }
   },
   methods: {}

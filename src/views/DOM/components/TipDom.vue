@@ -1,10 +1,21 @@
 <template>
-  <div class="tip_dom" style="display: flex; align-items: center;">
-    <img class="icon" :src="require('@/assets/images/site.png')" alt="" style="width: 20px;height: 20px;">
+  <div
+    class="tip_dom">
+    <img
+      class="icon"
+      :src="require('@/assets/images/site.png')"
+      alt=""
+      style="width: 20px;height: 20px;">
     <div>
-      <div>经度：{{ messageData.longitude }}</div>
-      <div>纬度：{{ messageData.latitude }}</div>
-      <div>海拔：{{ messageData.altitude }}</div>
+      <div>
+        经度：{{ messageData.longitude }}
+      </div>
+      <div>
+        纬度：{{ messageData.latitude }}
+      </div>
+      <div>
+        海拔：{{ messageData.altitude }}
+      </div>
     </div>
   </div>
 </template>
@@ -64,6 +75,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .tip_dom {
+  display: flex;
+  align-items: center;
   .icon {
     animation: scale 2s linear infinite;
   }
